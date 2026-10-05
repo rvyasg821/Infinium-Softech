@@ -76,8 +76,12 @@ function ProjectCard({ project, isClone = false }: { project: SolutionsProject; 
 
       <div className="ai-work-body">
         <div className="ai-work-identity">
-          <span className="ai-work-badge" style={{ backgroundColor: project.tint }}>
-            {project.mark}
+          <span className="ai-work-badge" style={{ backgroundColor: project.logo ? "transparent" : project.tint }}>
+            {project.logo ? (
+              <Image src={project.logo} alt={`${project.name} Logo`} width={40} height={40} className="ai-work-badge-logo" />
+            ) : (
+              project.mark
+            )}
           </span>
           <div>
             <h3 className="ai-work-name" style={{ color: project.tint }}>{project.name}</h3>

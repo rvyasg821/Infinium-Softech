@@ -53,6 +53,7 @@ export interface SolutionsProject {
   imageAlt: string;
   href: string;
   result: string;
+  logo?: string;
 }
 
 export interface SolutionsTechnology {
@@ -221,8 +222,8 @@ export const WEB_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
     titleEnd: "for real operations.",
     description: "A selection of Infinium products with web experiences built around everyday workflows.",
     items: [
-      { name: "Slota", mark: "SL", category: "Bookings · Web platform", tint: "#1F31E8", description: "A booking and management platform that brings calendars, teams, services, and payments together.", image: "/shots/slota.png", imageAlt: "Slota booking and management platform", href: "/products/slota", result: "Booking operations" },
-      { name: "WelzoKart", mark: "WK", category: "Quick commerce · Web platform", tint: "#1E9E5A", description: "A commerce platform connecting product catalogs, orders, dispatch, and customer experiences.", image: "/shots/Welzokart 2.jpg", imageAlt: "WelzoKart commerce platform", href: "/products/welzokart", result: "Commerce operations" },
+      { name: "Slota", mark: "SL", category: "Bookings · Web platform", tint: "#1F31E8", description: "A booking and management platform that brings calendars, teams, services, and payments together.", image: "/shots/slota.png", imageAlt: "Slota booking and management platform", href: "/products/slota", result: "Booking operations", logo: "/logos/slota-logo.png" },
+      { name: "WelzoKart", mark: "WK", category: "Quick commerce · Web platform", tint: "#1E9E5A", description: "A commerce platform connecting product catalogs, orders, dispatch, and customer experiences.", image: "/shots/Welzokart 2.jpg", imageAlt: "WelzoKart commerce platform", href: "/products/welzokart", result: "Commerce operations", logo: "/logos/welzokart-logo.png" },
       { name: "NurseWorth", mark: "NW", category: "Healthcare · Web platform", tint: "#8B3FE8", description: "A healthcare staffing platform for credentialing, shift matching, and workforce coordination.", image: "/shots/mapmypay.jpg", imageAlt: "NurseWorth staffing platform", href: "/products/NurseWorth", result: "Workforce management" },
     ],
   },

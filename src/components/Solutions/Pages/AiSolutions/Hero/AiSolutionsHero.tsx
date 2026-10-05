@@ -65,7 +65,7 @@ export function AiSolutionsHero({
             </p>
 
             <div data-reveal="" className="ai-solutions-hero-actions">
-              <Link href="/contact" className="btn-primary">
+              <Link href="/book-a-demo" className="btn-primary">
                 {content.primaryAction} <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <Link href="/contact" className="btn-outline">

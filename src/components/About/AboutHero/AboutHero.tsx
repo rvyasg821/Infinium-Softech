@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import "./AboutHero.scss";
 
 export function AboutHero() {
@@ -32,11 +33,11 @@ export function AboutHero() {
             </p>
 
             <div data-reveal="" className="about-hero-actions">
-              <Link href="#ecosystem" className="btn-primary">
-                See the nine platforms
+              <Link href="/products" className="btn-primary">
+                See the nine platforms <ArrowRight size={16} aria-hidden="true" />
               </Link>
-              <Link href="#process" className="btn-outline">
-                How we deliver
+              <Link href="/contact" className="btn-outline">
+                How we deliver <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
           </div>

@@ -101,8 +101,8 @@ export const MOBILE_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
     description: "Explore Infinium products that bring essential workflows to customers and teams on the move.",
     items: [
       { name: "Trekvano", mark: "TV", category: "Education · Mobile app", tint: "#2AA8C4", description: "Student and school transport tracking with routes, attendance, and live parent updates.", image: "/shots/trekvano.jpg", imageAlt: "Trekvano school transport app", href: "/products/trekvano", result: "Student transport" },
-      { name: "WelzoKart", mark: "WK", category: "Quick commerce · Mobile app", tint: "#1E9E5A", description: "A grocery and restaurant delivery experience connecting customers, stores, and riders.", image: "/shots/Welzokart 2.jpg", imageAlt: "WelzoKart mobile commerce platform", href: "/products/welzokart", result: "Commerce & delivery" },
-      { name: "Slota", mark: "SL", category: "Bookings · Mobile app", tint: "#1F31E8", description: "Appointment booking and business management for teams that coordinate schedules and services.", image: "/shots/appointgem-mobile.webp", imageAlt: "Slota mobile booking app", href: "/products/slota", result: "Appointment operations" },
+      { name: "WelzoKart", mark: "WK", category: "Quick commerce · Mobile app", tint: "#1E9E5A", description: "A grocery and restaurant delivery experience connecting customers, stores, and riders.", image: "/shots/Welzokart 2.jpg", imageAlt: "WelzoKart mobile commerce platform", href: "/products/welzokart", result: "Commerce & delivery", logo: "/logos/welzokart-logo.png" },
+      { name: "Slota", mark: "SL", category: "Bookings · Mobile app", tint: "#1F31E8", description: "Appointment booking and business management for teams that coordinate schedules and services.", image: "/shots/appointgem-mobile.webp", imageAlt: "Slota mobile booking app", href: "/products/slota", result: "Appointment operations", logo: "/logos/slota-logo.png" },
     ],
   },
   stack: {

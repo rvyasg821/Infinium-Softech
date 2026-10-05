@@ -200,10 +200,10 @@ export function Banner() {
               </p>
 
               <div className="banner-actions">
-                <Link href="#demo" className="btn-primary">
+                <Link href="/book-a-demo" className="btn-primary">
                   Book Live Demo <span aria-hidden="true">→</span>
                 </Link>
-                <Link href="#ecosystem" className="btn-secondary">
+                <Link href="/products" className="btn-secondary">
                   Explore Products
                 </Link>
               </div>
@@ -237,7 +237,14 @@ export function Banner() {
               >
                 <div className="card-glass">
                   <div className="card-head">
-                    <div className="card-mark mark-blue">sl</div>
+                    <div className="card-mark mark-blue">
+                      <Image
+                        src="/logos/slota-logo.png"
+                        alt="Slota Logo"
+                        width={28}
+                        height={28}
+                      />
+                    </div>
                     <div className="card-title">Slota</div>
                   </div>
                   <div className="card-metric">18,412</div>
@@ -269,7 +276,14 @@ export function Banner() {
               >
                 <div className="card-glass">
                   <div className="card-head">
-                    <div className="card-mark mark-green">WK</div>
+                    <div className="card-mark mark-green">
+                      <Image
+                        src="/logos/welzokart-logo.png"
+                        alt="WelzoKart Logo"
+                        width={28}
+                        height={28}
+                      />
+                    </div>
                     <div className="card-title">WelzoKart</div>
                   </div>
                   <div className="card-spark-bars">

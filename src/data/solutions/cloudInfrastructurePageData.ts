@@ -293,6 +293,7 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
         imageAlt: "Slota booking and management platform",
         href: "/products/slota",
         result: "Booking operations",
+        logo: "/logos/slota-logo.png",
       },
       {
         name: "WelzoKart",
@@ -305,6 +306,7 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
         imageAlt: "WelzoKart commerce platform",
         href: "/products/welzokart",
         result: "Commerce operations",
+        logo: "/logos/welzokart-logo.png",
       },
     ],
   },
