@@ -277,7 +277,7 @@ export const ENTERPRISE_SOLUTIONS_PAGE_CONTENT: WebApplicationsPageContent = {
           "A logistics platform supporting connected business operations.",
         image: "/shots/truckguru.jpg",
         imageAlt: "Truck Guru logistics platform",
-        href: "/products/truck-guru",
+        href: "/products/loadgo",
         result: "Logistics operations",
       },
     ],

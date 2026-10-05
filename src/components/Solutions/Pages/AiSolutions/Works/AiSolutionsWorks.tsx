@@ -46,7 +46,7 @@ const defaultContent: SolutionsSectionIntro & { items: SolutionsProject[] } = {
       "AI-powered cooking and menu guidance helps multi-outlet kitchens standardize prep, control portions, and reduce waste.",
     image: "/shots/welzokart.jpg",
     imageAlt: "Dishly AI kitchen operations screen",
-    href: "/products/mindful-menu",
+    href: "/products/dishly",
     result: "Kitchen AI platform",
   },
   ],

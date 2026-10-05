@@ -1,402 +1,127 @@
 @use "../../../../../styles/variables" as *;
 @use "../../../../../styles/mixins" as *;
 
-.appointgem-solution-section {
+.welzokart-solution-lc {
+  padding: 100px 0;
+  background-color: #fafbf5; // subtle lime-ish offwhite background seen in mock
   position: relative;
-  color: $color-ink;
-  @include section-padding;
-  scroll-margin-top: 130px;
-  background-color: $color-bg;
   overflow: hidden;
 
-  .appointgem-solution-container {
-    @include container;
-  }
-
-  .solution-header {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    @include respond($bp-lg) {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 50px;
-    }
-
-    @media (max-width: 480px) {
-      gap: 12px;
-    }
-  }
-
-  .appointgem-eyebrow {
-    @include section-eyebrow("light");
-  }
-
-  .solution-headline {
-    font-family: $font-display;
-    font-weight: 800;
-    font-stretch: 110%;
-    font-size: clamp(30px, 4vw, 68px);
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-    color: $color-ink;
-    margin: 12px 0 0;
-  }
-
-  .solution-subtitle {
-    font-size: clamp(14px, 1.25vw, 16.5px);
-    line-height: 1.6;
-    color: $color-body;
-    margin: 12px 0 0;
-    max-width: 560px;
-  }
-
-  .solution-grid {
-    display: none;
-
-    @include respond($bp-lg) {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      background: rgba(12, 12, 13, 0.12);
-      border: 1px solid rgba(12, 12, 13, 0.12);
-      margin-top: 48px;
-    }
-  }
-
-  .solution-card {
-    background: $color-bg;
-    padding: 28px 24px 26px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    transition: background-color 0.25s ease;
-    border-radius: 0px;
-
-    &:hover {
-      background: #ebeae6;
-    }
-  }
-
-  .dot-indicator {
-    display: block;
-    width: 32px;
-    height: 32px;
-    border-radius: 9px;
-    margin: 0;
-  }
-
-  .solution-card-title {
-    font-family: $font-display;
-    font-weight: 700;
-    font-stretch: 106%;
-    font-size: 19px;
-    letter-spacing: -0.025em;
-    color: $color-ink;
-    margin-top: 12px;
-    text-align: left;
-  }
-
-  .solution-card-desc {
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: #5f5f64;
-    margin-top: 6px;
-    text-align: left;
-  }
-
-  .solution-mobile-slider-area {
-    display: block;
-
-    @include respond($bp-lg) {
-      display: none;
-    }
-  }
-
-  .solution-slider-wrapper {
-    position: relative;
-    max-width: 600px;
-    width: 100%;
-    margin: 32px auto 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @include respond($bp-md) {
-      max-width: 680px;
-      margin-top: 44px;
-    }
-  }
-
-  .slider-arrow-btn {
+  // Dotted lines background graphic mock
+  &::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid rgba(12, 12, 13, 0.16);
-    background: #ffffff;
-    color: $color-ink;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 3px 10px rgba(12, 12, 13, 0.1);
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-
-    svg {
-      display: block;
-      margin: auto;
-      flex-shrink: 0;
-    }
-
-    @include respond($bp-sm) {
-      width: 32px;
-      height: 32px;
-    }
-
-    @include respond($bp-md) {
-      width: 36px;
-      height: 36px;
-    }
-
-    &.prev-btn {
-      left: -8px;
-    }
-
-    &.next-btn {
-      right: -8px;
-    }
-
-    @include respond($bp-sm) {
-      &.prev-btn {
-        left: -12px;
-      }
-
-      &.next-btn {
-        right: -12px;
-      }
-    }
-
-    @include respond($bp-lg) {
-      &.prev-btn {
-        left: -18px;
-      }
-
-      &.next-btn {
-        right: -18px;
-      }
-    }
-
-    &:hover {
-      background: $color-ink;
-      color: #ffffff;
-      border-color: $color-ink;
-      transform: translateY(-50%) scale(1.08);
-      box-shadow: 0 6px 18px rgba(12, 12, 13, 0.18);
-    }
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(149, 219, 90, 0.4) 2px, transparent 2px);
+    background-size: 30px 30px;
+    opacity: 0.5;
   }
+}
 
-  .slider-card-stage {
-    width: 100%;
-    position: relative;
-  }
+.solution-lc-container {
+  @include container;
+  position: relative;
+  z-index: 2;
+}
 
-  .single-solution-card {
-    background: #ffffff;
-    border: 1px solid rgba(12, 12, 13, 0.13);
-    border-radius: 18px;
-    padding: 24px 28px 22px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 24px rgba(12, 12, 13, 0.04);
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.solution-lc-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
 
-    @include respond($bp-sm) {
-      padding: 30px 34px 26px;
-      border-radius: 22px;
-    }
-
-    @include respond($bp-md) {
-      padding: 34px 40px 30px;
-    }
-
-    &.slide-next {
-      animation: slideInRight 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    &.slide-prev {
-      animation: slideInLeft 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .card-accent-strip {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-    }
-
-    .card-header-row,
-    .card-badge-wrap,
-    .card-bottom-row {
-      display: flex;
-      align-items: center;
-    }
-
-    .card-header-row,
-    .card-bottom-row {
-      justify-content: space-between;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .card-badge-wrap {
-      gap: 10px;
-    }
-
-    .solution-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-
-    .card-badge {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: $color-ink-soft;
-      border: 1px solid rgba(12, 12, 13, 0.14);
-      padding: 4px 10px;
-      border-radius: 100px;
-      background: #fafaf9;
-    }
-
-    .card-counter {
-      font-family: $font-display;
-      font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      color: $color-ink;
-    }
-
-    .divider {
-      margin: 0 3px;
-      color: rgba(12, 12, 13, 0.3);
-    }
-
-    .total-num {
-      color: rgba(12, 12, 13, 0.4);
-    }
-
-    .single-solution-title {
-      font-family: $font-display;
-      font-weight: 800;
-      font-size: clamp(20px, 3.2vw, 32px);
-      letter-spacing: -0.035em;
-      color: $color-ink;
-      margin: 18px 0 0;
-      line-height: 1.15;
-      text-align: left;
-    }
-
-    .single-solution-desc {
-      font-size: 14.5px;
-      line-height: 1.6;
-      color: #55555c;
-      margin: 10px 0 0;
-      text-align: left;
-    }
-
-    .card-bottom-row {
-      margin-top: 22px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(12, 12, 13, 0.08);
-    }
-
-    .card-chip {
-      font-size: 11px;
-      color: #6a6a72;
-      background: rgba(12, 12, 13, 0.04);
-      padding: 4px 10px;
-      border-radius: 5px;
-      font-weight: 500;
-    }
-
-    .card-indicator-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-  }
-
-  .slider-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    margin-top: 22px;
-  }
-
-  .pagination-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 100px;
-    border: none;
-    background: rgba(12, 12, 13, 0.16);
-    cursor: pointer;
-    padding: 0;
-    transition: width 0.3s ease, background-color 0.25s ease;
-  }
-
-  .pagination-dot .dot-fill {
+  .lc-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    color: #449adc; 
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background: transparent;
+    margin-bottom: 20px;
   }
 
-  .pagination-dot.is-active {
-    width: 26px;
-    background: $color-ink;
+  .lc-headline {
+    font-family: $font-display;
+    font-size: $fs-h2;
+    font-weight: 800;
+    color: #0c0c0d;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px 0;
   }
 
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(24px);
-    }
+  .lc-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+  }
+}
 
-    to {
-      opacity: 1;
-      transform: translateX(0);
+.solution-lc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lc-solution-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  border: 1.5px solid #3c82ca;
+  box-shadow: -6px 6px 0px #3c82ca;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+
+  &:hover {
+    transform: translate(2px, -2px);
+    box-shadow: -8px 8px 0px #3c82ca;
+  }
+
+  .lc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .lc-card-icon {
+    width: 60px;
+    height: 60px;
+    background: #f7f9fc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #0c0c0d; // black icons per mockup
     }
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-24px);
-    }
+  h3 {
+    font-family: $font-display;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0c0c0d;
+    margin: 0;
+  }
 
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
   }
 }

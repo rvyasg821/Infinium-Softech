@@ -1,174 +1,88 @@
 "use client";
-
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
+import Image from "next/image";
 import "./WelzokartChallenges.scss";
 
 const CHALLENGES = [
   {
-    num: "01",
     title: "Finding Products Quickly",
-    desc: "Customers need a simple way to discover groceries and everyday essentials without navigating through a complicated shopping experience.",
+    desc: "Customers need a simple way to discover groceries without navigating through complicated shopping flows.",
+    bgColor: "#a0dbd6"
   },
   {
-    num: "02",
-    title: "Managing a Large Product Range",
-    desc: "Fresh products, groceries, and household essentials need clear categorization so customers can easily browse available items.",
+    title: "Managing Large Variety",
+    desc: "Fresh products and household essentials need clear categorization for easy browsing.",
+    bgColor: "#969fdb"
   },
   {
-    num: "03",
-    title: "Making Checkout Effortless",
-    desc: "The ordering journey needs to remain simple and efficient so customers can complete purchases without unnecessary steps.",
+    title: "Checkout Friction",
+    desc: "The ordering journey must remain simple and efficient for immediate purchases.",
+    bgColor: "#e5fdac"
   },
   {
-    num: "04",
-    title: "Managing Recurring Milk Deliveries",
-    desc: "Daily milk requirements need a flexible subscription experience instead of requiring customers to place the same order repeatedly.",
+    title: "Service Reliability",
+    desc: "Ensuring accurate packaging and timely delivery to maintain customer trust.",
+    bgColor: "#bbc3f7"
   },
   {
-    num: "05",
-    title: "Keeping Customers Informed",
-    desc: "Customers need timely updates about order progress, delivery status, and subscription changes throughout the fulfillment process.",
+    title: "Cleaner Verification",
+    desc: "Delivery partner backgrounds need strict vetting to guarantee user safety.",
+    bgColor: "#ebc1bc"
   },
   {
-    num: "06",
-    title: "Coordinating Delivery Operations",
-    desc: "Delivery partners need an efficient way to receive orders, manage delivery status, navigate routes, and complete orders accurately.",
+    title: "Scalable Infrastructure",
+    desc: "Building a system capable of handling growing demand and unexpected surges.",
+    bgColor: "#a0dbd6"
   },
 ];
 
 export function WelzokartChallenges() {
-  const challengesGridRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(1);
-
-  useEffect(() => {
-    const updateVisibleCards = () => {
-      setVisibleCards(window.innerWidth > 767 ? 2 : 1);
-    };
-
-    updateVisibleCards();
-    window.addEventListener("resize", updateVisibleCards);
-    return () => window.removeEventListener("resize", updateVisibleCards);
-  }, []);
-
-  const syncActiveIndex = useCallback(() => {
-    const grid = challengesGridRef.current;
-    const firstCard = grid?.firstElementChild as HTMLElement | null;
-    if (!grid || !firstCard) return;
-
-    const gap = parseFloat(window.getComputedStyle(grid).gap) || 0;
-    const distance = firstCard.offsetWidth + gap;
-    const maxIndex = Math.max(0, CHALLENGES.length - visibleCards);
-    const nextIndex = Math.max(
-      0,
-      Math.min(maxIndex, Math.round(grid.scrollLeft / distance)),
-    );
-
-    setActiveIndex(nextIndex);
-  }, [visibleCards]);
-
-  useEffect(() => {
-    const grid = challengesGridRef.current;
-    if (!grid) return;
-
-    grid.addEventListener("scroll", syncActiveIndex, { passive: true });
-    window.addEventListener("resize", syncActiveIndex);
-
-    return () => {
-      grid.removeEventListener("scroll", syncActiveIndex);
-      window.removeEventListener("resize", syncActiveIndex);
-    };
-  }, [syncActiveIndex]);
-
-  const moveChallenges = (direction: 1 | -1) => {
-    const grid = challengesGridRef.current;
-    const firstCard = grid?.firstElementChild as HTMLElement | null;
-    if (!grid || !firstCard) return;
-
-    const gap = parseFloat(window.getComputedStyle(grid).gap) || 0;
-    const distance = firstCard.offsetWidth + gap;
-    const maxIndex = Math.max(0, CHALLENGES.length - visibleCards);
-    const nextIndex = Math.max(
-      0,
-      Math.min(maxIndex, activeIndex + direction),
-    );
-
-    setActiveIndex(nextIndex);
-    grid.scrollTo({ left: nextIndex * distance, behavior: "smooth" });
-  };
-
   return (
-    <section id="challenges" className="appointgem-challenges-section" aria-labelledby="challenges-title">
-      <div className="appointgem-challenges-container">
-        <div className="challenges-card-wrapper">
-          <div className="challenges-header">
-            <div>
-              <span data-reveal="" className="challenges-eyebrow">Key challenges</span>
-              <h2 data-reveal="" id="challenges-title" className="challenges-headline">
-                What Everyday Grocery Shopping Needed to Solve
-              </h2>
-            </div>
-            <p data-reveal="" className="challenges-subtitle">
-              WelzoKart focuses on reducing the friction commonly associated with grocery ordering while supporting recurring milk deliveries, delivery operations, and real-time customer communication.
-            </p>
-          </div>
+    <section id="challenges-lc" className="welzokart-challenges-lc">
+      <div className="challenges-lc-container">
+        
+        <div className="challenges-lc-header">
+          <span className="lc-eyebrow">KEY CHALLENGES</span>
+          <h2 className="lc-headline">
+            Overcoming hurdles to build a secure, scalable, and reliable platform.
+          </h2>
+          <p className="lc-desc">
+            Developing WelzoKart demanded addressing performance, real-time inventory, and scalability while maintaining smooth user experiences across all devices.
+          </p>
+        </div>
 
-          <div className="challenges-grid-wrap">
-            {activeIndex > 0 && (
-              <button
-                type="button"
-                className="challenges-scroll-button challenges-scroll-button--previous"
-                onClick={() => moveChallenges(-1)}
-                aria-label="Show previous challenges"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
-              </button>
-            )}
-
-            <div ref={challengesGridRef} className="challenges-grid">
-              {CHALLENGES.map((item) => (
-                <div key={item.num} data-reveal="" className="challenge-item">
-                  <span className="challenge-num">{item.num}</span>
-                  <h3 className="challenge-item-title">{item.title}</h3>
-                  <p className="challenge-item-desc">{item.desc}</p>
+        <div className="challenges-lc-layout-parts">
+          {/* First part */}
+          <div className="challenge-part">
+            <div className="challenge-group">
+              {CHALLENGES.slice(0, 3).map((item, idx) => (
+                <div key={idx} className="lc-challenge-card" style={{ backgroundColor: item.bgColor }}>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                 </div>
               ))}
             </div>
+            <div className="challenge-image">
+               <Image src="/shots/Welzokart 2.jpg" alt="Welzokart Challenges Part 1" width={600} height={400} />
+            </div>
+          </div>
 
-            {activeIndex < CHALLENGES.length - visibleCards && (
-              <button
-                type="button"
-                className="challenges-scroll-button challenges-scroll-button--next"
-                onClick={() => moveChallenges(1)}
-                aria-label="Show next challenges"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
-            )}
+          {/* Second part */}
+          <div className="challenge-part">
+            <div className="challenge-image">
+               <Image src="/shots/Welzokart 2.jpg" alt="Welzokart Challenges Part 2" width={600} height={400} />
+            </div>
+            <div className="challenge-group">
+              {CHALLENGES.slice(3, 6).map((item, idx) => (
+                <div key={idx} className="lc-challenge-card" style={{ backgroundColor: item.bgColor }}>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+
       </div>
     </section>
   );

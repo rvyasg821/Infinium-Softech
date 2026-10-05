@@ -270,7 +270,7 @@ export const CUSTOM_SOFTWARE_PAGE_CONTENT: WebApplicationsPageContent = {
           "A logistics platform supporting transportation and business workflows.",
         image: "/shots/truckguru.jpg",
         imageAlt: "Truck Guru logistics platform",
-        href: "/products/truck-guru",
+        href: "/products/loadgo",
         result: "Logistics operations",
       },
     ],

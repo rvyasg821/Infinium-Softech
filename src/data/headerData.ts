@@ -66,7 +66,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(139, 63, 232, 0.16)",
   },
   {
-    id: "truck-guru",
+    id: "loadgo",
     n: "04",
     name: "LoadGo",
     mark: "LG",
@@ -77,7 +77,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(232, 162, 31, 0.16)",
   },
   {
-    id: "mindful-menu",
+    id: "dishly",
     n: "05",
     name: "Dishly",
     mark: "DI",
@@ -110,7 +110,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(224, 69, 47, 0.16)",
   },
   {
-    id: "locale-e-clean",
+    id: "purespace",
     n: "08",
     name: "PureSpace",
     mark: "PS",

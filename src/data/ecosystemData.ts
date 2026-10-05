@@ -72,7 +72,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/mapmypay.jpg",
   },
   {
-    id: "truck-guru",
+    id: "loadgo",
     n: "04",
     name: "LoadGo",
     mark: "LG",
@@ -89,7 +89,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/truckguru.jpg",
   },
   {
-    id: "mindful-menu",
+    id: "dishly",
     n: "05",
     name: "Dishly",
     mark: "DI",
@@ -140,7 +140,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/welzokart.jpg",
   },
   {
-    id: "locale-e-clean",
+    id: "purespace",
     n: "08",
     name: "PureSpace",
     mark: "PS",

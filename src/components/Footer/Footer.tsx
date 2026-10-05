@@ -59,7 +59,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
       { label: "Slota", href: "/products/slota" },
       { label: "WelzoKart", href: "/products/welzokart" },
       { label: "NurseWorth", href: "/products/NurseWorth" },
-      { label: "LoadGo", href: "/products/truck-guru" },
+      { label: "LoadGo", href: "/products/loadgo" },
       { label: "Trekvano", href: "/products/trekvano" },
       { label: "Textora", href: "/products/Textora" },
     ],

@@ -1,15 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useEffect } from "react";
+import Image from "next/image";
 import type { ProductItem } from "@/data/productsData";
+import { Factory, MonitorSmartphone, Lightbulb, Globe } from "lucide-react";
 import "./WelzokartHero.scss";
 
 export function WelzokartHero({ product }: { product: ProductItem }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const introRef = useRef<HTMLDivElement>(null);
-  const interfaceRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.history.scrollRestoration = "manual";
@@ -18,77 +15,93 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="appointgem-hero-section" aria-labelledby="appointgem-title">
-      <div className="hero-glow-layer" aria-hidden="true">
-        <div className="hero-glow-tr" />
-        <div className="hero-glow-bl" />
-        <div className="hero-glow-center" />
-        <div className="hero-orbs">
-          <div className="orb-bl" />
-          <div className="orb-tr" />
-        </div>
-      </div>
+    <section className="welzokart-hero-lc">
+      <div className="welzokart-hero-lc-container">
+        
+        <div className="hero-split-top">
+          <div className="hero-lc-content">
+            
+            {/* Logo */}
+            <div className="identity-top">
+              <Image 
+                src="/logos/welzokart-logo.png" 
+                alt="WelzoKart" 
+                width={180} 
+                height={50} 
+                className="identity-logo"
+              />
+            </div>
 
-      <div className="appointgem-hero-container">
-        <div data-reveal="" className="appointgem-hero-crumbs">
-          <Link href="/products">Products</Link>
-          <span>/</span>
-          <span className="current">Welzokart</span>
-        </div>
+            {/* Title */}
+            <h1 className="hero-lc-title">
+              WelzoKart Smart Grocery Delivery App
+            </h1>
 
-        <div data-reveal="" className="appointgem-hero-identity">
-          <img src={product.logo || "/logos/welzokart-logo.png"} alt={`${product.name} Logo`} className="appointgem-hero-logo" />
-          <div>
-            <strong>Welzokart</strong>
-            <span className="sub">
-              <i className="appointgem-hero-pulse-dot" /> Smart Grocery Delivery Platform
-            </span>
-          </div>
-        </div>
-
-        <div ref={introRef} className="appointgem-hero-intro">
-          <h1 data-reveal="" id="appointgem-title" className="appointgem-hero-title">
-            WelzoKart Smart<br className="mobile-title-break" /> <span className="highlight">Grocery Delivery App</span>
-          </h1>
-
-          <div className="appointgem-hero-right">
-            <p data-reveal="" className="appointgem-hero-copy">
-              WelzoKart is a modern grocery delivery application designed to simplify everyday shopping through a fast, intuitive, and user-friendly experience. The platform allows users to explore fresh products, daily essentials, and household items with seamless navigation, quick search, and smooth checkout.
+            {/* Split Paragraphs */}
+            <p className="hero-lc-desc">
+              WelzoKart is a modern grocery delivery application for easy everyday shopping. Users can explore fresh products, daily essentials, and household items. Fast search, smooth navigation, and simple checkout enhance the experience.
             </p>
-
-            <div data-reveal="" className="appointgem-hero-actions">
-              <Link href="/contact" className="appointgem-hero-primary">
-                Book a walkthrough <span aria-hidden="true">→</span>
-              </Link>
-              <a href="#interface" className="appointgem-hero-secondary">
-                See the interface
-              </a>
-            </div>
+            <p className="hero-lc-desc">
+              The platform focuses on usability, convenience, and customer satisfaction. Built for scalability, WelzoKart provides a reliable on-demand grocery solution.
+            </p>
           </div>
-        </div>
-
-        <div ref={interfaceRef} id="interface" className="appointgem-hero-interface">
-          <div className="appointgem-hero-tablet" aria-label="Slota Tablet Companies View">
-            <div className="appointgem-hero-tablet-screen">
-              <img
-                src="/shots/tablet-appointgem.webp"
-                alt="Slota Tablet Companies Screen"
-                className="appointgem-hero-tablet-img"
-              />
-            </div>
-          </div>
-
-          <div className="appointgem-hero-mobile" aria-label="Slota Mobile Companies View">
-            <span className="notch" />
-            <div className="appointgem-hero-mobile-screen">
-              <img
-                src="/shots/mobile-appotingem.webp"
-                alt="Slota Mobile Companies Screen"
-                className="appointgem-hero-mobile-img"
+          
+          <div className="hero-lc-visual">
+            <div className="visual-wrapper">
+              <Image 
+                src="/shots/Welzokart 2.jpg" 
+                alt="WelzoKart App Display"
+                width={800}
+                height={600}
+                className="hero-main-image"
+                priority
               />
             </div>
           </div>
         </div>
+
+        <div className="hero-lc-stats-row">
+          <div className="stat-card">
+            <div className="stat-icon">
+              <Factory size={22} />
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">Industry</span>
+              <span className="stat-val">eCommerce</span>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">
+              <MonitorSmartphone size={22} />
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">Platform</span>
+              <span className="stat-val">Web & Mobile</span>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">
+              <Lightbulb size={22} />
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">Solution</span>
+              <span className="stat-val">Commerce Ops</span>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">
+              <Globe size={22} />
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">Country</span>
+              <span className="stat-val">Global</span>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </section>
   );

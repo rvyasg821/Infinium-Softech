@@ -279,7 +279,7 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
           "A logistics platform supported by cloud infrastructure for application services, integrations, and scalable operations.",
         image: "/shots/truckguru.jpg",
         imageAlt: "Truck Guru logistics platform",
-        href: "/products/truck-guru",
+        href: "/products/loadgo",
         result: "Logistics operations",
       },
       {

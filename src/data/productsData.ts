@@ -135,7 +135,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     golive: "6–8 weeks",
   },
   {
-    id: "truck-guru",
+    id: "loadgo",
     n: "04",
     name: "LoadGo",
     mark: "TG",
@@ -153,7 +153,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     golive: "8–12 weeks",
   },
   {
-    id: "mindful-menu",
+    id: "dishly",
     n: "05",
     name: "Dishly",
     mark: "MM",
@@ -207,7 +207,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     golive: "6–8 weeks",
   },
   {
-    id: "locale-e-clean",
+    id: "purespace",
     n: "08",
     name: "PureSpace",
     mark: "LE",

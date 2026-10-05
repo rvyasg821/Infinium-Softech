@@ -1,445 +1,156 @@
 @use "../../../../../styles/variables" as *;
 @use "../../../../../styles/mixins" as *;
 
-.appointgem-hero-section {
+.welzokart-hero-lc {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background-color: #f2f8fc; // Slightly deeper pastel blue matching reference
   position: relative;
-  padding-top: 48px;
-  padding-bottom: 0;
   overflow: hidden;
-
-  @include respond($bp-sm) {
-    padding-top: 56px;
-  }
-
-  @include respond($bp-md) {
-    padding-top: 72px;
-  }
 }
 
-.appointgem-hero-glow {
-  position: absolute;
-  top: -220px;
-  right: -10%;
-  width: 44vw;
-  height: 44vw;
-  max-width: 620px;
-  max-height: 620px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(31, 49, 232, 0.22), rgba(31, 49, 232, 0) 74%);
-  filter: blur(30px);
-  pointer-events: none;
-}
-
-.appointgem-hero-container {
-  position: relative;
-  z-index: 1;
+.welzokart-hero-lc-container {
   @include container;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
-.appointgem-hero-crumbs {
+.hero-split-top {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 40px;
+  align-items: center;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.hero-lc-content {
+  max-width: 100%;
+  padding-right: 20px;
+  
+  @media (max-width: $bp-lg) {
+    padding-right: 0;
+  }
+}
+
+.identity-top {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #8a8a8e;
-  font-size: 13px;
+  margin-bottom: 24px;
+
+  @media (max-width: $bp-lg) {
+    justify-content: center;
+  }
+
+  .identity-logo {
+    object-fit: contain;
+    width: auto;
+    height: 44px; // Responsive scaling for the wide logo
+  }
 }
 
-.appointgem-hero-crumbs a {
-  color: #8a8a8e;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.appointgem-hero-crumbs a:hover {
+.hero-lc-title {
+  font-family: $font-display;
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1.25;
   color: #0c0c0d;
+  margin: 0 0 24px 0;
 }
 
-.appointgem-hero-crumbs .current {
-  color: #0c0c0d;
-  font-weight: 500;
+.hero-lc-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
-.appointgem-hero-identity {
+.hero-lc-visual {
+  position: relative;
+  width: 100%;
+  
+  .visual-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transform: scale(1.05); // slight pop to mimic floating mock layer without harsh box-shadows
+  }
+}
+
+/* Bottom Stats Row */
+.hero-lc-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  
+  @media (max-width: $bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 32px;
-}
+  padding: 16px 20px;
+  border: 1.5px solid #a3c9e8;
+  border-radius: 8px;
+  background: transparent;
+  transition: all 0.2s ease;
 
-.appointgem-hero-mark {
-  display: grid;
-  width: 54px;
-  height: 54px;
-  place-items: center;
-  border-radius: 14px;
-  background: #1f31e8;
-  color: #fff;
-  font-family: $font-display;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  box-shadow: 0 8px 20px -6px rgba(31, 49, 232, 0.4);
-}
-
-.appointgem-hero-logo {
-  display: block;
-  height: 54px;
-  width: auto;
-  max-width: 200px;
-  object-fit: contain;
-}
-
-.appointgem-hero-identity strong {
-  display: block;
-  font-family: $font-display;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #0c0c0d;
-}
-
-.appointgem-hero-identity .sub {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-  color: #55555a;
-  font-size: 11px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.appointgem-hero-pulse-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #1f31e8;
-  animation: im-pulse 2.4s ease-in-out infinite;
-}
-
-.appointgem-hero-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 48px;
-  align-items: flex-start;
-  margin-top: 32px;
-}
-
-.appointgem-hero-right {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 20px;
-}
-
-.appointgem-hero-title {
-  @include hero-headline;
-  margin: 0;
-
-  .highlight {
-    display: inline;
-    color: #1f31e8;
-  }
-}
-
-.appointgem-hero-copy {
-  @include hero-desc;
-  margin: 0;
-  max-width: 540px;
-}
-
-.appointgem-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.appointgem-hero-primary {
-  @include btn-hero-primary;
-}
-
-.appointgem-hero-secondary {
-  @include btn-hero-outline;
-}
-
-.section-breakline {
-  margin-top: 30px;
-}
-
-hr {
-  display: block;
-  height: 1px;
-  margin: 0;
-  border: 0;
-  background: rgba(12, 12, 13, 0.14);
-}
-
-
-.appointgem-hero-interface {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 28px;
-  margin: 40px 0 35px;
-  padding: 0 clamp(20px, 4vw, 80px);
-  overflow: hidden;
-}
-
-.appointgem-hero-tablet {
-  flex: 1 1 760px;
-  max-width: 760px;
-  min-width: 0;
-  border: 10px solid #0c0c0d;
-  border-radius: 20px;
-  background: #0c0c0d;
-  box-shadow: 0 30px 70px -20px rgba(12, 12, 13, 0.35);
-  overflow: hidden;
-}
-
-.appointgem-hero-tablet-screen {
-  width: 100%;
-  max-height: 540px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.appointgem-hero-tablet-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: translateY(0);
-  animation: scroll-tablet 14s ease-in-out infinite alternate;
-}
-
-.appointgem-hero-mobile {
-  position: relative;
-  flex: 0 0 300px;
-  max-width: 300px;
-  padding: 8px;
-  border-radius: 36px;
-  background: #0c0c0d;
-  box-shadow: 0 30px 60px -15px rgba(12, 12, 13, 0.45);
-  // margin-top: 110px;
-  align-self: flex-end;
-}
-
-.appointgem-hero-mobile .notch {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 72px;
-  height: 18px;
-  border-radius: 100px;
-  background: #0c0c0d;
-  z-index: 10;
-}
-
-.appointgem-hero-mobile-screen {
-  width: 100%;
-  max-height: 560px;
-  border-radius: 28px;
-  background: #ffffff;
-  overflow: hidden;
-}
-
-.appointgem-hero-mobile-img {
-  display: block;
-  width: 100%;
-  height: 115%;
-  object-fit: cover;
-  object-position: center top;
-  transform: translateY(-8%);
-  animation: scroll-mobile 12s ease-in-out infinite alternate;
-}
-
-@media (max-width: 1024px) {
-  .section-breakline {
-    margin-top: 24px;
+  &:hover {
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    border-color: #60a5fa;
   }
 
-  .appointgem-hero-interface {
-    flex-direction: column;
+  .stat-icon {
+    width: 44px;
+    height: 44px;
+    background-color: #3b82f6;
+    color: white;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+    border-radius: 8px;
+    flex-shrink: 0;
   }
 
-  .appointgem-hero-tablet {
-    width: 100%;
-    max-width: 100%;
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .appointgem-hero-mobile {
-    margin-top: 24px;
-    max-width: 280px;
-    flex-basis: 280px;
+  .stat-label {
+    font-family: $font-display;
+    font-size: 14px;
+    font-weight: 800;
+    color: #449adc;
   }
 
-  .appointgem-hero-tablet {
-    display: none;
-  }
-
-  .appointgem-hero-mobile {
-    display: block;
-    width: min(78vw, 320px);
-    max-width: 320px;
-    flex-basis: auto;
-    margin-top: 0;
-    align-self: center;
-  }
-
-  .appointgem-hero-mobile-screen {
-    max-height: 620px;
-  }
-}
-
-@media (max-width: 800px) {
-  .appointgem-hero-section {
-    padding: 44px 20px 0;
-  }
-
-  .appointgem-hero-intro {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .appointgem-hero-right {
-    gap: 20px;
-  }
-
-  .appointgem-hero-interface {
-    margin-inline: -20px;
-    padding-inline: 20px;
-    margin-top: 18px;
-  }
-
-  .appointgem-hero-tablet {
-    display: none;
-  }
-
-  .appointgem-hero-mobile {
-    display: block;
-    width: min(78vw, 320px);
-    max-width: 320px;
-    flex-basis: auto;
-    margin-top: 0;
-    align-self: center;
-  }
-
-  .appointgem-hero-mobile-screen {
-    max-height: 620px;
-  }
-}
-
-@media (max-width: 768px) {
-  .appointgem-hero-section {
-    padding-inline: 20px;
-  }
-
-  .appointgem-hero-interface {
-    margin-top: 16px;
-    padding-inline: 0;
-  }
-
-  .appointgem-hero-tablet {
-    display: none;
-  }
-
-  .appointgem-hero-mobile {
-    display: block;
-    width: min(78vw, 320px);
-    max-width: 320px;
-    flex-basis: auto;
-    margin-top: 0;
-    align-self: center;
-  }
-
-  .appointgem-hero-mobile-screen {
-    max-height: 620px;
-  }
-}
-
-@media (max-width: 480px) {
-  .appointgem-hero-section {
-    padding: 36px 16px 0;
-  }
-
-  .appointgem-hero-identity {
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .appointgem-hero-mark {
-    width: 46px;
-    height: 46px;
-    font-size: 17px;
-  }
-
-  .appointgem-hero-logo {
-    height: 46px;
-  }
-
-  .appointgem-hero-intro {
-    margin-top: 24px;
-  }
-
-  .section-breakline {
-    margin-top: 20px;
-  }
-
-  .appointgem-hero-copy {
-    font-size: 15px;
-  }
-
-  .appointgem-hero-primary,
-  .appointgem-hero-secondary {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .appointgem-hero-stats {
-    grid-template-columns: 1fr;
-  }
-}
-
-@keyframes im-pulse {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.25;
-  }
-}
-
-@keyframes scroll-mobile {
-  0% {
-    transform: translateY(-10%);
-  }
-
-  100% {
-    transform: translateY(-32%);
-  }
-}
-
-@keyframes scroll-tablet {
-  0% {
-    transform: translateY(0%);
-  }
-
-  100% {
-    transform: translateY(-16%);
+  .stat-val {
+    font-family: $font-display;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
   }
 }
