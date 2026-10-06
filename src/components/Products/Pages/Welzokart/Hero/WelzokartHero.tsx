@@ -18,7 +18,9 @@ import {
   ShoppingBag,
   Building2,
   X,
-  MessageSquare
+  MessageSquare,
+  Smartphone,
+  Globe
 } from "lucide-react";
 import "./WelzokartHero.scss";
 
@@ -27,28 +29,28 @@ const SLIDES = [
     id: "home",
     title: "Home & Discovery",
     desc: "Browse fresh groceries & daily essentials with AI search",
-    img: "/shots/Welzokart 2.jpg",
+    img: "/shots/Welzokart_ui-1.png",
     callout: "⚡ 15-Min Express Delivery"
   },
   {
     id: "cart",
     title: "Smart Cart & Checkout",
     desc: "Instant coupon application, multi-address & quick payment",
-    img: "/shots/Welzokart_ui-1.jpg",
+    img: "/shots/Welzokart_ui-2.png",
     callout: "🔒 100% Secure Instant Payments"
   },
   {
     id: "tracking",
     title: "Real-Time GPS Tracking",
     desc: "Live rider location tracking with estimated arrival timer",
-    img: "/shots/Welzokart_ui-2.jpg",
+    img: "/shots/Welzokart_ui-3.png",
     callout: "📍 Real-Time Live Order Tracking"
   },
   {
     id: "express",
     title: "Driver & Partner App",
     desc: "Instant dispatch, route optimization and delivery proof",
-    img: "/shots/Welzokart_ui-3.jpg",
+    img: "/shots/Welzokart_ui-4.png",
     callout: "⭐ 4.9 Rating Across 150K+ Reviews"
   }
 ];
@@ -58,11 +60,6 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
   const [isPaused, setIsPaused] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  // Count-up stats animation
-  const [ordersCount, setOrdersCount] = useState(0);
-  const [usersCount, setUsersCount] = useState(0);
-  const [citiesCount, setCitiesCount] = useState(0);
 
   const phoneRef = useRef<HTMLDivElement>(null);
 
@@ -81,28 +78,6 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
     }, 4500);
     return () => clearInterval(interval);
   }, [isPaused]);
-
-  // Animated counter effect on load
-  useEffect(() => {
-    let step = 0;
-    const duration = 2000;
-    const intervalTime = 30;
-    const totalSteps = duration / intervalTime;
-
-    const timer = setInterval(() => {
-      step++;
-      const progress = Math.min(step / totalSteps, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-
-      setOrdersCount(Math.floor(easeProgress * 250));
-      setUsersCount(Math.floor(easeProgress * 150));
-      setCitiesCount(Math.floor(easeProgress * 45));
-
-      if (progress >= 1) clearInterval(timer);
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // Parallax tilt handler
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -305,46 +280,46 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
           <div className="stats-live-grid">
             <div className="stat-live-card">
               <div className="stat-icon-wrap">
-                <ShoppingBag size={22} />
-              </div>
-              <div className="stat-data">
-                <span className="stat-num">{ordersCount}K+</span>
-                <span className="stat-text">Orders Completed</span>
-              </div>
-            </div>
-
-            <div className="stat-live-card">
-              <div className="stat-icon-wrap">
-                <Users size={22} />
-              </div>
-              <div className="stat-data">
-                <span className="stat-num">{usersCount}K+</span>
-                <span className="stat-text">Active App Users</span>
-              </div>
-            </div>
-
-            <div className="stat-live-card">
-              <div className="stat-icon-wrap">
                 <Building2 size={22} />
               </div>
               <div className="stat-data">
-                <span className="stat-num">{citiesCount}+</span>
-                <span className="stat-text">Cities Operating</span>
+                <span className="stat-num">Industry</span>
+                <span className="stat-text">Grocery Delivery</span>
               </div>
             </div>
 
             <div className="stat-live-card">
               <div className="stat-icon-wrap">
-                <CheckCircle2 size={22} />
+                <Smartphone size={22} />
               </div>
               <div className="stat-data">
-                <span className="stat-num">99.9%</span>
-                <span className="stat-text">Platform Uptime</span>
+                <span className="stat-num">Platform</span>
+                <span className="stat-text">Mobile application</span>
+              </div>
+            </div>
+
+            <div className="stat-live-card">
+              <div className="stat-icon-wrap">
+                <Zap size={22} />
+              </div>
+              <div className="stat-data">
+                <span className="stat-num">Solutions</span>
+                <span className="stat-text">Digital grocery solutions</span>
+              </div>
+            </div>
+
+            <div className="stat-live-card">
+              <div className="stat-icon-wrap">
+                <Globe size={22} />
+              </div>
+              <div className="stat-data">
+                <span className="stat-num">Country</span>
+                <span className="stat-text">India</span>
               </div>
             </div>
           </div>
 
-          <div className="trust-proof-strip">
+          {/* <div className="trust-proof-strip">
             <span className="trust-label">
               Trusted by 50+ regional retail chains &amp; quick-commerce operators
             </span>
@@ -353,7 +328,7 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
               <span className="proof-pill">✓ Live GPS Tracking</span>
               <span className="proof-pill">✓ PCI-DSS Secure Payments</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

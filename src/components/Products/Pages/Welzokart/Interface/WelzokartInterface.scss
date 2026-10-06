@@ -2,7 +2,7 @@
 @use "../../../../../styles/mixins" as *;
 
 .welzokart-interface-lc {
-  padding: 90px 0;
+  @include section-padding;
   background-color: #fafcff;
   position: relative;
   overflow: hidden;
@@ -34,20 +34,21 @@
 
     .lc-headline {
       font-family: $font-display;
-      font-size: $fs-h2;
       font-weight: 800;
-      color: #0f172a;
-      line-height: 1.25;
-      margin: 0;
-      letter-spacing: -0.02em;
+      font-stretch: 110%;
+      font-size: var(--fs-h2);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      color: $color-ink;
+      margin: 12px 0 0 0;
       flex: 1;
     }
 
     .lc-desc {
-      font-size: 16px;
-      line-height: 1.65;
-      color: #334155; // High contrast text color
-      margin: 0;
+      font-size: clamp(14px, 1.25vw, 16.5px);
+      line-height: 1.6;
+      color: $color-body;
+      margin-top: 16px;
       flex: 1;
       max-width: 540px;
     }
@@ -193,6 +194,10 @@
     font-weight: 700;
     text-decoration: none;
     transition: all 0.25s ease;
+
+    @media (max-width: 1023px) {
+      display: none;
+    }
 
     &:hover {
       background: #2563eb;

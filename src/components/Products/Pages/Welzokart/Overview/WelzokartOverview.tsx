@@ -1,20 +1,46 @@
-import React from "react";
+"use client";
+
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import "./WelzokartOverview.scss";
 
 export function WelzokartOverview() {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!frameRef.current) return;
+    const rect = frameRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setTilt({
+      x: (y / rect.height) * -10,
+      y: (x / rect.width) * 10
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
   return (
     <section id="overview" className="welzokart-overview-lc" aria-labelledby="overview-title">
       <div className="overview-lc-container">
 
         <div className="overview-lc-grid">
-          {/* Left Images */}
+          {/* Left Image */}
           <div className="overview-lc-images">
-            <div className="img-frame img-main">
-              <Image src="/shots/welzokart.jpg" alt="Welzokart App Display" width={500} height={400} />
-            </div>
-            <div className="img-frame img-sub">
-              <Image src="/shots/Welzokart_ui-1.jpg" alt="Welzokart Ui" width={300} height={250} />
+            <div 
+              ref={frameRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              className="img-frame img-main 3d-tilt-frame"
+              style={{
+                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                transition: tilt.x === 0 && tilt.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease-out"
+              }}
+            >
+              <Image src="/shots/welzokart_overview.png" alt="Welzokart App Display" width={800} height={600} priority />
             </div>
           </div>
 

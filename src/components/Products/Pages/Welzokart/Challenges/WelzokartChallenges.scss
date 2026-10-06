@@ -2,7 +2,7 @@
 @use "../../../../../styles/mixins" as *;
 
 .welzokart-challenges-lc {
-  padding: 100px 0;
+  @include section-padding;
   background: linear-gradient(135deg, #e5f3ff 0%, #ffffff 50%, #eef5fb 100%);
   position: relative;
 }
@@ -14,9 +14,9 @@
 }
 
 .challenges-lc-header {
-  text-align: center;
+  text-align: left;
   max-width: 800px;
-  margin: 0 auto 60px;
+  margin: 0 0 60px;
 
   .lc-eyebrow {
     @include section-eyebrow("white");
@@ -25,18 +25,19 @@
 
   .lc-headline {
     font-family: $font-display;
-    font-size: $fs-h2;
     font-weight: 800;
-    color: #0c0c0d;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    margin: 0 0 20px 0;
+    font-stretch: 110%;
+    font-size: var(--fs-h2);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: $color-ink;
+    margin: 12px 0 20px 0;
   }
 
   .lc-desc {
-    font-size: 16px;
+    font-size: clamp(14px, 1.25vw, 16.5px);
     line-height: 1.6;
-    color: #555;
+    color: $color-body;
   }
 }
 

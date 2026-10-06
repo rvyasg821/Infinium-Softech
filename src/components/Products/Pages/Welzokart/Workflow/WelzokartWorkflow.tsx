@@ -80,7 +80,7 @@ export function WelzokartWorkflow() {
       <div className="welzokart-workflow-container">
         
         {/* Header */}
-        <div className="workflow-section-header">
+        <div className="workflow-lc-header">
           <span className="lc-eyebrow">INTERACTIVE WALKTHROUGH</span>
           <h2 id="workflow-title" className="lc-headline">
             "Try It" Stepper: How WelzoKart Works

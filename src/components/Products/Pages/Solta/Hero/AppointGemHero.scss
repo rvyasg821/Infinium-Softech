@@ -203,7 +203,7 @@ hr {
 
 .appointgem-hero-tablet-screen {
   width: 100%;
-  max-height: 540px;
+  height: 540px;
   border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
@@ -214,8 +214,8 @@ hr {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translateY(0);
-  animation: scroll-tablet 14s ease-in-out infinite alternate;
+  object-position: top center;
+  animation: scroll-tablet 18s ease-in-out infinite alternate;
 }
 
 .appointgem-hero-mobile {
@@ -244,7 +244,7 @@ hr {
 
 .appointgem-hero-mobile-screen {
   width: 100%;
-  max-height: 560px;
+  height: 560px;
   border-radius: 28px;
   background: #ffffff;
   overflow: hidden;
@@ -253,11 +253,10 @@ hr {
 .appointgem-hero-mobile-img {
   display: block;
   width: 100%;
-  height: 115%;
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
-  transform: translateY(-8%);
-  animation: scroll-mobile 12s ease-in-out infinite alternate;
+  object-position: top center;
+  animation: scroll-mobile 18s ease-in-out infinite alternate;
 }
 
 @media (max-width: 1024px) {
@@ -425,21 +424,19 @@ hr {
 }
 
 @keyframes scroll-mobile {
-  0% {
-    transform: translateY(-10%);
+  0%, 15% {
+    object-position: top center;
   }
-
-  100% {
-    transform: translateY(-32%);
+  85%, 100% {
+    object-position: bottom center;
   }
 }
 
 @keyframes scroll-tablet {
-  0% {
-    transform: translateY(0%);
+  0%, 15% {
+    object-position: top center;
   }
-
-  100% {
-    transform: translateY(-16%);
+  85%, 100% {
+    object-position: bottom center;
   }
 }

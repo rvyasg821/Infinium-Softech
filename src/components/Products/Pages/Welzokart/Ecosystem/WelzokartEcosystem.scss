@@ -2,7 +2,7 @@
 @use "../../../../../styles/mixins" as *;
 
 .appointgem-ecosystem-section {
-  padding: 50px 0 0;
+  @include section-padding;
   background: $color-bg;
 
   .appointgem-ecosystem-container {

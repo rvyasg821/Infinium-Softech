@@ -2,7 +2,16 @@
 @use "../../../../../styles/mixins" as *;
 
 .welzokart-hero-lc {
-  padding-top: 110px;
+  padding-top: 48px;
+
+  @include respond($bp-md) {
+    padding-top: 56px;
+  }
+
+  @include respond($bp-lg) {
+    padding-top: 72px;
+  }
+
   padding-bottom: 70px;
   position: relative;
   overflow: hidden;
@@ -66,7 +75,7 @@
   @media (max-width: $bp-lg) {
     grid-template-columns: 1fr;
     gap: 50px;
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -76,7 +85,7 @@
   flex-direction: column;
 
   @media (max-width: $bp-lg) {
-    align-items: center;
+    align-items: flex-start;
   }
 }
 
@@ -119,7 +128,7 @@
   margin-bottom: 22px;
 
   @media (max-width: $bp-lg) {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .identity-logo {
@@ -187,16 +196,16 @@
   margin-bottom: 22px;
 
   @media (max-width: $bp-lg) {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .chip-badge {
     background: #eef6ff;
     border: 1px solid #bfdbfe;
     color: #1e40af;
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 700;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 100px;
     letter-spacing: 0.02em;
   }
@@ -407,8 +416,8 @@
 .phone-device-frame {
   position: relative;
   width: 100%;
-  max-width: 320px;
-  height: 610px;
+  max-width: 330px;
+  height: 720px;
   border-radius: 46px;
   background: #0f172a;
   border: 12px solid #0f172a;
@@ -535,9 +544,9 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  color: #0f172a;
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid rgba(37, 99, 235, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -547,9 +556,9 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: #2563eb;
-    color: #ffffff;
-    border-color: #2563eb;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+    border-color: rgba(226, 232, 240, 0.8);
     transform: translateY(-50%) scale(1.1);
   }
 
@@ -687,10 +696,12 @@
 
     .stat-num {
       font-family: $font-display;
-      font-size: 26px;
+      font-size: 18px;
       font-weight: 800;
       color: #1d4ed8;
       line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
     .stat-text {
@@ -734,17 +745,28 @@
     flex-wrap: wrap;
 
     @media (max-width: $bp-lg) {
-      justify-content: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+      padding-bottom: 8px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     .proof-pill {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
       color: #15803d;
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
-      padding: 4px 12px;
+      padding: 6px 14px;
       border-radius: 100px;
+      flex-shrink: 0;
     }
   }
 }

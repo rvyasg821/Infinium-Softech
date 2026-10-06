@@ -84,7 +84,7 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
             <span className="notch" />
             <div className="appointgem-hero-mobile-screen">
               <img
-                src="/shots/Slota-mobil.png"
+                src="/shots/Slota-mobile.png"
                 alt="Slota Mobile Companies Screen"
                 className="appointgem-hero-mobile-img"
               />

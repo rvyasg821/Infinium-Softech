@@ -5,7 +5,7 @@ import "./WelzokartNav.scss";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "#overview", color: "#2AA8C4" },
-  { label: "Interface", href: "#interface1", color: "#1F31E8" },
+  { label: "Interface", href: "#interface", color: "#1F31E8" },
   { label: "Key challenges", href: "#challenges", color: "#1E9E5A" },
   { label: "Our solution", href: "#solution", color: "#0F8F87" },
   { label: "Workflow", href: "#workflow", color: "#8B3FE8" },
@@ -25,74 +25,84 @@ export function WelzokartNav() {
   const navContainerRef = useRef<HTMLDivElement | null>(null);
 
   const scrollActiveTabIntoView = useCallback((sectionId: string) => {
-    const container = navContainerRef.current;
-    if (!container) return;
-    const activeCard = container.querySelector(
+    if (!navContainerRef.current) return;
+    const activeCard = navContainerRef.current.querySelector(
       `[data-nav-id="${sectionId}"]`
     ) as HTMLElement;
     if (activeCard) {
-      const cardLeft = activeCard.offsetLeft;
-      const cardWidth = activeCard.offsetWidth;
-      const containerWidth = container.clientWidth;
+      const container = navContainerRef.current;
+      const scrollLeft =
+        activeCard.offsetLeft -
+        container.offsetWidth / 2 +
+        activeCard.offsetWidth / 2;
+
       container.scrollTo({
-        left: cardLeft - containerWidth / 2 + cardWidth / 2,
+        left: scrollLeft,
         behavior: "smooth",
       });
     }
   }, []);
 
-  const updateActiveFromScroll = useCallback(() => {
-    const scrollY = window.scrollY;
-    const scrollPosition = scrollY + ACTIVATION_OFFSET;
+  useEffect(() => {
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px",
+      threshold: 0.05,
+    };
 
-    // At the very bottom of the page -> last item active
-    const atBottom =
-      window.innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+    const handleIntersect: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          if (SECTION_IDS.includes(id)) {
+            setActiveSection(id);
+            scrollActiveTabIntoView(id);
+          }
+        }
+      });
+    };
 
-    if (atBottom && scrollY > 0) {
-      const lastId = SECTION_IDS[SECTION_IDS.length - 1];
-      if (document.getElementById(lastId)) {
-        setActiveSection(lastId);
-        scrollActiveTabIntoView(lastId);
-        return;
-      }
-    }
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
-    let current = SECTION_IDS[0];
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
-    for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
-      const element = document.getElementById(SECTION_IDS[i]);
-      if (!element) continue;
-
-      const sectionTop = element.getBoundingClientRect().top + scrollY;
-      if (sectionTop <= scrollPosition) {
-        current = SECTION_IDS[i];
-        break;
-      }
-    }
-
-    setActiveSection(current);
-    scrollActiveTabIntoView(current);
+    return () => {
+      observer.disconnect();
+    };
   }, [scrollActiveTabIntoView]);
 
   useEffect(() => {
-    window.addEventListener("scroll", updateActiveFromScroll, { passive: true });
-    window.addEventListener("resize", updateActiveFromScroll);
-    const initialUpdateFrame = window.requestAnimationFrame(updateActiveFromScroll);
-
-    return () => {
-      window.removeEventListener("scroll", updateActiveFromScroll);
-      window.removeEventListener("resize", updateActiveFromScroll);
-      window.cancelAnimationFrame(initialUpdateFrame);
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const id = hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        if (SECTION_IDS.includes(id)) {
+          setActiveSection(id);
+          scrollActiveTabIntoView(id);
+        }
+        setTimeout(() => {
+          const targetY = element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }, 120);
+      }
     };
-  }, [updateActiveFromScroll]);
+
+    handleHashScroll();
+    window.addEventListener("hashchange", handleHashScroll);
+    return () => window.removeEventListener("hashchange", handleHashScroll);
+  }, [scrollActiveTabIntoView]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
-    e.currentTarget.blur(); // remove focus/hover leftovers from clicked link
+    e.currentTarget.blur();
 
     const id = href.substring(1);
     const element = document.getElementById(id);
@@ -101,9 +111,9 @@ export function WelzokartNav() {
     setActiveSection(id);
     scrollActiveTabIntoView(id);
 
-    const y =
+    const targetY =
       element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
-    window.scrollTo({ top: y, behavior: "smooth" });
+    window.scrollTo({ top: targetY, behavior: "smooth" });
   };
 
   return (
@@ -111,30 +121,34 @@ export function WelzokartNav() {
       className="appointgem-subnav-sticky"
       aria-label="AppointGem Page Navigation"
     >
-      <div className="appointgem-subnav-container" ref={navContainerRef}>
-        {NAV_ITEMS.map((item) => {
-          const id = item.href.substring(1);
-          const isActive = activeSection === id;
-          return (
-            <a
-              key={item.href}
-              href={item.href}
-              data-nav-id={id}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className={`appointgem-subnav-item ${isActive ? "active" : ""}`}
-              style={{ "--item-accent-color": item.color } as React.CSSProperties}
-              aria-current={isActive ? "true" : undefined}
-            >
-              <span
-                className="appointgem-index-dot"
-                style={{ backgroundColor: item.color }}
-                aria-hidden="true"
-              />
-              <span>{item.label}</span>
-            </a>
-          );
-        })}
+      <div className="appointgem-subnav-container">
+        <div className="appointgem-subnav-index" ref={navContainerRef}>
+          {NAV_ITEMS.map((item) => {
+            const id = item.href.substring(1);
+            const isActive = activeSection === id;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                data-nav-id={id}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`appointgem-subnav-item ${isActive ? "active" : ""}`}
+                style={{ "--item-accent-color": item.color } as React.CSSProperties}
+                aria-current={isActive ? "true" : undefined}
+              >
+                <div className="index-title-row">
+                  <span
+                    className="appointgem-index-dot"
+                    style={{ backgroundColor: item.color }}
+                    aria-hidden="true"
+                  />
+                  <span>{item.label}</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
-    </nav >
+    </nav>
   );
 }

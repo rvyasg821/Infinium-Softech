@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+
+import React, { useState, useRef } from "react";
 import "./WelzokartSolution.scss";
-import { MousePointerClick, ShieldCheck, CreditCard, LayoutTemplate, Cloud, LineChart } from "lucide-react";
+import { MousePointerClick, ShieldCheck, CreditCard, LayoutTemplate, Cloud, LineChart, ChevronLeft, ChevronRight } from "lucide-react";
 
 const SOLUTIONS = [
   {
@@ -37,10 +38,42 @@ const SOLUTIONS = [
 ];
 
 export function WelzokartSolution() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!gridRef.current) return;
+    const { scrollLeft, clientWidth } = gridRef.current;
+    if (clientWidth > 0) {
+      const cardWidth = gridRef.current.children[0]?.clientWidth || clientWidth;
+      const index = Math.round(scrollLeft / (cardWidth + 16));
+      setActiveIndex(Math.min(Math.max(index, 0), SOLUTIONS.length - 1));
+    }
+  };
+
+  const scrollToSlide = (index: number) => {
+    if (!gridRef.current) return;
+    const card = gridRef.current.children[index] as HTMLElement;
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+    setActiveIndex(index);
+  };
+
+  const handlePrev = () => {
+    const nextIndex = Math.max(0, activeIndex - 1);
+    scrollToSlide(nextIndex);
+  };
+
+  const handleNext = () => {
+    const nextIndex = Math.min(SOLUTIONS.length - 1, activeIndex + 1);
+    scrollToSlide(nextIndex);
+  };
+
   return (
     <section id="solution" className="welzokart-solution-lc">
       <div className="solution-lc-container">
-        
+
         <div className="solution-lc-header">
           <span className="lc-eyebrow">OUR SOLUTION</span>
           <h2 className="lc-headline">
@@ -51,17 +84,56 @@ export function WelzokartSolution() {
           </p>
         </div>
 
-        <div className="solution-lc-grid">
-          {SOLUTIONS.map((item, idx) => (
-            <div key={idx} className="lc-solution-card">
-              <div className="lc-card-header">
-                <div className="lc-card-icon">
-                  {item.icon}
+        <div className="solution-carousel-wrapper">
+          <button
+            type="button"
+            className="solution-nav-btn prev-btn"
+            onClick={handlePrev}
+            disabled={activeIndex === 0}
+            aria-label="Previous solution card"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          <div
+            ref={gridRef}
+            className="solution-lc-grid"
+            onScroll={handleScroll}
+          >
+            {SOLUTIONS.map((item, idx) => (
+              <div key={idx} className="lc-solution-card">
+                <div className="lc-card-header">
+                  <div className="lc-card-icon">
+                    {item.icon}
+                  </div>
+                  <h3>{item.title}</h3>
                 </div>
-                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
               </div>
-              <p>{item.desc}</p>
-            </div>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="solution-nav-btn next-btn"
+            onClick={handleNext}
+            disabled={activeIndex === SOLUTIONS.length - 1}
+            aria-label="Next solution card"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        {/* Carousel Pagination Dots */}
+        <div className="solution-carousel-dots" aria-label="Solution pagination">
+          {SOLUTIONS.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`solution-dot ${activeIndex === idx ? "is-active" : ""}`}
+              onClick={() => scrollToSlide(idx)}
+              aria-label={`Go to solution card ${idx + 1}`}
+            />
           ))}
         </div>
 
