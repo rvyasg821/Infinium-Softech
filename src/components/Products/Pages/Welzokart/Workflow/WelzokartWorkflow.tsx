@@ -14,7 +14,7 @@ const WORKFLOW_STEPS = [
     icon: Search,
     headline: "Explore 5,000+ Fresh Items & AI Recommendations",
     desc: "Customers open the app, search fresh produce, daily dairy, or household essentials with instant smart search and category filters.",
-    img: "/shots/Welzokart 2.jpg",
+    img: "/shots/Welzokart_workflow-1.jpg",
     actionNote: "Smart Auto-Suggest & Filter by Dietary Preferences"
   },
   {
@@ -25,7 +25,7 @@ const WORKFLOW_STEPS = [
     icon: ShoppingBag,
     headline: "Add Items, Apply Coupons & Select Delivery Window",
     desc: "Review selected items, apply promo codes, choose scheduled or 15-minute express delivery slots, and split payments if needed.",
-    img: "/shots/Welzokart_ui-1.jpg",
+    img: "/shots/Welzokart_workflow-2.jpg",
     actionNote: "Automated Best-Coupon Match & Instant Discounts"
   },
   {
@@ -36,7 +36,7 @@ const WORKFLOW_STEPS = [
     icon: CreditCard,
     headline: "Instant Dispatch & Dark-Store Packing",
     desc: "Order is confirmed and instantly transmitted to the nearest fulfillment hub or merchant store. Staff picks and packs items in under 3 minutes.",
-    img: "/shots/Welzokart_ui-3.jpg",
+    img: "/shots/Welzokart_workflow-3.jpg",
     actionNote: "100% Encrypted Payment with Instant Merchant Sound Alert"
   },
   {
@@ -47,7 +47,7 @@ const WORKFLOW_STEPS = [
     icon: MapPin,
     headline: "Real-time Rider Tracking & Doorstep Handover",
     desc: "Rider picks up the order and navigates via turn-by-turn GPS. Customer receives live map updates, rider contact, and OTP handover.",
-    img: "/shots/Welzokart_ui-2.jpg",
+    img: "/shots/Welzokart_workflow-4.jpg",
     actionNote: "Live GPS Map Tracking with Contactless OTP Confirmation"
   }
 ];
@@ -78,7 +78,7 @@ export function WelzokartWorkflow() {
   return (
     <section id="workflow" className="welzokart-workflow-section" aria-labelledby="workflow-title">
       <div className="welzokart-workflow-container">
-        
+
         {/* Header */}
         <div className="workflow-lc-header">
           <span className="lc-eyebrow">INTERACTIVE WALKTHROUGH</span>

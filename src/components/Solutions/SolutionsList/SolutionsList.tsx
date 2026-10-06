@@ -32,7 +32,7 @@ function SolutionVisualCol({ item }: { item: typeof SOLUTIONS_LIST_DATA[0] }) {
 
   return (
     <div data-reveal="" className="solution-visual-col">
-      <div 
+      <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -58,7 +58,6 @@ function SolutionVisualCol({ item }: { item: typeof SOLUTIONS_LIST_DATA[0] }) {
     </div>
   );
 }
-
 export function SolutionsList() {
   const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
