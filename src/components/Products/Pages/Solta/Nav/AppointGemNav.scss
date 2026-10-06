@@ -3,22 +3,17 @@
 
 .appointgem-subnav-sticky {
   position: sticky;
-  top: var(--site-header-height, 75px);
+  // 1px overlap under the header (header has higher z-index) so no seam can appear
+  top: calc(var(--site-header-height, 85px) - 1px);
   z-index: 60;
-  background: rgba(243, 242, 238, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  // Solid-ish background, no backdrop-filter (it flickers on sticky + smooth scroll)
+  background: rgba(243, 242, 238, 0.98);
   padding: 6px 0;
-
-  @media (max-width: 1024px) {
-    padding: 6px 0;
-  }
+  // Own compositor layer = stable sticky position while scrolling
+  transform: translateZ(0);
+  backface-visibility: hidden;
 
   @media (max-width: 640px) {
-    padding: 4px 0;
-  }
-
-  @media (max-width: 380px) {
     padding: 4px 0;
   }
 
@@ -29,13 +24,15 @@
   }
 
   .appointgem-subnav-index {
+    position: relative;
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
-    scroll-behavior: smooth;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -110,6 +107,7 @@
       gap: 8px;
     }
 
+    // Reserves the bold text width so the tab never changes size when active
     .appointgem-label {
       display: inline-flex;
       flex-direction: column;
@@ -137,9 +135,5 @@
     &.active .appointgem-index-dot {
       transform: scale(1.2);
     }
-  }
-
-  @media (max-width: 768px) {
-    padding: 6px 0;
   }
 }

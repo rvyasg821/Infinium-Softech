@@ -63,7 +63,7 @@ export function WelzokartChallenges() {
   return (
     <section id="challenges" className="welzokart-challenges-lc">
       <div className="challenges-lc-container">
-        
+
         <div className="challenges-lc-header">
           <span className="lc-eyebrow">KEY CHALLENGES</span>
           <h2 className="lc-headline">
@@ -96,7 +96,7 @@ export function WelzokartChallenges() {
                 transition: tilt1.x === 0 && tilt1.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease-out"
               }}
             >
-               <Image src="/shots/Welzokart 2.jpg" alt="Welzokart Challenges Part 1" width={600} height={400} />
+              <Image src="/shots/Welzokart_KC-1.png" alt="Welzokart Challenges Part 1" width={600} height={400} />
             </div>
           </div>
 
@@ -112,7 +112,7 @@ export function WelzokartChallenges() {
                 transition: tilt2.x === 0 && tilt2.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease-out"
               }}
             >
-               <Image src="/shots/Welzokart 2.jpg" alt="Welzokart Challenges Part 2" width={600} height={400} />
+              <Image src="/shots/Welzokart_KC-2.jpg" alt="Welzokart Challenges Part 2" width={600} height={400} />
             </div>
 
             <div className="challenge-group">

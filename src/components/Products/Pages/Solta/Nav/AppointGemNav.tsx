@@ -16,55 +16,66 @@ const NAV_ITEMS = [
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.href.substring(1));
 
-// Where a section lands after clicking (space for sticky header + sub nav)
-const SCROLL_OFFSET = 110;
-// A section becomes active when its top passes this line (must be >= SCROLL_OFFSET)
-const ACTIVATION_OFFSET = 140;
-// How long scrolling must be idle before we unlock scroll-spy after a click
+// Breathing room between the sticky bars and the top of a section
+const GAP_BELOW_BARS = 12;
+// Extra tolerance so a section clicked is always "active" after landing
+const ACTIVATION_TOLERANCE = 8;
+// How long scrolling must be idle before scroll-spy unlocks after a click
 const SCROLL_IDLE_MS = 150;
+// Wait this long before centering the active tab (avoids restarting animations)
+const CENTER_DEBOUNCE_MS = 120;
 
 export function AppointGemNav() {
   const [activeSection, setActiveSection] = useState(SECTION_IDS[0]);
-  const navContainerRef = useRef<HTMLDivElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
+  const stripRef = useRef<HTMLDivElement | null>(null);
   const { scrollTo } = useScrollAnimation();
 
-  // True while a click-initiated smooth scroll is running
   const isProgrammaticScrollRef = useRef(false);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isTouchingStripRef = useRef(false);
+  const touchEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const scrollActiveTabIntoView = useCallback(
-    (sectionId: string, force = false) => {
-      const container = navContainerRef.current;
-      if (!container) return;
+  // Real height of the sticky header + this sub-nav (measured, not hard-coded)
+  const getStickyOffset = useCallback(() => {
+    const headerVar = getComputedStyle(document.documentElement).getPropertyValue(
+      "--site-header-height"
+    );
+    const headerH = parseFloat(headerVar) || 75;
+    const subNavH = navRef.current?.offsetHeight ?? 0;
+    return headerH + subNavH;
+  }, []);
 
-      const activeCard = container.querySelector(
-        `[data-nav-id="${sectionId}"]`
-      ) as HTMLElement | null;
-      if (!activeCard) return;
+  const centerActiveTab = useCallback((sectionId: string, force = false) => {
+    const container = stripRef.current;
+    if (!container) return;
 
-      const cardLeft = activeCard.offsetLeft;
-      const cardRight = cardLeft + activeCard.offsetWidth;
-      const containerScrollLeft = container.scrollLeft;
-      const containerWidth = container.clientWidth;
-      const containerScrollRight = containerScrollLeft + containerWidth;
+    const activeCard = container.querySelector(
+      `[data-nav-id="${sectionId}"]`
+    ) as HTMLElement | null;
+    if (!activeCard) return;
 
-      const isVisible =
-        cardLeft >= containerScrollLeft + 16 &&
-        cardRight <= containerScrollRight - 16;
+    const cardLeft = activeCard.offsetLeft;
+    const cardRight = cardLeft + activeCard.offsetWidth;
+    const viewLeft = container.scrollLeft;
+    const viewRight = viewLeft + container.clientWidth;
 
-      if (!isVisible || force) {
-        const left =
-          cardLeft - containerWidth / 2 + activeCard.offsetWidth / 2;
-        container.scrollTo({ left, behavior: "smooth" });
-      }
-    },
-    []
-  );
+    const isVisible = cardLeft >= viewLeft + 16 && cardRight <= viewRight - 16;
 
-  // Keep the active tab visible – runs ONLY when active section changes
+    if (!isVisible || force) {
+      const left =
+        cardLeft - container.clientWidth / 2 + activeCard.offsetWidth / 2;
+      container.scrollTo({ left, behavior: "smooth" });
+    }
+  }, []);
+
+  // Keep the active tab visible: debounced, and never while the user touches the strip
   useEffect(() => {
-    scrollActiveTabIntoView(activeSection);
-  }, [activeSection, scrollActiveTabIntoView]);
+    const timer = setTimeout(() => {
+      if (!isTouchingStripRef.current) centerActiveTab(activeSection);
+    }, CENTER_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [activeSection, centerActiveTab]);
 
   // Scroll-spy (rAF throttled)
   useEffect(() => {
@@ -81,12 +92,14 @@ export function AppointGemNav() {
         return;
       }
 
-      let current = SECTION_IDS[0];
+      const activationLine =
+        getStickyOffset() + GAP_BELOW_BARS + ACTIVATION_TOLERANCE;
 
+      let current = SECTION_IDS[0];
       for (const id of SECTION_IDS) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= ACTIVATION_OFFSET) {
+        if (el.getBoundingClientRect().top <= activationLine) {
           current = id;
         }
       }
@@ -94,9 +107,7 @@ export function AppointGemNav() {
       const atBottom =
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 4;
-      if (atBottom) {
-        current = SECTION_IDS[SECTION_IDS.length - 1];
-      }
+      if (atBottom) current = SECTION_IDS[SECTION_IDS.length - 1];
 
       setActiveSection(current);
     };
@@ -117,7 +128,7 @@ export function AppointGemNav() {
       window.removeEventListener("resize", onScroll);
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
     };
-  }, []);
+  }, [getStickyOffset]);
 
   const scrollToSection = useCallback(
     (id: string) => {
@@ -126,16 +137,16 @@ export function AppointGemNav() {
 
       isProgrammaticScrollRef.current = true;
       setActiveSection(id);
-      scrollActiveTabIntoView(id, true);
+      centerActiveTab(id, true);
 
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
       idleTimerRef.current = setTimeout(() => {
         isProgrammaticScrollRef.current = false;
       }, 1200);
 
-      scrollTo(element, { offset: -SCROLL_OFFSET });
+      scrollTo(element, { offset: -(getStickyOffset() + GAP_BELOW_BARS) });
     },
-    [scrollActiveTabIntoView, scrollTo]
+    [centerActiveTab, getStickyOffset, scrollTo]
   );
 
   // Handle initial hash + hash changes
@@ -145,7 +156,6 @@ export function AppointGemNav() {
       if (!hash) return;
       const id = hash.substring(1);
       if (!SECTION_IDS.includes(id)) return;
-
       setTimeout(() => scrollToSection(id), 120);
     };
 
@@ -163,13 +173,38 @@ export function AppointGemNav() {
     scrollToSection(href.substring(1));
   };
 
+  // Pause auto-centering while the user swipes the tab strip
+  const handleStripTouchStart = () => {
+    isTouchingStripRef.current = true;
+    if (touchEndTimerRef.current) clearTimeout(touchEndTimerRef.current);
+  };
+  const handleStripTouchEnd = () => {
+    if (touchEndTimerRef.current) clearTimeout(touchEndTimerRef.current);
+    touchEndTimerRef.current = setTimeout(() => {
+      isTouchingStripRef.current = false;
+    }, 400);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (touchEndTimerRef.current) clearTimeout(touchEndTimerRef.current);
+    };
+  }, []);
+
   return (
     <nav
+      ref={navRef}
       className="appointgem-subnav-sticky"
       aria-label="AppointGem Page Navigation"
     >
       <div className="appointgem-subnav-container">
-        <div className="appointgem-subnav-index" ref={navContainerRef}>
+        <div
+          className="appointgem-subnav-index"
+          ref={stripRef}
+          onTouchStart={handleStripTouchStart}
+          onTouchEnd={handleStripTouchEnd}
+          onTouchCancel={handleStripTouchEnd}
+        >
           {NAV_ITEMS.map((item) => {
             const id = item.href.substring(1);
             const isActive = activeSection === id;
