@@ -70,6 +70,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     appLabel: "New today",
     appValue: "1,940",
     shot: "/shots/welzokart.jpg",
+    logo: "/logos/needly-logo.png",
   },
   {
     id: "loadgo",

@@ -64,6 +64,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "Daily needs buy and sell marketplace with verified neighbourhood listings.",
     shot: "/shots/textgem.jpg",
     wash: "rgba(224, 69, 47, 0.16)",
+    logo: "/logos/needly-logo.png",
   },
 
   {

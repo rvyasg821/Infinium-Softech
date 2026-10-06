@@ -202,6 +202,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metric: "58,020",
     metricDelta: "▲ 26.1%",
     shot: "/shots/Reporting.webp",
+    logo: "/logos/needly-logo.png",
     apps: "Web, buyer, seller",
     api: "Payments + KYC",
     golive: "6–8 weeks",
