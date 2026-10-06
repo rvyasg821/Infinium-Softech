@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import "./WelzokartChallenges.scss";
 
@@ -37,6 +38,28 @@ const CHALLENGES = [
 ];
 
 export function WelzokartChallenges() {
+  const [tilt1, setTilt1] = useState({ x: 0, y: 0 });
+  const [tilt2, setTilt2] = useState({ x: 0, y: 0 });
+
+  const ref1 = useRef<HTMLDivElement>(null);
+  const ref2 = useRef<HTMLDivElement>(null);
+
+  const handleMove1 = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref1.current) return;
+    const rect = ref1.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setTilt1({ x: (y / rect.height) * -12, y: (x / rect.width) * 12 });
+  };
+
+  const handleMove2 = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref2.current) return;
+    const rect = ref2.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setTilt2({ x: (y / rect.height) * -12, y: (x / rect.width) * 12 });
+  };
+
   return (
     <section id="challenges" className="welzokart-challenges-lc">
       <div className="challenges-lc-container">
@@ -62,16 +85,36 @@ export function WelzokartChallenges() {
                 </div>
               ))}
             </div>
-            <div className="challenge-image">
+
+            <div
+              ref={ref1}
+              className="challenge-image 3d-tilt-frame"
+              onMouseMove={handleMove1}
+              onMouseLeave={() => setTilt1({ x: 0, y: 0 })}
+              style={{
+                transform: `perspective(1000px) rotateX(${tilt1.x}deg) rotateY(${tilt1.y}deg)`,
+                transition: tilt1.x === 0 && tilt1.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease-out"
+              }}
+            >
                <Image src="/shots/Welzokart 2.jpg" alt="Welzokart Challenges Part 1" width={600} height={400} />
             </div>
           </div>
 
           {/* Second part */}
           <div className="challenge-part">
-            <div className="challenge-image">
+            <div
+              ref={ref2}
+              className="challenge-image 3d-tilt-frame"
+              onMouseMove={handleMove2}
+              onMouseLeave={() => setTilt2({ x: 0, y: 0 })}
+              style={{
+                transform: `perspective(1000px) rotateX(${tilt2.x}deg) rotateY(${tilt2.y}deg)`,
+                transition: tilt2.x === 0 && tilt2.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease-out"
+              }}
+            >
                <Image src="/shots/Welzokart 2.jpg" alt="Welzokart Challenges Part 2" width={600} height={400} />
             </div>
+
             <div className="challenge-group">
               {CHALLENGES.slice(3, 6).map((item, idx) => (
                 <div key={idx} className="lc-challenge-card">

@@ -42,7 +42,7 @@ export function TechnologyList() {
     const activeCard = container.querySelector(
       `[data-nav-id="${sectionId}"]`
     ) as HTMLElement;
-    
+
     if (activeCard) {
       // Horizontally scroll only, absolutely no vertical block alignment to prevent jumping
       const scrollTarget = activeCard.offsetLeft - container.offsetWidth / 2 + activeCard.offsetWidth / 2;
@@ -143,7 +143,7 @@ export function TechnologyList() {
             {TECHNOLOGY_HERO_INDEX_ITEMS.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
-              return ( 
+              return (
                 <a
                   key={item.num}
                   href={item.href}
@@ -240,7 +240,7 @@ export function TechnologyList() {
                           <div className="image-frame">
                             {item.image ? (
                               <Image
-                                src={item.image}
+                                src={item.image.startsWith("/") || item.image.startsWith("http") ? item.image : `/${item.image}`}
                                 alt={item.title}
                                 width={480}
                                 height={320}
