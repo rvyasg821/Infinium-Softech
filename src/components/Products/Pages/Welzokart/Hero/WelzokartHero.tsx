@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { ProductItem } from "@/data/productsData";
 import { Factory, MonitorSmartphone, Lightbulb, Globe } from "lucide-react";
 import "./WelzokartHero.scss";
@@ -16,40 +17,60 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
 
   return (
     <section className="welzokart-hero-lc">
+      <div className="hero-glow-layer" aria-hidden="true">
+        <div className="hero-glow-tr" />
+        <div className="hero-glow-bl" />
+        <div className="hero-glow-center" />
+        <div className="hero-orbs">
+          <div className="orb-bl" />
+          <div className="orb-tr" />
+        </div>
+      </div>
+
       <div className="welzokart-hero-lc-container">
-        
+
         <div className="hero-split-top">
           <div className="hero-lc-content">
-            
+
+            {/* Breadcrumb */}
+            <div className="hero-crumbs">
+              <Link href="/products">Products</Link>
+              <span>/</span>
+              <span className="current">WelzoKart</span>
+            </div>
+
             {/* Logo */}
             <div className="identity-top">
-              <Image 
-                src="/logos/welzokart-logo.png" 
-                alt="WelzoKart" 
-                width={180} 
-                height={50} 
+              <Image
+                src="/logos/welzokart-logo.png"
+                alt="WelzoKart"
+                width={180}
+                height={50}
                 className="identity-logo"
               />
+              <div className="identity-meta">
+                <strong className="identity-name">WelzoKart</strong>
+                <span className="identity-sub">
+                  <i className="pulse-dot" /> GROCERY DELIVERY · LIVE IN PRODUCTION
+                </span>
+              </div>
             </div>
 
             {/* Title */}
             <h1 className="hero-lc-title">
-              WelzoKart Smart Grocery Delivery App
+              Fresh groceries, easy shopping and delivery at your doorstep.
             </h1>
 
-            {/* Split Paragraphs */}
+            {/* Paragraph */}
             <p className="hero-lc-desc">
-              WelzoKart is a modern grocery delivery application for easy everyday shopping. Users can explore fresh products, daily essentials, and household items. Fast search, smooth navigation, and simple checkout enhance the experience.
-            </p>
-            <p className="hero-lc-desc">
-              The platform focuses on usability, convenience, and customer satisfaction. Built for scalability, WelzoKart provides a reliable on-demand grocery solution.
+              WelzoKart is an online grocery delivery platform designed to make everyday shopping simple and convenient. Users can explore products, manage their cart, place secure orders, and track deliveries in real time, creating a smooth shopping experience from discovery to doorstep.
             </p>
           </div>
-          
+
           <div className="hero-lc-visual">
             <div className="visual-wrapper">
-              <Image 
-                src="/shots/Welzokart 2.jpg" 
+              <Image
+                src="/shots/Welzokart 2.jpg"
                 alt="WelzoKart App Display"
                 width={800}
                 height={600}
@@ -101,7 +122,7 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
             </div>
           </div>
         </div>
-        
+
       </div>
     </section>
   );

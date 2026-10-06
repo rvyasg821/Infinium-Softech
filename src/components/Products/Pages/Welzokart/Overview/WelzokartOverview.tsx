@@ -6,19 +6,6 @@ export function WelzokartOverview() {
   return (
     <section id="overview" className="welzokart-overview-lc" aria-labelledby="overview-title">
       <div className="overview-lc-container">
-        
-        {/* Top Navigation Row (Simulated) */}
-        <div className="overview-lc-nav">
-          <ul>
-            <li className="active">OVERVIEW</li>
-            <li>UI/UX</li>
-            <li>KEY CHALLENGES</li>
-            <li>OUR SOLUTIONS</li>
-            <li>OUR APPROACH</li>
-            <li>KEY RESULTS</li>
-            <li>TECHNOLOGY</li>
-          </ul>
-        </div>
 
         <div className="overview-lc-grid">
           {/* Left Images */}
@@ -41,29 +28,22 @@ export function WelzokartOverview() {
               WelzoKart is an on-demand grocery delivery platform enabling users to order essentials with ease, offering secure payments, real-time scheduling, and reliability. It ships as its own platform and inherits the shared Infinium layer for seamless scalability.
             </p>
 
-            <div className="lc-meta">
-              <div className="meta-col">
-                <span className="meta-label">Client Name</span>
-                <span className="meta-val">WelzoKart</span>
-              </div>
-              <div className="meta-col">
-                <span className="meta-label">Business</span>
-                <span className="meta-val">Grocery Services</span>
-              </div>
-              <div className="meta-col">
-                <span className="meta-label">Country</span>
-                <span className="meta-val">Global</span>
-              </div>
-            </div>
-
             <div className="lc-check-list">
               <div className="check-item">
-                <span>Secure Booking Process</span>
                 <div className="check-icon">✓</div>
+                <span>Easy Grocery Shopping</span>
               </div>
               <div className="check-item">
-                <span>Dynamic Product Services</span>
                 <div className="check-icon">✓</div>
+                <span>Fast &amp; Reliable Delivery</span>
+              </div>
+              <div className="check-item">
+                <div className="check-icon">✓</div>
+                <span>Real-Time Order Tracking</span>
+              </div>
+              <div className="check-item">
+                <div className="check-icon">✓</div>
+                <span>Secure Online Payments</span>
               </div>
             </div>
           </div>

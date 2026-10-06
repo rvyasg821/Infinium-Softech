@@ -34,7 +34,7 @@ export function AboutHero() {
 
             <div data-reveal="" className="about-hero-actions">
               <Link href="/products" className="btn-primary">
-                See the nine platforms <ArrowRight size={16} aria-hidden="true" />
+                see our product  <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <Link href="/contact" className="btn-outline">
                 How we deliver <ArrowRight size={16} aria-hidden="true" />

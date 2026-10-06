@@ -38,7 +38,7 @@ const SOLUTIONS = [
 
 export function WelzokartSolution() {
   return (
-    <section id="solution-lc" className="welzokart-solution-lc">
+    <section id="solution" className="welzokart-solution-lc">
       <div className="solution-lc-container">
         
         <div className="solution-lc-header">

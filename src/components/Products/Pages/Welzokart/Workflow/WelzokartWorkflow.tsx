@@ -19,7 +19,7 @@ export function WelzokartWorkflow() {
 
           {/* Left Column */}
           <div className="workflow-lc-left">
-            <span className="lc-eyebrow">OUR APPROACH</span>
+            <span className="lc-eyebrow">WORKFLOW</span>
             <h2 id="workflow-title" className="lc-headline">
               A Structured, Insightful Process
             </h2>

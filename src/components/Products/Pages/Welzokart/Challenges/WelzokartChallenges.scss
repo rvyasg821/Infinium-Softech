@@ -19,12 +19,7 @@
   margin: 0 auto 60px;
 
   .lc-eyebrow {
-    font-size: 13px;
-    font-weight: 700;
-    color: #449adc;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: block;
+    @include section-eyebrow("white");
     margin-bottom: 20px;
   }
 
@@ -77,29 +72,51 @@
 }
 
 .lc-challenge-card {
-  padding: 24px;
+  padding: 26px 24px;
   border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #eef7fe 0%, #ffffff 70%, #f4fafe 100%);
+  border: 1px solid #d4ebfc;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #449adc 0%, #60a5fa 100%);
+    border-radius: 16px 16px 0 0;
+    opacity: 0.85;
+    transition: opacity 0.25s ease, background 0.25s ease;
+  }
 
   &:hover {
     transform: translateY(-4px);
-    background: #e5f3ff;
-    box-shadow: 0 15px 40px rgba(68, 154, 220, 0.15);
+    background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 50%, #e6f4ff 100%);
+    box-shadow: 0 15px 40px rgba(68, 154, 220, 0.2);
+    border-color: #79bdf2;
+
+    &::before {
+      opacity: 1;
+      background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+    }
   }
 
   h3 {
     font-family: $font-display;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 800;
-    color: #0c0c0d;
+    color: #0b1a2a;
     margin-bottom: 8px;
   }
   p {
     font-size: 14px;
-    line-height: 1.5;
-    color: rgba(12, 12, 13, 0.7);
+    line-height: 1.6;
+    color: #555;
     margin: 0;
   }
 }

@@ -31,12 +31,7 @@
   margin: 0 auto 60px;
 
   .lc-eyebrow {
-    font-size: 13px;
-    font-weight: 700;
-    color: #449adc; 
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: block;
+    @include section-eyebrow("white");
     margin-bottom: 20px;
   }
 
@@ -69,7 +64,7 @@
 
 .lc-solution-card {
   background: #ffffff;
-  padding: 40px;
+  padding: 20px;
   border-radius: 16px;
   border: 1.5px solid #3c82ca;
   box-shadow: -6px 6px 0px #3c82ca;
@@ -102,7 +97,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    
+
     svg {
       width: 28px;
       height: 28px;

@@ -91,6 +91,13 @@
     color: #0c0c0d;
   }
 
+  @else if $theme =="white" {
+    background-color: #ffffff;
+    color: #0c0c0d;
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
   @else {
     background-color: #0c0c0d;
     color: #ffffff;

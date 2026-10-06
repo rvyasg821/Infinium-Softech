@@ -4,9 +4,53 @@
 .welzokart-hero-lc {
   padding-top: 120px;
   padding-bottom: 80px;
-  background-color: #f2f8fc; // Slightly deeper pastel blue matching reference
   position: relative;
   overflow: hidden;
+
+  /* Custom Glow Colors for WelzoKart: Light Blue (Top) & Light Orange (Bottom) */
+  .hero-glow-layer {
+    &::before {
+      border-color: rgba(67, 149, 211, 0.22);
+    }
+
+    &::after {
+      border-color: rgba(251, 146, 60, 0.2);
+    }
+  }
+
+  .hero-glow-tr {
+    background: radial-gradient(circle,
+        rgba(67, 149, 211, 0.52) 0%,
+        rgba(67, 149, 211, 0.16) 54%,
+        rgba(67, 149, 211, 0) 76%);
+  }
+
+  .hero-glow-bl {
+    background: radial-gradient(circle,
+        rgba(255, 140, 50, 0.46) 0%,
+        rgba(255, 140, 50, 0.14) 56%,
+        rgba(255, 140, 50, 0) 78%);
+  }
+
+  .hero-glow-center {
+    background: radial-gradient(60% 70% at 50% 40%,
+        rgba(67, 149, 211, 0.15),
+        rgba(255, 140, 50, 0) 72%);
+  }
+
+  .hero-orbs {
+    .orb-tr {
+      background: radial-gradient(circle,
+          rgba(96, 165, 250, 0.55) 0%,
+          rgba(96, 165, 250, 0) 66%);
+    }
+
+    .orb-bl {
+      background: radial-gradient(circle,
+          rgba(251, 146, 60, 0.55) 0%,
+          rgba(251, 146, 60, 0) 68%);
+    }
+  }
 }
 
 .welzokart-hero-lc-container {
@@ -14,11 +58,41 @@
   display: flex;
   flex-direction: column;
   gap: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8a8a8e;
+  font-size: 13px;
+  margin-bottom: 24px;
+
+  @media (max-width: $bp-lg) {
+    justify-content: center;
+  }
+
+  a {
+    color: #8a8a8e;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0c0c0d;
+    }
+  }
+
+  .current {
+    color: #0c0c0d;
+    font-weight: 500;
+  }
 }
 
 .hero-split-top {
   display: grid;
-  grid-template-columns: 5fr 7fr;
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
 
@@ -31,7 +105,7 @@
 .hero-lc-content {
   max-width: 100%;
   padding-right: 20px;
-  
+
   @media (max-width: $bp-lg) {
     padding-right: 0;
   }
@@ -40,6 +114,7 @@
 .identity-top {
   display: flex;
   align-items: center;
+  gap: 16px;
   margin-bottom: 24px;
 
   @media (max-width: $bp-lg) {
@@ -49,7 +124,44 @@
   .identity-logo {
     object-fit: contain;
     width: auto;
-    height: 44px; // Responsive scaling for the wide logo
+    height: 48px;
+  }
+
+  .identity-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+
+    .identity-name {
+      font-family: $font-display;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0c0c0d;
+      line-height: 1.1;
+    }
+
+    .identity-sub {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #55555a;
+      font-size: 11px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .pulse-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #1f31e8;
+      animation: im-pulse 2.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
   }
 }
 
@@ -76,7 +188,7 @@
 .hero-lc-visual {
   position: relative;
   width: 100%;
-  
+
   .visual-wrapper {
     position: relative;
     width: 100%;
@@ -96,11 +208,11 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  
+
   @media (max-width: $bp-lg) {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   @media (max-width: $bp-sm) {
     grid-template-columns: 1fr;
   }
@@ -118,7 +230,7 @@
 
   &:hover {
     background: #ffffff;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
     border-color: #60a5fa;
   }
 
@@ -152,5 +264,15 @@
     font-size: 13px;
     font-weight: 600;
     color: #555;
+  }
+}
+
+@keyframes im-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
   }
 }

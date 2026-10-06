@@ -87,11 +87,11 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "03",
-    name: "NurseWorth",
-    mark: "MP",
-    tag: "Healthcare",
-    tint: ABOUT_TINTS.violet,
-    desc: "Healthcare and nursing recruitment platform with shift-based payouts.",
+    name: "Needly",
+    mark: "ND",
+    tag: "Marketplace",
+    tint: ABOUT_TINTS.rose,
+    desc: "Daily needs buy and sell marketplace with verified neighbourhood listings.",
   },
   {
     n: "04",
@@ -119,11 +119,11 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "07",
-    name: "Needly",
-    mark: "ND",
-    tag: "Marketplace",
-    tint: ABOUT_TINTS.rose,
-    desc: "Daily needs buy and sell marketplace with verified neighbourhood listings.",
+    name: "NurseWorth",
+    mark: "MP",
+    tag: "Healthcare",
+    tint: ABOUT_TINTS.violet,
+    desc: "Healthcare and nursing recruitment platform with shift-based payouts.",
   },
   {
     n: "08",

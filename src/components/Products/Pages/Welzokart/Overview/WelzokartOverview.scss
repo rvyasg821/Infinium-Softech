@@ -88,12 +88,7 @@
 
 .overview-lc-content {
   .lc-eyebrow {
-    font-size: 12px;
-    font-weight: 700;
-    color: #449adc;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: block;
+    @include section-eyebrow("white");
     margin-bottom: 16px;
   }
 
@@ -137,14 +132,19 @@
   }
 
   .lc-check-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+
+    @media (max-width: $bp-sm) {
+      grid-template-columns: 1fr;
+    }
 
     .check-item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 12px;
       background: #ffffff;
       padding: 16px 20px;
       border-radius: 12px;
@@ -155,12 +155,6 @@
         transform: translateY(-4px);
         background: #e5f3ff;
         box-shadow: 0 15px 40px rgba(68, 154, 220, 0.15);
-      }
-      
-      span {
-        font-size: 14px;
-        font-weight: 600;
-        color: #0c0c0d;
       }
       
       .check-icon {
@@ -174,6 +168,13 @@
         align-items: center;
         font-size: 10px;
         font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 600;
+        color: #0c0c0d;
       }
     }
   }

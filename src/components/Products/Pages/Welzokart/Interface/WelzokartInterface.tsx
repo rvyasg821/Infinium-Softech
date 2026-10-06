@@ -4,17 +4,19 @@ import "./WelzokartInterface.scss";
 
 export function WelzokartInterface() {
   return (
-    <section id="ui-ux" className="welzokart-interface-lc">
+    <section id="interface1" className="welzokart-interface-lc">
       <div className="interface-lc-container">
         
         <div className="interface-lc-header">
-          <span className="lc-eyebrow">UI/UX</span>
-          <h2 className="lc-headline">
-            Intuitive Design, Effortless Experience
-          </h2>
-          <p className="lc-desc">
-            We crafted a clean, user-friendly interface with smooth navigation, making finding products, scheduling deliveries, and payments simple and accessible for every user.
-          </p>
+          <span className="lc-eyebrow">INTERFACE</span>
+          <div className="header-title-row">
+            <h2 className="lc-headline">
+              Intuitive Design, Effortless Experience
+            </h2>
+            <p className="lc-desc">
+              We crafted a clean, user-friendly interface with smooth navigation, making finding products, scheduling deliveries, and payments simple and accessible for every user.
+            </p>
+          </div>
         </div>
 
         <div className="interface-lc-grid-new">

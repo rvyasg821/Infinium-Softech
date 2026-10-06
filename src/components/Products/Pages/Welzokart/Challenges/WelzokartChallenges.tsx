@@ -38,7 +38,7 @@ const CHALLENGES = [
 
 export function WelzokartChallenges() {
   return (
-    <section id="challenges-lc" className="welzokart-challenges-lc">
+    <section id="challenges" className="welzokart-challenges-lc">
       <div className="challenges-lc-container">
         
         <div className="challenges-lc-header">
@@ -56,7 +56,7 @@ export function WelzokartChallenges() {
           <div className="challenge-part">
             <div className="challenge-group">
               {CHALLENGES.slice(0, 3).map((item, idx) => (
-                <div key={idx} className="lc-challenge-card" style={{ backgroundColor: item.bgColor }}>
+                <div key={idx} className="lc-challenge-card">
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
@@ -74,7 +74,7 @@ export function WelzokartChallenges() {
             </div>
             <div className="challenge-group">
               {CHALLENGES.slice(3, 6).map((item, idx) => (
-                <div key={idx} className="lc-challenge-card" style={{ backgroundColor: item.bgColor }}>
+                <div key={idx} className="lc-challenge-card">
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
