@@ -9,7 +9,6 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 6px 0;
-  transition: top 0.3s ease;
 
   @media (max-width: 1024px) {
     padding: 6px 0;
@@ -109,6 +108,22 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .appointgem-label {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &::after {
+        content: attr(data-label);
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        pointer-events: none;
+        user-select: none;
+        font-weight: 700;
+      }
     }
 
     .appointgem-index-dot {

@@ -21,7 +21,7 @@ interface ScrollAnimationContextType {
 
 const ScrollAnimationContext = createContext<ScrollAnimationContextType>({
   getLenis: () => null,
-  scrollTo: () => {},
+  scrollTo: () => { },
 });
 
 export const useScrollAnimation = () => useContext(ScrollAnimationContext);
@@ -52,16 +52,16 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
     const syncReveals = () => {
       const vh = window.innerHeight || 1;
       const revealNodes = document.querySelectorAll<HTMLElement>("[data-reveal]");
-      
+
       revealNodes.forEach((node, idx) => {
         if (node.getAttribute("data-revealed") === "1") return;
         const rect = node.getBoundingClientRect();
-        
+
         if (node.getAttribute("data-rev-init") !== "1") {
           node.setAttribute("data-rev-init", "1");
           const stagger = ((idx % 6) * 0.05).toFixed(2);
           node.style.transition = `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s`;
-          
+
           // Only abort if it HASN'T safely entered the screen based on both rules
           if (rect.top > vh * 0.92 && rect.bottom > vh) {
             node.style.opacity = "0";
@@ -69,7 +69,7 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
             return;
           }
         }
-        
+
         // Reveal if it crosses the traditional 92% boundary, OR if it's completely visible (fixes short elements at the bottom of the page)
         if (rect.top < vh * 0.92 || rect.bottom <= vh + 50) {
           node.setAttribute("data-revealed", "1");

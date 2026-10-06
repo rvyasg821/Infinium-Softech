@@ -10,7 +10,7 @@ const TABS = [
     id: "customer",
     label: "Customer App",
     icon: Smartphone,
-    img: "/shots/Welzokart 2.jpg",
+    img: "/shots/Welzokart_interface-1.jpg",
     badge: "iOS & Android",
     title: "Seamless Everyday Shopping Experience",
     desc: "Designed for speed and simplicity. Users can search fresh produce, manage smart carts, and track deliveries live.",
@@ -25,7 +25,7 @@ const TABS = [
     id: "delivery",
     label: "Delivery Partner App",
     icon: Bike,
-    img: "/shots/Welzokart_ui-3.jpg",
+    img: "/shots/Welzokart_interface-2.jpg",
     badge: "Rider Ecosystem",
     title: "Optimized Fleet & Express Dispatch",
     desc: "Empowers riders with live route guidance, instant order acceptance, and earnings tracking.",
@@ -94,7 +94,7 @@ export function WelzokartInterface() {
   return (
     <section id="interface" className="welzokart-interface-lc">
       <div className="interface-lc-container">
-        
+
         {/* Section Header */}
         <div className="interface-lc-header">
           <span className="lc-eyebrow">INTERFACE &amp; ECOSYSTEM</span>
