@@ -63,7 +63,7 @@ function EcosystemCardView({
 }
 
 export function WelzokartEcosystem() {
-  const welzoProducts = ["Slota", "Needly", "NurseWorth"];
+  const welzoProducts = ["Slota", "Needly", "LoadGo"];
   const RELATED_PRODUCTS = welzoProducts
     .map((name) => ECOSYSTEM_PRODUCTS.find((p) => p.name === name))
     .filter((p): p is EcosystemProduct => p !== undefined);

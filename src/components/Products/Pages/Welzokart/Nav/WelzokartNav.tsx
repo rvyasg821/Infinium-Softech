@@ -5,7 +5,7 @@ import "./WelzokartNav.scss";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "#overview", color: "#2AA8C4" },
-  { label: "Interface", href: "#interface1", color: "#1F31E8" },
+  { label: "Interface", href: "#interface", color: "#1F31E8" },
   { label: "Key challenges", href: "#challenges", color: "#1E9E5A" },
   { label: "Our solution", href: "#solution", color: "#0F8F87" },
   { label: "Workflow", href: "#workflow", color: "#8B3FE8" },
