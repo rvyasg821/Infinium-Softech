@@ -11,6 +11,54 @@ import {
 
 const SECTION_IDS = HERO_INDEX_ITEMS.map((item) => item.href.substring(1));
 
+function SolutionVisualCol({ item }: { item: typeof SOLUTIONS_LIST_DATA[0] }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setTilt({
+      x: (y / rect.height) * -10,
+      y: (x / rect.width) * 10
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  return (
+    <div data-reveal="" className="solution-visual-col">
+      <div 
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className={`mockup-card ${item.tintClass}`}
+        style={{
+          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transition: tilt.x === 0 && tilt.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease"
+        }}
+      >
+        <div className="mockup-content">
+          <div className="image-frame">
+            <Image
+              src={item.image}
+              alt={item.imageAlt}
+              width={640}
+              height={480}
+              className="strivedge-portfolio-img"
+              priority={item.num === "01"}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function SolutionsList() {
   const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
@@ -193,22 +241,7 @@ export function SolutionsList() {
               </div>
 
               {/* Visual Column with Strivedge Website Image */}
-              <div data-reveal="" className="solution-visual-col">
-                <div className={`mockup-card ${item.tintClass}`}>
-                  <div className="mockup-content">
-                    <div className="image-frame">
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt}
-                        width={640}
-                        height={480}
-                        className="strivedge-portfolio-img"
-                        priority={item.num === "01"}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SolutionVisualCol item={item} />
             </div>
           </section>
         );

@@ -73,7 +73,7 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
           <div className="appointgem-hero-tablet" aria-label="Slota Tablet Companies View">
             <div className="appointgem-hero-tablet-screen">
               <img
-                src="/shots/tablet-appointgem.webp"
+                src="/shots/Slota-tablet.png"
                 alt="Slota Tablet Companies Screen"
                 className="appointgem-hero-tablet-img"
               />
@@ -84,7 +84,7 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
             <span className="notch" />
             <div className="appointgem-hero-mobile-screen">
               <img
-                src="/shots/mobile-appotingem.webp"
+                src="/shots/Slota-mobil.png"
                 alt="Slota Mobile Companies Screen"
                 className="appointgem-hero-mobile-img"
               />

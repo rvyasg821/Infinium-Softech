@@ -58,7 +58,30 @@
   gap: 30px;
 
   @media (max-width: $bp-sm) {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .lc-solution-card {
+      min-width: 85%;
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      /* Override any hover transform displacement on mobile carousel since it can clip */
+      &:hover {
+        transform: none;
+        box-shadow: -6px 6px 0px #3c82ca;
+      }
+    }
   }
 }
 
