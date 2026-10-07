@@ -66,30 +66,90 @@
 }
 
 .result-item {
-  background: var(--needly-card-white);
-  padding: 24px;
+  background: #ffffff;
+  padding: 32px 28px;
   border-radius: var(--needly-radius-lg);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
-  border-top: 4px solid transparent; 
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+
+  .result-item-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .icon-wrapper {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+  }
 
   &.color-orange {
-    border-top-color: var(--needly-orange);
+    background: linear-gradient(180deg, rgba(245, 130, 32, 0.04) 0%, #ffffff 80%);
+    .icon-wrapper {
+      background: rgba(245, 130, 32, 0.1);
+      color: var(--needly-orange);
+    }
   }
 
   &.color-green {
-    border-top-color: var(--needly-app-green);
+    background: linear-gradient(180deg, rgba(147, 192, 31, 0.05) 0%, #ffffff 80%);
+    .icon-wrapper {
+      background: rgba(147, 192, 31, 0.12);
+      color: var(--needly-app-green);
+    }
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.1);
+    
+    &.color-orange {
+      .icon-wrapper {
+        background: var(--needly-orange);
+        color: #ffffff;
+        transform: scale(1.1) rotate(5deg);
+      }
+      h3 {
+        color: var(--needly-orange);
+      }
+    }
+    
+    &.color-green {
+      .icon-wrapper {
+        background: var(--needly-app-green);
+        color: #ffffff;
+        transform: scale(1.1) rotate(-5deg);
+      }
+      h3 {
+        color: var(--needly-app-green);
+      }
+    }
   }
 
   h3 {
-    font-size: 1.25rem;
-    margin-bottom: 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
     color: var(--needly-deep-green);
+    transition: color 0.3s ease;
+    line-height: 1.25;
   }
   
   p {
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.6;
+    font-size: 0.95rem;
     color: var(--needly-muted);
   }
 }

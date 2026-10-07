@@ -21,18 +21,20 @@ export function NeedlyInterface() {
           </p>
         </div>
 
-        <div className="interface-image-grid">
-          {IMAGES.map((src, idx) => (
-            <div key={idx} className="interface-image-card">
-              <Image 
-                src={src} 
-                alt={`Needly Interface ${idx + 1}`} 
-                width={400} 
-                height={800} 
-                className="grid-image"
-              />
-            </div>
-          ))}
+        <div className="interface-marquee-viewport">
+          <div className="interface-marquee-track">
+            {[...IMAGES, ...IMAGES].map((src, idx) => (
+              <div key={idx} className="interface-image-card">
+                <Image 
+                  src={src} 
+                  alt={`Needly Interface ${idx + 1}`} 
+                  width={300} 
+                  height={650} 
+                  className="grid-image"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

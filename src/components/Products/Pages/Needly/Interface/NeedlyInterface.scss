@@ -34,26 +34,37 @@
   }
 }
 
-.interface-image-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+.interface-marquee-viewport {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  padding: 60px 0; // Padding ensures 3d hover effects don't get clipped
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
+.interface-marquee-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: scrollMarquee 35s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
   }
+}
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
   }
-
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  100% {
+    transform: translateX(calc(-50% - 20px)); // 20px equals half of the 40px gap
   }
 }
 
 .interface-image-card {
+  flex: 0 0 clamp(200px, 22vw, 290px); // Approx 4 screenshots on average desktop screens
   position: relative;
   border-radius: var(--needly-radius-lg);
   overflow: visible; 
