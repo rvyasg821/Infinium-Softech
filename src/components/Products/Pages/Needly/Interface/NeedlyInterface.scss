@@ -12,8 +12,16 @@
 .interface-header {
   text-align: center;
   max-width: 700px;
-  margin: 0 auto 60px;
-  
+  margin: 0 auto 32px;
+
+  @media (min-width: 1400px) {
+    max-width: 900px;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
+
   .section-eyebrow {
     @include section-eyebrow("dark");
     margin-bottom: 24px;
@@ -21,14 +29,14 @@
   }
 
   .interface-headline {
-    font-size: clamp(28px, 3vw, 42px);
+    
     margin-bottom: 16px;
     color: var(--needly-deep-green);
     line-height: 1.2;
   }
 
   .interface-desc {
-    font-size: 1.15rem;
+    font-size: 16.5px;
     color: var(--needly-muted);
     line-height: 1.5;
   }
@@ -39,60 +47,32 @@
   width: 100%;
   display: flex;
   align-items: center;
+
+  @media (max-width: 1023px) {
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 12px;
+  }
 }
 
-.carousel-nav-btn {
-  position: absolute;
-  z-index: 20;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--needly-deep-green);
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background: var(--needly-app-green);
-    color: #ffffff;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    border-color: var(--needly-app-green);
-  }
-  
-  &.prev-btn {
-    left: -24px;
-    @media (max-width: 768px) { left: 4px; }
-  }
-  
-  &.next-btn {
-    right: -24px;
-    @media (max-width: 768px) { right: 4px; }
-  }
-}
 
 .interface-marquee-viewport {
   width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
-  padding: 60px 0; 
+
+  padding: 32px 0;
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 
-  @media (max-width: 768px) {
-    padding: 40px 0;
-    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
-  }
-
-  @media (max-width: 480px) {
-    padding: 24px 0;
-    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+  @media (max-width: 1023px) {
+    padding: 16px 0;
+    mask-image: none;
+    flex: 1;
+    min-width: 0;
   }
 }
 
@@ -101,30 +81,24 @@
   gap: 40px;
   width: max-content;
 
-  @media (max-width: 768px) {
-    gap: 30px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 24px;
+  @media (max-width: 1023px) {
+    gap: 16px;
   }
 }
 
 .interface-image-card {
-  flex: 0 0 clamp(220px, 22vw, 290px); 
+  flex: 0 0 clamp(220px, 22vw, 290px);
   position: relative;
   border-radius: var(--needly-radius-lg);
-  overflow: visible; 
-  perspective: 1200px; 
-  
-  @media (max-width: 768px) {
-    flex: 0 0 220px; 
+  overflow: visible;
+  perspective: 1200px;
+
+  @media (max-width: 1023px) {
+    // flex: 0 0 100%; // Takes exactly 100% width to enforce 1 per view
+    display: flex;
+    justify-content: center;
   }
-  
-  @media (max-width: 480px) {
-    flex: 0 0 160px; // Shrunk slightly to ensure ~1.5 to 2 items are visible at all times on tiny mobile screens
-  }
-  
+
   .grid-image {
     width: 100%;
     height: auto;
@@ -136,11 +110,16 @@
     position: relative;
     z-index: 1;
     border: 1px solid rgba(0, 0, 0, 0.04);
+
+    @media (max-width: 1023px) {
+      max-width: 240px; // CRITICAL: Stop the image from expanding to fill the 100% parent width!
+      margin: 0 auto;
+    }
   }
 
   &:hover .grid-image {
     transform: rotateY(-8deg) rotateX(8deg) scale(1.08) translateZ(20px);
-    box-shadow: -12px 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.7) inset;
+    box-shadow: -12px 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
     z-index: 10;
   }
 }
@@ -152,7 +131,7 @@
   .btn-primary {
     @include btn-hero-primary;
     background: var(--needly-deep-green); // Overwrite mixin blue with Needly brand color
-    
+
     &:hover {
       background: var(--needly-app-green);
       box-shadow: 0 6px 20px rgba(147, 192, 31, 0.3);

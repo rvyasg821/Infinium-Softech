@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { User, MapPin, MonitorSmartphone } from "lucide-react";
 import "./NeedlyOverview.scss";
 
 export function NeedlyOverview() {
@@ -12,7 +13,7 @@ export function NeedlyOverview() {
         <div className="overview-left-col">
           <span className="section-eyebrow" data-reveal="">Overview</span>
           <h2 className="overview-headline">
-            Connecting customers with nearby shops for smarter grocery ordering.
+            Connecting customers with nearby grocery shops.
           </h2>
           <p className="overview-desc">
             Needly creates a direct connection between customers and local grocery shops. Customers send their grocery requirements to nearby shops, while shop owners check availability, provide prices, and respond before the order is confirmed.
@@ -20,16 +21,31 @@ export function NeedlyOverview() {
 
           <div className="overview-meta-list">
             <div className="meta-item">
-              <span className="meta-label">Client Name</span>
-              <span className="meta-value">Needly</span>
+              <div className="icon-wrapper">
+                <User size={18} strokeWidth={2.5} />
+              </div>
+              <div className="meta-text">
+                <span className="meta-label">Client Name</span>
+                <span className="meta-value">Needly</span>
+              </div>
             </div>
             <div className="meta-item">
-              <span className="meta-label">Country</span>
-              <span className="meta-value">India</span>
+              <div className="icon-wrapper">
+                <MapPin size={18} strokeWidth={2.5} />
+              </div>
+              <div className="meta-text">
+                <span className="meta-label">Country</span>
+                <span className="meta-value">India</span>
+              </div>
             </div>
             <div className="meta-item">
-              <span className="meta-label">Platform</span>
-              <span className="meta-value">Application</span>
+              <div className="icon-wrapper">
+                <MonitorSmartphone size={18} strokeWidth={2.5} />
+              </div>
+              <div className="meta-text">
+                <span className="meta-label">Platform</span>
+                <span className="meta-value">Application</span>
+              </div>
             </div>
           </div>
         </div>

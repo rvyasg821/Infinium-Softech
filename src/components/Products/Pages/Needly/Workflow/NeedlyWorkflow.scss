@@ -35,15 +35,19 @@
 
   .workflow-headline {
     color: var(--needly-deep-green);
-    font-size: clamp(32px, 3.5vw, 42px);
+    
     margin-bottom: 24px;
     line-height: 1.2;
     max-width: 480px;
+
+    @media (min-width: 1400px) {
+      max-width: 800px;
+    }
   }
 
   .workflow-desc {
     color: var(--needly-muted);
-    font-size: 1.125rem;
+    font-size: 16.5px;
     line-height: 1.6;
     max-width: 500px;
   }

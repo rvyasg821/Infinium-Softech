@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./NeedlyInterface.scss";
 
 const IMAGES = Array.from({ length: 12 }, (_, i) => `/shots/Needly/Needly_ui-${i + 1}.png`);
@@ -31,13 +30,6 @@ export function NeedlyInterface() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
-  const scrollDir = (dir: 'left' | 'right') => {
-    if (trackRef.current) {
-      const scrollAmount = 340;
-      trackRef.current.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: "smooth" });
-    }
-  };
-
   return (
     <section id="interface" className="needly-interface-section">
       <div className="needly-interface-container">
@@ -56,10 +48,6 @@ export function NeedlyInterface() {
           onMouseEnter={() => hoverRef.current = true}
           onMouseLeave={() => hoverRef.current = false}
         >
-          <button className="carousel-nav-btn prev-btn" onClick={() => scrollDir('left')}>
-            <ChevronLeft size={24} />
-          </button>
-
           <div className="interface-marquee-viewport" ref={trackRef}>
             <div className="interface-marquee-track">
               {[...IMAGES, ...IMAGES].map((src, idx) => (
@@ -75,10 +63,6 @@ export function NeedlyInterface() {
               ))}
             </div>
           </div>
-
-          <button className="carousel-nav-btn next-btn" onClick={() => scrollDir('right')}>
-            <ChevronRight size={24} />
-          </button>
         </div>
 
       </div>
