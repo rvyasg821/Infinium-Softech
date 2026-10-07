@@ -35,7 +35,7 @@
 
   .workflow-headline {
     color: var(--needly-deep-green);
-    
+
     margin-bottom: 24px;
     line-height: 1.2;
     max-width: 480px;
@@ -63,7 +63,9 @@
     position: relative;
     max-height: 380px;
     overflow-y: auto;
-    scrollbar-width: none;
+    overscroll-behavior: contain; // wheel won't scroll the page when the box reaches its end
+    -webkit-overflow-scrolling: touch;
+    outline: none;
     /* Hide scrollbar for Firefox */
 
     /* Hide scrollbar for Chrome/Edge/Safari */

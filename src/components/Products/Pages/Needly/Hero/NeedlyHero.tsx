@@ -1,11 +1,96 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProductItem } from "@/data/productsData";
-import { ArrowRight, MessageSquare, Store, Smartphone, Globe, Briefcase } from "lucide-react";
+import {
+  ArrowRight,
+  MessageSquare,
+  Store,
+  Smartphone,
+  Globe,
+  Briefcase,
+  Apple,
+  Carrot,
+  Cherry,
+  Banana,
+  Grape,
+  Citrus,
+  Milk,
+  Egg,
+  Wheat,
+  Salad,
+  Leaf,
+  ShoppingBasket,
+  ShoppingCart,
+  Croissant,
+  Beef,
+  Fish,
+  Drumstick,
+  Cookie,
+  Candy,
+  IceCream,
+  Pizza,
+  Sandwich,
+  Soup,
+  Coffee,
+  Nut,
+  Bean,
+  Sprout,
+  Popcorn,
+  CupSoda,
+  Package,
+  Cake,
+  Wine,
+} from "lucide-react";
 import "./NeedlyHero.scss";
+
+// Background decorative icons: position (%), size (px), rotation (deg), float delay (s)
+const BG_ICONS = [
+  // Row 1 (top)
+  { Icon: Apple, top: "3%", left: "3%", size: 56, rotate: -15, delay: 0 },
+  { Icon: Wheat, top: "4%", left: "14%", size: 42, rotate: -25, delay: 1.0 },
+  { Icon: Carrot, top: "6%", left: "26%", size: 48, rotate: 25, delay: 1.2 },
+  { Icon: Cookie, top: "3%", left: "38%", size: 40, rotate: 10, delay: 2.2 },
+  { Icon: Croissant, top: "7%", left: "52%", size: 44, rotate: 15, delay: 2.0 },
+  { Icon: Sprout, top: "4%", left: "64%", size: 42, rotate: -10, delay: 0.8 },
+  { Icon: Candy, top: "8%", left: "76%", size: 40, rotate: 20, delay: 1.7 },
+  { Icon: Cherry, top: "4%", left: "90%", size: 52, rotate: 12, delay: 0.6 },
+
+  // Row 2
+  { Icon: Milk, top: "24%", left: "2%", size: 50, rotate: -8, delay: 1.8 },
+  { Icon: Fish, top: "26%", left: "16%", size: 46, rotate: 18, delay: 0.4 },
+  { Icon: Banana, top: "22%", left: "47%", size: 54, rotate: 30, delay: 0.3 },
+  { Icon: Pizza, top: "27%", left: "60%", size: 44, rotate: -18, delay: 2.5 },
+  { Icon: Nut, top: "24%", left: "78%", size: 38, rotate: 22, delay: 1.1 },
+  { Icon: Grape, top: "28%", left: "94%", size: 48, rotate: -12, delay: 2.1 },
+
+  // Row 3 (middle)
+  { Icon: Salad, top: "46%", left: "4%", size: 58, rotate: 10, delay: 0.9 },
+  { Icon: Egg, top: "44%", left: "20%", size: 40, rotate: 18, delay: 2.4 },
+  { Icon: Soup, top: "48%", left: "34%", size: 46, rotate: -14, delay: 1.4 },
+  { Icon: Drumstick, top: "45%", left: "50%", size: 46, rotate: 28, delay: 0.2 },
+  { Icon: ShoppingCart, top: "47%", left: "66%", size: 46, rotate: -10, delay: 1.6 },
+  { Icon: IceCream, top: "44%", left: "82%", size: 44, rotate: 14, delay: 2.3 },
+  { Icon: Bean, top: "50%", left: "95%", size: 38, rotate: -20, delay: 0.5 },
+
+  // Row 4
+  { Icon: Beef, top: "66%", left: "2%", size: 50, rotate: -12, delay: 1.3 },
+  { Icon: Citrus, top: "68%", left: "14%", size: 50, rotate: -20, delay: 1.5 },
+  { Icon: Sandwich, top: "64%", left: "28%", size: 44, rotate: 16, delay: 0.7 },
+  { Icon: Coffee, top: "67%", left: "44%", size: 42, rotate: -8, delay: 2.6 },
+  { Icon: Package, top: "65%", left: "58%", size: 44, rotate: 12, delay: 1.9 },
+  { Icon: CupSoda, top: "68%", left: "72%", size: 42, rotate: -16, delay: 0.1 },
+  { Icon: ShoppingBasket, top: "64%", left: "90%", size: 60, rotate: 8, delay: 0.2 },
+
+  // Row 5 (bottom)
+  { Icon: Popcorn, top: "88%", left: "6%", size: 42, rotate: 14, delay: 2.0 },
+  { Icon: Cake, top: "90%", left: "22%", size: 44, rotate: -10, delay: 0.9 },
+  { Icon: Wine, top: "88%", left: "40%", size: 40, rotate: 20, delay: 1.2 },
+  { Icon: Leaf, top: "91%", left: "70%", size: 38, rotate: 35, delay: 0.7 },
+];
 
 export function NeedlyHero({ product }: { product: ProductItem }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -19,7 +104,7 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
     const y = e.clientY - rect.top - rect.height / 2;
     setTilt({
       x: (y / rect.height) * -3,
-      y: (x / rect.width) * 3
+      y: (x / rect.width) * 3,
     });
   };
 
@@ -29,8 +114,27 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
 
   return (
     <section className="needly-hero-section">
-      <div className="needly-hero-container">
+      {/* Decorative background icons */}
+      <div className="hero-bg-icons" aria-hidden="true">
+        {BG_ICONS.map(({ Icon, top, left, size, rotate, delay }, i) => (
+          <span
+            key={i}
+            className="bg-icon"
+            style={
+              {
+                top,
+                left,
+                "--rotate": `${rotate}deg`,
+                animationDelay: `${delay}s`,
+              } as CSSProperties
+            }
+          >
+            <Icon size={size} strokeWidth={1.5} />
+          </span>
+        ))}
+      </div>
 
+      <div className="needly-hero-container">
         {/* Top Split Section */}
         <div className="hero-split-top">
           <div className="hero-left-col">
@@ -57,9 +161,7 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
               </div>
             </div>
 
-            <div className="hero-handwritten">
-              Har Dukaan. Har Zaroorat.
-            </div>
+            <div className="hero-handwritten">Har Dukaan. Har Zaroorat.</div>
 
             <h1 className="hero-headline">
               Nearby Groceries, <br />
@@ -74,7 +176,9 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
             </div>
 
             <p className="hero-description">
-              Needly connects customers with nearby local grocery shops, making local shopping easier through direct product requests, shop responses, and simple order confirmation.
+              Needly connects customers with nearby local grocery shops, making
+              local shopping easier through direct product requests, shop
+              responses, and simple order confirmation.
             </p>
 
             <div className="hero-cta-group">
@@ -88,7 +192,6 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
                 <span>Talk to Our Team</span>
               </Link>
             </div>
-
           </div>
 
           <div className="hero-right-col">
@@ -98,7 +201,7 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               style={{
-                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
               }}
             >
               <div className="blob-shape"></div>
@@ -124,32 +227,40 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
           </div>
         </div>
 
-        {/* Live Production Stats & Social Proof Bar (Moved below split layout) */}
+        {/* Live Production Stats & Social Proof Bar */}
         <div className="hero-pinned-info">
           <div className="info-grid">
             <div className="info-card">
-              <div className="info-icon"><Briefcase size={22} /></div>
+              <div className="info-icon">
+                <Briefcase size={22} />
+              </div>
               <div className="info-text">
                 <strong>Industry</strong>
                 <span>Local Groceries</span>
               </div>
             </div>
             <div className="info-card">
-              <div className="info-icon"><Smartphone size={22} /></div>
+              <div className="info-icon">
+                <Smartphone size={22} />
+              </div>
               <div className="info-text">
                 <strong>Platform</strong>
                 <span>Mobile application</span>
               </div>
             </div>
             <div className="info-card">
-              <div className="info-icon"><Store size={22} /></div>
+              <div className="info-icon">
+                <Store size={22} />
+              </div>
               <div className="info-text">
                 <strong>Solutions</strong>
                 <span>Request-to-Delivery</span>
               </div>
             </div>
             <div className="info-card">
-              <div className="info-icon"><Globe size={22} /></div>
+              <div className="info-icon">
+                <Globe size={22} />
+              </div>
               <div className="info-text">
                 <strong>Country</strong>
                 <span>India</span>
@@ -157,7 +268,6 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

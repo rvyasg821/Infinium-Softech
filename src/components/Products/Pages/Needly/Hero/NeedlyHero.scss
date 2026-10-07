@@ -6,7 +6,7 @@
   background-color: var(--needly-peach);
   overflow: hidden;
   position: relative;
-  
+
   padding-top: 48px;
 
   @include respond($bp-md) {
@@ -18,6 +18,56 @@
   }
 
   padding-bottom: 70px;
+}
+
+/* ---------- Background grocery icons ---------- */
+.hero-bg-icons {
+  position: absolute;
+  inset: 0;
+  z-index: 0; // below the container (z-index: 2)
+  pointer-events: none;
+  user-select: none;
+
+  .bg-icon {
+    position: absolute;
+    display: inline-flex;
+    color: var(--needly-deep-green);
+    opacity: 0.09;
+    transform: rotate(var(--rotate, 0deg));
+    animation: needlyHeroIconFloat 7s ease-in-out infinite;
+    will-change: transform;
+
+    svg {
+      display: block;
+    }
+
+    // Hide every other icon on small screens so it doesn't feel crowded
+    @media (max-width: 1024px) {
+      opacity: 0.07;
+
+      &:nth-child(even) {
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes needlyHeroIconFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rotate, 0deg));
+  }
+
+  50% {
+    transform: translateY(-14px) rotate(calc(var(--rotate, 0deg) + 6deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-icons .bg-icon {
+    animation: none;
+  }
 }
 
 .needly-hero-container {
@@ -111,7 +161,8 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       font-weight: 700;
-      max-width: 400px; /* Prevent it from stretching too far if it is a long sentence */
+      max-width: 400px;
+      /* Prevent it from stretching too far if it is a long sentence */
       line-height: 1.4;
     }
   }
@@ -126,10 +177,9 @@
 }
 
 .hero-headline {
-  
-  @media (max-width: 768px) {
-    
-  }
+
+  @media (max-width: 768px) {}
+
   line-height: 1.1;
   color: var(--needly-deep-green);
   margin-bottom: 24px;
@@ -152,10 +202,9 @@
 }
 
 .hero-description {
-  
-  @media (max-width: 768px) {
-    
-  }
+
+  @media (max-width: 768px) {}
+
   line-height: 1.6;
   color: var(--needly-muted);
   max-width: 580px;
@@ -176,14 +225,14 @@
   background: var(--needly-card-white);
   padding: 24px 32px;
   border-radius: var(--needly-radius-lg);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   width: 100%;
   border: 1px solid var(--needly-border);
-  
+
   @media (max-width: 480px) {
     padding: 20px 16px;
   }
-  
+
   .info-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -192,7 +241,7 @@
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     @media (max-width: 480px) {
       gap: 16px;
     }
@@ -222,7 +271,7 @@
     @media (max-width: 480px) {
       width: 38px;
       height: 38px;
-      
+
       svg {
         width: 18px;
         height: 18px;
@@ -238,15 +287,16 @@
       font-size: 0.9rem;
       color: var(--needly-ink);
       margin-bottom: 2px;
-      
+
       @media (max-width: 480px) {
         font-size: 0.85rem;
       }
     }
+
     span {
       font-size: 0.85rem;
       color: var(--needly-muted);
-      
+
       @media (max-width: 480px) {
         font-size: 0.75rem;
       }
@@ -308,14 +358,14 @@
 .phone-screen {
   position: absolute;
   border-radius: 36px;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.25);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
   border: 4px solid var(--needly-ink);
-  
+
   &.phone-back {
     transform: rotate(-7deg) translate(-80px, -20px);
     z-index: 2;
   }
-  
+
   &.phone-front {
     transform: rotate(2deg) translate(60px, 40px);
     z-index: 3;
@@ -324,11 +374,11 @@
   @media (max-width: 768px) {
     width: 200px;
     height: auto;
-    
+
     &.phone-back {
       transform: rotate(-7deg) translate(-50px, -20px);
     }
-    
+
     &.phone-front {
       transform: rotate(2deg) translate(40px, 40px);
     }

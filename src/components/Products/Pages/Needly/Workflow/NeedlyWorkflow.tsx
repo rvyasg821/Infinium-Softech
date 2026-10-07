@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./NeedlyWorkflow.scss";
 
 const STEPS = [
@@ -27,18 +27,32 @@ const STEPS = [
 ];
 
 export function NeedlyWorkflow() {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    // Stop the page-level smooth scroller from hijacking the wheel
+    const stopWheel = (e: Event) => e.stopPropagation();
+
+    el.addEventListener("wheel", stopWheel, { passive: true });
+    el.addEventListener("touchmove", stopWheel, { passive: true });
+
+    return () => {
+      el.removeEventListener("wheel", stopWheel);
+      el.removeEventListener("touchmove", stopWheel);
+    };
+  }, []);
+
   return (
     <section id="workflow" className="needly-workflow-section">
       <div className="needly-workflow-container">
-
         <div className="workflow-grid">
-
           <div className="workflow-left-col">
             <div className="workflow-header-sticky">
               <span className="section-eyebrow" data-reveal="">Workflow</span>
-              <h2 className="workflow-headline">
-                A Structured, Direct Process
-              </h2>
+              <h2 className="workflow-headline">A Structured, Direct Process</h2>
               <p className="workflow-desc">
                 We've designed a clear, user-centered approach focused on empowering direct communication between customers and shop owners. By combining fast quote generation and an intuitive interface, we ensure every grocery order is handled efficiently and transparently.
               </p>
@@ -46,7 +60,12 @@ export function NeedlyWorkflow() {
           </div>
 
           <div className="workflow-right-col">
-            <div className="workflow-timeline-card">
+            <div
+              className="workflow-timeline-card"
+              ref={cardRef}
+              data-lenis-prevent
+              tabIndex={0}
+            >
               <div className="vertical-timeline-line"></div>
               <div className="timeline-items">
                 {STEPS.map((step, idx) => (
@@ -61,9 +80,7 @@ export function NeedlyWorkflow() {
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );
