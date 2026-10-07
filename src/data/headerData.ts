@@ -99,6 +99,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "School van and student tracking system with live parent notifications.",
     shot: "/shots/Trekvano.jpg",
     wash: "rgba(42, 168, 196, 0.16)",
+    logo: "/logos/Trekvano.png"
   },
   {
     id: "purespace",

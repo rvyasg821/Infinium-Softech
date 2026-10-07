@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
+import { getPageMetadata } from "@/lib/seo";
 import { AiSolutionsPage } from "@/components/Solutions/Pages/AiSolutions/AiSolutionsPage";
 
-export const metadata: Metadata = {
-  title: "AI Solutions",
-  description:
-    "AI solutions built for business efficiency, automation, and smarter decision-making.",
-  alternates: {
-    canonical: "/ai-solutions",
-  },
-};
+export const metadata: Metadata = getPageMetadata("/ai-solutions");
 
 export default function AISolutionsRoutePage() {
   return <AiSolutionsPage />;

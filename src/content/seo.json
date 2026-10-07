@@ -52,6 +52,24 @@
       "changeFrequency": "weekly",
       "priority": 0.9
     },
+    "/products/slota": {
+      "title": "Slota",
+      "description": "Business booking and management platform for appointment-led teams.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/products/welzokart": {
+      "title": "WelzoKart",
+      "description": "Quick commerce marketplace combining grocery and restaurant delivery.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/products/needly": {
+      "title": "Needly",
+      "description": "Daily needs buy and sell marketplace with verified neighbourhood listings.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
     "/products/[slug]": {
       "title": "Product Platform",
       "description": "Explore an Infinium Softech product platform, its operating model, and the capabilities built for its industry.",

@@ -1,13 +1,8 @@
 import "./TermsOfService.scss";
 import { Metadata } from "next";
+import { getPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | Infinium Softech",
-  description: "Terms of Service and usage conditions for Infinium Softech.",
-  alternates: {
-    canonical: "/terms-of-service",
-  },
-};
+export const metadata: Metadata = getPageMetadata("/terms-of-service");
 
 export default function TermsOfServicePage() {
   return (

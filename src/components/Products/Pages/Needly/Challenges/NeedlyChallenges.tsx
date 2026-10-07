@@ -46,7 +46,7 @@ export function NeedlyChallenges() {
           </div>
 
           <div className="challenges-image-wrap">
-            <img src="/shots/Needly.png" alt="Needly Infrastructure Challenges" className="challenges-image" />
+            <img src="/shots/Needly/Needly_KC.webp" alt="Needly Infrastructure Challenges" className="challenges-image" />
           </div>
         </div>
 

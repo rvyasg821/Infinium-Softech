@@ -37,7 +37,7 @@ export function NeedlyResults() {
               <React.Fragment key={idx}>
                 {isCenterSpot && (
                   <div className="center-results-image">
-                    <img src="/shots/Needly.png" alt="Needly Mobile Interfaces" />
+                    <img src="/shots/Needly/Needly_KR.png" alt="Needly Mobile Interfaces" />
                   </div>
                 )}
                 <div className={`result-item color-${item.color}`}>

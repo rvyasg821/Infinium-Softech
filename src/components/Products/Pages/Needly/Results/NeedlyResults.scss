@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   .section-eyebrow {
     @include section-eyebrow("dark");
     margin-bottom: 24px;
@@ -23,7 +23,7 @@
   }
 
   .results-headline {
-    
+
     max-width: 700px;
     text-align: center;
   }
@@ -51,17 +51,33 @@
   display: flex;
   align-items: stretch;
   justify-content: center;
-  
+  perspective: 1200px;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: inherit;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+
+    &:hover {
+      transform: scale(1.05) rotateY(-5deg) rotateX(2deg);
+    }
   }
 
   @media (max-width: 1024px) {
     grid-row: auto;
-    display: none; /* Hide on smaller screens to preserve grid */
+    display: none;
+    /* Hide on medium screens to preserve 2-col grid */
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    order: -1;
+    min-width: 85vw;
+    scroll-snap-align: center;
+    flex-shrink: 0;
   }
 }
 
@@ -95,6 +111,7 @@
 
   &.color-orange {
     background: linear-gradient(180deg, rgba(245, 130, 32, 0.04) 0%, #ffffff 80%);
+
     .icon-wrapper {
       background: rgba(245, 130, 32, 0.1);
       color: var(--needly-orange);
@@ -103,6 +120,7 @@
 
   &.color-green {
     background: linear-gradient(180deg, rgba(147, 192, 31, 0.05) 0%, #ffffff 80%);
+
     .icon-wrapper {
       background: rgba(147, 192, 31, 0.12);
       color: var(--needly-app-green);
@@ -113,24 +131,26 @@
     transform: translateY(-8px);
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
     border-color: rgba(0, 0, 0, 0.1);
-    
+
     &.color-orange {
       .icon-wrapper {
         background: var(--needly-orange);
         color: #ffffff;
         transform: scale(1.1) rotate(5deg);
       }
+
       h3 {
         color: var(--needly-orange);
       }
     }
-    
+
     &.color-green {
       .icon-wrapper {
         background: var(--needly-app-green);
         color: #ffffff;
         transform: scale(1.1) rotate(-5deg);
       }
+
       h3 {
         color: var(--needly-app-green);
       }
@@ -145,7 +165,7 @@
     transition: color 0.3s ease;
     line-height: 1.25;
   }
-  
+
   p {
     margin: 0;
     line-height: 1.6;

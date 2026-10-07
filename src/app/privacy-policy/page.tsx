@@ -1,13 +1,8 @@
 import "./PrivacyPolicy.scss";
 import { Metadata } from "next";
+import { getPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Infinium Softech",
-  description: "Privacy Policy and data practices for Infinium Softech.",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
-};
+export const metadata: Metadata = getPageMetadata("/privacy-policy");
 
 export default function PrivacyPolicyPage() {
   return (

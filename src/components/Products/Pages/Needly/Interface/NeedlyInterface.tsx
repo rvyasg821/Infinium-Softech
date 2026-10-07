@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import "./NeedlyInterface.scss";
 
-const IMAGES = Array.from({ length: 12 }, (_, i) => `/shots/Needly/Needly_ui-${i + 1}.png`);
+const IMAGES = Array.from({ length: 9 }, (_, i) => `/shots/Needly/Needly_interface-${i + 1}.jpg`);
 
 const MOBILE_QUERY = "(max-width: 1023px)";
 const MOBILE_SLIDE_DELAY = 2500; // ms between slides on mobile
