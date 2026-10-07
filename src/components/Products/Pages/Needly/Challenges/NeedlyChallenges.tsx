@@ -38,11 +38,14 @@ export function NeedlyChallenges() {
           <div className="challenges-header">
             <span className="section-eyebrow" data-reveal="">Key challenges</span>
             <h2 className="challenges-headline">
-              Where traditional e-commerce fails local grocery.
+              Why Local Grocery Needs More
             </h2>
             <p className="challenges-desc">
               Developing Needly meant addressing fast response times, accurate price quoting, and simple list creation for both customers and shop owners.
             </p>
+            <div className="challenges-image-wrap">
+              <img src="/shots/Needly.png" alt="Needly Infrastructure Challenges" className="challenges-image" />
+            </div>
           </div>
         </div>
 

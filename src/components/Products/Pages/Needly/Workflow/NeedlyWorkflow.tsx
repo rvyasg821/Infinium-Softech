@@ -30,9 +30,9 @@ export function NeedlyWorkflow() {
   return (
     <section id="workflow" className="needly-workflow-section">
       <div className="needly-workflow-container">
-        
+
         <div className="workflow-grid">
-          
+
           <div className="workflow-left-col">
             <div className="workflow-header-sticky">
               <span className="section-eyebrow" data-reveal="">Workflow</span>

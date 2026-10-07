@@ -54,12 +54,13 @@
     background: var(--needly-card-white);
     padding: 60px 40px;
     border-radius: var(--needly-radius-lg);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
     border: 1px solid var(--needly-border);
     position: relative;
     max-height: 380px;
     overflow-y: auto;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
+    /* Hide scrollbar for Firefox */
 
     /* Hide scrollbar for Chrome/Edge/Safari */
     &::-webkit-scrollbar {
@@ -90,7 +91,7 @@
       top: 10px;
       bottom: 20px;
       width: 2px;
-      background-color: #3b82f6; 
+      background-color: #3b82f6;
       z-index: 0;
     }
   }
@@ -106,7 +107,7 @@
       flex: none;
       width: 14px;
       height: 14px;
-      margin-left: -26px; 
+      margin-left: -26px;
       margin-top: 6px;
       border-radius: 50%;
       background-color: #3b82f6;

@@ -99,7 +99,6 @@ const FOOTER_COLUMNS: FooterColumn[] = [
 const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Service", href: "/terms-of-service" },
-  { label: "Security", href: "/book-a-demo" },
 ];
 
 const SOCIAL_LINKS = [
