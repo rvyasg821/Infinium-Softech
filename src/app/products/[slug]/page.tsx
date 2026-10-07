@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AppointGem } from "@/components/Products/Pages/Solta/AppointGem";
 import { Welzokart } from "@/components/Products/Pages/Welzokart/Welzokart";
+import { Needly } from "@/components/Products/Pages/Needly/Needly"
 
 
 import { PRODUCT_ITEMS } from "@/data/productsData";
@@ -47,6 +48,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   if (product.id === "welzokart") {
     return <Welzokart product={product} />;
+  }
+
+  if (product.id === "needly") {
+    return <Needly product={product} />;
   }
 
   return <ProductPlaceholder product={product} />;
