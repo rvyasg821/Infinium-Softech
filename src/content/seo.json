@@ -111,6 +111,18 @@
       "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",
       "changeFrequency": "weekly",
       "priority": 0.9
+    },
+    "/privacy-policy": {
+      "title": "Privacy Policy",
+      "description": "Read Infinium Softech's privacy policy to learn how we collect, use, and protect your personal information.",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    "/terms-of-service": {
+      "title": "Terms of Service",
+      "description": "Read the terms of service that govern your use of Infinium Softech's website and products.",
+      "changeFrequency": "yearly",
+      "priority": 0.3
     }
   }
 }
