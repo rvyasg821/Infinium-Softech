@@ -1,3 +1,5 @@
+@import "./NeedlyDesign.scss";
+
 .Welzokart-page,
 .welzokart-page {
   min-height: 100vh;
@@ -8,4 +10,9 @@
 
 .mobile-title-break {
   display: block;
+}
+
+.needly-page-container {
+  overflow-x: clip;
+  background-color: var(--needly-page-bg);
 }

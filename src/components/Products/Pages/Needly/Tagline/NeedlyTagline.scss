@@ -1,0 +1,21 @@
+.needly-tagline-band {
+  background-color: var(--needly-deep-green);
+  width: 100%;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.needly-tagline-container {
+  max-width: 1280px;
+  margin: 0 auto;
+
+  .tagline-text {
+    color: var(--needly-card-white) !important;
+    font-size: clamp(24px, 3vw, 42px) !important;
+    margin: 0;
+  }
+
+  .highlight-amber {
+    color: var(--needly-amber);
+  }
+}

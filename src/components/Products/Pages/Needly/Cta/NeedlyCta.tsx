@@ -15,12 +15,13 @@ export function NeedlyCta() {
               <span className="consultation-badge">Book consultation</span>
 
               <h2 id="cta-title" className="consultation-title">
-                See Needly <br className="mobile-title-break" />
-                in action with a live demo
+                See Welzokart <br className="mobile-title-break" />
+                against your own calendar
               </h2>
 
               <p className="consultation-desc">
-                Experience the complete request-and-response flow. Send a grocery list as a customer and watch the shop reply instantly.
+                Bring one week of real bookings. An implementation lead maps it
+                into the product live and shows you where the gaps are.
               </p>
 
               <div className="consultation-actions">
