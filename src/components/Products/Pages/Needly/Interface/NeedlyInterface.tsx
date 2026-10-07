@@ -1,12 +1,43 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./NeedlyInterface.scss";
 
 const IMAGES = Array.from({ length: 12 }, (_, i) => `/shots/Needly/Needly_ui-${i + 1}.png`);
 
 export function NeedlyInterface() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const hoverRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const scrollStep = () => {
+      const track = trackRef.current;
+      if (track && !hoverRef.current) {
+        track.scrollLeft += 0.8;
+
+        if (track.scrollLeft >= track.scrollWidth / 2) {
+          track.scrollLeft = 0;
+        }
+      }
+      animationFrameId = requestAnimationFrame(scrollStep);
+    };
+
+    animationFrameId = requestAnimationFrame(scrollStep);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  const scrollDir = (dir: 'left' | 'right') => {
+    if (trackRef.current) {
+      const scrollAmount = 340;
+      trackRef.current.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="interface" className="needly-interface-section">
       <div className="needly-interface-container">
@@ -21,20 +52,33 @@ export function NeedlyInterface() {
           </p>
         </div>
 
-        <div className="interface-marquee-viewport">
-          <div className="interface-marquee-track">
-            {[...IMAGES, ...IMAGES].map((src, idx) => (
-              <div key={idx} className="interface-image-card">
-                <Image 
-                  src={src} 
-                  alt={`Needly Interface ${idx + 1}`} 
-                  width={300} 
-                  height={650} 
-                  className="grid-image"
-                />
-              </div>
-            ))}
+        <div className="interface-carousel-wrapper"
+          onMouseEnter={() => hoverRef.current = true}
+          onMouseLeave={() => hoverRef.current = false}
+        >
+          <button className="carousel-nav-btn prev-btn" onClick={() => scrollDir('left')}>
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="interface-marquee-viewport" ref={trackRef}>
+            <div className="interface-marquee-track">
+              {[...IMAGES, ...IMAGES].map((src, idx) => (
+                <div key={idx} className="interface-image-card">
+                  <Image
+                    src={src}
+                    alt={`Needly Interface ${idx + 1}`}
+                    width={300}
+                    height={650}
+                    className="grid-image"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
+
+          <button className="carousel-nav-btn next-btn" onClick={() => scrollDir('right')}>
+            <ChevronRight size={24} />
+          </button>
         </div>
 
       </div>

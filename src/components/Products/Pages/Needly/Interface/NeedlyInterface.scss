@@ -34,41 +34,96 @@
   }
 }
 
+.interface-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--needly-deep-green);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--needly-app-green);
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    border-color: var(--needly-app-green);
+  }
+  
+  &.prev-btn {
+    left: -24px;
+    @media (max-width: 768px) { left: 4px; }
+  }
+  
+  &.next-btn {
+    right: -24px;
+    @media (max-width: 768px) { right: 4px; }
+  }
+}
+
 .interface-marquee-viewport {
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  padding: 60px 0; // Padding ensures 3d hover effects don't get clipped
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 60px 0; 
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+
+  @media (max-width: 480px) {
+    padding: 24px 0;
+    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+  }
 }
 
 .interface-marquee-track {
   display: flex;
   gap: 40px;
   width: max-content;
-  animation: scrollMarquee 35s linear infinite;
 
-  &:hover {
-    animation-play-state: paused;
+  @media (max-width: 768px) {
+    gap: 30px;
   }
-}
 
-@keyframes scrollMarquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 20px)); // 20px equals half of the 40px gap
+  @media (max-width: 480px) {
+    gap: 24px;
   }
 }
 
 .interface-image-card {
-  flex: 0 0 clamp(200px, 22vw, 290px); // Approx 4 screenshots on average desktop screens
+  flex: 0 0 clamp(220px, 22vw, 290px); 
   position: relative;
   border-radius: var(--needly-radius-lg);
   overflow: visible; 
   perspective: 1200px; 
+  
+  @media (max-width: 768px) {
+    flex: 0 0 220px; 
+  }
+  
+  @media (max-width: 480px) {
+    flex: 0 0 160px; // Shrunk slightly to ensure ~1.5 to 2 items are visible at all times on tiny mobile screens
+  }
   
   .grid-image {
     width: 100%;
@@ -87,5 +142,20 @@
     transform: rotateY(-8deg) rotateX(8deg) scale(1.08) translateZ(20px);
     box-shadow: -12px 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.7) inset;
     z-index: 10;
+  }
+}
+
+.interface-action {
+  text-align: center;
+  margin-top: 10px;
+
+  .btn-primary {
+    @include btn-hero-primary;
+    background: var(--needly-deep-green); // Overwrite mixin blue with Needly brand color
+    
+    &:hover {
+      background: var(--needly-app-green);
+      box-shadow: 0 6px 20px rgba(147, 192, 31, 0.3);
+    }
   }
 }
