@@ -29,7 +29,6 @@
   }
 
   .interface-headline {
-    
     margin-bottom: 16px;
     color: var(--needly-deep-green);
     line-height: 1.2;
@@ -49,30 +48,30 @@
   align-items: center;
 
   @media (max-width: 1023px) {
-    justify-content: space-between;
-    gap: 12px;
     padding: 0 12px;
   }
 }
-
 
 .interface-marquee-viewport {
   width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
+  padding: 32px 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 
   &::-webkit-scrollbar {
     display: none;
   }
 
-  padding: 32px 0;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-
+  // MOBILE / TABLET: one image per view, snap scrolling
   @media (max-width: 1023px) {
     padding: 16px 0;
     mask-image: none;
     flex: 1;
     min-width: 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
 }
 
@@ -82,7 +81,8 @@
   width: max-content;
 
   @media (max-width: 1023px) {
-    gap: 16px;
+    gap: 0; // no gap so each slide is exactly 100% of the viewport
+    width: 100%;
   }
 }
 
@@ -94,9 +94,13 @@
   perspective: 1200px;
 
   @media (max-width: 1023px) {
-    // flex: 0 0 100%; // Takes exactly 100% width to enforce 1 per view
+    flex: 0 0 100%; // exactly one image per view
+    width: 100%;
     display: flex;
     justify-content: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    perspective: none;
   }
 
   .grid-image {
@@ -104,7 +108,8 @@
     height: auto;
     border-radius: var(--needly-radius-md);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     transform-style: preserve-3d;
     backface-visibility: hidden;
     position: relative;
@@ -112,15 +117,93 @@
     border: 1px solid rgba(0, 0, 0, 0.04);
 
     @media (max-width: 1023px) {
-      max-width: 240px; // CRITICAL: Stop the image from expanding to fill the 100% parent width!
+      width: 100%;
+      max-width: 240px; // keep the phone screenshot at a nice size
       margin: 0 auto;
     }
   }
 
-  &:hover .grid-image {
-    transform: rotateY(-8deg) rotateX(8deg) scale(1.08) translateZ(20px);
-    box-shadow: -12px 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
-    z-index: 10;
+  // 3D hover effect only on desktop with a real mouse
+  @media (min-width: 1024px) and (hover: hover) {
+    &:hover .grid-image {
+      transform: rotateY(-8deg) rotateX(8deg) scale(1.08) translateZ(20px);
+      box-shadow: -12px 24px 48px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      z-index: 10;
+    }
+  }
+}
+
+// ---------- Left / Right arrow buttons (mobile + tablet) ----------
+.interface-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: var(--needly-deep-green);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: var(--needly-deep-green);
+    color: #fff;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.92);
+  }
+
+  &.interface-arrow-left {
+    left: 4px;
+  }
+
+  &.interface-arrow-right {
+    right: 4px;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+// ---------- Dots (mobile + tablet) ----------
+.interface-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  .interface-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+
+    &.is-active {
+      width: 24px;
+      background: var(--needly-deep-green);
+    }
   }
 }
 

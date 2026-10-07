@@ -43,9 +43,10 @@ export function NeedlyChallenges() {
             <p className="challenges-desc">
               Developing Needly meant addressing fast response times, accurate price quoting, and simple list creation for both customers and shop owners.
             </p>
-            <div className="challenges-image-wrap">
-              <img src="/shots/Needly.png" alt="Needly Infrastructure Challenges" className="challenges-image" />
-            </div>
+          </div>
+
+          <div className="challenges-image-wrap">
+            <img src="/shots/Needly.png" alt="Needly Infrastructure Challenges" className="challenges-image" />
           </div>
         </div>
 
