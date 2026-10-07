@@ -39,7 +39,7 @@ export function AboutProcess() {
     useAboutCarousel(ABOUT_DELIVERY_STEPS.length, 1280);
 
   return (
-    <section className="about-process-section" aria-label="How We Deliver">
+    <section id="process" className="about-process-section" aria-label="How We Deliver">
       <div className="about-process-container">
         <div className="about-process-header">
           <div>

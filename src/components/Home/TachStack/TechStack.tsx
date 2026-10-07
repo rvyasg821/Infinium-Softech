@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { STACK_LAYERS, STACK_NOTES, StackLayer } from "@/data/stackData";
 import "./TechStack.scss";
 
@@ -123,7 +124,7 @@ export function TechStack() {
             <div data-reveal="" className="stack-eyebrow">Technology</div>
 
             <h2 data-reveal="" className="stack-headline">
-             The Technology Behind
+              The Technology Behind
               <br />
               <span className="highlight">Every Product.</span>
             </h2>
@@ -131,8 +132,8 @@ export function TechStack() {
 
           <p data-reveal="" className="stack-intro">
             Web, mobile, and cloud solutions are built on a shared
-technology foundation, so improvements at the platform level
-can benefit products across the entire ecosystem.
+            technology foundation, so improvements at the platform level
+            can benefit products across the entire ecosystem.
           </p>
         </div>
 
@@ -143,8 +144,6 @@ can benefit products across the entire ecosystem.
               {/* Left Layer Info */}
               <div className="layer-meta">
                 <div className="layer-kicker-row">
-                  <span className="layer-n">{layer.n}</span>
-                  <span className="layer-line" aria-hidden="true" />
                   <span className="layer-kicker">{layer.kicker}</span>
                 </div>
 
@@ -169,11 +168,24 @@ can benefit products across the entire ecosystem.
                     >
                       {layer.items.map((item, itemIdx) => (
                         <div key={itemIdx} className="tech-chip">
-                          <span
-                            className="chip-tint"
-                            style={{ backgroundColor: item.tint }}
-                            aria-hidden="true"
-                          />
+                          {item.icon ? (
+                            <div className="chip-icon-wrapper">
+                              <Image 
+                                src={item.icon} 
+                                alt={item.name} 
+                                width={24} 
+                                height={24} 
+                                unoptimized={item.icon.endsWith(".svg")}
+                                className="tech-chip-img"
+                              />
+                            </div>
+                          ) : (
+                            <span
+                              className="chip-tint"
+                              style={{ backgroundColor: item.tint }}
+                              aria-hidden="true"
+                            />
+                          )}
                           <div className="chip-info">
                             <span className="chip-name">{item.name}</span>
                             <span className="chip-role">{item.role}</span>
@@ -207,7 +219,7 @@ can benefit products across the entire ecosystem.
           }}
         >
           {/* Mobile Navigation Left Arrow Button */}
-          <button
+          {/* <button
             type="button"
             className="stack-notes-arrow prev-btn"
             onClick={handlePrev}
@@ -225,9 +237,9 @@ can benefit products across the entire ecosystem.
             >
               <path d="M15 18l-6-6 6-6" />
             </svg>
-          </button>
+          </button> */}
 
-          <div ref={notesContainerRef} className="stack-notes-grid">
+          {/* <div ref={notesContainerRef} className="stack-notes-grid">
             {STACK_NOTES.map((note, idx) => (
               <div data-reveal="" key={idx} className="note-card">
                 <div className="note-check" aria-hidden="true">
@@ -236,10 +248,10 @@ can benefit products across the entire ecosystem.
                 <p className="note-text">{note}</p>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Mobile Navigation Right Arrow Button */}
-          <button
+          {/* <button
             type="button"
             className="stack-notes-arrow next-btn"
             onClick={handleNext}
@@ -257,10 +269,10 @@ can benefit products across the entire ecosystem.
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-          </button>
+          </button> */}
 
           {/* Mobile Dots Pagination Indicator */}
-          <div
+          {/* <div
             className="stack-notes-dots"
             aria-label="Architecture commitments pagination"
           >
@@ -275,7 +287,7 @@ can benefit products across the entire ecosystem.
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

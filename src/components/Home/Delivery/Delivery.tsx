@@ -8,6 +8,7 @@ import {
   DeliveryStep,
   EngagementModel,
 } from "@/data/deliverData";
+import { ABOUT_ENGAGEMENTS } from "@/data/aboutData";
 import "./Delivery.scss";
 
 function useCarousel(ref: RefObject<HTMLDivElement | null>, itemCount: number) {
@@ -204,9 +205,8 @@ function StepCardView({
 }) {
   return (
     <div
-      className={`step-card ${
-        isClone ? "step-card--clone" : `step-card--${index + 1}`
-      }`}
+      className={`step-card ${isClone ? "step-card--clone" : `step-card--${index + 1}`
+        }`}
       data-card
       aria-hidden={isClone ? "true" : undefined}
     >
@@ -239,9 +239,8 @@ function EngagementCardView({
 }) {
   return (
     <div
-      className={`engagement-card ${
-        isClone ? "engagement-card--clone" : `engagement-card--${index + 1}`
-      }`}
+      className={`engagement-card ${isClone ? "engagement-card--clone" : `engagement-card--${index + 1}`
+        }`}
       data-card
       aria-hidden={isClone ? "true" : undefined}
     >
@@ -271,7 +270,7 @@ function EngagementCardView({
 
       <div className="engagement-footer">
         <span className="fit-label">{model.fit}</span>
-        <Link href="#demo" className="btn-talk">
+        <Link href="contact" className="btn-talk">
           Talk to us{" "}
           <span className="arrow" aria-hidden="true">
             →
@@ -471,17 +470,34 @@ export function Delivery() {
               </p>
 
               <div className="consultation-actions">
-                <Link href="#demo" className="btn-primary-consult">
+                <Link href="/book-a-demo" className="btn-primary-consult">
                   Book Live Demo{" "}
                   <span className="btn-arrow" aria-hidden="true">
                     →
                   </span>
                 </Link>
 
-                <Link href="#demo" className="btn-secondary-consult">
+                <Link href="/contact" className="btn-secondary-consult">
                   Talk to sales
                 </Link>
               </div>
+            </div>
+
+            {/* Right Side Engagement List */}
+            <div className="consultation-right">
+              {ABOUT_ENGAGEMENTS.map((engagement, idx) => (
+                <div key={idx} className="engagement-item">
+                  <span
+                    className="engagement-dot"
+                    style={{ backgroundColor: engagement.tint }}
+                    aria-hidden="true"
+                  />
+                  <div className="engagement-content">
+                    <span className="engagement-title">{engagement.title}</span>
+                    <span className="engagement-fit">{engagement.fit}</span>
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* Visual Animated Wave Band */}

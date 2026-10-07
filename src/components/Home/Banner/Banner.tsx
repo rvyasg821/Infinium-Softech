@@ -93,7 +93,7 @@ export function Banner() {
     <section ref={sectionRef} className="banner content-padding" aria-label="Hero Banner">
       <div ref={stickyRef} className="banner-sticky-frame">
         {/* Background Ambient Glows */}
-        <div className="hero-glow-layer" aria-hidden="true"> 
+        <div className="hero-glow-layer" aria-hidden="true">
           <div className="hero-glow-tr" />
           <div className="hero-glow-bl" />
           <div className="hero-glow-center" />
@@ -184,26 +184,30 @@ export function Banner() {
             <span className="eyebrow-pill">One Unified Platform.</span>
           </div>
 
-          <h1 className="banner-headline">
-            One Platform.
-            <br />
-            Multiple Industries.
-            <br />
-            <span className="accent">Infinite Possibilities.</span>
-          </h1>
+          <div className="banner-grid">
+            <h1 className="banner-headline">
+              One Platform.
+              <br />
+              Multiple Industries.
+              <br />
+              <span className="accent">Infinite Possibilities.</span>
+            </h1>
 
-          <p className="banner-lede">
-            From logistics and healthcare to commerce and education, Infinium Softech powers businesses
-            with intelligent digital products designed to scale.
-          </p>
+            <div className="banner-side">
+              <p className="banner-lede">
+                From logistics and healthcare to commerce and education, Infinium Softech powers businesses
+                with intelligent digital products designed to scale.
+              </p>
 
-          <div className="banner-actions">
-            <Link href="#demo" className="btn-primary">
-              Book Live Demo <span aria-hidden="true">→</span>
-            </Link>
-            <Link href="#ecosystem" className="btn-secondary">
-              Explore Products
-            </Link>
+              <div className="banner-actions">
+                <Link href="/book-a-demo" className="btn-primary">
+                  Book Live Demo <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/products" className="btn-secondary">
+                  Explore Products
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -233,15 +237,22 @@ export function Banner() {
               >
                 <div className="card-glass">
                   <div className="card-head">
-                    <div className="card-mark mark-blue">AG</div>
-                    <div className="card-title">AppointGem</div>
+                    <div className="card-mark mark-blue">
+                      <Image
+                        src="/logos/slota-logo.png"
+                        alt="Slota Logo"
+                        width={28}
+                        height={28}
+                      />
+                    </div>
+                    <div className="card-title">Slota</div>
                   </div>
                   <div className="card-metric">18,412</div>
                   <div className="card-caption">bookings this month</div>
                 </div>
               </div>
 
-              {/* Card 2: Truck Guru */}
+              {/* Card 2: LoadGo */}
               <div
                 data-parallax="0.07"
                 className="stat-card card-truckguru"
@@ -250,7 +261,7 @@ export function Banner() {
                 <div className="card-glass">
                   <div className="card-head">
                     <div className="card-mark mark-amber">TG</div>
-                    <div className="card-title">Truck Guru</div>
+                    <div className="card-title">LoadGo</div>
                   </div>
                   <div className="card-metric">482</div>
                   <div className="card-caption">trucks on road now</div>
@@ -265,7 +276,14 @@ export function Banner() {
               >
                 <div className="card-glass">
                   <div className="card-head">
-                    <div className="card-mark mark-green">WK</div>
+                    <div className="card-mark mark-green">
+                      <Image
+                        src="/logos/welzokart-logo.png"
+                        alt="WelzoKart Logo"
+                        width={28}
+                        height={28}
+                      />
+                    </div>
                     <div className="card-title">WelzoKart</div>
                   </div>
                   <div className="card-spark-bars">

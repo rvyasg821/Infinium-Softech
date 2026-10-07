@@ -16,9 +16,8 @@ function BeliefCardView({
   return (
     <div
       data-reveal={isClone ? undefined : ""}
-      className={`belief-card ${isClone ? "belief-card--clone" : ""} ${
-        isLast ? "belief-card--last" : ""
-      }`}
+      className={`belief-card ${isClone ? "belief-card--clone" : ""} ${isLast ? "belief-card--last" : ""
+        }`}
       data-carousel-item
       aria-hidden={isClone ? "true" : undefined}
     >
@@ -122,8 +121,7 @@ export function AboutBeliefs() {
                 <span
                   className="dot-fill"
                   style={{
-                    backgroundColor:
-                      activeIndex === idx ? belief.tint : undefined,
+                    backgroundColor: activeIndex === idx ? belief.tint : "#0C0C0D",
                   }}
                 />
               </button>

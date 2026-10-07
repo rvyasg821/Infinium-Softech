@@ -21,18 +21,22 @@ export function ContactHero() {
           Contact us
         </div>
 
-        {/* Headline strictly in two lines as requested */}
-        <h1 data-reveal="" className="contact-hero-headline">
-          Tell us what you run.
-          <br />
-          <span className="highlight">We&apos;ll show you the fit.</span>
-        </h1>
+        <div className="contact-hero-grid">
+          {/* Headline strictly in two lines as requested */}
+          <h1 data-reveal="" className="contact-hero-headline">
+            Tell us what you run.
+            <br />
+            <span className="highlight">We&apos;ll show you the fit.</span>
+          </h1>
 
-        <p data-reveal="" className="contact-hero-intro">
-          Every enquiry goes to a person who works on the product, not a queue.
-          Tell us the scale you operate at and we&apos;ll come back with the
-          platform that matches, a walkthrough and an honest timeline.
-        </p>
+          <div className="contact-hero-side">
+            <p data-reveal="" className="contact-hero-intro">
+              Every enquiry goes to a person who works on the product, not a queue.
+              Tell us the scale you operate at and we&apos;ll come back with the
+              platform that matches, a walkthrough and an honest timeline.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

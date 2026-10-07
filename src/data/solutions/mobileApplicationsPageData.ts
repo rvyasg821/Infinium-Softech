@@ -1,0 +1,127 @@
+import type { WebApplicationsPageContent } from "./webApplicationsPageData";
+
+export const MOBILE_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
+  hero: {
+    category: "Mobile applications",
+    name: "Mobile Applications",
+    subtitle: "Apps for teams and customers",
+    titleStart: "Mobile apps for",
+    titleEnd: "work on the move.",
+    description:
+      "We build dependable iOS, Android, and cross-platform apps that connect people to the services and workflows they need wherever work happens.",
+    primaryAction: "Plan a mobile app",
+    secondaryAction: "Contact our app team",
+  },
+  offerings: {
+    eyebrow: "What we deliver",
+    titleStart: "Mobile apps designed",
+    titleEnd: "for real users.",
+    description:
+      "From first product idea to app-store release, we build mobile experiences connected to your business systems.",
+    items: [
+      { number: "01", tint: "#1F31E8", title: "React Native Apps", description: "Share product logic across iOS and Android with a consistent experience." },
+      { number: "02", tint: "#1E9E5A", title: "Flutter Development", description: "Build expressive cross-platform apps from a shared codebase." },
+      { number: "03", tint: "#E8A21F", title: "Native iOS Apps", description: "Create polished iPhone and iPad apps with Swift and platform-native patterns." },
+      { number: "04", tint: "#8B3FE8", title: "Native Android Apps", description: "Deliver reliable Android experiences shaped for devices and user roles." },
+      { number: "05", tint: "#0F8F87", title: "Mobile UX & Design", description: "Turn user needs into clear flows, accessible screens, and usable interactions." },
+      { number: "06", tint: "#2AA8C4", title: "APIs & Integrations", description: "Connect apps with accounts, payments, notifications, and business platforms." },
+      { number: "07", tint: "#4338CA", title: "Testing & App Launch", description: "Validate real-device behavior and prepare releases for the app stores." },
+      { number: "08", tint: "#0C0C0D", title: "Maintenance & Growth", description: "Keep apps secure, compatible, and improving after launch." },
+    ],
+  },
+  strengths: {
+    eyebrow: "Why Infinium Softech",
+    titleStart: "Mobile products",
+    titleEnd: "built to keep up.",
+    description:
+      "We connect thoughtful mobile experiences to the products, people, and operations behind them.",
+    items: [
+      { number: "01", tint: "#1F31E8", title: "Designed for people", description: "Simple, task-focused experiences for customers and frontline teams." },
+      { number: "02", tint: "#1E9E5A", title: "Native where it matters", description: "Use device capabilities and platform conventions where they add value." },
+      { number: "03", tint: "#E8A21F", title: "One connected platform", description: "Keep mobile apps aligned with your APIs, web tools, and business data." },
+      { number: "04", tint: "#8B3FE8", title: "Secure access", description: "Protect accounts and data with appropriate identity and permissions." },
+      { number: "05", tint: "#0F8F87", title: "Ready for real conditions", description: "Test performance across devices, networks, and daily workflows." },
+      { number: "06", tint: "#2AA8C4", title: "Supported after release", description: "Plan for store updates, OS changes, and ongoing product improvements." },
+    ],
+  },
+  process: {
+    eyebrow: "How we work",
+    titleStart: "From app idea",
+    titleEnd: "to app-store launch.",
+    description:
+      "A collaborative delivery path covering user needs, design, engineering, testing, and post-launch support.",
+    items: [
+      { number: "01", tint: "#1F31E8", title: "Discover & define", description: "Clarify users, goals, features, and technical feasibility." },
+      { number: "02", tint: "#1E9E5A", title: "Map user journeys", description: "Plan app flows, navigation, and the key moments in each task." },
+      { number: "03", tint: "#E8A21F", title: "Design the interface", description: "Create mobile-first screens and interactions for each platform." },
+      { number: "04", tint: "#8B3FE8", title: "Build & integrate", description: "Develop the app and connect its APIs, accounts, and services." },
+      { number: "05", tint: "#0F8F87", title: "Test on real devices", description: "Check functionality, accessibility, performance, and security." },
+      { number: "06", tint: "#2AA8C4", title: "Launch & improve", description: "Support store release, monitor feedback, and plan updates." },
+    ],
+  },
+  hire: {
+    eyebrow: "Partner with us",
+    title: "Build a mobile app\nyour users return to.",
+    description:
+      "Share your app idea, target users, and goals. We’ll help shape a focused product plan and a practical path to launch.",
+    action: "Talk to our team",
+  },
+  consultation: {
+    titleStart: "Tell us the app idea.",
+    titleEnd: "We’ll map the next steps.",
+    description: "A 30-minute session to discuss users, features, platforms, and integrations.",
+    paths: [
+      { title: "App strategy", fit: "Set priorities and shape a useful first release.", tint: "#1F31E8" },
+      { title: "Platform choice", fit: "Compare native and cross-platform approaches.", tint: "#1E9E5A" },
+      { title: "Launch & support", fit: "Plan release, maintenance, and future improvements.", tint: "#8B3FE8" },
+    ],
+  },
+  faq: {
+    eyebrow: "FAQ",
+    titleStart: "Mobile app",
+    titleEnd: "questions, answered.",
+    description: "Answers about platforms, timelines, ownership, launch, and ongoing support.",
+    items: [
+      { question: "Do you build apps for both Android and iOS?", answer: "Yes. We develop native apps for each platform and cross-platform apps when a shared codebase best fits the product." },
+      { question: "What types of mobile apps do you build?", answer: "We build customer, commerce, booking, workforce, education, and field-service apps, along with mobile extensions for existing platforms." },
+      { question: "How long does it take to develop an app?", answer: "Timing depends on features, integrations, platforms, and readiness of designs and content. We define milestones after discovery and scope." },
+      { question: "Will Infinium provide the app source code?", answer: "Project handover and code ownership are agreed in the scope before development begins, with documentation for the delivered solution." },
+      { question: "Can you publish the app to the app stores?", answer: "We can prepare store submissions and support the release process for Apple App Store and Google Play requirements." },
+      { question: "Can you maintain and update the app after launch?", answer: "Yes. Support can include bug fixes, security updates, OS compatibility, performance monitoring, and new features." },
+      { question: "Will the app scale as our business grows?", answer: "We design the app and supporting services around expected usage, integrations, and future product needs, then evolve them as those needs change." },
+      { question: "Do you provide UI/UX design?", answer: "Yes. We can map user journeys, design wireframes and interfaces, and refine the experience before and during development." },
+      { question: "How much does mobile app development cost?", answer: "Cost depends on scope, platforms, integrations, and delivery needs. We can estimate after understanding the first release and its priorities." },
+      { question: "How do you keep app data secure?", answer: "We plan for secure authentication, permissions, encrypted connections, and appropriate data handling across the app and its services." },
+    ],
+  },
+  works: {
+    eyebrow: "Our works",
+    titleStart: "Mobile apps made",
+    titleEnd: "for everyday use.",
+    description: "Explore Infinium products that bring essential workflows to customers and teams on the move.",
+    items: [
+      { name: "Trekvano", mark: "TV", category: "Education · Mobile app", tint: "#2AA8C4", description: "Student and school transport tracking with routes, attendance, and live parent updates.", image: "/shots/trekvano.jpg", imageAlt: "Trekvano school transport app", href: "/products/trekvano", result: "Student transport" },
+      { name: "WelzoKart", mark: "WK", category: "Quick commerce · Mobile app", tint: "#1E9E5A", description: "A grocery and restaurant delivery experience connecting customers, stores, and riders.", image: "/shots/Welzokart 2.jpg", imageAlt: "WelzoKart mobile commerce platform", href: "/products/welzokart", result: "Commerce & delivery", logo: "/logos/welzokart-logo.png" },
+      { name: "Slota", mark: "SL", category: "Bookings · Mobile app", tint: "#1F31E8", description: "Appointment booking and business management for teams that coordinate schedules and services.", image: "/shots/appointgem-mobile.webp", imageAlt: "Slota mobile booking app", href: "/products/slota", result: "Appointment operations", logo: "/logos/slota-logo.png" },
+    ],
+  },
+  stack: {
+    eyebrow: "Tools & systems",
+    titleStart: "Mobile technology",
+    titleEnd: "chosen for the job.",
+    description: "Native and cross-platform frameworks, connected to reliable APIs and services.",
+    items: [
+      { name: "React Native", logo: "/technology/React-Native.png" },
+      { name: "Flutter", logo: "/technology/Flutter.png" },
+      { name: "Swift", logo: "/technology/swift.png" },
+      { name: "Kotlin", logo: "/technology/Kotlin.png" },
+      { name: "Android", logo: "/technology/android.png" },
+      { name: "iOS", logo: "/technology/IOS.png" },
+      { name: "Node.js", logo: "/technology/nodejs.png" },
+      { name: "Java", logo: "/technology/java.png" },
+      { name: "PostgreSQL", logo: "/technology/Postgre-SQL.png" },
+      { name: "AWS", logo: "/technology/AWS.png" },
+      { name: "Figma", logo: "/technology/Figma.png" },
+    ],
+  },
+};

@@ -1,8 +1,19 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
 .product-comparison-section {
-  padding: 96px 40px 0;
+  padding: 80px 40px 0;
+
+  @media (max-width: 1024px) {
+    padding: 60px 24px 0;
+  }
 
   @media (max-width: 768px) {
-    padding: 48px 20px 0;
+    padding: 44px 20px 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 32px 16px 0;
   }
 }
 
@@ -15,47 +26,54 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 50px;
+  gap: 32px;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    gap: 12px;
+  }
 }
 
 .comparison-eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #8a8a8e;
+  @include section-eyebrow("light");
 }
 
 .comparison-title {
   font-family: var(--font-archivo, "Archivo", sans-serif);
   font-weight: 800;
   font-stretch: 110%;
-  font-size: clamp(28px, 3.2vw, 52px);
-  line-height: 0.96;
-  letter-spacing: -0.045em;
-  margin: 16px 0 0;
+  font-size: clamp(24px, 3.5vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  margin: 12px 0 0;
   color: #0c0c0d;
+
+  @media (max-width: 480px) {
+    font-size: clamp(22px, 6vw, 26px);
+    line-height: 1.05;
+  }
 }
 
 .comparison-desc {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.55;
   color: #55555a;
-  max-width: 400px;
-  margin: 0 0 8px;
+  max-width: 440px;
+  margin: 0 0 4px;
 }
 
 .table-responsive-wrapper {
   overflow-x: auto;
-  margin-top: 34px;
+  margin-top: 28px;
   border: 1px solid rgba(12, 12, 13, 0.12);
+  scrollbar-width: thin;
 }
 
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 860px;
-  font-size: 14px;
+  min-width: 720px;
+  font-size: clamp(13px, 1.1vw, 14px);
 
   thead tr {
     background: #0c0c0d;
@@ -63,11 +81,15 @@
 
     th {
       text-align: left;
-      font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.2em;
+      font-weight: 600;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      padding: 16px 20px;
+      padding: 14px 18px;
+
+      @media (max-width: 768px) {
+        padding: 12px 14px;
+      }
     }
   }
 
@@ -88,8 +110,12 @@
     }
 
     td {
-      padding: 16px 20px;
+      padding: 14px 18px;
       color: #3a3a3e;
+
+      @media (max-width: 768px) {
+        padding: 12px 14px;
+      }
     }
 
     .product-name-cell {
@@ -98,8 +124,8 @@
       gap: 10px;
 
       .dot {
-        width: 10px;
-        height: 10px;
+        width: 9px;
+        height: 9px;
         border-radius: 25%;
         flex-shrink: 0;
       }
@@ -107,10 +133,11 @@
       .name {
         font-family: var(--font-archivo, "Archivo", sans-serif);
         font-weight: 700;
-        font-size: 14.5px;
+        font-size: clamp(13.5px, 1.1vw, 14.5px);
         letter-spacing: -0.015em;
         color: #0c0c0d;
       }
     }
   }
 }
+

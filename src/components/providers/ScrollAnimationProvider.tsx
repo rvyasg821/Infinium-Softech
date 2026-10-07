@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { usePathname } from "next/navigation";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +21,7 @@ interface ScrollAnimationContextType {
 
 const ScrollAnimationContext = createContext<ScrollAnimationContextType>({
   getLenis: () => null,
-  scrollTo: () => {},
+  scrollTo: () => { },
 });
 
 export const useScrollAnimation = () => useContext(ScrollAnimationContext);
@@ -28,6 +29,8 @@ export const useSmoothScroll = () => useContext(ScrollAnimationContext);
 
 export function ScrollAnimationProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+  const syncRevealsRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     // 1. Initialize Lenis Smooth Scrolling
@@ -49,30 +52,34 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
     const syncReveals = () => {
       const vh = window.innerHeight || 1;
       const revealNodes = document.querySelectorAll<HTMLElement>("[data-reveal]");
-      
+
       revealNodes.forEach((node, idx) => {
         if (node.getAttribute("data-revealed") === "1") return;
         const rect = node.getBoundingClientRect();
-        
+
         if (node.getAttribute("data-rev-init") !== "1") {
           node.setAttribute("data-rev-init", "1");
           const stagger = ((idx % 6) * 0.05).toFixed(2);
           node.style.transition = `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s`;
-          
-          if (rect.top > vh * 0.92) {
+
+          // Only abort if it HASN'T safely entered the screen based on both rules
+          if (rect.top > vh * 0.92 && rect.bottom > vh) {
             node.style.opacity = "0";
             node.style.transform = "translateY(26px)";
             return;
           }
         }
-        
-        if (rect.top < vh * 0.92) {
+
+        // Reveal if it crosses the traditional 92% boundary, OR if it's completely visible (fixes short elements at the bottom of the page)
+        if (rect.top < vh * 0.92 || rect.bottom <= vh + 50) {
           node.setAttribute("data-revealed", "1");
           node.style.opacity = "1";
           node.style.transform = "none";
         }
       });
     };
+
+    syncRevealsRef.current = syncReveals;
 
     // Initial check & safety checks
     syncReveals();
@@ -97,6 +104,8 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
 
     // 5. Smooth scroll on anchor link clicks
     const handleAnchorClick = (e: MouseEvent) => {
+      if (e.defaultPrevented) return;
+
       const target = e.target as HTMLElement | null;
       const anchor = target?.closest("a");
       if (!anchor) return;
@@ -128,6 +137,30 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
       lenisRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    const forceRecalculation = () => {
+      if (lenisRef.current) {
+        lenisRef.current.resize();
+      }
+      if (syncRevealsRef.current) {
+        syncRevealsRef.current();
+      }
+      ScrollTrigger.refresh();
+    };
+
+    // Run immediately and staggered to catch concurrent React DOM paints & image loads
+    forceRecalculation();
+    setTimeout(forceRecalculation, 150);
+    setTimeout(forceRecalculation, 500);
+    setTimeout(forceRecalculation, 1200);
+  }, [pathname]);
 
   const getLenis = useCallback(() => lenisRef.current, []);
 

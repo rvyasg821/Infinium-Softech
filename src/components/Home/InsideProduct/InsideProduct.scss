@@ -36,18 +36,10 @@
   }
 
   .inside-product-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: $color-muted;
-    font-weight: 600;
+    @include section-eyebrow("light");
 
     @include respond($bp-lg) {
       grid-column: 1 / -1;
-    }
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 12px;
     }
   }
 
@@ -55,7 +47,7 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(30px, 3.6vw, 66px);
+    font-size: var(--fs-h2);
     line-height: 0.94;
     letter-spacing: -0.045em;
     color: $color-ink;
@@ -178,8 +170,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     border: 1px solid rgba(12, 12, 13, 0.16);
     background: #ffffff;
@@ -189,17 +181,17 @@
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.12);
+    box-shadow: 0 3px 10px rgba(12, 12, 13, 0.1);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
     @include respond($bp-sm) {
-      width: 42px;
-      height: 42px;
+      width: 32px;
+      height: 32px;
     }
 
     @include respond($bp-md) {
-      width: 48px;
-      height: 48px;
+      width: 36px;
+      height: 36px;
     }
 
     &.prev-btn {
@@ -210,7 +202,7 @@
       }
 
       @include respond($bp-md) {
-        left: -24px;
+        left: -18px;
       }
     }
 
@@ -222,7 +214,7 @@
       }
 
       @include respond($bp-md) {
-        right: -24px;
+        right: -18px;
       }
     }
 
@@ -231,7 +223,7 @@
       color: #ffffff;
       border-color: $color-ink;
       transform: translateY(-50%) scale(1.08);
-      box-shadow: 0 8px 22px rgba(12, 12, 13, 0.2);
+      box-shadow: 0 6px 18px rgba(12, 12, 13, 0.18);
     }
 
     &:active {
@@ -448,6 +440,7 @@
     opacity: 0;
     transform: translateX(24px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -459,9 +452,9 @@
     opacity: 0;
     transform: translateX(-24px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateX(0) scale(1);
   }
 }
-

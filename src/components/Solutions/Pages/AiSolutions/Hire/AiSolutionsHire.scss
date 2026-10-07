@@ -1,0 +1,74 @@
+@use "../../../../../styles/variables" as *;
+@use "../../../../../styles/mixins" as *;
+
+.ai-solutions-hire {
+  background: $color-bg;
+  @include section-padding;
+
+  .ai-solutions-container {
+    @include container;
+  }
+
+  .hire-panel {
+    padding: 48px 40px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    background: rgba(31, 49, 232, 0.03);
+
+    @include respond($bp-lg) {
+      padding: 56px 48px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 28px 18px;
+    }
+  }
+
+  .hire-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 24px;
+    align-items: center;
+ 
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hire-copy {
+    h3 {
+      margin-top: 12px;
+      color: $color-ink;
+      font-family: $font-display;
+      font-size: clamp(2.1rem, 2.5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      white-space: pre-line;
+      text-wrap: balance;
+    }
+  }
+
+  .section-kicker {
+    @include section-eyebrow("light");
+  }
+
+  p {
+    margin: 0;
+    max-width: 560px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: $color-body;
+  }
+
+  .hire-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    .btn-primary {
+      @include btn-hero-primary;
+    }
+  }
+}

@@ -34,6 +34,12 @@
       "changeFrequency": "monthly",
       "priority": 0.8
     },
+    "/book-a-demo": {
+      "title": "Book a Demo — Live Product Walkthrough",
+      "description": "See Infinium Softech platforms running on your own numbers. 30-minute live walkthrough with a product specialist.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
     "/product": {
       "title": "Product Catalogue",
       "description": "Every product we build, in one place. Explore our nine proprietary platforms across industries.",
@@ -55,6 +61,54 @@
     "/solutions": {
       "title": "Solutions — Mobile, Web, Custom, AI & Enterprise Software",
       "description": "Six ways we build. One platform underneath. Mobile, web, custom software, AI, enterprise systems and cloud infrastructure.",
+      "changeFrequency": "weekly",
+      "priority": 0.9
+    },
+    "/solutions/[slug]": {
+      "title": "Solution Detail",
+      "description": "Explore how Infinium Softech builds custom digital solutions tailored to each business problem and operation.",
+      "changeFrequency": "monthly",
+      "priority": 0.7
+    },
+    "/ai-solutions": {
+      "title": "AI Solutions",
+      "description": "AI solutions built for business efficiency, automation, and smarter decision-making.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/web-applications": {
+      "title": "Web Applications",
+      "description": "Infinium Softech designs and builds responsive, secure web applications and business platforms around real workflows.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/mobile-applications": {
+      "title": "Mobile Applications",
+      "description": "Infinium Softech builds secure, high-performance native and cross-platform mobile applications for iOS and Android.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/cloud-infrastructure": {
+      "title": "Cloud Infrastructure",
+      "description": "Infinium Softech designs and manages secure, scalable cloud infrastructure and deployment environments.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/enterprise-systems": {
+      "title": "Enterprise Solutions",
+      "description": "Infinium Softech designs and builds connected enterprise solutions that bring teams, data, applications, and business processes together.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/custom-software": {
+      "title": "Custom Software",
+      "description": "Build custom software that fits your workflows, users, and business goals.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/technology": {
+      "title": "Technology — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
+      "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",
       "changeFrequency": "weekly",
       "priority": 0.9
     }

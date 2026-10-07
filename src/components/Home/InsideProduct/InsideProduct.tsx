@@ -83,13 +83,13 @@ export function InsideProduct() {
           <h2 data-reveal="" className="inside-product-headline">
             One Platform Core.
             <br />
-           Multiple Ways to Work.
+            Multiple Ways to Work.
           </h2>
 
           <p data-reveal="" className="inside-product-intro">
             Explore each product to see who it serves, the capabilities it
-brings together, and how it streamlines workflows from end
-to end.
+            brings together, and how it streamlines workflows from end
+            to end.
           </p>
         </div>
 
@@ -127,8 +127,8 @@ to end.
               aria-label="Previous capability card"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -161,7 +161,6 @@ to end.
                       style={{ backgroundColor: currentCap.tint }}
                       aria-hidden="true"
                     />
-                    <span className="card-badge">Core Capability</span>
                   </div>
 
                   <div className="card-counter">
@@ -176,17 +175,6 @@ to end.
                 <p className="capability-desc">{currentCap.desc}</p>
 
                 {/* Bottom Details Row */}
-                <div className="card-bottom-row">
-                  <div className="card-chips">
-                    <span className="card-chip">9 Ecosystem Products</span>
-                  </div>
-
-                  <div
-                    className="card-indicator-dot"
-                    style={{ backgroundColor: currentCap.tint }}
-                    aria-hidden="true"
-                  />
-                </div>
               </div>
             </div>
 
@@ -198,8 +186,8 @@ to end.
               aria-label="Next capability card"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

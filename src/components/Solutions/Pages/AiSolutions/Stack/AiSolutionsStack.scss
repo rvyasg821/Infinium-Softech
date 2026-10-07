@@ -1,0 +1,150 @@
+@use "../../../../../styles/variables" as *;
+@use "../../../../../styles/mixins" as *;
+
+.ai-solutions-stack {
+  position: relative;
+  overflow: hidden;
+  background: $color-bg;
+  color: $color-ink;
+  @include section-padding;
+
+  .ai-solutions-container {
+    @include container;
+  }
+
+  .ai-solutions-stack-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    @include respond($bp-md) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+      column-gap: 48px;
+      align-items: end;
+    }
+  }
+
+  .ai-solutions-stack-eyebrow {
+    @include section-eyebrow("light");
+
+    @include respond($bp-md) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .ai-solutions-stack-title {
+    margin: 18px 0 0;
+    color: $color-ink;
+    font-family: $font-display;
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+
+    @include respond($bp-md) {
+      grid-column: 1;
+    }
+  }
+
+  .ai-solutions-stack-description {
+    max-width: 600px;
+    margin: 18px 0 0;
+    color: $color-body;
+    font-size: 16.5px;
+    line-height: 1.6;
+
+    @include respond($bp-md) {
+      grid-column: 2;
+      margin: 18px 0 0;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      max-width: 650px;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  .ai-solutions-stack-marquee-viewport {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 32px;
+
+    @include respond($bp-md) {
+      margin-top: 48px;
+    }
+
+    @media (min-width: 1200px) {
+      margin-top: 56px;
+    }
+  }
+
+  .ai-solutions-stack-marquee {
+    display: flex;
+    width: max-content;
+    gap: 12px;
+    animation: ai-solutions-stack-marquee 32s linear infinite;
+
+    &:hover,
+    &:focus-within {
+      animation-play-state: paused;
+    }
+  }
+
+  .ai-solutions-stack-pill {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px 10px 12px;
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(12, 12, 13, 0.03);
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(12, 12, 13, 0.2);
+      box-shadow: 0 4px 14px rgba(12, 12, 13, 0.08);
+    }
+
+    img {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      object-fit: contain;
+    }
+
+    span {
+      color: $color-ink;
+      font-family: $font-display;
+      font-size: 15px;
+      font-weight: 700;
+    }
+  }
+}
+
+@keyframes ai-solutions-stack-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-solutions-stack .ai-solutions-stack-marquee {
+    animation: none;
+  }
+}

@@ -1,0 +1,233 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.ai-solutions-page {
+  background: $color-bg;
+  color: $color-ink;
+
+  .ai-solutions-hero-container,
+  .ai-solutions-container {
+    @include container;
+  }
+
+  .ai-solutions-hero {
+    position: relative;
+    overflow: hidden;
+    background: $color-bg;
+    @include section-padding;
+    padding-top: 48px;
+    padding-bottom: 56px;
+
+  }
+
+  .ai-solutions-hero-eyebrow {
+    @include section-eyebrow("light");
+    position: relative;
+    z-index: 1;
+  }
+
+  .ai-solutions-hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 48px;
+    align-items: flex-start;
+    margin-top: 24px;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+  }
+
+  .ai-solutions-hero-headline {
+    @include hero-headline;
+    margin-top: 0;
+    max-width: 18ch;
+  }
+
+  .ai-solutions-hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .ai-solutions-hero-desc {
+    @include hero-desc;
+    margin: 0;
+    max-width: 560px;
+  }
+
+  .ai-solutions-hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .btn-primary {
+      @include btn-hero-primary;
+    }
+
+    .btn-outline {
+      @include btn-hero-outline;
+    }
+  }
+
+  .section-kicker {
+    @include section-eyebrow("light");
+  }
+
+  .section-header {
+    margin-bottom: 38px;
+
+    h2 {
+      margin-top: 12px;
+      font-size: clamp(2.3rem, 3vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 12ch;
+    }
+
+    p {
+      margin: 0;
+      max-width: 560px;
+      font-size: 1.06rem;
+      line-height: 1.7;
+      color: $color-body;
+    }
+  }
+
+  .section-header-inline {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: end;
+    gap: 32px;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  .offerings-section,
+  .strengths-section,
+  .process-section,
+  .stack-section {
+    @include section-padding;
+  }
+
+  .strengths-grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .strength-card {
+    background: rgba(#ffffff, 0.8);
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    border-radius: 12px;
+    padding: 20px 18px 22px;
+    box-shadow: 0 10px 20px rgba(12, 12, 13, 0.02);
+
+    h3 {
+      margin-top: 16px;
+      margin-bottom: 8px;
+      font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: $color-body;
+    }
+  }
+
+  .hire-section {
+    background: rgba(31, 49, 232, 0.03);
+    border-top: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+    @include section-padding;
+  }
+
+  .hire-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) auto;
+    gap: 24px;
+    align-items: center;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+
+    .hire-copy {
+      h2 {
+        margin-top: 12px;
+        font-size: clamp(2.1rem, 2.5vw, 3.4rem);
+        line-height: 1.08;
+        max-width: 12ch;
+      }
+    }
+
+    p {
+      margin: 0;
+      max-width: 560px;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: $color-body;
+    }
+
+    .btn-primary {
+      @include btn-hero-primary;
+    }
+  }
+
+  .strengths-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .strength-card {
+    min-height: 220px;
+  }
+
+  .tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .tech-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    padding: 14px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    background: rgba(#ffffff, 0.8);
+    color: $color-ink;
+    font-size: 0.94rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+}
+ 

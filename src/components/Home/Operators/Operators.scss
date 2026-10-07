@@ -15,24 +15,19 @@
 
 .operators-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(48px, 7vw, 120px);
   align-items: end;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 20px;
   }
 }
 
 .operators-title-wrap {
   .operators-eyebrow {
-    display: block;
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #8a8a8e;
-    font-family: $font-body;
+    @include section-eyebrow("light");
     margin-bottom: 14px;
   }
 
@@ -40,115 +35,38 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(28px, 3.6vw, 64px);
+    font-size: var(--fs-h2);
     line-height: 0.98;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 0;
-
-    @media (min-width: 1200px) {
-      white-space: nowrap;
-    }
+    margin: 12px 0 0;
   }
 }
 
-.operators-stats-box {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background-color: rgba(12, 12, 13, 0.12);
-  border: 1px solid rgba(12, 12, 13, 0.12);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0;
-}
-
-.operator-stat-item {
-  background-color: $color-bg;
-  padding: 18px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  @media (max-width: $bp-md) {
-    padding: 12px 8px 10px;
-  }
+.operators-intro {
+  font-size: clamp(14px, 1.25vw, 16.5px);
+  line-height: 1.6;
+  color: $color-body;
+  margin: 12px 0 0;
+  max-width: 560px;
 
   @media (max-width: 480px) {
-    padding: 10px 4px 8px;
+    margin: 10px 0 0;
   }
 }
 
-.operator-stat-value-wrap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-.operator-stat-value {
-  font-family: $font-display;
-  font-weight: 800;
-  font-size: clamp(16px, 2.2vw, 26px);
-  letter-spacing: -0.035em;
-  line-height: 1;
-  color: $color-ink;
-
-  @media (max-width: 480px) {
-    font-size: 16px;
-  }
-}
-
-.operator-stat-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #1f31e8;
-  flex-shrink: 0;
-
-  svg {
-    width: 11px;
-    height: 11px;
-    stroke: currentColor;
-    display: block;
-
-    @media (max-width: 480px) {
-      width: 9.5px;
-      height: 9.5px;
-    }
-  }
-}
-
-.operator-stat-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #8a8a8e;
-  margin-top: 6px;
-  font-family: $font-body;
-  text-align: center;
-  line-height: 1.2;
-
-  @media (max-width: 480px) {
-    font-size: 8.5px;
-    letter-spacing: 0.06em;
-    margin-top: 4px;
-  }
-}
+/* ---------- Marquee ---------- */
 
 .operators-marquee-container {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   width: 100%;
   overflow: hidden;
   margin-top: 32px;
 
   @include respond($bp-md) {
-    margin-top: 52px;
+    margin-top: 48px;
   }
 
   @media (min-width: 1200px) {
@@ -167,6 +85,7 @@
   overflow: hidden;
   width: 100%;
   display: flex;
+  padding: 6px 0; // room for hover lift + shadow
 }
 
 .marquee-track {
@@ -185,80 +104,55 @@
 
 .marquee-group {
   display: flex;
-  gap: 10px;
-  padding-right: 10px;
+  gap: 12px;
+  padding-right: 12px; // equals gap so the loop is seamless
 }
 
-.operator-client-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 12px;
+/* ---------- Round pill (same as About) ---------- */
+
+.operator-pill {
+  display: inline-flex;
   align-items: center;
-  width: 252px;
-  flex: none;
+  gap: 12px;
   border: 1px solid rgba(12, 12, 13, 0.12);
-  border-radius: 12px;
-  padding: 14px 16px;
-  background-color: #ffffff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 100px;
+  padding: 10px 20px 10px 12px;
+  white-space: nowrap;
+  flex: none;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(12, 12, 13, 0.03);
   user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.06);
+    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.08);
     border-color: rgba(12, 12, 13, 0.2);
   }
-}
 
-.operator-client-mark {
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $font-display;
-  font-weight: 800;
-  font-size: 11px;
-  flex-shrink: 0;
-  text-transform: uppercase;
-}
+  .operator-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
 
-.operator-client-info {
-  min-width: 0;
-}
-
-.operator-client-name {
-  display: block;
-  font-family: $font-display;
-  font-weight: 700;
-  font-stretch: 105%;
-  font-size: 15px;
-  letter-spacing: -0.015em;
-  color: $color-ink;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.operator-client-sector {
-  display: block;
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #9a9a9e;
-  margin-top: 3px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: $font-body;
+  .operator-name {
+    font-family: $font-display;
+    font-weight: 700;
+    font-stretch: 105%;
+    font-size: 15px;
+    letter-spacing: -0.015em;
+    color: $color-ink;
+  }
 }
 
 @keyframes operator-marquee-left {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -268,6 +162,7 @@
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }

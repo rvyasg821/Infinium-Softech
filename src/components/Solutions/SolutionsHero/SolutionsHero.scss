@@ -23,180 +23,6 @@
 }
 
 /* =========================================================
-   Fresha-style animated spotlight
-   ========================================================= */
-
-.animated-spotlight-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-  isolation: isolate;
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg,
-        rgba(241, 240, 236, 0.1),
-        rgba(241, 240, 236, 0.72));
-        
-    content: "";
-    z-index: 2;
-  }
-}
-
-.animated-spotlight-core,
-.animated-spotlight-sheen {
-  position: absolute;
-  width: min(1100px, 92vw);
-  height: min(720px, 72vw);
-  border-radius: 50%;
-  filter: blur(55px);
-  will-change: transform;
-}
-
-.animated-spotlight-core {
-  top: -18%;
-  left: 50%;
-
-  background:
-    radial-gradient(ellipse at 20% 48%,
-      rgba(30, 158, 90, 0.42) 0%,
-      rgba(30, 158, 90, 0.2) 27%,
-      transparent 64%),
-    radial-gradient(ellipse at 78% 38%,
-      rgba(196, 242, 44, 0.48) 0%,
-      rgba(196, 242, 44, 0.2) 30%,
-      transparent 66%),
-    radial-gradient(ellipse at 54% 78%,
-      rgba(42, 168, 196, 0.28) 0%,
-      transparent 62%);
-
-  transform: translateX(-50%) rotate(-8deg);
-  animation: spotlight-drift 18s ease-in-out infinite alternate;
-}
-
-.animated-spotlight-sheen {
-  right: -22%;
-  bottom: -32%;
-
-  width: min(900px, 80vw);
-  height: min(650px, 66vw);
-
-  background:
-    radial-gradient(ellipse at center,
-      rgba(16, 185, 129, 0.26) 0%,
-      rgba(42, 168, 196, 0.14) 34%,
-      transparent 70%);
-
-  filter: blur(75px);
-  transform: rotate(18deg);
-  animation: spotlight-sheen 22s ease-in-out infinite alternate;
-}
-
-/* =========================================================
-   Two Round Vertical Glows
-   ========================================================= */
-
-.hero-round-glow {
-  position: absolute;
-
-  width: 300px;
-  height: 300px;
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  filter: blur(70px);
-
-  opacity: 0.65;
-
-  z-index: 1;
-
-  will-change: transform;
-}
-
-/* Top Round Glow */
-
-.hero-round-glow--top {
-  top: 40px;
-  right: 80px;
-
-  background: radial-gradient(circle,
-      rgba(168, 85, 247, 0.65) 0%,
-      rgba(168, 85, 247, 0.35) 35%,
-      rgba(168, 85, 247, 0.08) 65%,
-      transparent 75%);
-
-  animation: round-glow-top 10s ease-in-out infinite alternate;
-}
-
-/* Bottom Round Glow */
-
-.hero-round-glow--bottom {
-  top: 300px;
-  right: 80px;
-
-  background: radial-gradient(circle,
-      rgba(236, 72, 153, 0.6) 0%,
-      rgba(236, 72, 153, 0.3) 35%,
-      rgba(236, 72, 153, 0.08) 65%,
-      transparent 75%);
-
-  animation: round-glow-bottom 12s ease-in-out infinite alternate;
-}
-
-/* =========================================================
-   Glow Animations
-   ========================================================= */
-
-@keyframes spotlight-drift {
-  0% {
-    transform: translateX(-50%) translateY(2%) rotate(-8deg) scale(0.96);
-  }
-
-  100% {
-    transform: translateX(-47%) translateY(8%) rotate(5deg) scale(1.06);
-  }
-}
-
-@keyframes spotlight-sheen {
-  0% {
-    transform: translate(-4%, 5%) rotate(18deg) scale(0.94);
-  }
-
-  100% {
-    transform: translate(5%, -5%) rotate(26deg) scale(1.08);
-  }
-}
-
-/* Top Glow Animation */
-
-@keyframes round-glow-top {
-  0% {
-    transform: translateY(0) scale(0.95);
-  }
-
-  100% {
-    transform: translateY(25px) scale(1.08);
-  }
-}
-
-/* Bottom Glow Animation */
-
-@keyframes round-glow-bottom {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-
-  100% {
-    transform: translateY(-20px) scale(1.06);
-  }
-}
-
-/* =========================================================
    Hero Content
    ========================================================= */
 
@@ -208,43 +34,14 @@
 }
 
 .solutions-hero-eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: $color-muted;
-  font-weight: 600;
+  @include section-eyebrow("light");
 }
 
 .solutions-hero-headline {
-  font-family: $font-display;
-  font-weight: 800;
-  font-stretch: 110%;
-
-  font-size: clamp(38px, 5.8vw, 96px);
-
-  line-height: 0.92;
-  letter-spacing: -0.045em;
-
-  margin-top: 22px;
-  max-width: 19ch;
-
-  color: $color-ink;
-
-  text-wrap: pretty;
-
-  @media (max-width: 480px) {
-    font-size: 36px;
-    line-height: 0.94;
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 46px;
-    line-height: 1;
-  }
-
-  .highlight {
-    color: $color-accent;
-  }
+  @include hero-headline;
+  margin-top: 0;
+  max-width: none;
+  text-wrap: balance;
 }
 
 /* =========================================================
@@ -252,37 +49,29 @@
    ========================================================= */
 
 .solutions-hero-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 48px;
+  align-items: flex-start;
+  margin-top: 24px;
 
-  gap: 24px;
-  margin-top: 32px;
-
-  @include respond($bp-md) {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
-    align-items: flex-end;
-
-    gap: 48px;
-    margin-top: 44px;
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
+.solutions-hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
 .solutions-hero-desc {
-  font-size: 17.5px;
-  line-height: 1.6;
-
-  color: $color-body;
-
+  @include hero-desc;
   margin: 0;
   max-width: 580px;
-
-  @media (max-width: 768px) {
-    font-size: 15px;
-    line-height: 1.55;
-  }
 }
 
 /* =========================================================
@@ -308,78 +97,11 @@
   }
 
   .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    background: $color-accent;
-    color: #ffffff;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    padding: 14px 26px;
-
-    border-radius: 2px;
-
-    white-space: nowrap;
-
-    transition:
-      background 0.25s ease,
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-
-    @include respond($bp-lg) {
-      font-size: 14px;
-      padding: 15px 28px;
-    }
-
-    &:hover {
-      background: #1826b8;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(31, 49, 232, 0.25);
-    }
+    @include btn-hero-primary;
   }
 
   .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    border: 1px solid rgba($color-ink, 0.16);
-
-    color: $color-ink;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    padding: 14px 23px;
-
-    border-radius: 2px;
-
-    white-space: nowrap;
-
-    background: transparent;
-
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      transform 0.2s ease;
-
-    @include respond($bp-lg) {
-      font-size: 14px;
-      padding: 15px 25px;
-    }
-
-    &:hover {
-      background: rgba($color-ink, 0.05);
-      border-color: rgba($color-ink, 0.35);
-      transform: translateY(-1px);
-    }
+    @include btn-hero-outline;
   }
 }
 
@@ -389,11 +111,8 @@
 
 .solutions-hero-index {
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
   gap: 10px;
-
   margin-top: 40px;
 
   @include respond($bp-md) {
@@ -403,47 +122,34 @@
 
   @include respond($bp-lg) {
     grid-template-columns: repeat(6, 1fr);
-
     margin-top: 56px;
-
     gap: 12px;
   }
 }
 
 .index-card {
   background: rgba(#ffffff, 0.85);
-
   backdrop-filter: blur(12px);
-
   color: $color-ink;
-
-  padding: 14px 16px;
-
+  padding: 12px 14px;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 10px;
-
+  flex-direction: column;
+  gap: 6px;
   border: 1px solid rgba(12, 12, 13, 0.12);
-
-  border-radius: 6px;
-
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
   transition:
     border-color 0.25s ease,
     background 0.25s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
-
   text-decoration: none;
 
   &:hover {
     background: #ffffff;
-
     border-color: rgba(30, 158, 90, 0.5);
-
     transform: translateY(-2px);
-
     box-shadow: 0 8px 24px rgba(12, 12, 13, 0.08);
 
     .index-title {
@@ -454,106 +160,37 @@
   .index-content {
     display: flex;
     flex-direction: column;
+    gap: 4px;
   } 
 
   .index-num {
     display: block;
-
     font-size: 9.5px;
-
     letter-spacing: 0.18em;
-
     color: $color-muted;
-
     font-weight: 600;
   }
 
-  .index-title {
-    display: block;
-
-    font-family: $font-display;
-
-    font-weight: 700;
-
-    font-size: 13.5px;
-
-    letter-spacing: -0.015em;
-
-    margin-top: 4px;
-
-    color: $color-ink;
-
-    transition: color 0.2s ease;
+  .index-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .index-dot {
     width: 8px;
     height: 8px;
-
     border-radius: 50%;
-
-    margin-top: 3px;
-
     flex: none;
   }
-}
 
-/* =========================================================
-   Accessibility - Reduced Motion
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .animated-spotlight-core,
-  .animated-spotlight-sheen,
-  .hero-round-glow--top,
-  .hero-round-glow--bottom {
-    animation: none;
-  }
-}
-
-/* =========================================================
-   Mobile Glow
-   ========================================================= */
-
-@media (max-width: 767px) {
-  .animated-spotlight-core {
-    width: 145vw;
-    height: 115vw;
-
-    top: 4%;
-
-    filter: blur(50px);
-  }
-
-  .animated-spotlight-sheen {
-    width: 125vw;
-    height: 100vw;
-
-    right: -52%;
-    bottom: -10%;
-
-    filter: blur(65px);
-  }
-
-  /* Mobile Round Glows */
-
-  .hero-round-glow {
-    width: 200px;
-    height: 200px;
-
-    filter: blur(55px);
-
-    opacity: 0.5;
-  }
-
-  .hero-round-glow--top {
-    top: 80px;
-    right: -50px;
-  }
-
-  .hero-round-glow--bottom {
-    top: 260px;
-    right: -50px;
+  .index-title {
+    display: block;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: -0.015em;
+    color: $color-ink;
+    transition: color 0.2s ease;
   }
 }

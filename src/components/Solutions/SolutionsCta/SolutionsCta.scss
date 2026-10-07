@@ -50,6 +50,12 @@
 }
 
 .cta-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 2.2;
+  padding: 4px 14px;
   font-size: 10.5px;
   letter-spacing: 0.28em;
   text-transform: uppercase;

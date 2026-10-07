@@ -1,8 +1,19 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
 .product-catalogue-section {
   padding: 74px 40px 0;
 
+  @media (max-width: 1024px) {
+    padding: 60px 24px 0;
+  }
+
   @media (max-width: 768px) {
-    padding: 48px 20px 0;
+    padding: 44px 20px 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 32px 16px 0;
   }
 }
 
@@ -15,40 +26,41 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 40px;
+  gap: 24px;
   flex-wrap: wrap;
   border-bottom: 1px solid rgba(12, 12, 13, 0.12);
-  padding-bottom: 22px;
+  padding-bottom: 20px;
+
+  @media (max-width: 480px) {
+    padding-bottom: 16px;
+    gap: 12px;
+  }
 } 
 
 .catalogue-eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #8a8a8e;
-  font-weight: 600;
+  @include section-eyebrow("light");
 }
 
 .catalogue-title {
   font-family: var(--font-archivo, "Archivo", sans-serif);
   font-weight: 800;
   font-stretch: 110%;
-  font-size: clamp(28px, 3.2vw, 52px);
-  line-height: 0.96;
-  letter-spacing: -0.045em;
-  margin: 16px 0 0;
+  font-size: clamp(24px, 3.5vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  margin: 12px 0 0;
   color: #0c0c0d;
 
   @media (max-width: 480px) {
-    font-size: 28px;
-    line-height: 1;
+    font-size: clamp(22px, 6vw, 26px);
+    line-height: 1.05;
   }
 }
 
 .catalogue-count {
-  font-size: 13px;
+  font-size: clamp(12px, 1.2vw, 13.5px);
   color: #55555a;
-  padding-bottom: 6px;
+  padding-bottom: 4px;
 
   strong {
     color: #0c0c0d;
@@ -59,7 +71,7 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 8px;
-  margin-top: 26px;
+  margin-top: 24px;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -73,15 +85,20 @@
 .chip-btn {
   cursor: pointer;
   font-family: var(--font-instrument-sans, "Instrument Sans", sans-serif);
-  font-size: 13.5px;
+  font-size: clamp(12.5px, 1.1vw, 13.5px);
   font-weight: 500;
-  padding: 10px 17px;
+  padding: 8px 15px;
   border-radius: 100px;
   white-space: nowrap;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   background: transparent;
   color: #3a3a3e;
   border: 1px solid rgba(12, 12, 13, 0.18);
+
+  @media (max-width: 480px) {
+    padding: 7px 13px;
+    font-size: 12px;
+  }
 
   &:hover {
     border-color: #0c0c0d;
@@ -98,7 +115,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  margin-top: 34px;
+  margin-top: 30px;
 
   @media (max-width: 1023px) {
     display: flex;
@@ -115,14 +132,9 @@
   }
 
   @media (max-width: 767px) {
-    gap: 12px;
-    padding: 4px 7% 10px;
-    scroll-padding-inline: 7%;
-  }
-
-  @media (max-width: 480px) {
-    padding-inline: 5%;
-    scroll-padding-inline: 5%;
+    gap: 14px;
+    padding: 4px 0 10px;
+    margin-top: 24px;
   }
 }
 
@@ -205,12 +217,12 @@
   }
 
   @media (max-width: 767px) {
-    flex: 0 0 84%;
+    flex: 0 0 86%;
     scroll-snap-align: center;
   }
 
   @media (max-width: 480px) {
-    flex-basis: 90%;
+    flex-basis: 92%;
   }
 
   &:hover {
@@ -221,7 +233,11 @@
 
 .card-top-wash {
   position: relative;
-  padding: 22px 22px 0;
+  padding: 20px 20px 0;
+
+  @media (max-width: 480px) {
+    padding: 16px 16px 0;
+  }
 }
 
 .card-top-header {
@@ -234,37 +250,46 @@
 .brand-badge-group {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 10px;
 
   .brand-mark {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-archivo, "Archivo", sans-serif);
     font-weight: 800;
-    font-size: 12.5px;
+    font-size: 12px;
+  }
+
+  .brand-logo {
+    display: block;
+    height: 34px;
+    width: auto;
+    max-width: 80px;
+    object-fit: contain;
+    border-radius: 8px;
   }
 
   .product-name {
     display: block;
     font-family: var(--font-archivo, "Archivo", sans-serif);
     font-weight: 700;
-    font-size: 18px;
+    font-size: clamp(16px, 1.4vw, 18px);
     letter-spacing: -0.02em;
     color: #0c0c0d;
   }
 
   .product-tag-text {
     display: block;
-    font-size: 11px;
-    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #55555a;
-    margin-top: 3px;
+    margin-top: 2px;
   }
 }
 
@@ -276,10 +301,10 @@
 }
 
 .card-shot-wrapper {
-  margin-top: 20px;
+  margin-top: 18px;
   overflow: hidden;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0 20px 48px rgba(12, 12, 13, 0.16);
+  box-shadow: 0 16px 36px rgba(12, 12, 13, 0.14);
 
   .card-shot-img {
     display: block;
@@ -290,45 +315,50 @@
 }
 
 .card-shot-fallback {
-  margin-top: 20px;
+  margin-top: 18px;
   border: 1px dashed rgba(12, 12, 13, 0.22);
   border-bottom: none;
   border-radius: 10px 10px 0 0;
   background: rgba(255, 255, 255, 0.55);
-  min-height: 196px;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
-  padding: 26px;
+  padding: 24px 20px;
 
   .fallback-mark {
     font-family: var(--font-archivo, "Archivo", sans-serif);
     font-weight: 800;
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: -0.03em;
   }
 
   .fallback-text {
-    font-size: 11px;
-    letter-spacing: 0.2em;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #8a8a8e;
   }
 }
 
 .card-body {
-  padding: 22px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   flex: 1;
+
+  @media (max-width: 480px) {
+    padding: 16px;
+    gap: 14px;
+  }
 }
 
 .card-desc {
-  font-size: 14.5px;
+  font-size: clamp(13.5px, 1.1vw, 14.5px);
   line-height: 1.55;
   color: #3a3a3e;
   margin: 0;
@@ -348,11 +378,16 @@
   }
 
   .feature-pill {
-    font-size: 11.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    font-size: 11px;
     color: #3a3a3e;
     border: 1px solid rgba(12, 12, 13, 0.14);
     border-radius: 100px;
-    padding: 5px 11px;
+    padding: 4px 10px;
     white-space: nowrap;
     flex: 0 0 auto;
   }
@@ -360,10 +395,10 @@
 
 .card-actions {
   display: flex;
-  gap: 9px;
+  gap: 8px;
   margin-top: auto;
   border-top: 1px solid rgba(12, 12, 13, 0.1);
-  padding-top: 18px;
+  padding-top: 16px;
 
   .btn-primary {
     flex: 1;
@@ -379,16 +414,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 13.5px;
+  font-size: clamp(12.5px, 1.1vw, 13.5px);
   font-weight: 500;
-  padding: 13px 16px;
+  padding: 11px 15px;
   border-radius: 2px;
   white-space: nowrap;
   text-decoration: none;
 }
 
 .btn-primary {
-  gap: 8px;
+  gap: 6px;
   background: #1f31e8;
   color: #ffffff;
   transition: background 0.25s ease;
@@ -410,10 +445,10 @@
 
 .catalogue-empty {
   border: 1px dashed rgba(12, 12, 13, 0.2);
-  padding: 60px;
+  padding: 48px 24px;
   text-align: center;
-  margin-top: 34px;
-  font-size: 15px;
+  margin-top: 30px;
+  font-size: 14.5px;
   color: #55555a;
 
   .btn-reset {
@@ -421,9 +456,10 @@
     border: none;
     background: none;
     font-family: var(--font-instrument-sans, "Instrument Sans", sans-serif);
-    font-size: 15px;
+    font-size: 14.5px;
     color: #1f31e8;
     padding: 0;
     text-decoration: underline;
   }
 }
+

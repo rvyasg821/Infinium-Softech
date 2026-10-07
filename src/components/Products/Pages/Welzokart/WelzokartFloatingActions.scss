@@ -1,0 +1,73 @@
+@use "../../../../styles/variables" as *;
+
+.welzokart-floating-widget {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: floatWidgetIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  @media (max-width: 640px) {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    justify-content: space-between;
+  }
+
+  .floating-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 100px;
+    font-family: $font-display;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s ease;
+
+    @media (max-width: 640px) {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    &.btn-demo {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #ffffff;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 35px rgba(37, 99, 235, 0.4);
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      }
+    }
+
+    &.btn-whatsapp {
+      background: #25d366;
+      color: #ffffff;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 35px rgba(37, 211, 102, 0.4);
+        background: #1eb857;
+      }
+    }
+  }
+}
+
+@keyframes floatWidgetIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

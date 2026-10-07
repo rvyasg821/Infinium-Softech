@@ -1,23 +1,34 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
+import { sendContactEmail } from "@/actions/sendEmail";
 import {
-  CONTACT_SIZES,
-  CONTACT_PRODUCTS,
+  CONTACT_SERVICES,
+  CONTACT_APP_STAGES,
+  CONTACT_START_TIMES,
   CONTACT_DESKS,
   CONTACT_STEPS,
-  ContactDesk,
 } from "@/data/contactData";
-import "./ContactForm.scss"; 
+import "./ContactForm.scss";
 
 export function ContactForm() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
-  const [size, setSize] = useState("1–10");
-  const [product, setProduct] = useState("Not sure yet");
+  const [mobile, setMobile] = useState("");
+  const [service, setService] = useState("");
+  const [stage, setStage] = useState("");
+  const [startTime, setStartTime] = useState("");
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isSent && sectionRef.current) {
+      const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [isSent]);
 
   // Big screen (>= 768px): 2-grid mouse scrollable & draggable carousel (no arrows, no dots)
   const desktopScrollRef = useRef<HTMLDivElement>(null);
@@ -166,103 +177,46 @@ export function ContactForm() {
 
   const currentDesk = CONTACT_DESKS[deskActiveIndex];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
-    setIsSent(true);
+    if (!name.trim() || !email.trim() || !mobile.trim()) return;
+    
+    setIsSubmitting(true);
+    const result = await sendContactEmail({
+      name,
+      email,
+      mobile,
+      service,
+      stage,
+      startTime,
+      message,
+    });
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setIsSent(true);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   const handleReset = () => {
     setIsSent(false);
     setName("");
     setEmail("");
-    setCompany("");
-    setSize("1–10");
-    setProduct("Not sure yet");
+    setMobile("");
+    setService("");
+    setStage("");
+    setStartTime("");
     setMessage("");
   };
 
-  const productChipsRef = useRef<HTMLDivElement>(null);
-  const [isChipsDragging, setIsChipsDragging] = useState(false);
-  const chipsMouseDownRef = useRef(false);
-  const chipsStartXRef = useRef(0);
-  const chipsStartScrollLeftRef = useRef(0);
-
-  const handleChipsWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    const el = productChipsRef.current;
-    if (!el) return;
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      el.scrollLeft += e.deltaY;
-    } else {
-      el.scrollLeft += e.deltaX;
-    }
-  };
-
-  const handleChipsMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = productChipsRef.current;
-    if (!el) return;
-    chipsMouseDownRef.current = true;
-    chipsStartXRef.current = e.pageX - el.offsetLeft;
-    chipsStartScrollLeftRef.current = el.scrollLeft;
-  };
-
-  const handleChipsMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!chipsMouseDownRef.current) return;
-    const el = productChipsRef.current;
-    if (!el) return;
-    e.preventDefault();
-    setIsChipsDragging(true);
-    const x = e.pageX - el.offsetLeft;
-    const walk = (x - chipsStartXRef.current) * 1.3;
-    el.scrollLeft = chipsStartScrollLeftRef.current - walk;
-  };
-
-  const handleChipsMouseUp = () => {
-    chipsMouseDownRef.current = false;
-    setTimeout(() => {
-      setIsChipsDragging(false);
-    }, 50);
-  };
-
-  const handleChipsMouseLeave = () => {
-    chipsMouseDownRef.current = false;
-    setIsChipsDragging(false);
-  };
-
-  const scrollChipsLeft = () => {
-    if (productChipsRef.current) {
-      productChipsRef.current.scrollBy({ left: -220, behavior: "smooth" });
-    }
-  };
-
-  const scrollChipsRight = () => {
-    if (productChipsRef.current) {
-      productChipsRef.current.scrollBy({ left: 220, behavior: "smooth" });
-    }
-  };
-
-  const handleProductSelect = (
-    prodName: string,
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    if (isChipsDragging) return;
-    setProduct(prodName);
-    if (e.currentTarget) {
-      e.currentTarget.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-    }
-  };
-
-  const sentMessageNote =
-    product === "Not sure yet"
-      ? "A product specialist will read this and recommend the platform that fits. Expect a reply within one working day, usually with two or three questions and a time for a walkthrough."
-      : `Routed to the ${product} team. Expect a reply within one working day, usually with two or three questions and a time for a walkthrough.`;
+  const sentMessageNote = service
+    ? `Routed to the ${service} team. Expect a reply within one working day, usually with two or three questions and a time for a walkthrough.`
+    : "Our team will read this and get back to you. Expect a reply within one working day, usually with two or three questions and a time for a walkthrough.";
 
   return (
-    <section id="form" className="contact-form-section content-padding" aria-label="Send Brief & Contacts">
+    <section ref={sectionRef} id="form" className="contact-form-section content-padding" aria-label="Send Brief & Contacts">
       <div className="contact-form-container">
         {/* Left Column: Interactive Form Box */}
         <div data-reveal="" className="contact-form-card">
@@ -270,12 +224,12 @@ export function ContactForm() {
             <form onSubmit={handleSubmit} className="form-inner">
               <h2 className="form-title">Send us a brief</h2>
               <p className="form-subtitle">
-                Six fields. The more you tell us about volumes and teams, the more useful the first call is.
+                Tell us about your project and we will get back to you with the right next steps.
               </p>
 
               <div className="form-grid">
                 <label className="form-field">
-                  <span className="field-label">Full name</span>
+                  <span className="field-label">Name</span>
                   <input
                     type="text"
                     required
@@ -287,7 +241,7 @@ export function ContactForm() {
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Work email</span>
+                  <span className="field-label">Email Address</span>
                   <input
                     type="email"
                     required
@@ -299,27 +253,76 @@ export function ContactForm() {
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Company</span>
+                  <span className="field-label">Mobile No</span>
                   <input
-                    type="text"
-                    placeholder="Company name"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
+                    type="tel"
+                    required
+                    placeholder="Your mobile number"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
                     className="field-input"
                   />
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Team size</span>
+                  <span className="field-label">Select a service</span>
                   <div className="select-wrap">
                     <select
-                      value={size}
-                      onChange={(e) => setSize(e.target.value)}
+                      required
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
                       className="field-select"
                     >
-                      {CONTACT_SIZES.map((s, idx) => (
+                      <option value="" disabled>
+                        Select a service
+                      </option>
+                      {CONTACT_SERVICES.map((s, idx) => (
                         <option key={idx} value={s}>
-                          {s} 
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="select-caret" aria-hidden="true">▾</span>
+                  </div>
+                </label>
+
+                <label className="form-field">
+                  <span className="field-label">At what stage is your app?</span>
+                  <div className="select-wrap">
+                    <select
+                      required
+                      value={stage}
+                      onChange={(e) => setStage(e.target.value)}
+                      className="field-select"
+                    >
+                      <option value="" disabled>
+                        Select stage
+                      </option>
+                      {CONTACT_APP_STAGES.map((s, idx) => (
+                        <option key={idx} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="select-caret" aria-hidden="true">▾</span>
+                  </div>
+                </label>
+
+                <label className="form-field">
+                  <span className="field-label">When do you want to start</span>
+                  <div className="select-wrap">
+                    <select
+                      required
+                      value={startTime}
+                      onChange={(e) => setStartTime(e.target.value)}
+                      className="field-select"
+                    >
+                      <option value="" disabled>
+                        Select timeline
+                      </option>
+                      {CONTACT_START_TIMES.map((s, idx) => (
+                        <option key={idx} value={s}>
+                          {s}
                         </option>
                       ))}
                     </select>
@@ -328,67 +331,12 @@ export function ContactForm() {
                 </label>
               </div>
 
-              {/* Product Chips Selection (Horizontal scrollable track with mouse & touch support) */}
-              <div className="form-products-group">
-                <div className="form-products-header">
-                  <span className="field-label">Which product are you looking at</span>
-                  <div className="chips-nav-controls">
-                    <button
-                      type="button"
-                      className="chips-scroll-btn"
-                      onClick={scrollChipsLeft}
-                      aria-label="Scroll products left"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M15 18l-6-6 6-6" />
-                      </svg>
-                    </button>
-                    <button
-                      type="button"
-                      className="chips-scroll-btn"
-                      onClick={scrollChipsRight}
-                      aria-label="Scroll products right"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M9 18l6-6-6-6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <div
-                  ref={productChipsRef}
-                  className={`product-chips-wrap ${isChipsDragging ? "is-dragging" : ""}`}
-                  onWheel={handleChipsWheel}
-                  onMouseDown={handleChipsMouseDown}
-                  onMouseMove={handleChipsMouseMove}
-                  onMouseUp={handleChipsMouseUp}
-                  onMouseLeave={handleChipsMouseLeave}
-                  role="group"
-                  aria-label="Select product"
-                >
-                  {CONTACT_PRODUCTS.map((prodName, idx) => {
-                    const isSelected = product === prodName;
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        className={`chip-btn ${isSelected ? "is-selected" : ""}`}
-                        onClick={(e) => handleProductSelect(prodName, e)}
-                        aria-pressed={isSelected}
-                      >
-                        {prodName}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Message Textarea */}
               <label className="form-field form-field--full">
-                <span className="field-label">What are you trying to solve</span>
+                <span className="field-label">How can we help you?</span>
                 <textarea
                   rows={4}
-                  placeholder="Current process, rough volumes, the tools you run today, and anything that has to stay."
+                  placeholder="Tell us a little about your project or requirement."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="field-textarea"
@@ -397,9 +345,9 @@ export function ContactForm() {
 
               {/* Form Actions */}
               <div className="form-footer">
-                <button type="submit" className="btn-primary">
-                  Send enquiry
-                  <span aria-hidden="true">→</span>
+                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send enquiry"}
+                  {!isSubmitting && <span aria-hidden="true">→</span>}
                 </button>
                 <span className="form-note">We reply within one working day.</span>
               </div>
@@ -411,11 +359,7 @@ export function ContactForm() {
               </div>
               <h3 className="success-title">Brief received.</h3>
               <p className="success-note">{sentMessageNote}</p>
-              <button
-                type="button"
-                onClick={handleReset}
-                className="btn-reset"
-              >
+              <button type="button" onClick={handleReset} className="btn-reset">
                 Send another
               </button>
             </div>
@@ -428,7 +372,7 @@ export function ContactForm() {
           <div data-reveal="" className="desks-card">
             <div className="desks-eyebrow">Reach the right desk</div>
 
-            {/* Big Screen: 2-Grid Carousel (>= 768px, no arrows, no dots, mouse scroll & drag) */}
+            {/* Big Screen: 2-Grid Carousel (>= 768px) */}
             <div
               ref={desktopScrollRef}
               className={`desks-desktop-track ${isDragging ? "is-dragging" : ""}`}
@@ -458,10 +402,7 @@ export function ContactForm() {
             </div>
 
             {/* Mobile Carousel Slider (< 768px) */}
-            <div
-              className="desks-carousel"
-              aria-label="Reach the right desk carousel"
-            >
+            <div className="desks-carousel" aria-label="Reach the right desk carousel">
               <div
                 className="desks-carousel-wrapper"
                 onTouchStart={handleDeskTouchStart}
@@ -475,8 +416,8 @@ export function ContactForm() {
                   aria-label="Previous desk"
                 >
                   <svg
-                    width="18"
-                    height="18"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -509,13 +450,13 @@ export function ContactForm() {
 
                 <button
                   type="button"
-                  className="carousel-arrow-btn next-btn "
+                  className="carousel-arrow-btn next-btn"
                   onClick={handleDeskNext}
                   aria-label="Next desk"
                 >
                   <svg
-                    width="18"
-                    height="18"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -529,25 +470,19 @@ export function ContactForm() {
               </div>
 
               {/* Pagination Dots */}
-              <div
-                className="desks-carousel-dots"
-                aria-label="Desk navigation dots"
-              >
+              <div className="desks-carousel-dots" aria-label="Desk navigation dots">
                 {CONTACT_DESKS.map((desk, idx) => (
                   <button
                     key={idx}
                     type="button"
-                    className={`desks-dot ${
-                      deskActiveIndex === idx ? "is-active" : ""
-                    }`}
+                    className={`desks-dot ${deskActiveIndex === idx ? "is-active" : ""}`}
                     onClick={() => handleDeskIndex(idx)}
                     aria-label={`Go to desk ${idx + 1}: ${desk.name}`}
                   >
                     <span
                       className="dot-fill"
                       style={{
-                        backgroundColor:
-                          deskActiveIndex === idx ? desk.tint : undefined,
+                        backgroundColor: deskActiveIndex === idx ? desk.tint : undefined,
                       }}
                     />
                   </button>

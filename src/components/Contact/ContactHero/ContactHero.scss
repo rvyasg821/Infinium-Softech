@@ -25,78 +25,37 @@
 }
 
 .contact-hero-eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: $color-muted;
-  font-weight: 600;
+  @include section-eyebrow("light");
+}
 
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 12px;
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 48px;
+  align-items: flex-start;
+  margin-top: 24px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
+}
+
+.contact-hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
 }
 
 .contact-hero-headline {
-  font-family: $font-display;
-  font-weight: 800;
-  font-stretch: 110%;
-  font-size: clamp(26px, 6.6vw, 100px);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-  color: $color-ink;
-  margin: 22px 0 0;
+  @include hero-headline;
+  margin: 0;
   max-width: 24ch;
-
-  @include respond($bp-sm) {
-    font-size: clamp(34px, 5.8vw, 56px);
-    line-height: 0.98;
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 44px;
-    line-height: 1.02;
-    max-width: 18ch;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: clamp(48px, 5.8vw, 100px);
-    line-height: 0.92;
-    max-width: 18ch;
-  }
-
-  @media (max-width: 480px) {
-    font-size: clamp(23px, 6.8vw, 30px);
-    line-height: 1.1;
-    letter-spacing: -0.035em;
-    max-width: 100%;
-  }
-
-  @media (max-width: 380px) {
-    font-size: 24px;
-    line-height: 1.12;
-  }
-
-  .highlight {
-    color: $color-accent;
-  }
 }
 
 .contact-hero-intro {
-  font-size: 17px;
-  line-height: 1.6;
-  color: $color-body;
-  margin: 28px 0 0;
+  @include hero-desc;
+  margin: 0;
   max-width: 620px;
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 18px;
-    line-height: 1.55;
-    max-width: 680px;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 14.5px;
-    line-height: 1.55;
-    margin-top: 20px;
-  }
 }

@@ -19,18 +19,10 @@
   }
 
   .about-operators-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: $color-muted;
-    font-weight: 600;
+    @include section-eyebrow("light");
 
     @include respond($bp-md) {
       grid-column: 1 / -1;
-    }
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 12px;
     }
   }
 

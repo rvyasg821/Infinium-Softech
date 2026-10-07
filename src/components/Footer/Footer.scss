@@ -3,30 +3,60 @@
 
 .site-footer {
   position: relative;
+
+  width: 100%;
+
   background-color: $color-ink;
   color: $color-bg;
+
   padding-top: clamp(60px, 7vw, 100px);
   padding-bottom: 36px;
-  width: 100%;
+
+  -webkit-tap-highlight-color: transparent;
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+
+    &:focus,
+    &:focus-visible,
+    &:active {
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  // ==========================================
+  // TOP
+  // ==========================================
 
   .top {
     @include container;
+
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
 
-    // Desktop (>= 1024px): 5 columns in one row, always expanded (no toggle)
     @media (min-width: 1024px) {
       grid-template-columns: 1.5fr repeat(4, minmax(0, 1fr));
+
       gap: 40px clamp(20px, 2.5vw, 48px);
+
       align-items: start;
     }
   }
 
+  // ==========================================
+  // BRAND
+  // ==========================================
+
   .brand {
     grid-column: 1 / -1;
+
     margin-bottom: 24px;
     padding-bottom: 24px;
+
     border-bottom: 1px solid $color-border-on-dark;
 
     @media (min-width: 768px) and (max-width: 1023px) {
@@ -36,14 +66,16 @@
 
     @media (min-width: 1024px) {
       grid-column: auto;
-      border-bottom: none;
+
       margin-bottom: 0;
       padding-bottom: 0;
+
+      border-bottom: none;
     }
 
     img {
-      height: 34px;
       width: auto;
+      height: 34px;
 
       @media (max-width: 480px) {
         height: 30px;
@@ -51,11 +83,14 @@
     }
 
     p {
+      max-width: 440px;
+
+      margin-top: 18px;
+
       font-size: 14.5px;
       line-height: 1.6;
+
       color: $color-on-dark-muted;
-      margin-top: 18px;
-      max-width: 440px;
 
       @media (min-width: 768px) and (max-width: 1023px) {
         max-width: 540px;
@@ -66,67 +101,207 @@
       }
 
       @media (max-width: 768px) {
+        max-width: 100%;
+
+        margin-top: 14px;
+
         font-size: 14px;
         line-height: 1.55;
-        margin-top: 14px;
+      }
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+
+      @media (max-width: 768px) {
+        margin-top: 16px;
+      }
+    }
+
+    .social-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
       }
     }
   }
 
+  // ==========================================
+  // COLUMN
+  // ==========================================
+
   .column {
     min-width: 0;
-    border-bottom: 1px solid $color-border-on-dark;
+
+    // ----------------------------------------
+    // MOBILE / TABLET
+    // ----------------------------------------
+
+    @media (max-width: 1023px) {
+      /*
+       * ONE SINGLE BOX
+       *
+       * This box contains:
+       * 1. Header / title
+       * 2. UL / links
+       *
+       * LI does NOT have any box.
+       */
+
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      border-radius: 8px;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      margin-bottom: 8px;
+
+      overflow: hidden;
+
+      transition:
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+
+      &.is-open {
+        border-color: rgba(255, 255, 255, 0.18);
+
+        background: rgba(255, 255, 255, 0.045);
+      }
+    }
+
+    // ----------------------------------------
+    // DESKTOP
+    // ----------------------------------------
 
     @media (min-width: 1024px) {
-      border-bottom: none;
+      border: none;
+
+      border-radius: 0;
+
+      background: transparent;
+
+      margin-bottom: 0;
     }
+
+    // ========================================
+    // HEADER
+    // ========================================
 
     .column-header-btn {
       width: 100%;
-      background: transparent;
-      border: none;
-      padding: 18px 0;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      cursor: pointer;
-      text-align: left;
+
+      padding: 11px 14px;
+
+      background: transparent;
+
+      border: none;
+
       color: inherit;
 
+      text-align: left;
+
+      cursor: pointer;
+
+      box-sizing: border-box;
+
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+
+      @media (max-width: 480px) {
+        padding: 10px 12px;
+      }
+
       @media (min-width: 768px) and (max-width: 1023px) {
-        padding: 20px 0;
+        padding: 11px 14px;
       }
 
       @media (min-width: 1024px) {
-        cursor: default;
-        pointer-events: none;
-        padding: 0 0 20px 0;
         display: block;
+
+        padding: 0 0 20px 0;
+
+        cursor: default;
+
+        pointer-events: none;
       }
 
+      &:hover {
+        @media (max-width: 1023px) {
+          background: rgba(255, 255, 255, 0.025);
+        }
+      }
+
+      // --------------------------------------
+      // TITLE
+      // --------------------------------------
+
       .column-title {
-        font-size: 15px;
-        letter-spacing: 0.16em;
+        display: inline-block;
+
+        font-size: 12.5px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.14em;
+
+        line-height: 1;
+
         text-transform: uppercase;
-        color: $color-muted;
-        font-weight: 600;
+
+        color: rgba(255, 255, 255, 0.9);
 
         @media (min-width: 1024px) {
-          font-size: 15.5px;
-          letter-spacing: 0.18em;
+          font-size: 13px;
+
+          letter-spacing: 0.16em;
         }
 
         @media (max-width: 480px) {
-          font-size: 16px;
+          font-size: 12px;
         }
       }
 
+      // --------------------------------------
+      // ARROW
+      // --------------------------------------
+
       .toggle-icon {
         display: flex;
+
         align-items: center;
+
         justify-content: center;
-        color: $color-muted;
-        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+
+        flex-shrink: 0;
+
+        color: rgba(255, 255, 255, 0.6);
+
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.2s ease;
 
         svg {
           width: 14px;
@@ -139,81 +314,263 @@
       }
     }
 
-    &.is-open {
-      .column-header-btn .toggle-icon {
-        transform: rotate(180deg);
-        color: #ffffff;
-      }
+    // ========================================
+    // SMOOTH DROPDOWN WRAPPER
+    // ========================================
 
-      .column-list {
-        display: flex;
+    .column-list-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+
+      @media (min-width: 1024px) {
+        display: block !important;
+        grid-template-rows: none !important;
+        overflow: visible !important;
       }
     }
 
+    // ========================================
+    // OPEN STATE
+    // ========================================
+
+    &.is-open {
+      .column-header-btn {
+        .toggle-icon {
+          transform: rotate(180deg);
+
+          color: #ffffff;
+        }
+
+        .column-title {
+          color: #ffffff;
+        }
+      }
+
+      .column-list-wrapper {
+        grid-template-rows: 1fr;
+
+        .column-list {
+          opacity: 1;
+
+          visibility: visible;
+
+          padding: 2px 14px 12px 14px;
+
+          @media (max-width: 480px) {
+            padding: 2px 12px 10px 12px;
+          }
+        }
+      }
+    }
+
+    // ========================================
+    // UL
+    // ========================================
+
     .column-list {
-      display: none;
+      display: flex;
+
       flex-direction: column;
-      gap: 14px;
+
       list-style: none;
-      padding: 0 0 20px 0;
+
+      padding: 0 14px;
+
       margin: 0;
 
-      @media (min-width: 1024px) {
-        display: flex !important;
-        padding: 0;
-        gap: 14px;
+      gap: 8px;
+
+      min-height: 0;
+
+      overflow: hidden;
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        padding: 0 14px;
+
+        gap: 8px;
       }
 
       @media (max-width: 480px) {
-        gap: 13px;
-        padding-bottom: 20px;
-      }
-    }
+        padding: 0 12px;
 
-    a {
-      font-size: 17px;
-      color: $color-on-dark-link;
-      line-height: 1.5;
-      display: inline-block;
-      transition: color 0.15s ease;
-
-      @media (max-width: 768px) {
-        font-size: 15.5px;
+        gap: 7px;
       }
 
-      @media (min-width: 1200px) {
-        font-size: 17.5px;
+      // ======================================
+      // DESKTOP
+      // ======================================
+
+      @media (min-width: 1024px) {
+        display: flex !important;
+
+        opacity: 1 !important;
+
+        visibility: visible !important;
+
+        overflow: visible !important;
+
+        padding: 0 !important;
+
+        gap: 11px;
       }
 
-      &:hover {
-        color: #ffffff;
+      // ======================================
+      // LI
+      // ======================================
+
+      li {
+        /*
+         * LI IS COMPLETELY NORMAL
+         */
+
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        margin: 0;
+
+        padding: 0;
+
+        border: none;
+
+        background: transparent;
+
+        border-radius: 0;
+
+        // ====================================
+        // LINK
+        // ====================================
+
+        a {
+          position: relative;
+
+          display: inline-flex;
+
+          align-items: center;
+
+          color: $color-on-dark-link;
+
+          font-size: 14px;
+
+          font-weight: 450;
+
+          line-height: 1.45;
+
+          text-decoration: none;
+
+          transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+
+          @media (max-width: 768px) {
+            font-size: 13.5px;
+          }
+
+          @media (min-width: 1200px) {
+            font-size: 14.5px;
+          }
+
+          // Desktop dot
+          &::before {
+            content: "";
+
+            display: inline-block;
+
+            width: 4px;
+            height: 4px;
+
+            margin-right: 6px;
+
+            border-radius: 50%;
+
+            background-color: $color-accent;
+
+            opacity: 0;
+
+            transform: scale(0);
+
+            transition:
+              opacity 0.2s ease,
+              transform 0.2s ease;
+
+            @media (max-width: 1023px) {
+              display: none;
+            }
+          }
+
+          &:hover {
+            color: #ffffff;
+
+            transform: translateX(4px);
+
+            &::before {
+              opacity: 1;
+
+              transform: scale(1);
+            }
+          }
+        }
       }
     }
   }
 
+  // ==========================================
+  // BOTTOM
+  // ==========================================
+
   .bottom {
     @include container;
+
     margin-top: clamp(48px, 6vw, 72px);
-    border-top: 1px solid $color-border-on-dark;
+
     padding-top: 26px;
+
+    border-top: 1px solid $color-border-on-dark;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 16px;
+
     font-size: 13.5px;
+
     color: $color-muted;
 
     @media (min-width: 768px) {
       flex-direction: row;
+
       align-items: center;
+
       justify-content: space-between;
+
       font-size: 12.5px;
     }
   }
 
+  // ==========================================
+  // LEGAL
+  // ==========================================
+
   .legal {
     display: flex;
-    gap: 24px;
+
     flex-wrap: wrap;
+
+    gap: 24px;
 
     @media (max-width: 480px) {
       gap: 18px;
@@ -221,7 +578,11 @@
 
     a {
       font-size: 13.5px;
+
       color: $color-muted;
+
+      text-decoration: none;
+
       transition: color 0.15s ease;
 
       @media (min-width: 768px) {

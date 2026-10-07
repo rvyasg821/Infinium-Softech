@@ -23,7 +23,7 @@
 3. **GTM:** Use Google's official Next.js package. It's flagged "experimental" by Google/Next themselves (not a red flag, just means the package name/API could still shift), so we pin a version. One manual step is required that the package doesn't do automatically — explained below.
 4. **What's not in this plan:** A list of extra SEO items (favicon, 404 page, image alt text, etc.) that matter but aren't blockers — tracked separately so nothing is assumed "done" by accident.
 
-**Build order:** SEO system first → GTM second → try both on one real page to make sure it works → add a safety check so it can't be forgotten later → everything else (contact form, etc.) only once we actually need it.
+**Build order:** SEO system first → GTM second → try both on one real page to make sure it works → add aa safety check so it can't be forgotten later → everything else (contact form, etc.) only once we actually need it.
 
 Everything below explains each decision in plain terms, then gives the exact files and code to write.
 

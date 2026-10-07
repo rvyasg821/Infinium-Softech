@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -16,12 +21,45 @@ export function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [previewProductName, setPreviewProductName] = useState<string>("AppointGem");
+  const [previewProductName, setPreviewProductName] = useState<string>("Slota");
   const [isMobile, setIsMobile] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const headerRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Detect scroll to decrease header size
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 30) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const headerWrapper = headerRef.current;
+    if (!headerWrapper) return;
+
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty(
+        "--site-header-height",
+        `${headerWrapper.getBoundingClientRect().height}px`
+      );
+    };
+
+    updateHeaderHeight();
+    const resizeObserver = new ResizeObserver(updateHeaderHeight);
+    resizeObserver.observe(headerWrapper);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   // Detect screen size for responsive mode
   useEffect(() => {
@@ -47,7 +85,8 @@ export function Header() {
   // Close menu on click outside or escape key
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape ") {
+      // FIX: was "Escape " (with a space), so it never matched
+      if (e.key === "Escape") {
         setActiveMenu(null);
       }
     }
@@ -109,41 +148,45 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
+      technology: "/technology",
     };
     const route = routeByMenuKey[key];
 
-    if (route) {
-      setActiveMenu(null);
-      router.push(route);
-    }
+    if (route) navigateToHeaderRoute(route);
   };
 
   const handleMenuClick = (key: string) => {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
+      technology: "/technology",
     };
     const route = routeByMenuKey[key];
 
     if (!isMobile && route) {
-      setActiveMenu(null);
-      router.push(route);
+      navigateToHeaderRoute(route);
       return;
     }
 
     toggleMenuKey(key);
   };
 
+  // Close menu on route change
+  useEffect(() => {
+    setActiveMenu(null);
+  }, [pathname]);
+
   const handleCategoryClick = (key: string) => {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
+      technology: "/technology",
     };
     const route = routeByMenuKey[key];
 
     if (isMobile && route) {
       if (activeMenu === key) {
-        router.push(route);
+        navigateToHeaderRoute(route);
       } else {
         openMenu(key);
       }
@@ -151,6 +194,32 @@ export function Header() {
     }
 
     openMenu(key);
+  };
+
+  const scrollToPageTop = () => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
+
+  const navigateToHeaderRoute = (route: string) => {
+    setActiveMenu(null);
+    if (pathname === route) {
+      scrollToPageTop();
+      return;
+    }
+    router.push(route);
+  };
+
+  const handleHeaderLinkClick = (
+    event: ReactMouseEvent<HTMLElement>,
+    route: string
+  ) => {
+    setActiveMenu(null);
+    if (pathname !== route) return;
+
+    event.preventDefault();
+    scrollToPageTop();
   };
 
   const currentMenuKey = activeMenu || "products";
@@ -170,12 +239,12 @@ export function Header() {
         }
       }}
     >
-      <header className="site-header">
+      <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
         <nav className="nav content-padding" aria-label="Main Navigation">
           <Link
             href="/"
             className="logo"
-            onClick={() => setActiveMenu(null)}
+            onClick={(event) => handleHeaderLinkClick(event, "/")}
           >
             <Image
               src="/brand/logo-dark.png"
@@ -188,12 +257,25 @@ export function Header() {
 
           {/* Desktop Nav Tabs */}
           <div className="nav-desktop">
+            <Link
+              href="/about"
+              className={`nav-menu-btn ${!activeMenu && pathname === "/about" ? "is-route-active" : ""}`}
+              onClick={(event) => handleHeaderLinkClick(event, "/about")}
+              onMouseEnter={() => {
+                if (!isMobile) setActiveMenu(null);
+              }}
+            >
+              About
+            </Link>
+
             {MENU_KEYS.map((key) => {
               const def = MENU_DEFS[key];
               const isOpen = activeMenu === key;
               const isRouteActive =
-                (key === "products" && pathname.startsWith("/products")) ||
-                (key === "solutions" && pathname === "/solutions");
+                !activeMenu &&
+                ((key === "products" && pathname.startsWith("/products")) ||
+                  (key === "solutions" && pathname === "/solutions") ||
+                  (key === "technology" && pathname === "/technology"));
               return (
                 <button
                   key={key}
@@ -211,16 +293,27 @@ export function Header() {
                 </button>
               );
             })}
+
+            <Link
+              href="/contact"
+              className={`nav-menu-btn ${!activeMenu && pathname === "/contact" ? "is-route-active" : ""}`}
+              onClick={(event) => handleHeaderLinkClick(event, "/contact")}
+              onMouseEnter={() => {
+                if (!isMobile) setActiveMenu(null);
+              }}
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* Responsive Toggle & Action Button */}
           <div className="actions">
             <Link
-              href="#demo"
+              href="/book-a-demo"
               className="cta"
-              onClick={() => setActiveMenu(null)}
+              onClick={(event) => handleHeaderLinkClick(event, "/book-a-demo")}
             >
-              Book a demo <span aria-hidden="true">→</span>
+              Book a Demo <span aria-hidden="true">→</span>
             </Link>
 
             {/* Mobile/Compact Trigger Button */}
@@ -268,7 +361,7 @@ export function Header() {
             }
           }}
         >
-          <div className="mega-menu-inner">
+          <div className={`mega-menu-inner ${currentMenuDef?.key === "technology" ? "is-tech-menu" : ""}`}>
             {/* Left Content Column */}
             <div className="mega-left-col">
               {/* Category Eyebrow Header */}
@@ -280,6 +373,17 @@ export function Header() {
               {/* Mobile / Tablet Horizontal Category Chip Tabs */}
               <div className="mobile-category-chips-wrapper">
                 <div className="mobile-category-chips">
+                  {/* FIX: About/Contact chips are never "selected" (filled).
+                      Only the open menu chip is filled, so two chips can't be highlighted together. */}
+                  <Link
+                    href="/about"
+                    className="category-chip"
+                    aria-current={pathname === "/about" ? "page" : undefined}
+                    onClick={(event) => handleHeaderLinkClick(event, "/about")}
+                  >
+                    About
+                  </Link>
+
                   {MENU_KEYS.map((key) => {
                     const def = MENU_DEFS[key];
                     const isSelected = currentMenuKey === key;
@@ -291,12 +395,22 @@ export function Header() {
                         }}
                         type="button"
                         className={`category-chip ${isSelected ? "is-selected" : ""}`}
+                        aria-pressed={isSelected}
                         onClick={() => handleCategoryClick(key)}
                       >
                         {def.label}
                       </button>
                     );
                   })}
+
+                  <Link
+                    href="/contact"
+                    className="category-chip"
+                    aria-current={pathname === "/contact" ? "page" : undefined}
+                    onClick={(event) => handleHeaderLinkClick(event, "/contact")}
+                  >
+                    Contact Us
+                  </Link>
                 </div>
               </div>
 
@@ -311,16 +425,26 @@ export function Header() {
                         href={`/products/${prod.id}`}
                         className={`product-card ${isSelected ? "is-selected" : ""}`}
                         onMouseEnter={() => setPreviewProductName(prod.name)}
-                        onClick={() => {
+                        onClick={(event) => {
                           setPreviewProductName(prod.name);
-                          setActiveMenu(null);
+                          handleHeaderLinkClick(event, `/products/${prod.id}`);
                         }}
                       >
                         <span
                           className="badge-mark"
                           style={{ backgroundColor: prod.tint }}
                         >
-                          {prod.mark}
+                          {prod.logo ? (
+                            <Image
+                              src={prod.logo}
+                              alt={prod.name}
+                              width={22}
+                              height={22}
+                              className="badge-logo-img"
+                            />
+                          ) : (
+                            prod.mark
+                          )}
                         </span>
                         <div className="card-info">
                           <div className="card-header-row">
@@ -337,7 +461,7 @@ export function Header() {
 
               {/* Generic Menu Links Layout (Industries, Solutions, Technology, Company, Demo) */}
               {!currentMenuDef.isProducts && currentMenuDef.items && (
-                <div className="links-grid">
+                <div className={`links-grid ${currentMenuDef.key === "technology" ? "tech-links-grid" : ""}`}>
                   {currentMenuDef.items.map((item) => {
                     const isSelected = previewProductName === item.product;
                     const matchedProd = ECOSYSTEM_PRODUCTS.find((p) => p.name === item.product);
@@ -351,7 +475,19 @@ export function Header() {
                         onClick={() => {
                           setPreviewProductName(item.product);
                           setActiveMenu(null);
-                          if (!item.href && matchedProd) {
+                          if (item.href) {
+                            if (item.href.includes("#")) {
+                              const [hrefPath, hashId] = item.href.split("#");
+                              if (pathname === hrefPath || (hrefPath === "" && hashId)) {
+                                const el = document.getElementById(hashId);
+                                if (el) {
+                                  const targetY =
+                                    el.getBoundingClientRect().top + window.scrollY - 130;
+                                  window.scrollTo({ top: targetY, behavior: "smooth" });
+                                }
+                              }
+                            }
+                          } else if (matchedProd) {
                             window.dispatchEvent(
                               new CustomEvent("scroll-to-ecosystem-product", {
                                 detail: { id: matchedProd.id },
@@ -369,9 +505,21 @@ export function Header() {
                           <span className="link-title">{item.name}</span>
                           <span className="link-desc">{item.desc}</span>
                         </div>
-                        <span className="link-arrow" aria-hidden="true">
-                          →
-                        </span>
+                        {item.icon ? (
+                          <span className="link-tech-icon-wrap" aria-hidden="true">
+                            <Image
+                              src={item.icon}
+                              alt={item.name}
+                              width={22}
+                              height={22}
+                              className="link-tech-icon-img"
+                            />
+                          </span>
+                        ) : (
+                          <span className="link-arrow" aria-hidden="true">
+                            →
+                          </span>
+                        )}
                       </Link>
                     );
                   })}
@@ -380,7 +528,7 @@ export function Header() {
 
               {/* Bottom bar of Mega Menu */}
               <div className="mega-bottom-bar">
-                <span className="bottom-count">9 products across 9 industries</span>
+                {/* <span className="bottom-count">9 products across 9 industries</span> */}
                 <Link
                   href="#ecosystem"
                   className="bottom-link"
@@ -393,55 +541,57 @@ export function Header() {
                     );
                   }}
                 >
-                  Browse the full ecosystem →
+                  {/* Browse the full ecosystem → */}
                 </Link>
               </div>
             </div>
 
-            {/* Right Preview Card */}
-            <div className="preview-card">
-              <div
-                className="preview-image-wrapper"
-                style={{ backgroundColor: currentPreviewProduct.wash }}
-              >
-                <Image
-                  src={currentPreviewProduct.shot}
-                  alt={currentPreviewProduct.name}
-                  width={480}
-                  height={300}
-                  className="preview-img"
-                  loading="eager"
-                />
-              </div>
-              <div className="preview-content">
-                <div className="preview-tag">{currentPreviewProduct.tag}</div>
-                <div className="preview-title">{currentPreviewProduct.name}</div>
-                <div className="preview-desc">{currentPreviewProduct.desc}</div>
-                <div className="preview-actions">
-                  <Link
-                    href="#demo"
-                    className="btn-launch"
-                    onClick={() => setActiveMenu(null)}
-                  >
-                    Launch demo <span aria-hidden="true">→</span>
-                  </Link>
-                  <Link
-                    href={`#${currentPreviewProduct.id}`}
-                    className="btn-details"
-                    onClick={() => {
-                      setActiveMenu(null);
-                      window.dispatchEvent(
-                        new CustomEvent("scroll-to-ecosystem-product", {
-                          detail: { id: currentPreviewProduct.id },
-                        })
-                      );
-                    }}
-                  >
-                    View details
-                  </Link>
+            {/* Right Preview Card (Hidden for Technology Menu) */}
+            {currentMenuDef.key !== "technology" && (
+              <div className="preview-card">
+                <div
+                  className="preview-image-wrapper"
+                  style={{ backgroundColor: currentPreviewProduct.wash }}
+                >
+                  <Image
+                    src={currentPreviewProduct.shot}
+                    alt={currentPreviewProduct.name}
+                    width={480}
+                    height={300}
+                    className="preview-img"
+                    loading="eager"
+                  />
+                </div>
+                <div className="preview-content">
+                  <div className="preview-tag">{currentPreviewProduct.tag}</div>
+                  <div className="preview-title">{currentPreviewProduct.name}</div>
+                  <div className="preview-desc">{currentPreviewProduct.desc}</div>
+                  <div className="preview-actions">
+                    <Link
+                      href="/book-a-demo"
+                      className="btn-launch"
+                      onClick={() => setActiveMenu(null)}
+                    >
+                      Launch demo <span aria-hidden="true">→</span>
+                    </Link>
+                    <Link
+                      href={`#${currentPreviewProduct.id}`}
+                      className="btn-details"
+                      onClick={() => {
+                        setActiveMenu(null);
+                        window.dispatchEvent(
+                          new CustomEvent("scroll-to-ecosystem-product", {
+                            detail: { id: currentPreviewProduct.id },
+                          })
+                        );
+                      }}
+                    >
+                      View details
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}

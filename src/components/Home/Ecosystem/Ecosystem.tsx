@@ -46,7 +46,7 @@ export function Ecosystem() {
         if (!inner) return;
 
         gsap.set(inner, {
-          scale: 1, 
+          scale: 1,
           opacity: 1,
           transformOrigin: "center center",
         });
@@ -271,17 +271,19 @@ export function Ecosystem() {
     return () => clearTimeout(timer);
   }, []);
 
-  const scrollToCard = (index: number) => {
+  const scrollToCard = (index: number, scrollWindow: boolean = true) => {
     if (index < 0 || index >= ECOSYSTEM_PRODUCTS.length) return;
     setActiveRail(ECOSYSTEM_PRODUCTS[index].n);
 
     if (window.innerWidth >= 1024) {
+      if (!scrollWindow) return;
+
       const section = sectionRef.current;
       const sectionDocTop = section
         ? section.getBoundingClientRect().top + window.scrollY
         : 0;
 
-      // Special handling for first card (AppointGem / 01)
+      // Special handling for first card (Slota / 01)
       if (index === 0) {
         const firstSt = stickyTriggersRef.current[0];
         const targetTop =
@@ -321,14 +323,16 @@ export function Ecosystem() {
         behavior: "smooth",
       });
     } else {
-      // Mobile & Tablet: scroll window to section and scroll container to card
-      const section = sectionRef.current;
-      if (section) {
-        const sectionTop = section.getBoundingClientRect().top + window.scrollY - 70;
-        window.scrollTo({
-          top: Math.max(0, sectionTop),
-          behavior: "smooth",
-        });
+      // Mobile & Tablet: scroll window to section only if requested (e.g. from header nav/hash link)
+      if (scrollWindow) {
+        const section = sectionRef.current;
+        if (section) {
+          const sectionTop = section.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({
+            top: Math.max(0, sectionTop),
+            behavior: "smooth",
+          });
+        }
       }
 
       const container = cardsContainerRef.current;
@@ -360,7 +364,7 @@ export function Ecosystem() {
         );
       }
       if (targetIdx !== -1) {
-        scrollToCard(targetIdx);
+        scrollToCard(targetIdx, true);
       }
     };
 
@@ -374,7 +378,7 @@ export function Ecosystem() {
           p.n === hash
       );
       if (targetIdx !== -1) {
-        scrollToCard(targetIdx);
+        scrollToCard(targetIdx, true);
       }
     };
 
@@ -418,7 +422,7 @@ export function Ecosystem() {
         }
       }, 420);
     } else {
-      scrollToCard(currentIdx - 1);
+      scrollToCard(currentIdx - 1, false);
     }
   };
 
@@ -449,7 +453,7 @@ export function Ecosystem() {
         }
       }, 420);
     } else {
-      scrollToCard(currentIdx + 1);
+      scrollToCard(currentIdx + 1, false);
     }
   };
 
@@ -488,41 +492,22 @@ export function Ecosystem() {
           <div data-reveal="" className="ecosystem-eyebrow">The ecosystem</div>
 
           <h2 data-reveal="" className="ecosystem-headline">
-          Built Independently.
+            Built Independently.
             <br />
-           Connected Seamlessly.
+            Connected Seamlessly.
           </h2>
 
           <p data-reveal="" className="ecosystem-intro">
             Each product works as a standalone platform while sharing
-a unified foundation for identity, billing, analytics, and
-automation. Choose the solutions you need today and
-expand your ecosystem as your business evolves
+            a unified foundation for identity, billing, analytics, and
+            automation. Choose the solutions you need today and
+            expand your ecosystem as your business evolves
           </p>
         </div>
 
         {/* Section Main Content Grid */}
         <div className="ecosystem-body">
-          {/* Left Number Rail (Sticky on Desktop >= 1024px) */}
-          <nav
-            className="ecosystem-rail"
-            aria-label="Ecosystem navigation rail"
-          >
-            {ECOSYSTEM_PRODUCTS.map((prod, idx) => (
-              <button
-                key={prod.n}
-                type="button"
-                className={`rail-item ${
-                  activeRail === prod.n ? "is-active" : ""
-                }`}
-                onClick={() => scrollToCard(idx)}
-                aria-label={`Jump to ${prod.name}`}
-              >
-                <span className="rail-bar" aria-hidden="true" />
-                <span>{prod.n}</span>
-              </button>
-            ))}
-          </nav>
+
 
           {/* Cards Area with Mobile Navigation Arrows & Bottom Dots */}
           <div className="ecosystem-cards-wrapper">
@@ -534,8 +519,8 @@ expand your ecosystem as your business evolves
               aria-label="Previous ecosystem product card"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -578,14 +563,24 @@ expand your ecosystem as your business evolves
                       {/* Header Row: Category Badge & Giant Number */}
                       <div className="card-header-row">
                         <div className="card-tag-pill">
-                          <span
-                            className="tag-mark"
-                            style={{
-                              backgroundColor: prod.tint,
-                            }}
-                          >
-                            {prod.mark}
-                          </span>
+                          {prod.logo ? (
+                            <Image
+                              src={prod.logo}
+                              alt={`${prod.name} Logo`}
+                              width={48}
+                              height={22}
+                              className="tag-logo"
+                            />
+                          ) : (
+                            <span
+                              className="tag-mark"
+                              style={{
+                                backgroundColor: prod.tint,
+                              }}
+                            >
+                              {prod.mark}
+                            </span>
+                          )}
 
                           <span className="tag-label">{prod.tag}</span>
                         </div>
@@ -643,7 +638,7 @@ expand your ecosystem as your business evolves
 
                       {/* Action CTAs */}
                       <div className="card-actions">
-                        <Link href="#demo" className="btn-card-primary">
+                        <Link href="/book-a-demo" className="btn-card-primary">
                           Launch demo{" "}
                           <span className="btn-arrow" aria-hidden="true">
                             →
@@ -679,7 +674,7 @@ expand your ecosystem as your business evolves
                     </div>
                   </div>
                 </div>
-              ))} 
+              ))}
             </div>
 
             {/* Mobile Right Arrow Button (Middle of Card) */}
@@ -690,8 +685,8 @@ expand your ecosystem as your business evolves
               aria-label="Next ecosystem product card"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -710,7 +705,7 @@ expand your ecosystem as your business evolves
                   key={prod.n}
                   type="button"
                   className={`ecosystem-dot ${activeRail === prod.n ? "is-active" : ""}`}
-                  onClick={() => scrollToCard(idx)}
+                  onClick={() => scrollToCard(idx, false)}
                   aria-label={`Go to slide ${idx + 1}: ${prod.name}`}
                 >
                   <span

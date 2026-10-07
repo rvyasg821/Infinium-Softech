@@ -63,9 +63,7 @@ export function ProductHero() {
       <div className="product-hero-container">
         {/* Eyebrow Badge */}
         <div data-reveal="" className="product-hero-eyebrow">
-          <span className="pulse-dot" />
-          <span>Product catalogue</span>
-          <span className="live-badge">9 live platforms</span>
+          Product catalogue
         </div>
 
         {/* Title & Description Grid */}

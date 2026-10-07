@@ -8,6 +8,7 @@ export type ProductItem = {
   desc: string;
   shot: string;
   wash: string;
+  logo?: string;
 };
 
 export type GenericMenuItem = {
@@ -16,6 +17,7 @@ export type GenericMenuItem = {
   tint: string;
   product: string;
   href?: string;
+  icon?: string;
 };
 
 export type MenuDef = {
@@ -29,15 +31,16 @@ export type MenuDef = {
 
 export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
   {
-    id: "appointgem",
+    id: "slota",
     n: "01",
-    name: "AppointGem",
-    mark: "AG",
+    name: "slota",
+    mark: "sl",
     tag: "BOOKINGS",
     tint: "#1F31E8",
     desc: "Business booking and management platform for appointment-led teams.",
-    shot: "/shots/welzokart.jpg",
+    shot: "/shots/slota.png",
     wash: "rgba(31, 49, 232, 0.16)",
+    logo: "/logos/slota-logo.png",
   },
   {
     id: "welzokart",
@@ -47,25 +50,28 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     tag: "QUICK COMMERCE",
     tint: "#1E9E5A",
     desc: "Quick commerce marketplace combining grocery and restaurant delivery.",
-    shot: "/shots/welzokart.jpg",
+    shot: "/shots/Welzokart 2.jpg",
     wash: "rgba(30, 158, 90, 0.16)",
+    logo: "/logos/welzokart-logo.png",
   },
   {
-    id: "mapmypay",
+    id: "needly",
     n: "03",
-    name: "MapMyPay",
-    mark: "MP",
-    tag: "HEALTHCARE",
-    tint: "#8B3FE8",
-    desc: "Healthcare and nursing recruitment platform with shift-based payouts.",
-    shot: "/shots/mapmypay.jpg",
-    wash: "rgba(139, 63, 232, 0.16)",
+    name: "Needly",
+    mark: "ND",
+    tag: "MARKETPLACE",
+    tint: "#E0452F",
+    desc: "Daily needs buy and sell marketplace with verified neighbourhood listings.",
+    shot: "/shots/Needly.png",
+    wash: "rgba(224, 69, 47, 0.16)",
+    logo: "/logos/Needly-logo.png",
   },
+
   {
-    id: "truck-guru",
+    id: "loadgo",
     n: "04",
-    name: "Truck Guru",
-    mark: "TG",
+    name: "LoadGo",
+    mark: "LG",
     tag: "LOGISTICS",
     tint: "#E8A21F",
     desc: "Transport and truck booking ecosystem across long-haul and regional lanes.",
@@ -73,10 +79,10 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(232, 162, 31, 0.16)",
   },
   {
-    id: "mindful-menu",
+    id: "dishly",
     n: "05",
-    name: "MindFul Menu",
-    mark: "MM",
+    name: "Dishly",
+    mark: "DI",
     tag: "KITCHEN AI",
     tint: "#0F8F87",
     desc: "AI-powered cooking and menu instruction platform for multi-outlet kitchens.",
@@ -91,25 +97,14 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     tag: "EDUCATION",
     tint: "#2AA8C4",
     desc: "School van and student tracking system with live parent notifications.",
-    shot: "/shots/trekvano.jpg",
+    shot: "/shots/Trekvano.jpg",
     wash: "rgba(42, 168, 196, 0.16)",
   },
   {
-    id: "needly",
+    id: "purespace",
     n: "07",
-    name: "Needly",
-    mark: "ND",
-    tag: "MARKETPLACE",
-    tint: "#E0452F",
-    desc: "Daily needs buy and sell marketplace with verified neighbourhood listings.",
-    shot: "/shots/textgem.jpg",
-    wash: "rgba(224, 69, 47, 0.16)",
-  },
-  {
-    id: "locale-e-clean",
-    n: "08",
-    name: "Locale E Clean",
-    mark: "LE",
+    name: "PureSpace",
+    mark: "PS",
     tag: "HOME SERVICES",
     tint: "#4338CA",
     desc: "Cleaning and home service booking platform with route-optimised crews.",
@@ -117,10 +112,10 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(67, 56, 202, 0.16)",
   },
   {
-    id: "textgem",
-    n: "09",
-    name: "TextGem",
-    mark: "TX",
+    id: "Textora",
+    n: "08",
+    name: "Textora",
+    mark: "TT",
     tag: "COMMUNICATION",
     tint: "#0C0C0D",
     desc: "Bulk SMS and business communication platform with delivery analytics.",
@@ -137,30 +132,17 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     isProducts: true,
     productItems: ECOSYSTEM_PRODUCTS,
   },
-  industries: {
-    key: "industries",
-    label: "Industries",
-    eyebrow: "Built for how these sectors operate",
-    items: [
-      { name: "Healthcare", desc: "Nursing workforce, credentials, payouts", tint: "#8B3FE8", product: "MapMyPay" },
-      { name: "Logistics", desc: "Loads, fleet tracking, freight settlement", tint: "#E8A21F", product: "Truck Guru" },
-      { name: "Retail & Commerce", desc: "Grocery, restaurant and quick commerce", tint: "#1E9E5A", product: "WelzoKart" },
-      { name: "Education", desc: "Student transport and parent visibility", tint: "#2AA8C4", product: "Trekvano" },
-      { name: "Home Services", desc: "Crew dispatch and recurring contracts", tint: "#4338CA", product: "Locale E Clean" },
-      { name: "Communication", desc: "Campaigns, OTP and delivery analytics", tint: "#0C0C0D", product: "TextGem" },
-    ],
-  },
   solutions: {
     key: "solutions",
     label: "Solutions",
     eyebrow: "How we build and ship",
     items: [
-      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions#mobile-applications" },
-      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "AppointGem", href: "/solutions#web-applications" },
-      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions#custom-software" },
-      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "MindFul Menu", href: "/solutions#ai-solutions" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "MapMyPay", href: "/solutions#enterprise-systems" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "Truck Guru", href: "/solutions#cloud-infrastructure" },
+      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions/ai-solutions" },
+      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software" },
+      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications" },
+      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications" },
+      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems" },
+      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure" },
     ],
   },
   technology: {
@@ -168,37 +150,16 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Technology",
     eyebrow: "One toolchain across all nine products",
     items: [
-      { name: "React", desc: "Component system for every dashboard", tint: "#1F31E8", product: "AppointGem" },
-      { name: "Next.js", desc: "Marketing and portal surfaces", tint: "#0C0C0D", product: "TextGem" },
-      { name: "Flutter", desc: "Shared iOS and Android codebase", tint: "#2AA8C4", product: "Trekvano" },
-      { name: "Node.js", desc: "Realtime services and APIs", tint: "#1E9E5A", product: "WelzoKart" },
-      { name: "Laravel", desc: "Billing, admin and back office", tint: "#E0452F", product: "Needly" },
-      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "Truck Guru" },
-      { name: "Security & Scalability", desc: "Encryption, RBAC, load testing", tint: "#8B3FE8", product: "MapMyPay" },
-    ],
-  },
-  company: {
-    key: "company",
-    label: "Company",
-    eyebrow: "The team behind the ecosystem",
-    items: [
-      { name: "About Us", desc: "Why we build products, not projects", tint: "#1F31E8", product: "AppointGem", href: "/about" },
-      { name: "Careers", desc: "Engineering, design and delivery roles", tint: "#1E9E5A", product: "WelzoKart" },
-      { name: "Partners", desc: "Resellers and implementation partners", tint: "#E8A21F", product: "Truck Guru" },
-      { name: "Contact Us", desc: "Talk to sales or support", tint: "#8B3FE8", product: "MapMyPay", href: "/contact" },
-    ],
-  },
-  demo: {
-    key: "demo",
-    label: "Demo Center",
-    eyebrow: "See any product running live",
-    items: [
-      { name: "Live Product Demos", desc: "Sandboxes with seeded data", tint: "#1F31E8", product: "AppointGem" },
-      { name: "Interactive Walkthroughs", desc: "Click-through core flows", tint: "#0F8F87", product: "MindFul Menu" },
-      { name: "Schedule Consultation", desc: "30 minutes with an implementation lead", tint: "#4338CA", product: "Locale E Clean" },
-      { name: "Request Demo", desc: "Tell us the operation, we bring the products", tint: "#1E9E5A", product: "WelzoKart" },
+      { name: "React", desc: "Component system for every dashboard", tint: "#1F31E8", product: "Slota", href: "/technology#tech-reactjs", icon: "/technology/reactjs.png" },
+      { name: "Next.js", desc: "Marketing and portal surfaces", tint: "#0C0C0D", product: "Textora", href: "/technology#tech-nextjs", icon: "/technology/nextjs.svg" },
+      { name: "React Native", desc: "Shared iOS and Android codebase", tint: "#2AA8C4", product: "Trekvano", href: "/technology#tech-react-native", icon: "/technology/React-Native.png" },
+      { name: "Node.js", desc: "Realtime services and APIs", tint: "#1E9E5A", product: "WelzoKart", href: "/technology#tech-nodejs", icon: "/technology/nodejs.png" },
+      { name: "Laravel", desc: "Billing, admin and back office", tint: "#E0452F", product: "Needly", href: "/technology#tech-php", icon: "/technology/Laravel.png" },
+      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "LoadGo", href: "/technology#tech-aws", icon: "/technology/aws.svg" },
+      { name: "AI/ML", desc: "Intelligent automation and data-driven insights", tint: "#8B3FE8", product: "", href: "/technology#tech-python", icon: "/technology/ai-ml.svg" },
+      { name: "View More", desc: "Discover more tools behind our products", tint: "#8B3FE8", product: "NurseWorth", href: "/technology#frontend" },
     ],
   },
 };
 
-export const MENU_KEYS = ["products", "industries", "solutions", "technology", "company", "demo"] as const;
+export const MENU_KEYS = ["products", "solutions", "technology"] as const;

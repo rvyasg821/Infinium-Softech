@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AppointGem } from "@/components/Products/Pages/AppointGem/AppointGem";
+import { AppointGem } from "@/components/Products/Pages/Solta/AppointGem";
+import { Welzokart } from "@/components/Products/Pages/Welzokart/Welzokart";
+import { Needly } from "@/components/Products/Pages/Needly/Needly"
+
+
 import { PRODUCT_ITEMS } from "@/data/productsData";
 
 type ProductPageProps = {
@@ -28,6 +32,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
+import { ProductPlaceholder } from "@/components/Products/Pages/Placeholder/ProductPlaceholder";
+
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = PRODUCT_ITEMS.find((item) => item.id === slug);
@@ -36,17 +42,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  if (product.id === "appointgem") {
+  if (product.id === "slota") {
     return <AppointGem product={product} />;
   }
 
-  return (
-    <main className="main">
-      <section style={{ padding: "120px 40px", maxWidth: 1440, margin: "0 auto" }}>
-        <p>{product.tag} platform</p>
-        <h1>{product.name}</h1>
-        <p>{product.desc}</p>
-      </section>
-    </main>
-  );
+  if (product.id === "welzokart") {
+    return <Welzokart product={product} />;
+  }
+
+  if (product.id === "needly") {
+    return <Needly product={product} />;
+  }
+
+  return <ProductPlaceholder product={product} />;
 }

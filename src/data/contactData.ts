@@ -37,17 +37,45 @@ export const CONTACT_SIZES = [
 ];
 
 export const CONTACT_PRODUCTS = [
-  "AppointGem",
+  "Slota",
   "WelzoKart",
-  "MapMyPay",
-  "Truck Guru",
-  "MindFul Menu",
+  "NurseWorth",
+  "LoadGo",
+  "Dishly",
   "Trekvano",
   "Needly",
-  "Locale E Clean",
-  "TextGem",
+  "PureSpace",
+  "Textora",
   "Not sure yet",
 ];
+export const CONTACT_SERVICES = [
+  "AI/ML Development",
+  "Web Development",
+  "CMS Development",
+  "Mobile App Development",
+  "SEO & Digital Marketing",
+  "UI/UX Design",
+  "Software Development",
+  "Other",
+];
+
+export const CONTACT_APP_STAGES = [
+  "At What Stage is your app?",
+  "I need to build a mobile app from scratch",
+  "I have propotype and I want to make an app",
+  "My existing product needs a mobile component",
+  "I am looking to improve my existing product/app",
+  "I have an app idea and want to know to build an app",
+  "Other"
+];
+
+export const CONTACT_START_TIMES = [
+  "When do you want to start",
+  "As soon as possible",
+  "Next week",
+  "Next month",
+  "Not sure"
+]
 
 export const CONTACT_DESKS: ContactDesk[] = [
   {

@@ -1,8 +1,16 @@
 .product-cta-section {
-  padding: 96px 40px 100px;
+  padding: 80px 40px 96px;
+
+  @media (max-width: 1024px) {
+    padding: 60px 24px 72px;
+  }
 
   @media (max-width: 768px) {
-    padding: 48px 20px 60px;
+    padding: 44px 20px 60px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 32px 16px 48px;
   }
 }
 
@@ -10,16 +18,21 @@
   max-width: 1440px;
   margin: 0 auto;
   border: 1px solid rgba(12, 12, 13, 0.14);
-  padding: 56px;
+  padding: 48px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 48px;
+  gap: 40px;
   align-items: center;
 
   @media (max-width: 992px) {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 40px 24px;
+    gap: 24px;
+    padding: 36px 28px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 24px 18px;
+    gap: 20px;
   }
 }
 
@@ -27,19 +40,28 @@
   font-family: var(--font-archivo, "Archivo", sans-serif);
   font-weight: 800;
   font-stretch: 112%;
-  font-size: clamp(26px, 3vw, 50px);
-  line-height: 0.96;
-  letter-spacing: -0.045em;
+  font-size: clamp(24px, 2.8vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
   margin: 0;
   color: #0c0c0d;
+
+  @media (max-width: 480px) {
+    font-size: clamp(20px, 5.5vw, 24px);
+    line-height: 1.1;
+  }
 }
 
 .cta-desc {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.55;
   color: #55555a;
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   max-width: 520px;
+
+  @media (max-width: 480px) {
+    margin-top: 10px;
+  }
 }
 
 .cta-actions {
@@ -50,16 +72,22 @@
   .btn-primary-blue {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     background: #1f31e8;
     color: #ffffff;
-    font-size: 14px;
+    font-size: clamp(13px, 1.1vw, 14px);
     font-weight: 500;
-    padding: 15px 26px;
+    padding: 13px 24px;
     border-radius: 2px;
     white-space: nowrap;
     text-decoration: none;
     transition: background 0.25s ease;
+
+    @media (max-width: 480px) {
+      width: 100%;
+      justify-content: center;
+      padding: 12px 20px;
+    }
 
     &:hover {
       background: #1624b5;
@@ -73,19 +101,26 @@
   .btn-outline-dark {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     border: 1px solid rgba(12, 12, 13, 0.2);
     color: #0c0c0d;
-    font-size: 14px;
+    font-size: clamp(13px, 1.1vw, 14px);
     font-weight: 500;
-    padding: 15px 26px;
+    padding: 13px 24px;
     border-radius: 2px;
     white-space: nowrap;
     text-decoration: none;
     transition: background 0.25s ease;
+
+    @media (max-width: 480px) {
+      width: 100%;
+      justify-content: center;
+      padding: 12px 20px;
+    }
 
     &:hover {
       background: rgba(12, 12, 13, 0.06);
     }
   }
 }
+

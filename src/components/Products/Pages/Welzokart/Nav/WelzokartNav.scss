@@ -1,0 +1,107 @@
+@use "../../../../../styles/variables" as *;
+@use "../../../../../styles/mixins" as *;
+
+.appointgem-subnav-sticky {
+  position: sticky;
+  top: var(--site-header-height, 75px);
+  z-index: 60;
+  margin-top: 0;
+  padding: 8px 0;
+  background: rgba(243, 242, 238, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  // border-bottom: 1px solid rgba(12, 12, 13, 0.08);
+
+  .appointgem-subnav-container {
+    @include container;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-top: 4px;
+    padding-bottom: 6px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .appointgem-subnav-item {
+    font-family: $font-body;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: max-content;
+    flex: none;
+    padding: 10px 18px;
+    border: 1px solid rgba(12, 12, 13, 0.1);
+    border-bottom: 3.5px solid transparent;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #0c0c0d;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(12, 12, 13, 0.03);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      box-shadow 0.25s ease,
+      color 0.25s ease;
+
+    @media (max-width: 768px) {
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.active) {
+        background: #ffffff;
+        border-color: rgba(12, 12, 13, 0.2);
+        box-shadow: 0 4px 10px rgba(12, 12, 13, 0.06);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 2px;
+    }
+
+    &.active {
+      background: #ffffff;
+      border-color: rgba(12, 12, 13, 0.16);
+      border-bottom-color: var(--item-accent-color, #1f31e8);
+      color: var(--item-accent-color, #1f31e8);
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(12, 12, 13, 0.07);
+    }
+
+    .appointgem-index-dot {
+      width: 8px;
+      height: 8px;
+      flex: none;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+    }
+
+    &.active .appointgem-index-dot {
+      transform: scale(1.2);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 0;
+  }
+}

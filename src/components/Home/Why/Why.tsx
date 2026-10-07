@@ -38,9 +38,8 @@ export function Why() {
                 } else {
                   formatted = Math.round(proxy.val).toLocaleString("en-US");
                 }
-                el.textContent = `${stat.prefix || ""}${formatted}${
-                  stat.suffix || ""
-                }`;
+                el.textContent = `${stat.prefix || ""}${formatted}${stat.suffix || ""
+                  }`;
               },
             });
           });
@@ -64,18 +63,17 @@ export function Why() {
             <div data-reveal="" className="why-eyebrow">Why Infinium Softech</div>
 
             <h2 data-reveal="" className="why-headline">
-              One Engineering Foundation.
+              One Engineering Core.
               <br />
-              <span className="highlight"> Multiple Powerful
-Products.</span>
+              <span className="highlight"> Built to Scale Every Product.</span>
             </h2>
           </div>
 
           <p data-reveal="" className="why-intro">
             Every product is built on shared cloud infrastructure, a
-unified security foundation, and consistent engineering
-standards — delivering reliability and scalability across the
-entire ecosystem.
+            unified security foundation, and consistent engineering
+            standards — delivering reliability and scalability across the
+            entire ecosystem.
           </p>
         </div>
 

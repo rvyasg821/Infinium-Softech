@@ -23,7 +23,7 @@ export function SolutionsCta() {
               <Link href="/contact" className="btn-primary-blue">
                 Talk to sales
               </Link>
-              <Link href="/contact" className="btn-outline-light">
+              <Link href="/book-a-demo" className="btn-outline-light">
                 Book a demo
               </Link>
             </div>

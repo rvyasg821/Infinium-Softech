@@ -1,0 +1,119 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.terms-of-service-page {
+  background-color: #0c0c0d;
+  color: #e4e4e6;
+  @include section-padding;
+  padding-top: 140px; 
+  min-height: 100vh;
+  
+  .terms-container {
+    @include container;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: var(--font-instrument-sans), sans-serif;
+    
+    h1 {
+      font-family: $font-display;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      color: #f1f0ec;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .last-updated {
+      font-size: 14px;
+      color: #a9a9ae;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(241, 240, 236, 0.1);
+    }
+
+    h2 {
+      font-family: $font-display;
+      font-size: 24px;
+      font-weight: 700;
+      color: #f1f0ec;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      font-family: $font-display;
+      font-size: 18px;
+      font-weight: 600;
+      color: #e4e4e6;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: #a9a9ae;
+      margin-bottom: 16px;
+
+      strong {
+        color: #f1f0ec;
+      }
+    }
+
+    ul {
+      margin-bottom: 24px;
+      padding-left: 20px;
+      
+      li {
+        font-size: 15.5px;
+        line-height: 1.65;
+        color: #a9a9ae;
+        margin-bottom: 8px;
+        list-style-type: disc;
+      }
+    }
+
+    .contact-details {
+      background: rgba(241, 240, 236, 0.04);
+      border: 1px solid rgba(241, 240, 236, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      
+      p {
+        margin-bottom: 8px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        strong {
+          color: #f1f0ec;
+        }
+
+        a {
+          color: #c8f24e;
+          text-decoration: underline;
+          text-decoration-color: transparent;
+          transition: text-decoration-color 0.2s ease;
+          
+          &:hover {
+            text-decoration-color: #c8f24e;
+          }
+        }
+      }
+    }
+
+    .copyright-info {
+      font-size: 14px;
+      color: #8a8a8e;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(241, 240, 236, 0.1);
+      text-align: center;
+    }
+  }
+}

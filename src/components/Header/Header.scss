@@ -6,26 +6,26 @@
   top: 0;
   z-index: 1000;
   width: 100%;
+
 }
 
 
 .site-header {
   position: relative;
   z-index: 1000;
-  background: $color-bg;
+  background: rgba(241, 240, 236, 0.99);
   border-bottom: 1px solid $color-border;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
 
   .nav {
-    max-width: $max-width;
-    margin: 0 auto;
+    @include container;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
     padding-top: 18px;
     padding-bottom: 18px;
-    @include content-padding;
+    transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
     @media (max-width: 1024px) {
       padding-top: 14px;
@@ -45,6 +45,37 @@
     }
   }
 
+  &.is-scrolled {
+    box-shadow: 0 4px 24px rgba(12, 12, 13, 0.08);
+
+    .nav {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      @media (max-width: 1024px) {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      @media (max-width: 640px) {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+    }
+
+    .logo img {
+      height: 32px;
+
+      @media (max-width: 768px) {
+        height: 26px;
+      }
+
+      @media (max-width: 480px) {
+        height: 24px;
+      }
+    }
+  }
+
   .logo {
     display: flex;
     align-items: center;
@@ -54,18 +85,19 @@
       display: block;
       height: 38px;
       width: auto;
+      transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
       @media (max-width: 768px) {
         height: 32px;
       }
 
       @media (max-width: 480px) {
-        height: 28px;
+        height: 30px;
       }
 
-      @media (max-width: 360px) {
-        height: 24px;
-      }
+      // @media (max-width: 360px) {
+      //   height: 24px;
+      // }
     }
   }
 
@@ -84,37 +116,56 @@
 
   .nav-menu-btn {
     cursor: pointer;
-    border: 0;
+    margin: 0;
+    border: none;
     border-bottom: 2px solid transparent;
     background: transparent;
     color: $color-ink-soft;
     font-family: $font-body;
-    font-size: 17px;
+    font-size: 16.5px;
     font-weight: 500;
-    padding: 12px 16px;
-    border-radius: 3px;
+    padding: 0 16px;
+    height: 44px;
+    border-radius: 4px 4px 0 0;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 7px;
     white-space: nowrap;
     flex: none;
-    transition: background 0.25s ease, color 0.25s ease;
-
-    &:hover,
-    &.is-active {
-      background: rgba($color-ink, 0.06);
-      color: $color-ink;
-    }
+    box-sizing: border-box;
+    line-height: 1;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    text-decoration: none;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
 
     &.is-active,
     &.is-route-active {
+      background: rgba($color-ink, 0.06);
+      color: $color-ink;
+      border-bottom-color: $color-ink;
+    }
+
+    &.is-route-active {
+      background: transparent;
+    }
+
+    &:hover {
+      background: transparent;
+      color: $color-ink;
       border-bottom-color: $color-ink;
     }
 
     .caret {
-      font-size: 9px;
+      font-size: 8.5px;
       opacity: 0.6;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      height: 1em;
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
       &.is-open {
@@ -186,8 +237,8 @@
       background: $color-ink;
       border-radius: 1px;
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.2s ease,
-                  background-color 0.2s ease;
+        opacity 0.2s ease,
+        background-color 0.2s ease;
       transform-origin: center;
     }
 
@@ -210,10 +261,12 @@
       .bar-top {
         transform: translateY(5.75px) rotate(45deg);
       }
+
       .bar-middle {
         opacity: 0;
         transform: scaleX(0);
       }
+
       .bar-bottom {
         transform: translateY(-5.75px) rotate(-45deg);
       }
@@ -334,15 +387,17 @@
   }
 
   .mega-menu-inner {
-    max-width: $max-width;
-    margin: 0 auto;
+    @include container;
     padding-top: 26px;
     padding-bottom: 30px;
-    @include content-padding;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 336px;
     gap: 40px;
     align-items: start;
+
+    &.is-tech-menu {
+      grid-template-columns: 1fr;
+    }
 
     @media (max-width: 1240px) {
       grid-template-columns: 1fr;
@@ -431,6 +486,8 @@
     }
   }
 
+  // FIX: hover only on real mouse devices (no sticky hover on touch / DevTools mobile),
+  // and only the open menu chip gets the filled "is-selected" style.
   .category-chip {
     cursor: pointer;
     font-family: $font-body;
@@ -443,11 +500,21 @@
     background: transparent;
     color: #b6b6ba;
     border: 1px solid rgba(241, 240, 236, 0.24);
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
-    &:hover {
-      border-color: rgba(241, 240, 236, 0.5);
-      color: #f1f0ec;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.is-selected) {
+        border-color: rgba(241, 240, 236, 0.5);
+        color: #f1f0ec;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid #c8f24e;
+      outline-offset: 2px;
     }
 
     &.is-selected {
@@ -498,6 +565,10 @@
     &.is-selected {
       background: rgba(241, 240, 236, 0.07);
       border-color: rgba(241, 240, 236, 0.2);
+
+      .product-title {
+        color: #ffffff;
+      }
     }
 
     .badge-mark {
@@ -512,6 +583,13 @@
       font-weight: 800;
       font-size: 12px;
       flex-shrink: 0;
+      overflow: hidden;
+
+      .badge-logo-img {
+        width: 35px;
+        height: 35px;
+        object-fit: contain;
+      }
     }
 
     .card-info {
@@ -534,8 +612,14 @@
     }
 
     .product-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1;
       font-size: 8.5px;
       letter-spacing: 0.14em;
+      text-indent: 0.14em;
       text-transform: uppercase;
       color: #8a8a8e;
       border: 1px solid rgba(241, 240, 236, 0.18);
@@ -553,9 +637,10 @@
       margin-top: 4px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
+      line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-    } 
+    }
 
     @media (max-width: 600px) {
       padding: 10px 12px;
@@ -590,6 +675,31 @@
     gap: 8px;
     margin-top: 18px;
 
+    &.tech-links-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+
+      @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+      }
+
+      .link-card {
+        padding: 14px 16px;
+
+        .link-desc {
+          white-space: normal;
+          line-clamp: 2;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+    }
+
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -618,6 +728,10 @@
     &.is-selected {
       background: rgba(241, 240, 236, 0.07);
       border-color: rgba(241, 240, 236, 0.2);
+
+      .link-title {
+        color: #ffffff;
+      }
     }
 
     .link-dot {
@@ -651,11 +765,36 @@
     .link-arrow {
       font-size: 12px;
       color: #6e7280;
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
 
     &:hover .link-arrow {
       color: #f1f0ec;
+      transform: translateX(2px);
+    }
+
+    .link-tech-icon-wrap {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px;
+      transition: transform 0.2s ease, background 0.2s ease;
+
+      .link-tech-icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &:hover .link-tech-icon-wrap {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.14);
     }
 
     @media (max-width: 600px) {
@@ -853,6 +992,7 @@
     opacity: 0;
     transform: translateY(-6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -863,8 +1003,8 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
-

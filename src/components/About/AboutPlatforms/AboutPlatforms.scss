@@ -27,15 +27,7 @@
   }
 
   .about-platforms-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: $color-muted;
-    font-weight: 600;
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 12px;
-    }
+    @include section-eyebrow("light");
   }
 
   .about-platforms-headline {
@@ -118,16 +110,28 @@
       height: 36px;
     }
 
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(12, 12, 13, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $color-ink;
+    transition: transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
     &:hover {
-      background: $color-ink;
-      color: #ffffff;
-      border-color: $color-ink;
-      transform: translateY(-50%) scale(1.08);
-      box-shadow: 0 6px 20px rgba(12, 12, 13, 0.22);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
 
     &:active {
-      transform: translateY(-50%) scale(0.94);
+      transform: translateY(-50%) scale(0.95);
     }
 
     &--left {
@@ -160,12 +164,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 8px;
   margin-top: 24px;
-
-  @include respond($bp-lg) {
-    margin-top: 32px;
-  }
 
   .carousel-dot {
     width: 8px;
@@ -177,8 +177,7 @@
     padding: 0;
     position: relative;
     overflow: hidden;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 0.25s ease;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
 
     .dot-fill {
       display: block;
@@ -189,12 +188,12 @@
     }
 
     &.is-active {
-      width: 26px;
+      width: 24px;
       background: $color-ink;
     }
 
     &:hover:not(.is-active) {
-      background: rgba(12, 12, 13, 0.32);
+      opacity: 0.8;
     }
   }
 }
@@ -203,8 +202,6 @@
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  
-  // NATIVE SMOOTH SCROLL CONFIGURATION
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -244,42 +241,38 @@
 
 .platform-card {
   flex: 0 0 82%;
-  
-  // FIX CRITICAL SMOOTH INTERPOLATION CONFLICTS HERE
   scroll-snap-align: center;
-  scroll-snap-stop: always; // Tells browser not to skip cleanly during animation sweeps
-  
+  scroll-snap-stop: always;
+
   background: #ffffff;
-  border: 1px solid rgba(12, 12, 13, 0.12);
-  // border-radius: 12px;
-  padding: 24px 32px 22px;
+  border: 1px solid rgba(12, 12, 13, 0.14);
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  box-shadow: 0 2px 8px rgba(12, 12, 13, 0.03);
-  transition: background-color 0.25s ease, transform 0.25s ease,
-    box-shadow 0.25s ease, border-color 0.25s ease;
+  color: $color-ink;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 
   @media (max-width: 480px) {
     flex: 0 0 88%;
-    padding: 20px 24px 18px;
+    padding: 14px;
   }
 
   @include respond($bp-sm) {
     flex: 0 0 76%;
-    padding: 24px 34px 22px;
+    padding: 16px;
   }
 
   @include respond($bp-md) {
     flex: 0 0 calc((100% - 16px) / 2);
     scroll-snap-align: start;
-    padding: 26px 28px 24px;
   }
 
   @include respond($bp-lg) {
     flex: 0 0 calc((100% - 40px) / 3);
     scroll-snap-align: start;
-    padding: 28px 30px 26px;
+    padding: 16px;
   }
 
   &--clone {
@@ -287,73 +280,125 @@
   }
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(12, 12, 13, 0.08);
-    border-color: rgba(12, 12, 13, 0.24);
+    border-color: rgba(12, 12, 13, 0.36);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(12, 12, 13, 0.08);
+
+    .card-img {
+      transform: scale(1.04);
+    }
   }
 
-  .platform-card-top {
+  .card-image-box {
+    width: 100%;
+    aspect-ratio: 1.5;
+    background: #f1f0ec;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .card-body {
+    padding: 0 8px;
+    flex-grow: 1;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
+    flex-direction: column;
+  }
 
-    .platform-badge {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: $font-display;
-      font-weight: 800;
-      font-size: 11px;
-      letter-spacing: -0.01em;
-      flex-shrink: 0;
-    }
+  .card-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
 
-    .platform-number {
-      font-family: $font-display;
-      font-weight: 800;
-      font-stretch: 112%;
-      font-size: 34px;
-      line-height: 0.8;
-      letter-spacing: -0.05em;
-      color: rgba(12, 12, 13, 0.1);
-      user-select: none;
+  .card-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+
+    .badge-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
     }
   }
 
-  .platform-card-body {
-    .platform-name {
-      font-family: $font-display;
-      font-weight: 700;
-      font-stretch: 106%;
-      font-size: 19px;
-      letter-spacing: -0.025em;
-      color: $color-ink;
-    }
-
-    .platform-tag {
-      font-size: 10.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: $color-muted;
-      margin-top: 4px;
-      font-weight: 600;
-    }
-  }
-
-  .platform-desc {
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: #5f5f64;
+  .card-name {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.015em;
     margin: 0;
+  }
 
-    @media (max-width: 768px) {
-      font-size: 12.5px;
-      line-height: 1.5;
+  .card-desc {
+    font-family: $font-body;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #626569;
+    margin: 0;
+  }
+
+  .card-footer {
+    margin-top: 24px;
+    padding: 16px 8px 4px 8px;
+    border-top: 1px solid rgba(12, 12, 13, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #555;
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+  }
+
+  .footer-link {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    .arrow {
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 400;
+      transform: translateY(-0.5px);
     }
   }
 }

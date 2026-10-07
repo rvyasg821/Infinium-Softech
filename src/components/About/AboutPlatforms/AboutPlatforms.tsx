@@ -1,8 +1,10 @@
 "use client";
 
-import { ABOUT_PRODUCTS, AboutProduct } from "@/data/aboutData";
+import { ECOSYSTEM_PRODUCTS, EcosystemProduct } from "@/data/ecosystemData";
 import { useAboutCarousel } from "../useAboutCarousel";
 import "./AboutPlatforms.scss";
+import Image from "next/image";
+import Link from "next/link";
 
 const CLONE_COUNT = 3;
 
@@ -10,46 +12,66 @@ function PlatformCardView({
   product,
   isClone = false,
 }: {
-  product: AboutProduct;
+  product: EcosystemProduct;
   isClone?: boolean;
 }) {
   return (
-    <div
+    <Link
+      href={`/products/${product.id}`}
       data-reveal={isClone ? undefined : ""}
       className={`platform-card ${isClone ? "platform-card--clone" : ""}`}
       data-carousel-item
       aria-hidden={isClone ? "true" : undefined}
     >
-      <div className="platform-card-top">
-        <span
-          className="platform-badge"
-          style={{ backgroundColor: product.tint }}
-        >
-          {product.mark}
-        </span>
-        <span className="platform-number">{product.n}</span>
+      <div className="card-image-box">
+        <Image
+          src={product.shot}
+          alt={product.name}
+          width={600}
+          height={400}
+          className="card-img"
+        />
       </div>
 
-      <div className="platform-card-body">
-        <h3 className="platform-name">{product.name}</h3>
-        <div className="platform-tag">{product.tag}</div>
+      <div className="card-body">
+        <div className="card-identity">
+          <span 
+            className="card-badge" 
+            style={{ backgroundColor: product.logo ? "transparent" : product.tint }}
+          >
+            {product.logo ? (
+              <Image src={product.logo} alt={product.name} width={40} height={40} className="badge-logo" />
+            ) : (
+              product.mark
+            )}
+          </span>
+          <h3 className="card-name" style={{ color: product.tint }}>{product.name}</h3>
+        </div>
+        <p className="card-desc">{product.desc}</p>
       </div>
 
-      <p className="platform-desc">{product.desc}</p>
-    </div>
+      <div className="card-footer">
+        <div className="footer-status">
+          <span className="status-dot" style={{ backgroundColor: "#1E9E5A" }} /> Live on iOS / Android
+        </div>
+        <div className="footer-link" style={{ color: product.tint }}>
+          Explore <span className="arrow" aria-hidden="true">&rsaquo;</span>
+        </div>
+      </div>
+    </Link>
   );
 }
 
 export function AboutPlatforms() {
   const { scrollRef, activeIndex, scrollToIndex, handleNext, handlePrev } =
-    useAboutCarousel(ABOUT_PRODUCTS.length, {
+    useAboutCarousel(ECOSYSTEM_PRODUCTS.length, {
       breakpoint: Infinity,
       cloneCount: CLONE_COUNT,
       alignMode: "auto",
     });
 
-  const prependedClones = ABOUT_PRODUCTS.slice(-CLONE_COUNT);
-  const appendedClones = ABOUT_PRODUCTS.slice(0, CLONE_COUNT);
+  const prependedClones = ECOSYSTEM_PRODUCTS.slice(-CLONE_COUNT);
+  const appendedClones = ECOSYSTEM_PRODUCTS.slice(0, CLONE_COUNT);
 
   return (
     <section id="ecosystem" className="about-platforms-section" aria-label="What We've Built">
@@ -60,7 +82,7 @@ export function AboutPlatforms() {
               What we&apos;ve built
             </div>
             <h2 data-reveal="" className="about-platforms-headline">
-              Nine platforms,<br />nine industries.
+              Built for platforms,<br />designed for industries.
             </h2>
           </div>
           <p data-reveal="" className="about-platforms-intro">
@@ -82,7 +104,7 @@ export function AboutPlatforms() {
               ))}
 
               {/* Real Products */}
-              {ABOUT_PRODUCTS.map((product) => (
+              {ECOSYSTEM_PRODUCTS.map((product) => (
                 <PlatformCardView key={product.n} product={product} />
               ))}
 
@@ -141,7 +163,7 @@ export function AboutPlatforms() {
 
           {/* Pagination Dots */}
           <div className="carousel-dots" aria-label="Platforms navigation dots">
-            {ABOUT_PRODUCTS.map((product, idx) => (
+            {ECOSYSTEM_PRODUCTS.map((product, idx) => (
               <button
                 key={product.n}
                 type="button"
@@ -152,8 +174,7 @@ export function AboutPlatforms() {
                 <span
                   className="dot-fill"
                   style={{
-                    backgroundColor:
-                      activeIndex === idx ? product.tint : undefined,
+                    backgroundColor: activeIndex === idx ? product.tint : "#0C0C0D",
                   }}
                 />
               </button>

@@ -149,67 +149,77 @@ export function ProductCatalogue({
           <div ref={catalogueGridRef} className="catalogue-grid">
             {filteredProducts.map((p) => (
               <article data-reveal="" key={p.id} className="product-card-item">
-              <div
-                className="card-top-wash"
-                style={{ backgroundColor: p.wash }}
-              >
-                <div className="card-top-header">
-                  <div className="brand-badge-group">
-                    <span
-                      className="brand-mark"
-                      style={{ backgroundColor: p.tint }}
-                    >
-                      {p.mark}
-                    </span>
-                    <div>
-                      <span className="product-name">{p.name}</span>
-                      <span className="product-tag-text">{p.tag}</span>
+                <div
+                  className="card-top-wash"
+                  style={{ backgroundColor: p.wash }}
+                >
+                  <div className="card-top-header">
+                    <div className="brand-badge-group">
+                      {p.logo ? (
+                        <Image
+                          src={p.logo}
+                          alt={`${p.name} Logo`}
+                          width={34}
+                          height={34}
+                          className="brand-logo"
+                        />
+                      ) : (
+                        <span
+                          className="brand-mark"
+                          style={{ backgroundColor: p.tint }}
+                        >
+                          {p.mark}
+                        </span>
+                      )}
+                      <div>
+                        <span className="product-name">{p.name}</span>
+                        <span className="product-tag-text">{p.tag}</span>
+                      </div>
                     </div>
+                    <span className="product-num">{p.n}</span>
                   </div>
-                  <span className="product-num">{p.n}</span>
+
+                  {/* Screenshot image or fallback */}
+                  {p.shot ? (
+                    <div className="card-shot-wrapper">
+                      <Image
+                        src={p.shot}
+                        alt={`${p.name} product screens`}
+                        width={600}
+                        height={360}
+                        className="card-shot-img"
+                      />
+                    </div>
+                  ) : (
+                    <div className="card-shot-fallback">
+                      <span className="fallback-mark" style={{ color: p.tint }}>
+                        {p.mark}
+                      </span>
+                      <span className="fallback-text">Screens coming soon</span>
+                    </div>
+                  )}
                 </div>
 
-                {/* Screenshot image or fallback */}
-                {p.shot ? (
-                  <div className="card-shot-wrapper">
-                    <Image
-                      src={p.shot}
-                      alt={`${p.name} product screens`}
-                      width={600}
-                      height={360}
-                      className="card-shot-img"
-                    />
+                <div className="card-body">
+                  <p className="card-desc">{p.desc}</p>
+                  <div className="card-features">
+                    {p.features.map((f, i) => (
+                      <span key={i} className="feature-pill">
+                        {f}
+                      </span>
+                    ))}
                   </div>
-                ) : (
-                  <div className="card-shot-fallback">
-                    <span className="fallback-mark" style={{ color: p.tint }}>
-                      {p.mark}
-                    </span>
-                    <span className="fallback-text">Screens coming soon</span>
+
+                  <div className="card-actions">
+                    <Link href="/book-a-demo" className="btn-primary">
+                      Book a demo <span className="arrow">→</span>
+                    </Link>
+                    <Link href={`/products/${p.id}`} className="btn-secondary">
+                      Details
+                    </Link>
                   </div>
-                )}
-              </div>
-
-              <div className="card-body">
-                <p className="card-desc">{p.desc}</p>
-                <div className="card-features">
-                  {p.features.map((f, i) => (
-                    <span key={i} className="feature-pill">
-                      {f}
-                    </span>
-                  ))}
                 </div>
-
-                <div className="card-actions">
-                  <Link href="/contact" className="btn-primary">
-                    Book a demo <span className="arrow">→</span>
-                  </Link>
-                  <Link href={`/products/${p.id}`} className="btn-secondary">
-                    Details
-                  </Link>
-                </div>
-              </div>
-              </article> 
+              </article>
             ))}
           </div>
           {activeIndex < maxIndex && (
@@ -224,7 +234,7 @@ export function ProductCatalogue({
               </svg>
             </button>
           )}
-        </div> 
+        </div>
 
         {/* Empty State */}
         {filteredProducts.length === 0 && (
