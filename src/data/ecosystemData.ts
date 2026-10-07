@@ -122,6 +122,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     appLabel: "On route",
     appValue: "1,286",
     shot: "/shots/Trekvano.jpg",
+    logo: "/logos/Trekvano.png",
   },
   {
     id: "purespace",

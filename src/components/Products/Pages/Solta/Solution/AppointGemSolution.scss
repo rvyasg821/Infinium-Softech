@@ -125,10 +125,10 @@
     align-items: center;
     justify-content: center;
 
-    @include respond($bp-md) {
-      max-width: 680px;
-      margin-top: 44px;
-    }
+    // @include respond($bp-md) {
+    //   max-width: 680px;
+    //   margin-top: 44px;
+    // }
   }
 
   .slider-arrow-btn {

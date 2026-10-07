@@ -126,7 +126,7 @@ export function NeedlyInterface() {
     <section id="interface" className="needly-interface-section">
       <div className="needly-interface-container">
 
-        <div className="interface-header">
+        <div className="needly-interface-header">
           <span className="section-eyebrow" data-reveal="">Interface</span>
           <h2 className="interface-headline">
             Purpose-built interfaces for every user.

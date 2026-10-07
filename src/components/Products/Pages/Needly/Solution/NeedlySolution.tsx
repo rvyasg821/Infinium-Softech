@@ -144,7 +144,7 @@ export function NeedlySolution() {
     <section id="solution" className="needly-solution-section">
       <div className="needly-solution-container">
 
-        <div className="solution-header">
+        <div className="Needly-solution-header">
           <span className="section-eyebrow" data-reveal="">Our solution</span>
           <h2 className="solution-headline">
             Smart, fast, and transparent tools for local request matching.
