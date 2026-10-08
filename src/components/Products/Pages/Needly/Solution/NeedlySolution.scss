@@ -20,6 +20,10 @@
 
   @media (max-width: 1023px) {
     margin-bottom: 36px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .section-eyebrow {
@@ -30,6 +34,9 @@
 
   .solution-headline {
     margin-bottom: 20px;
+    @media (max-width: 768px) {
+      margin: 10px 0;
+    }
   }
 
   .solution-desc {

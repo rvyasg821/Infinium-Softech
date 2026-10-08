@@ -21,10 +21,16 @@
   color: var(--needly-ink);
   background-color: var(--needly-page-bg);
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-bricolage), sans-serif;
     color: var(--needly-deep-green);
     margin: 0;
+    margin-bottom: 20px;
   }
 
   p {
@@ -45,7 +51,7 @@
     justify-content: center;
     text-decoration: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(245, 130, 32, 0.3);
@@ -57,7 +63,8 @@
     color: var(--needly-app-green);
     border: 2px solid var(--needly-app-green);
     border-radius: 9999px;
-    padding: 10px 24px; /* compensate for border */
+    padding: 10px 24px;
+    /* compensate for border */
     font-weight: 700;
     font-family: var(--font-dm-sans), sans-serif;
     cursor: pointer;

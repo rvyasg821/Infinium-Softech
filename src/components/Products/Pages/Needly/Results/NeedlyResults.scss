@@ -16,6 +16,12 @@
   flex-direction: column;
   align-items: center;
 
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+
   .section-eyebrow {
     @include section-eyebrow("dark");
     margin-bottom: 24px;
@@ -23,9 +29,12 @@
   }
 
   .results-headline {
-
     max-width: 700px;
     text-align: center;
+    @media (max-width: 768px) {
+      margin: 10px 0;
+      text-align: left;
+    }
   }
 }
 

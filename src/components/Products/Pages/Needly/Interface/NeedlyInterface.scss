@@ -20,6 +20,7 @@
 
   @media (max-width: 768px) {
     margin-bottom: 24px;
+    text-align: left;
   }
 
   .section-eyebrow {
@@ -32,6 +33,9 @@
     margin-bottom: 16px;
     color: var(--needly-deep-green);
     line-height: 1.2;
+    @media (max-width: 768px) {
+      margin: 10px 0;
+    }
   }
 
   .interface-desc {

@@ -3,6 +3,9 @@
   width: 100%;
   padding: 40px 24px;
   text-align: center;
+  @media (max-width: 768px) {
+    padding: 10px 24px;
+  }
 }
 
 .needly-tagline-container {
@@ -13,6 +16,9 @@
     color: var(--needly-card-white) !important;
     font-size: clamp(24px, 3vw, 42px) !important;
     margin: 0;
+    @media (max-width: 768px) {
+      margin: 10px 0;
+    }
   }
 
   .highlight-amber {
