@@ -120,7 +120,7 @@ export const MOBILE_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
       { name: "Node.js", logo: "/technology/nodejs.png" },
       { name: "Java", logo: "/technology/java.png" },
       { name: "PostgreSQL", logo: "/technology/Postgre-SQL.png" },
-      { name: "AWS", logo: "/technology/AWS.png" },
+      { name: "AWS", logo: "/technology/cloudfront.svg" },
       { name: "Figma", logo: "/technology/Figma.png" },
     ],
   },

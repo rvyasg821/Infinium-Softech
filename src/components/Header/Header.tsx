@@ -531,7 +531,11 @@ export function Header() {
                           }
                         }}
                       >
-                        {item.icon ? (
+                        {item.LucideIcon ? (
+                          <span className="link-tech-icon-wrap" aria-hidden="true" style={{ color: item.tint, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <item.LucideIcon size={18} strokeWidth={2.2} />
+                          </span>
+                        ) : item.icon ? (
                           <span className="link-tech-icon-wrap" aria-hidden="true">
                             <Image
                               src={item.icon}

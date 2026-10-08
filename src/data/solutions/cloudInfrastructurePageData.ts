@@ -331,15 +331,15 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
       },
       {
         name: "Linux",
-        logo: "/technology/linux.png",
+        logo: "/technology/linux.svg",
       },
       {
         name: "Nginx",
-        logo: "/technology/nginx.png",
+        logo: "/technology/nginx.svg",
       },
       {
         name: "MongoDB",
-        logo: "/technology/mongodb.png",
+        logo: "/technology/MongoDB.png",
       },
       {
         name: "MySQL",
@@ -351,15 +351,15 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
       },
       {
         name: "GitHub Actions",
-        logo: "/technology/github-actions.png",
+        logo: "/technology/github-actions.svg",
       },
       {
         name: "CloudFront",
-        logo: "/technology/cloudfront.png",
+        logo: "/technology/cloudfront.svg",
       },
       {
         name: "Amazon S3",
-        logo: "/technology/s3.png",
+        logo: "/technology/s3.svg",
       },
     ],
   },

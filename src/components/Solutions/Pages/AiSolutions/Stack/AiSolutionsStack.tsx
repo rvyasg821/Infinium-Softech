@@ -10,7 +10,7 @@ const defaultContent: SolutionsSectionIntro & { items: SolutionsTechnology[] } =
   items: [
     { name: "Python", logo: "/technology/Python.png" },
     { name: "AI / ML", logo: "/technology/ai-ml.svg" },
-    { name: "AWS", logo: "/technology/AWS.png" },
+    { name: "AWS", logo: "/technology/cloudfront.svg" },
     { name: "Azure", logo: "/technology/Azure.png" },
     { name: "Docker", logo: "/technology/docker.png" },
     { name: "Kubernetes", logo: "/technology/kubernetes.png" },

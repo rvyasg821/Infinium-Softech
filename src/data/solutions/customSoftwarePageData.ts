@@ -289,10 +289,10 @@ export const CUSTOM_SOFTWARE_PAGE_CONTENT: WebApplicationsPageContent = {
       { name: "TypeScript", logo: "/technology/typescript.png" },
       { name: "Laravel", logo: "/technology/Laravel.png" },
       { name: "Java", logo: "/technology/java.png" },
-      { name: "MongoDB", logo: "/technology/mongodb.png" },
+      { name: "MongoDB", logo: "/technology/MongoDB.png" },
       { name: "MySQL", logo: "/technology/mysql.png" },
       { name: "PostgreSQL", logo: "/technology/Postgre-SQL.png" },
-      { name: "AWS", logo: "/technology/AWS.png" },
+      { name: "AWS", logo: "/technology/cloudfront.svg" },
     ],
   },
 };

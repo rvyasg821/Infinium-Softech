@@ -243,7 +243,7 @@ export const WEB_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
       { name: "Java", logo: "/technology/java.png" },
       { name: "PostgreSQL", logo: "/technology/Postgre-SQL.png" },
       { name: "MySQL", logo: "/technology/mysql.png" },
-      { name: "AWS", logo: "/technology/AWS.png" },
+      { name: "AWS", logo: "/technology/cloudfront.svg" },
     ],
   },
 };
