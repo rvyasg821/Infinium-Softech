@@ -114,10 +114,29 @@ export function Header() {
     setActiveMenu(key);
     const menuDef = MENU_DEFS[key];
     if (menuDef) {
+      let nextPreviewName = "";
+
       if (menuDef.isProducts && menuDef.productItems && menuDef.productItems.length > 0) {
-        setPreviewProductName(menuDef.productItems[0].name);
+        const match = menuDef.productItems.find(p => pathname === `/products/${p.id}`);
+        nextPreviewName = match ? match.name : menuDef.productItems[0].name;
       } else if (menuDef.items && menuDef.items.length > 0) {
-        setPreviewProductName(menuDef.items[0].product);
+        const match = menuDef.items.find(item => item.href && item.href.split("#")[0] !== "/" && pathname.startsWith(item.href.split("#")[0]));
+        if (match) {
+           nextPreviewName = match.product;
+        } else {
+           const currentProd = ECOSYSTEM_PRODUCTS.find(p => pathname === `/products/${p.id}`);
+           if (currentProd) {
+              const relatedItem = menuDef.items.find(item => item.product === currentProd.name);
+              if (relatedItem) nextPreviewName = relatedItem.product;
+           }
+        }
+        if (!nextPreviewName) {
+           nextPreviewName = menuDef.items[0].product;
+        }
+      }
+
+      if (nextPreviewName) {
+        setPreviewProductName(nextPreviewName);
       }
     }
   };
@@ -223,7 +242,7 @@ export function Header() {
   };
 
   const currentMenuKey = activeMenu || "products";
-  const currentMenuDef = activeMenu ? MENU_DEFS[activeMenu] : null;
+  const currentMenuDef = (activeMenu && MENU_DEFS[activeMenu]) ? MENU_DEFS[activeMenu] : null;
   const currentPreviewProduct =
     ECOSYSTEM_PRODUCTS.find((p) => p.name === previewProductName) || ECOSYSTEM_PRODUCTS[0];
 
@@ -327,7 +346,18 @@ export function Header() {
                 aria-label={activeMenu ? "Close menu" : "Open menu"}
                 aria-expanded={!!activeMenu}
                 aria-controls="mega-menu-dropdown"
-                onClick={() => toggleMenuKey(activeMenu ? activeMenu : "products")}
+                onClick={() => {
+                  if (activeMenu) {
+                    toggleMenuKey(activeMenu);
+                  } else {
+                    let defaultMenu = "products";
+                    if (pathname.startsWith("/about")) defaultMenu = "about";
+                    if (pathname.startsWith("/contact")) defaultMenu = "contact";
+                    if (pathname.startsWith("/solutions")) defaultMenu = "solutions";
+                    if (pathname.startsWith("/technology")) defaultMenu = "technology";
+                    toggleMenuKey(defaultMenu);
+                  }
+                }}
               >
                 <span className="compact-toggle-icon" aria-hidden="true">
                   <span className="bar bar-top" />
@@ -351,12 +381,12 @@ export function Header() {
       )}
 
       {/* Unified Mega Menu Dropdown (Desktop & Mobile) */}
-      {currentMenuDef && (
+      {(currentMenuDef || activeMenu === "about" || activeMenu === "contact") && (
         <div
           id="mega-menu-dropdown"
           className="mega-menu-panel"
           role="region"
-          aria-label={`${currentMenuDef.label} menu`}
+          aria-label={`${currentMenuDef?.label || "Navigation"} menu`}
           onMouseEnter={() => {
             if (closeTimeoutRef.current) {
               clearTimeout(closeTimeoutRef.current);
@@ -368,10 +398,12 @@ export function Header() {
             {/* Left Content Column */}
             <div className="mega-left-col">
               {/* Category Eyebrow Header */}
-              <div className="mega-eyebrow">
-                <span>{currentMenuDef.eyebrow}</span>
-                <span className="divider-line" aria-hidden="true" />
-              </div>
+              {currentMenuDef && (
+                <div className="mega-eyebrow">
+                  <span>{currentMenuDef.eyebrow}</span>
+                  <span className="divider-line" aria-hidden="true" />
+                </div>
+              )}
 
               {/* Mobile / Tablet Horizontal Category Chip Tabs */}
               <div className="mobile-category-chips-wrapper">
@@ -380,7 +412,7 @@ export function Header() {
                       Only the open menu chip is filled, so two chips can't be highlighted together. */}
                   <Link
                     href="/about"
-                    className="category-chip"
+                    className={`category-chip ${activeMenu === "about" || (!activeMenu && pathname === "/about") ? "is-selected" : ""}`}
                     aria-current={pathname === "/about" ? "page" : undefined}
                     onClick={(event) => handleHeaderLinkClick(event, "/about")}
                   >
@@ -408,7 +440,7 @@ export function Header() {
 
                   <Link
                     href="/contact"
-                    className="category-chip"
+                    className={`category-chip ${activeMenu === "contact" || (!activeMenu && pathname === "/contact") ? "is-selected" : ""}`}
                     aria-current={pathname === "/contact" ? "page" : undefined}
                     onClick={(event) => handleHeaderLinkClick(event, "/contact")}
                   >
@@ -418,7 +450,7 @@ export function Header() {
               </div>
 
               {/* Product Cards Layout (9 Products) */}
-              {currentMenuDef.isProducts && currentMenuDef.productItems && (
+              {currentMenuDef?.isProducts && currentMenuDef.productItems && (
                 <div className="products-grid">
                   {currentMenuDef.productItems.map((prod) => {
                     const isSelected = previewProductName === prod.name;
@@ -463,7 +495,7 @@ export function Header() {
               )}
 
               {/* Generic Menu Links Layout (Industries, Solutions, Technology, Company, Demo) */}
-              {!currentMenuDef.isProducts && currentMenuDef.items && (
+              {!currentMenuDef?.isProducts && currentMenuDef?.items && (
                 <div className={`links-grid ${currentMenuDef.key === "technology" ? "tech-links-grid" : ""}`}>
                   {currentMenuDef.items.map((item) => {
                     const isSelected = previewProductName === item.product;
@@ -550,7 +582,7 @@ export function Header() {
             </div>
 
             {/* Right Preview Card (Hidden for Technology Menu) */}
-            {currentMenuDef.key !== "technology" && (
+            {currentMenuDef && currentMenuDef.key !== "technology" && (
               <div className="preview-card">
                 <div
                   className="preview-image-wrapper"

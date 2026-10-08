@@ -110,7 +110,7 @@
       }
 
       &:hover {
-        flex: 0 0 84%;
+        background: $color-accent-lime;
         color: #0c0c0d;
         border-color: $color-accent-lime;
         transform: translateY(-50%) scale(1.08);

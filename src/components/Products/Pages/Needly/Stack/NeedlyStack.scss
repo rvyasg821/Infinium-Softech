@@ -60,7 +60,7 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    
+
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: #f1f0ec;
@@ -68,7 +68,7 @@
   }
 
   .stack-desc {
-    
+
     line-height: 1.6;
     color: rgba(241, 240, 236, 0.72);
     margin: 12px 0 0;
@@ -112,7 +112,7 @@
       }
 
       &:hover {
-        flex: 0 0 84%;
+        background: $color-accent-lime;
         color: #0c0c0d;
         border-color: $color-accent-lime;
         transform: translateY(-50%) scale(1.08);

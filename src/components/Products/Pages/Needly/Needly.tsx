@@ -39,14 +39,16 @@ export function Needly({ product }: { product: ProductItem }) {
       <main>
         <NeedlyHero product={product} />
         <NeedlyTagline />
-        <NeedlyNav />
-        <NeedlyOverview />
-        <NeedlyInterface />
-        <NeedlyChallenges />
-        <NeedlySolution />
-        <NeedlyWorkflow />
-        <NeedlyResults />
-        <NeedlyStack />
+        <div className="product-nav-container">
+          <NeedlyNav />
+          <NeedlyOverview />
+          <NeedlyInterface />
+          <NeedlyChallenges />
+          <NeedlySolution />
+          <NeedlyWorkflow />
+          <NeedlyResults />
+          <NeedlyStack />
+        </div>
         <NeedlyEcosystem />
         <NeedlyCta />
       </main>
