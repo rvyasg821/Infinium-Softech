@@ -496,15 +496,6 @@ export function Header() {
                           }
                         }}
                       >
-                        <span
-                          className="link-dot"
-                          style={{ backgroundColor: item.tint }}
-                          aria-hidden="true"
-                        />
-                        <div className="link-info">
-                          <span className="link-title">{item.name}</span>
-                          <span className="link-desc">{item.desc}</span>
-                        </div>
                         {item.icon ? (
                           <span className="link-tech-icon-wrap" aria-hidden="true">
                             <Image
@@ -512,14 +503,23 @@ export function Header() {
                               alt={item.name}
                               width={22}
                               height={22}
-                              className="link-tech-icon-img"
+                              className="badge-logo-img"
                             />
                           </span>
                         ) : (
-                          <span className="link-arrow" aria-hidden="true">
-                            →
-                          </span>
+                          <span
+                            className="link-dot"
+                            style={{ backgroundColor: item.tint }}
+                            aria-hidden="true"
+                          />
                         )}
+                        <div className="link-info">
+                          <span className="link-title">{item.name}</span>
+                          <span className="link-desc">{item.desc}</span>
+                        </div>
+                        <span className="link-arrow" aria-hidden="true">
+                          →
+                        </span>
                       </Link>
                     );
                   })}
