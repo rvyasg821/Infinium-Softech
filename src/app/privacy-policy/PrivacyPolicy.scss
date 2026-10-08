@@ -7,13 +7,17 @@
   @include section-padding;
   padding-top: 140px; // accommodate sticky header
   min-height: 100vh;
-  
+
+  @media (max-width : 1023) {
+    padding-top: 40px;
+  }
+
   .privacy-container {
     @include container;
     max-width: 800px;
     margin: 0 auto;
     font-family: var(--font-instrument-sans), sans-serif;
-    
+
     h1 {
       font-family: $font-display;
       font-size: clamp(36px, 5vw, 56px);
@@ -65,7 +69,7 @@
     ul {
       margin-bottom: 24px;
       padding-left: 20px;
-      
+
       li {
         font-size: 15.5px;
         line-height: 1.65;
@@ -82,10 +86,10 @@
       padding: 24px;
       margin-top: 24px;
       margin-bottom: 24px;
-      
+
       p {
         margin-bottom: 8px;
-        
+
         &:last-child {
           margin-bottom: 0;
         }
@@ -99,21 +103,12 @@
           text-decoration: underline;
           text-decoration-color: transparent;
           transition: text-decoration-color 0.2s ease;
-          
+
           &:hover {
             text-decoration-color: #c8f24e;
           }
         }
       }
-    }
-
-    .copyright-info {
-      font-size: 14px;
-      color: #8a8a8e;
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(241, 240, 236, 0.1);
-      text-align: center;
     }
   }
 }

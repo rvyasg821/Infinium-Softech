@@ -250,18 +250,13 @@ export default function PrivacyPolicyPage() {
         <p>
           If you have questions about this Privacy Policy, your personal information, or our privacy practices, please contact us:
         </p>
-        
+
         <div className="contact-details">
           <p><strong>Infinium Softech</strong></p>
           <p><strong>Email:</strong> <a href="mailto:privacy@yourdomain.com">privacy@yourdomain.com</a></p>
           <p><strong>Website:</strong> Your Website URL</p>
           <p><strong>Address:</strong> Company Address</p>
         </div>
-
-        <p className="copyright-info">
-          <br/>
-          <strong>© 2026 Infinium Softech. All Rights Reserved.</strong>
-        </p>
       </div>
     </main>
   );

@@ -14,11 +14,11 @@ export default function TermsOfServicePage() {
         </p>
 
         <p>Welcome to <strong>Infinium Softech</strong>.</p>
-        
+
         <p>
           These Terms of Service ("Terms") govern your access to and use of the Infinium Softech website, software products, applications, platforms, and related services.
         </p>
-        
+
         <p>
           By accessing our website or using any of our products or services, you agree to be bound by these Terms. If you do not agree with these Terms, please do not use our website or services.
         </p>
@@ -275,18 +275,13 @@ export default function TermsOfServicePage() {
         <p>
           If you have any questions regarding these Terms of Service, please contact us:
         </p>
-        
+
         <div className="contact-details">
           <p><strong>Infinium Softech</strong></p>
           <p><strong>Email:</strong> <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></p>
           <p><strong>Website:</strong> Your Website URL</p>
           <p><strong>Address:</strong> Company Address</p>
         </div>
-
-        <p className="copyright-info">
-          <br/>
-          <strong>© 2026 Infinium Softech. All Rights Reserved.</strong>
-        </p>
       </div>
     </main>
   );
