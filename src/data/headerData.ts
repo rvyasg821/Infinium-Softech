@@ -12,6 +12,7 @@ export type ProductItem = {
   shot: string;
   wash: string;
   logo?: string;
+  link?: string;
 };
 
 export type GenericMenuItem = {
@@ -23,6 +24,7 @@ export type GenericMenuItem = {
   icon?: string;
   LucideIcon?: ElementType;
   previewImage?: string;
+  link?: string;
 };
 
 export type MenuDef = {
@@ -46,6 +48,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     shot: "/shots/Welzokart 2.jpg",
     wash: "rgba(30, 158, 90, 0.16)",
     logo: "/logos/welzokart-logo.png",
+    link: "/products/welzokart"
   },
   {
     id: "slota",
@@ -58,6 +61,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     shot: "/shots/slota.png",
     wash: "rgba(31, 49, 232, 0.16)",
     logo: "/logos/slota-logo.png",
+    link: "/products/slota"
   },
   {
     id: "needly",
@@ -70,6 +74,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     shot: "/shots/Needly.png",
     wash: "rgba(224, 69, 47, 0.16)",
     logo: "/logos/Needly-logo.png",
+    link: "/products/needly"
   },
 
   {
@@ -82,6 +87,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "Transport and truck booking ecosystem across long-haul and regional lanes.",
     shot: "/shots/LoadGo.png",
     wash: "rgba(232, 162, 31, 0.16)",
+    link: "/products/loadgo"
   },
   {
     id: "dishly",
@@ -94,6 +100,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     shot: "/shots/Dishly.png",
     wash: "rgba(15, 143, 135, 0.16)",
     logo: "/logos/Dishly-logo.png",
+    link: "/products/dishly"
   },
   {
     id: "trekvano",
@@ -105,7 +112,8 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "School van and student tracking system with live parent notifications.",
     shot: "/shots/Trekvano.jpg",
     wash: "rgba(42, 168, 196, 0.16)",
-    logo: "/logos/Trekvano.png"
+    logo: "/logos/Trekvano.png",
+    link: "/products/trekvano"
   },
   {
     id: "purespace",
@@ -118,6 +126,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     shot: "/shots/PureSpace.png",
     wash: "rgba(67, 56, 202, 0.16)",
     logo: "/logos/pureSpace-logo.png",
+    link: "/products/purespace"
   },
   {
     id: "Textora",
@@ -129,6 +138,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "Bulk SMS and business communication platform with delivery analytics.",
     shot: "/shots/textgem.jpg",
     wash: "rgba(241, 240, 236, 0.08)",
+    link: "/products/Textora"
   },
 ];
 
@@ -145,12 +155,12 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Solutions",
     eyebrow: "How we build and ship",
     items: [
-      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions/ai-solutions", LucideIcon: BrainCircuit, previewImage: "/solutions/AI%20%26%20Automation.png" },
-      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software", LucideIcon: Code, previewImage: "/solutions/Custom%20Software.png" },
-      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications", LucideIcon: Monitor, previewImage: "/solutions/Web%20Development.png" },
-      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications", LucideIcon: Smartphone, previewImage: "/solutions/Mobile%20Applications.png" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems", LucideIcon: Building2, previewImage: "/solutions/Enterprise%20Solutions.png" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure", LucideIcon: Cloud, previewImage: "/solutions/Cloud%20Infrastructure.png" },
+      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions/ai-solutions", LucideIcon: BrainCircuit, previewImage: "/solutions/AI%20%26%20Automation.png", link: "/solutions/ai-solutions" },
+      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software", LucideIcon: Code, previewImage: "/solutions/Custom%20Software.png", link: "/solutions/custom-software" },
+      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications", LucideIcon: Monitor, previewImage: "/solutions/Web%20Development.png", link: "/solutions/web-applications" },
+      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications", LucideIcon: Smartphone, previewImage: "/solutions/Mobile%20Applications.png", link: "/solutions/mobile-applications" },
+      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems", LucideIcon: Building2, previewImage: "/solutions/Enterprise%20Solutions.png", link: "/solutions/enterprise-systems" },
+      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure", LucideIcon: Cloud, previewImage: "/solutions/Cloud%20Infrastructure.png", link: "/solutions/cloud-infrastructure" },
     ],
   },
   technology: {

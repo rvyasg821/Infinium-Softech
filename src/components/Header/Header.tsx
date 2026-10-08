@@ -122,16 +122,16 @@ export function Header() {
       } else if (menuDef.items && menuDef.items.length > 0) {
         const match = menuDef.items.find(item => item.href && item.href.split("#")[0] !== "/" && pathname.startsWith(item.href.split("#")[0]));
         if (match) {
-           nextPreviewName = match.product;
+          nextPreviewName = match.product;
         } else {
-           const currentProd = ECOSYSTEM_PRODUCTS.find(p => pathname === `/products/${p.id}`);
-           if (currentProd) {
-              const relatedItem = menuDef.items.find(item => item.product === currentProd.name);
-              if (relatedItem) nextPreviewName = relatedItem.product;
-           }
+          const currentProd = ECOSYSTEM_PRODUCTS.find(p => pathname === `/products/${p.id}`);
+          if (currentProd) {
+            const relatedItem = menuDef.items.find(item => item.product === currentProd.name);
+            if (relatedItem) nextPreviewName = relatedItem.product;
+          }
         }
         if (!nextPreviewName) {
-           nextPreviewName = menuDef.items[0].product;
+          nextPreviewName = menuDef.items[0].product;
         }
       }
 
@@ -614,7 +614,11 @@ export function Header() {
                       Launch demo <span aria-hidden="true">→</span>
                     </Link>
                     <Link
-                      href={`#${currentPreviewProduct.id}`}
+                      href={
+                        currentMenuDef && currentMenuDef.items
+                          ? currentMenuDef.items.find(item => item.product === currentPreviewProduct.name)?.link || currentMenuDef.items.find(item => item.product === currentPreviewProduct.name)?.href || currentPreviewProduct.link || "#"
+                          : currentPreviewProduct.link || "#"
+                      }
                       className="btn-details"
                       onClick={() => {
                         setActiveMenu(null);
