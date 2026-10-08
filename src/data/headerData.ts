@@ -18,6 +18,7 @@ export type GenericMenuItem = {
   product: string;
   href?: string;
   icon?: string;
+  previewImage?: string;
 };
 
 export type MenuDef = {
@@ -140,12 +141,12 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Solutions",
     eyebrow: "How we build and ship",
     items: [
-      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions/ai-solutions" },
-      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software" },
-      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications" },
-      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure" },
+      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions/ai-solutions", icon: "/solutions/ai-solutions.svg", previewImage: "/solutions/AI%20%26%20Automation.png" },
+      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software", icon: "/solutions/custom-software.png", previewImage: "/solutions/Custom%20Software.png" },
+      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications", icon: "/solutions/web-app.svg", previewImage: "/solutions/Web%20Development.png" },
+      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications", icon: "/solutions/mobile-app.svg", previewImage: "/solutions/Mobile%20Applications.png" },
+      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems", icon: "/solutions/enterprise-systems.png", previewImage: "/solutions/Enterprise%20Solutions.png" },
+      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure", icon: "/solutions/cloud-infrastructure.svg", previewImage: "/solutions/Cloud%20Infrastructure.png" },
     ],
   },
   technology: {

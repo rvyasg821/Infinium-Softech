@@ -227,6 +227,9 @@ export function Header() {
   const currentPreviewProduct =
     ECOSYSTEM_PRODUCTS.find((p) => p.name === previewProductName) || ECOSYSTEM_PRODUCTS[0];
 
+  const currentHoveredGenericItem = currentMenuDef?.items?.find((item) => item.product === previewProductName);
+  const previewShot = currentHoveredGenericItem?.previewImage || currentPreviewProduct.shot;
+
   return (
     <div
       className="site-header-wrapper"
@@ -554,7 +557,7 @@ export function Header() {
                   style={{ backgroundColor: currentPreviewProduct.wash }}
                 >
                   <Image
-                    src={currentPreviewProduct.shot}
+                    src={previewShot}
                     alt={currentPreviewProduct.name}
                     width={480}
                     height={300}
