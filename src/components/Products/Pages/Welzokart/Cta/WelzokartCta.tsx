@@ -15,7 +15,7 @@ export function WelzokartCta() {
               <span className="consultation-badge">Book consultation</span>
 
               <h2 id="cta-title" className="consultation-title">
-                See Welzokart <br className="mobile-title-break" />
+                See Welzokart
                 against your own calendar
               </h2>
 

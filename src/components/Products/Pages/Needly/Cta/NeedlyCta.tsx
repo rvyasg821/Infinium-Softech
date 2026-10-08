@@ -15,7 +15,7 @@ export function NeedlyCta() {
               <span className="consultation-badge">Book consultation</span>
 
               <h2 id="cta-title" className="consultation-title">
-                See Needly <br className="mobile-title-break" />
+                See Needly
                 against your own calendar
               </h2>
 

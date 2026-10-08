@@ -6,7 +6,6 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, getOrganizationSchema } from "@/
 import { ScrollAnimationProvider } from "@/components/providers/ScrollAnimationProvider";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
-import { SiteLoader } from "@/components/SiteLoader/SiteLoader";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -43,7 +42,7 @@ export default function RootLayout({
     <html lang="en" className={`${archivo.variable} ${instrumentSans.variable}`}>
       {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
-        <SiteLoader />
+        {/* <SiteLoader /> */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

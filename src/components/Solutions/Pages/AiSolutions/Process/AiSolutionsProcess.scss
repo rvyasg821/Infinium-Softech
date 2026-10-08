@@ -37,7 +37,7 @@
     font-family: $font-display;
     font-size: var(--fs-h2);
     font-weight: 800;
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.04em;
 
     @include respond($bp-lg) {
@@ -353,6 +353,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .ai-solutions-process .process-card,
   .ai-solutions-process .process-slider-card {
     animation: none !important;

@@ -214,7 +214,7 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
               <span className="current">Needly</span>
             </nav>
 
-            <div data-reveal="" className="identity-top">
+            <div className="identity-top">
               <Image
                 src="/logos/Needly-logo.png"
                 alt="Needly Logo"
@@ -231,27 +231,27 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
               </div>
             </div>
 
-            <div data-reveal="" className="hero-handwritten">Har Dukaan. Har Zaroorat.</div>
+            <div className="hero-handwritten">Har Dukaan. Har Zaroorat.</div>
 
-            <h1 data-reveal="" className="hero-headline">
+            <h1 className="hero-headline">
               Nearby Groceries, <br />
               Real-Time Prices
             </h1>
 
-            <div data-reveal="" className="hero-tags" aria-label="Platform tags">
+            <div className="hero-tags" aria-label="Platform tags">
               <span className="tag-pill">Request-Based</span>
               <span className="tag-pill">Web &amp; Mobile</span>
               <span className="tag-pill">Local Shopping</span>
               <span className="tag-pill">Global</span>
             </div>
 
-            <p data-reveal="" className="hero-description">
+            <p className="hero-description">
               Needly connects customers with nearby local grocery shops, making
               local shopping easier through direct product requests, shop
               responses, and simple order confirmation.
             </p>
 
-            <div data-reveal="" className="hero-cta-group">
+            <div className="hero-cta-group">
               <Link href="/contact" className="needly-btn-primary">
                 <span>Book a Demo</span>
                 <ArrowRight size={18} style={{ marginLeft: "8px" }} />
@@ -264,7 +264,7 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
             </div>
           </div>
 
-          <div data-reveal="" className="hero-right-col">
+          <div className="hero-right-col">
             <div
               ref={blockRef}
               className="blob-container"

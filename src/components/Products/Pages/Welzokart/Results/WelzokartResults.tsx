@@ -42,15 +42,15 @@ export function WelzokartResults() {
     <section id="results" className="welzokart-results-lc">
       <div className="results-lc-container">
         <div className="results-lc-header">
-          <span className="lc-eyebrow">KEY RESULTS</span>
-          <h2 className="lc-headline">
+          <span data-reveal="" className="lc-eyebrow">KEY RESULTS</span>
+          <h2 data-reveal="" className="lc-headline">
             Delivering measurable value across the entire grocery ecosystem.
           </h2>
         </div>
         
         <div className="results-lc-grid">
           {RESULTS.map((item, idx) => (
-            <div key={idx} className="lc-result-card">
+            <div data-reveal="" key={idx} className="lc-result-card">
               <div className="card-check"></div>
               <div className="card-content">
                 <h3>{item.title}</h3>

@@ -33,12 +33,10 @@
       transform: translateX(-50%);
       width: 70%;
       height: 160%;
-      background: radial-gradient(
-        ellipse at center,
-        rgba(31, 49, 232, 0.22) 0%,
-        rgba(139, 63, 232, 0.1) 45%,
-        transparent 70%
-      );
+      background: radial-gradient(ellipse at center,
+          rgba(31, 49, 232, 0.22) 0%,
+          rgba(139, 63, 232, 0.1) 45%,
+          transparent 70%);
       pointer-events: none;
       filter: blur(40px);
     }
@@ -81,7 +79,7 @@
 
       @media (max-width: 480px) {
         font-size: clamp(26px, 7vw, 34px);
-        line-height: 1.05;
+        line-height: 1.1;
       }
     }
 
@@ -275,6 +273,7 @@
 
 // Keyframe Animation for CTA Wave Ribbon
 @keyframes appointgem-cta-wave-sway {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg);

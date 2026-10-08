@@ -65,11 +65,11 @@ export function WelzokartChallenges() {
       <div className="challenges-lc-container">
 
         <div className="challenges-lc-header">
-          <span className="lc-eyebrow">KEY CHALLENGES</span>
-          <h2 className="lc-headline">
+          <span data-reveal="" className="lc-eyebrow">KEY CHALLENGES</span>
+          <h2 data-reveal="" className="lc-headline">
             Overcoming hurdles to build a secure, scalable, and reliable platform.
           </h2>
-          <p className="lc-desc">
+          <p data-reveal="" className="lc-desc">
             Developing WelzoKart demanded addressing performance, real-time inventory, and scalability while maintaining smooth user experiences across all devices.
           </p>
         </div>
@@ -79,7 +79,7 @@ export function WelzokartChallenges() {
           <div className="challenge-part">
             <div className="challenge-group">
               {CHALLENGES.slice(0, 3).map((item, idx) => (
-                <div key={idx} className="lc-challenge-card">
+                <div data-reveal="" key={idx} className="lc-challenge-card">
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
@@ -87,6 +87,7 @@ export function WelzokartChallenges() {
             </div>
 
             <div
+              data-reveal=""
               ref={ref1}
               className="challenge-image 3d-tilt-frame"
               onMouseMove={handleMove1}
@@ -103,6 +104,7 @@ export function WelzokartChallenges() {
           {/* Second part */}
           <div className="challenge-part">
             <div
+              data-reveal=""
               ref={ref2}
               className="challenge-image 3d-tilt-frame"
               onMouseMove={handleMove2}
@@ -117,7 +119,7 @@ export function WelzokartChallenges() {
 
             <div className="challenge-group">
               {CHALLENGES.slice(3, 6).map((item, idx) => (
-                <div key={idx} className="lc-challenge-card">
+                <div data-reveal="" key={idx} className="lc-challenge-card">
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>

@@ -29,7 +29,7 @@ export function WelzokartOverview() {
 
         <div className="overview-lc-grid">
           {/* Left Image */}
-          <div className="overview-lc-images">
+          <div data-reveal="" className="overview-lc-images">
             <div 
               ref={frameRef}
               onMouseMove={handleMouseMove}
@@ -46,15 +46,15 @@ export function WelzokartOverview() {
 
           {/* Right Content */}
           <div className="overview-lc-content">
-            <span className="lc-eyebrow">OVERVIEW</span>
-            <h2 id="overview-title" className="lc-headline">
+            <span data-reveal="" className="lc-eyebrow">OVERVIEW</span>
+            <h2 data-reveal="" id="overview-title" className="lc-headline">
               Overcoming barriers in building a scalable delivery app
             </h2>
-            <p className="lc-desc">
+            <p data-reveal="" className="lc-desc">
               WelzoKart is an on-demand grocery delivery platform enabling users to order essentials with ease, offering secure payments, real-time scheduling, and reliability. It ships as its own platform and inherits the shared Infinium layer for seamless scalability.
             </p>
 
-            <div className="lc-check-list">
+            <div data-reveal="" className="lc-check-list">
               <div className="check-item">
                 <div className="check-icon">✓</div>
                 <span>Easy Grocery Shopping</span>

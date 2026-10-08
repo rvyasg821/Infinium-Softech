@@ -385,3 +385,43 @@
     }
   }
 }
+
+/* ---------- Hero Entry Animations ---------- */
+@keyframes needlyHeroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-left-col {
+  > * {
+    opacity: 0;
+    animation: needlyHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero-crumbs { animation-delay: 0.1s; }
+  .identity-top { animation-delay: 0.2s; }
+  .hero-handwritten { animation-delay: 0.3s; }
+  .hero-headline { animation-delay: 0.4s; }
+  .hero-tags { animation-delay: 0.5s; }
+  .hero-description { animation-delay: 0.6s; }
+  .hero-cta-group { animation-delay: 0.7s; }
+}
+
+.hero-right-col {
+  opacity: 0;
+  animation: needlyHeroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-left-col > *,
+  .hero-right-col {
+    animation: none;
+    opacity: 1;
+  }
+}

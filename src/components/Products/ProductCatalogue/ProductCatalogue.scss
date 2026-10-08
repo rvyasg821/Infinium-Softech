@@ -22,7 +22,7 @@
   margin: 0 auto;
 }
 
-.catalogue-header { 
+.catalogue-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -35,7 +35,7 @@
     padding-bottom: 16px;
     gap: 12px;
   }
-} 
+}
 
 .catalogue-eyebrow {
   @include section-eyebrow("light");
@@ -53,7 +53,7 @@
 
   @media (max-width: 480px) {
     font-size: clamp(22px, 6vw, 26px);
-    line-height: 1.05;
+    line-height: 1.1;
   }
 }
 
@@ -228,7 +228,7 @@
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 40px rgba(12, 12, 13, 0.08), 0 4px 12px rgba(12, 12, 13, 0.04);
-    
+
     .card-shot-img {
       transform: scale(1.04);
     }
@@ -440,7 +440,9 @@
     padding: 15px 26px;
   }
 
-  span, svg, .arrow {
+  span,
+  svg,
+  .arrow {
     opacity: 0.65;
     transition: transform 0.2s ease;
   }
@@ -450,7 +452,9 @@
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba($color-accent, 0.35);
 
-    span, svg, .arrow {
+    span,
+    svg,
+    .arrow {
       transform: translateX(3px);
     }
   }
@@ -506,4 +510,3 @@
     text-decoration: underline;
   }
 }
-

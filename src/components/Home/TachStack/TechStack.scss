@@ -15,11 +15,9 @@
     top: 10%;
     width: 760px;
     height: 760px;
-    background: radial-gradient(
-      closest-side,
-      rgba(31, 49, 232, 0.22),
-      rgba(31, 49, 232, 0) 70%
-    );
+    background: radial-gradient(closest-side,
+        rgba(31, 49, 232, 0.22),
+        rgba(31, 49, 232, 0) 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -34,7 +32,7 @@
   .stack-header {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    // gap: 16px;
 
     @include respond($bp-lg) {
       flex-direction: row;
@@ -53,7 +51,7 @@
     font-weight: 800;
     font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: #f1f0ec;
     margin: 12px 0 0;
@@ -140,20 +138,16 @@
     position: relative;
     overflow: hidden;
     min-width: 0;
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 4%,
-      black 96%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 4%,
-      black 96%,
-      transparent 100%
-    );
+    mask-image: linear-gradient(to right,
+        transparent 0%,
+        black 4%,
+        black 96%,
+        transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0%,
+        black 4%,
+        black 96%,
+        transparent 100%);
   }
 
   .marquee-track {
@@ -420,6 +414,7 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -429,6 +424,7 @@
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0%);
   }

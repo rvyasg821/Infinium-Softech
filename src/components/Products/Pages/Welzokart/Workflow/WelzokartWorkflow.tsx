@@ -81,17 +81,17 @@ export function WelzokartWorkflow() {
 
         {/* Header */}
         <div className="workflow-lc-header">
-          <span className="lc-eyebrow">INTERACTIVE WALKTHROUGH</span>
-          <h2 id="workflow-title" className="lc-headline">
+          <span data-reveal="" className="lc-eyebrow">INTERACTIVE WALKTHROUGH</span>
+          <h2 data-reveal="" id="workflow-title" className="lc-headline">
             "Try It" Stepper: How WelzoKart Works
           </h2>
-          <p className="lc-desc">
+          <p data-reveal="" className="lc-desc">
             Click through the 4-step ordering stepper below to experience how seamlessly orders move from initial item discovery to live doorstep delivery.
           </p>
         </div>
 
         {/* Stepper Progress Bar */}
-        <div className="stepper-nav-bar" role="tablist">
+        <div data-reveal="" className="stepper-nav-bar" role="tablist">
           {WORKFLOW_STEPS.map((s, idx) => {
             const Icon = s.icon;
             const isActive = idx === activeStep;
@@ -118,7 +118,7 @@ export function WelzokartWorkflow() {
         </div>
 
         {/* Stepper Interactive Display Card */}
-        <div className="stepper-interactive-card">
+        <div data-reveal="" className="stepper-interactive-card">
           <div className="stepper-details-col">
             <span className="step-badge">Step {currentStep.step} of 04</span>
             <h3 className="stepper-headline">{currentStep.headline}</h3>
