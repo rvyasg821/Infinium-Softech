@@ -18,27 +18,10 @@ export interface EcosystemProduct {
 }
 
 export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
-  {
-    id: "slota",
-    n: "01",
-    name: "Slota",
-    mark: "SL",
-    tag: "Bookings",
-    tint: "#1F31E8",
-    wash: "rgba(31, 49, 232, 0.16)",
-    desc: "Business booking and management platform for appointment-led teams.",
-    features: ["Calendar sync", "Staff rostering", "Payments"],
-    metricLabel: "Bookings / month",
-    metric: "18,412",
-    metricDelta: "▲ 16.4%",
-    appLabel: "Today",
-    appValue: "42 slots",
-    shot: "/shots/slota.png",
-    logo: "/logos/slota-logo.png",
-  },
+
   {
     id: "welzokart",
-    n: "02",
+    n: "01",
     name: "WelzoKart",
     mark: "WK",
     tag: "Quick commerce",
@@ -53,6 +36,24 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     appValue: "3,180",
     shot: "/shots/Welzokart 2.jpg",
     logo: "/logos/welzokart-logo.png",
+  },
+  {
+    id: "slota",
+    n: "02",
+    name: "Slota",
+    mark: "SL",
+    tag: "Bookings",
+    tint: "#1F31E8",
+    wash: "rgba(31, 49, 232, 0.16)",
+    desc: "Business booking and management platform for appointment-led teams.",
+    features: ["Calendar sync", "Staff rostering", "Payments"],
+    metricLabel: "Bookings / month",
+    metric: "18,412",
+    metricDelta: "▲ 16.4%",
+    appLabel: "Today",
+    appValue: "42 slots",
+    shot: "/shots/slota.png",
+    logo: "/logos/slota-logo.png",
   },
   {
     id: "needly",
@@ -87,7 +88,8 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     metricDelta: "▲ 13.9%",
     appLabel: "On road",
     appValue: "482",
-    shot: "/shots/truckguru.jpg",
+    shot: "/shots/LoadGo.png",
+
   },
   {
     id: "dishly",
@@ -104,7 +106,8 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     metricDelta: "▲ 22.6%",
     appLabel: "Prep queue",
     appValue: "86 items",
-    shot: "/shots/localeeclean.jpg",
+    shot: "/shots/Dishly.png",
+    logo: "/logos/Dishly-logo.png",
   },
   {
     id: "trekvano",
@@ -139,7 +142,8 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     metricDelta: "▲ 15.2%",
     appLabel: "Jobs today",
     appValue: "164",
-    shot: "/shots/localeeclean.jpg",
+    shot: "/shots/PureSpace.png",
+    logo: "/logos/pureSpace-logo.png",
   },
   {
     id: "Textora",

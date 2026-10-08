@@ -31,20 +31,8 @@ export type MenuDef = {
 
 export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
   {
-    id: "slota",
-    n: "01",
-    name: "slota",
-    mark: "sl",
-    tag: "BOOKINGS",
-    tint: "#1F31E8",
-    desc: "Business booking and management platform for appointment-led teams.",
-    shot: "/shots/slota.png",
-    wash: "rgba(31, 49, 232, 0.16)",
-    logo: "/logos/slota-logo.png",
-  },
-  {
     id: "welzokart",
-    n: "02",
+    n: "01",
     name: "WelzoKart",
     mark: "WK",
     tag: "QUICK COMMERCE",
@@ -53,6 +41,18 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     shot: "/shots/Welzokart 2.jpg",
     wash: "rgba(30, 158, 90, 0.16)",
     logo: "/logos/welzokart-logo.png",
+  },
+  {
+    id: "slota",
+    n: "02",
+    name: "slota",
+    mark: "sl",
+    tag: "BOOKINGS",
+    tint: "#1F31E8",
+    desc: "Business booking and management platform for appointment-led teams.",
+    shot: "/shots/slota.png",
+    wash: "rgba(31, 49, 232, 0.16)",
+    logo: "/logos/slota-logo.png",
   },
   {
     id: "needly",
@@ -75,7 +75,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     tag: "LOGISTICS",
     tint: "#E8A21F",
     desc: "Transport and truck booking ecosystem across long-haul and regional lanes.",
-    shot: "/shots/truckguru.jpg",
+    shot: "/shots/LoadGo.png",
     wash: "rgba(232, 162, 31, 0.16)",
   },
   {
@@ -86,8 +86,9 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     tag: "KITCHEN AI",
     tint: "#0F8F87",
     desc: "AI-powered cooking and menu instruction platform for multi-outlet kitchens.",
-    shot: "/shots/localeeclean.jpg",
+    shot: "/shots/Dishly.png",
     wash: "rgba(15, 143, 135, 0.16)",
+    logo: "/logos/Dishly-logo.png",
   },
   {
     id: "trekvano",
@@ -109,8 +110,9 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     tag: "HOME SERVICES",
     tint: "#4338CA",
     desc: "Cleaning and home service booking platform with route-optimised crews.",
-    shot: "/shots/localeeclean.jpg",
+    shot: "/shots/PureSpace.png",
     wash: "rgba(67, 56, 202, 0.16)",
+    logo: "/logos/pureSpace-logo.png",
   },
   {
     id: "Textora",

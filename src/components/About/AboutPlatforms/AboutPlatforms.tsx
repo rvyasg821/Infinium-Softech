@@ -35,8 +35,8 @@ function PlatformCardView({
 
       <div className="card-body">
         <div className="card-identity">
-          <span 
-            className="card-badge" 
+          <span
+            className="card-badge"
             style={{ backgroundColor: product.logo ? "transparent" : product.tint }}
           >
             {product.logo ? (

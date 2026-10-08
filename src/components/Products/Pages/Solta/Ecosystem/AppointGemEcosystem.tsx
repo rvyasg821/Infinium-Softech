@@ -62,7 +62,7 @@ function EcosystemCardView({
 }
 
 export function AppointGemEcosystem() {
-  const slotaProducts = ["WelzoKart", "Needly", "LoadGo"];
+  const slotaProducts = ["WelzoKart", "LoadGo", "Needly"];
   const RELATED_PRODUCTS = slotaProducts
     .map((name) => ECOSYSTEM_PRODUCTS.find((p) => p.name === name))
     .filter((p): p is EcosystemProduct => p !== undefined);
