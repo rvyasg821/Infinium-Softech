@@ -44,7 +44,7 @@ export function NeedlyNav() {
 
   const updateActiveFromScroll = useCallback(() => {
     const scrollY = window.scrollY;
-    
+
     // Check if the navbar is stuck
     const navEl = navContainerRef.current?.parentElement;
     if (navEl) {
@@ -117,10 +117,10 @@ export function NeedlyNav() {
 
   return (
     <nav
-      className={`appointgem-subnav-sticky ${isScrolled ? "is-scrolled" : ""}`}
-      aria-label="AppointGem Page Navigation"
+      className={`Needly-subnav-sticky ${isScrolled ? "is-scrolled" : ""}`}
+      aria-label="Needly Page Navigation"
     >
-      <div className="appointgem-subnav-container" ref={navContainerRef}>
+      <div className="Needly-subnav-container" ref={navContainerRef}>
         {NAV_ITEMS.map((item) => {
           const id = item.href.substring(1);
           const isActive = activeSection === id;
@@ -130,12 +130,12 @@ export function NeedlyNav() {
               href={item.href}
               data-nav-id={id}
               onClick={(e) => handleNavClick(e, item.href)}
-              className={`appointgem-subnav-item ${isActive ? "active" : ""}`}
+              className={`Needly-subnav-item ${isActive ? "active" : ""}`}
               style={{ "--item-accent-color": item.color } as React.CSSProperties}
               aria-current={isActive ? "true" : undefined}
             >
               <span
-                className="appointgem-index-dot"
+                className="Needly-index-dot"
                 style={{ backgroundColor: item.color }}
                 aria-hidden="true"
               />

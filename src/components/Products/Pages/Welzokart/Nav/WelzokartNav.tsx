@@ -44,7 +44,7 @@ export function WelzokartNav() {
 
   const updateActiveFromScroll = useCallback(() => {
     const scrollY = window.scrollY;
-    
+
     // Check if the navbar is stuck
     const navEl = navContainerRef.current?.parentElement;
     if (navEl) {
@@ -117,10 +117,10 @@ export function WelzokartNav() {
 
   return (
     <nav
-      className={`appointgem-subnav-sticky ${isScrolled ? "is-scrolled" : ""}`}
-      aria-label="AppointGem Page Navigation"
+      className={`Welzokart-subnav-sticky ${isScrolled ? "is-scrolled" : ""}`}
+      aria-label="Welzokart Page Navigation"
     >
-      <div className="appointgem-subnav-container" ref={navContainerRef}>
+      <div className="Welzokart-subnav-container" ref={navContainerRef}>
         {NAV_ITEMS.map((item) => {
           const id = item.href.substring(1);
           const isActive = activeSection === id;
@@ -130,12 +130,12 @@ export function WelzokartNav() {
               href={item.href}
               data-nav-id={id}
               onClick={(e) => handleNavClick(e, item.href)}
-              className={`appointgem-subnav-item ${isActive ? "active" : ""}`}
+              className={`Welzokart-subnav-item ${isActive ? "active" : ""}`}
               style={{ "--item-accent-color": item.color } as React.CSSProperties}
               aria-current={isActive ? "true" : undefined}
             >
               <span
-                className="appointgem-index-dot"
+                className="Welzokart-index-dot"
                 style={{ backgroundColor: item.color }}
                 aria-hidden="true"
               />

@@ -584,6 +584,8 @@
 
     @include respond($bp-md) {
       padding: 16px;
+      margin: 0;
+      border-radius: 0;
     }
 
     @include respond($bp-lg) {

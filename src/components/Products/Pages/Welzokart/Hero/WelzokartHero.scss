@@ -17,6 +17,7 @@
   @include respond($bp-lg) {
     padding-bottom: 70px;
   }
+
   position: relative;
   overflow: hidden;
   background: linear-gradient(180deg, #f4f8fc 0%, #ffffff 55%, #f8fafc 100%);
@@ -332,6 +333,10 @@
   align-items: center;
   position: relative;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    margin-top: 32px;
+  }
 }
 
 .phone-mockup-wrapper {

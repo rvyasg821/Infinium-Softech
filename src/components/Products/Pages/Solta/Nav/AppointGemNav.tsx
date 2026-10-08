@@ -22,6 +22,7 @@ const ACTIVATION_OFFSET = 140;
 
 export function AppointGemNav() {
   const [activeSection, setActiveSection] = useState(SECTION_IDS[0]);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
 
   const scrollActiveTabIntoView = useCallback((sectionId: string) => {
@@ -43,6 +44,14 @@ export function AppointGemNav() {
 
   const updateActiveFromScroll = useCallback(() => {
     const scrollY = window.scrollY;
+
+    // Check if the navbar is stuck
+    const navEl = navContainerRef.current?.parentElement;
+    if (navEl) {
+      // 76px is slightly more than the 75px top sticky threshold
+      setIsScrolled(navEl.getBoundingClientRect().top <= 76);
+    }
+
     const scrollPosition = scrollY + ACTIVATION_OFFSET;
 
     // At the very bottom of the page -> last item active
@@ -108,7 +117,7 @@ export function AppointGemNav() {
 
   return (
     <nav
-      className="appointgem-subnav-sticky"
+      className={`appointgem-subnav-sticky ${isScrolled ? "is-scrolled" : ""}`}
       aria-label="AppointGem Page Navigation"
     >
       <div className="appointgem-subnav-container" ref={navContainerRef}>
