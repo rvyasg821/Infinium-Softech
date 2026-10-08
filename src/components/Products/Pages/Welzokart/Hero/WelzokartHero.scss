@@ -12,7 +12,11 @@
     padding-top: 72px;
   }
 
-  padding-bottom: 70px;
+  padding-bottom: 0px; // Very small for mobile to decrease huge gap
+
+  @include respond($bp-lg) {
+    padding-bottom: 70px;
+  }
   position: relative;
   overflow: hidden;
   background: linear-gradient(180deg, #f4f8fc 0%, #ffffff 55%, #f8fafc 100%);
@@ -184,7 +188,7 @@
   line-height: 1.2;
   letter-spacing: -0.03em;
   color: #0f172a;
-  margin: 0 0 16px 0;
+  margin: 10px 0 10px 0;
 }
 
 /* Chips / Badges under Title (Not styled as action buttons) */
@@ -643,7 +647,8 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: 20px;
-    margin-right: -20px; /* bleeds off screen */
+    margin-right: -20px;
+    /* bleeds off screen */
     margin-left: -20px;
     padding-left: 20px;
     padding-right: 20px;

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { Search, ShoppingBag, CreditCard, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Search, ShoppingBag, CreditCard, MapPin, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 import "./WelzokartWorkflow.scss";
 
 const WORKFLOW_STEPS = [
@@ -136,7 +136,8 @@ export function WelzokartWorkflow() {
                 disabled={activeStep === 0}
                 onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
               >
-                ← Previous Step
+                <ArrowLeft size={16} />
+                <span>Previous</span>
               </button>
 
               <button
@@ -145,7 +146,7 @@ export function WelzokartWorkflow() {
                 disabled={activeStep === WORKFLOW_STEPS.length - 1}
                 onClick={() => setActiveStep((prev) => Math.min(WORKFLOW_STEPS.length - 1, prev + 1))}
               >
-                <span>Next Step</span>
+                <span>Next</span>
                 <ArrowRight size={16} />
               </button>
             </div>

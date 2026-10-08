@@ -102,6 +102,10 @@
     background-color: #0c0c0d;
     color: #ffffff;
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 0 !important;
+  }
 }
 
 // Standardized Hero Title Mixin

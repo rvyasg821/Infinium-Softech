@@ -75,7 +75,7 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
     border: 8px solid rgba(255, 255, 255, 0.8);
     background: #ffffff;
-    
+
     img {
       display: block;
       width: 100%;
@@ -107,7 +107,7 @@
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 12px 0 24px 0;
+    margin: 10px 0 10px 0;
 
     @media (max-width: $bp-lg) {
       order: 2;

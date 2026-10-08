@@ -15,7 +15,11 @@
 .workflow-lc-header {
   text-align: left;
   max-width: 800px;
-  margin: 0 0 60px;
+  margin: 0 0 40px;
+
+  @media (max-width: 768px) {
+    margin: 0 0 24px;
+  }
 
   .lc-eyebrow {
     @include section-eyebrow("white");
@@ -30,7 +34,7 @@
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 12px 0 20px 0;
+    margin: 10px 0 10px 0;
   }
 
   .lc-desc {
@@ -78,6 +82,7 @@
     @media (max-width: $bp-sm) {
       flex: 0 0 auto;
       scroll-snap-align: start;
+      margin-bottom: 0px;
     }
 
     &:hover {
@@ -237,7 +242,17 @@
       justify-content: flex-start;
     }
 
+    @media (max-width: 375px) {
+      justify-content: space-between;
+      gap: 8px;
+      width: 100%;
+    }
+
     .btn-step-prev {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       background: #ffffff;
       border: 1px solid #cbd5e1;
       color: #334155;
@@ -247,6 +262,13 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
+
+      @media (max-width: 375px) {
+        padding: 10px 14px;
+        font-size: 13px;
+        flex: 1;
+        text-align: center;
+      }
 
       &:hover:not(:disabled) {
         border-color: #0f172a;
@@ -262,6 +284,7 @@
     .btn-step-next {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       background: #2563eb;
       color: #ffffff;
@@ -273,6 +296,13 @@
       cursor: pointer;
       box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
       transition: all 0.25s ease;
+
+      @media (max-width: 375px) {
+        padding: 10px 14px;
+        font-size: 13.5px;
+        flex: 1;
+        gap: 6px;
+      }
 
       &:hover:not(:disabled) {
         background: #1d4ed8;
@@ -323,6 +353,7 @@
     opacity: 0;
     transform: scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
