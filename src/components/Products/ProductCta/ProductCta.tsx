@@ -16,7 +16,7 @@ export function ProductCta() {
           </p>
         </div>
         <div data-reveal="" className="cta-actions">
-          <Link href="/contact" className="btn-primary-blue">
+          <Link href="/contact" className="btn-primary">
             Talk to us <span className="arrow">→</span>
           </Link>
         </div>

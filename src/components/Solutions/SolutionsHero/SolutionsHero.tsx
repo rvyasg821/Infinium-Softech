@@ -43,7 +43,7 @@ export function SolutionsHero() {
                 Explore the six
               </Link>
 
-              <Link href="/contact" className="btn-outline">
+              <Link href="/contact" className="btn-secondary">
                 Talk to sales
               </Link>
             </div>

@@ -1,3 +1,6 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
 .product-cta-section {
   padding: 80px 40px 96px;
 
@@ -69,19 +72,20 @@
   gap: 12px;
   flex-wrap: wrap;
 
-  .btn-primary-blue {
+  .btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: #1f31e8;
+    justify-content: center;
+    gap: 10px;
+    background: $color-accent;
     color: #ffffff;
-    font-size: clamp(13px, 1.1vw, 14px);
+    font-size: var(--fs-body);
     font-weight: 500;
     padding: 13px 24px;
     border-radius: 2px;
     white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
     text-decoration: none;
-    transition: background 0.25s ease;
 
     @media (max-width: 480px) {
       width: 100%;
@@ -89,28 +93,46 @@
       padding: 12px 20px;
     }
 
-    &:hover {
-      background: #1624b5;
+    @include respond($bp-sm) {
+      padding: 10px 23px;
     }
 
-    .arrow {
-      opacity: 0.7;
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
+    span, svg, .arrow {
+      opacity: 0.65;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba($color-accent, 0.35);
+
+      span, svg, .arrow {
+        transform: translateX(3px);
+      }
     }
   }
 
-  .btn-outline-dark {
+  .btn-secondary {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(12, 12, 13, 0.2);
-    color: #0c0c0d;
-    font-size: clamp(13px, 1.1vw, 14px);
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba($color-ink, 0.2);
+    color: $color-ink;
+    font-size: var(--fs-body);
     font-weight: 500;
     padding: 13px 24px;
     border-radius: 2px;
     white-space: nowrap;
+    background: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     text-decoration: none;
-    transition: background 0.25s ease;
 
     @media (max-width: 480px) {
       width: 100%;
@@ -118,8 +140,19 @@
       padding: 12px 20px;
     }
 
+    @include respond($bp-sm) {
+      padding: 10px 23px;
+    }
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
     &:hover {
-      background: rgba(12, 12, 13, 0.06);
+      background: rgba($color-ink, 0.05);
+      border-color: rgba($color-ink, 0.4);
+      transform: translateY(-1px);
     }
   }
 }

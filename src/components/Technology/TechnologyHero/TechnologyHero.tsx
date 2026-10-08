@@ -41,7 +41,7 @@ export function TechnologyHero() {
                 Explore All Stack
               </Link>
 
-              <Link href="/contact" className="btn-outline">
+              <Link href="/contact" className="btn-secondary">
                 Let’s Build Together
               </Link>
             </div>

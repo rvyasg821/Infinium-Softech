@@ -133,9 +133,7 @@ export function Footer() {
           />
 
           <p>
-            Nine proprietary products. One unified platform. Built for
-            operators across logistics, healthcare, commerce, education
-            and services.
+            Powerful products. One unified platform. Built to support operators across logistics, healthcare, commerce, education and services.
           </p>
 
           <div className="social-links">

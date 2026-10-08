@@ -346,35 +346,44 @@
       border: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       background: $color-accent;
       color: #ffffff;
       font-family: $font-body;
-      font-size: 14px;
+      font-size: var(--fs-body);
       font-weight: 500;
-      padding: 14px 26px;
+      padding: 13px 24px;
       border-radius: 2px;
       white-space: nowrap;
-      transition: background-color 0.2s ease, color 0.2s ease,
-        transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 
-      &:hover {
-        background: #1826b8;
-        color: #ffffff;
-        transform: translateY(-1px);
+      @include respond($bp-sm) {
+        padding: 10px 23px;
       }
 
-      &:active {
-        transform: translateY(0);
+      @include respond($bp-lg) {
+        font-size: 14px;
+        padding: 15px 26px;
       }
 
-      span {
+      span, svg, .arrow {
         opacity: 0.65;
         transition: transform 0.2s ease;
       }
 
-      &:hover span {
-        transform: translateX(3px);
+      &:hover {
+        opacity: 0.95;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba($color-accent, 0.35);
+
+        span, svg, .arrow {
+          transform: translateX(3px);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
       }
     }
 
