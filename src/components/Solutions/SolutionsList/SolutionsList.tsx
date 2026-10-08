@@ -36,14 +36,14 @@ function SolutionVisualCol({ item }: { item: typeof SOLUTIONS_LIST_DATA[0] }) {
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`mockup-card ${item.tintClass}`}
+        className={`solution-image-card ${item.tintClass}`}
         style={{
           transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           transition: tilt.x === 0 && tilt.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease"
         }}
       >
-        <div className="mockup-content">
-          <div className="image-frame">
+        <div className="solution-image-content">
+          <div className="solution-image-frame">
             <Image
               src={item.image}
               alt={item.imageAlt}

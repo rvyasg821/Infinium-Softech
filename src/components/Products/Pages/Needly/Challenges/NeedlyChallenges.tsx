@@ -37,15 +37,15 @@ export function NeedlyChallenges() {
         <div className="challenges-left-col">
           <div className="challenges-header">
             <span className="section-eyebrow" data-reveal="">Key challenges</span>
-            <h2 className="challenges-headline">
+            <h2 data-reveal="" className="challenges-headline">
               Why Local Grocery Needs More
             </h2>
-            <p className="challenges-desc">
+            <p data-reveal="" className="challenges-desc">
               Developing Needly meant addressing fast response times, accurate price quoting, and simple list creation for both customers and shop owners.
             </p>
           </div>
 
-          <div className="challenges-image-wrap">
+          <div data-reveal="" className="challenges-image-wrap">
             <img src="/shots/Needly/Needly_KC.webp" alt="Needly Infrastructure Challenges" className="challenges-image" />
           </div>
         </div>
@@ -53,7 +53,7 @@ export function NeedlyChallenges() {
         <div className="challenges-right-col">
           <div className="challenges-grid">
             {CHALLENGES.map((item, idx) => (
-              <div key={idx} className="challenge-card">
+              <div data-reveal="" key={idx} className="challenge-card">
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
               </div>

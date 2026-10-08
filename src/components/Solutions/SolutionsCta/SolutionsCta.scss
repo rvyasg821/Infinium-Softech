@@ -1,207 +1,290 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.solutions-cta-section {
+.about-engagements-section {
   position: relative;
   background: $color-bg;
   @include section-padding;
-  padding-top: 0;
   scroll-margin-top: 80px;
 }
 
-.solutions-cta-container {
+.about-engagements-container {
   @include container;
 }
 
-.solutions-cta-card {
+// Consultation Banner Card
+.consultation-card {
   background: #0c0c0d;
   color: #f1f0ec;
-  padding: 36px 20px;
+  padding: 40px 22px;
+  position: relative;
+  overflow: hidden;
   border-radius: 4px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
 
   @include respond($bp-sm) {
-    padding: 44px 28px;
-    gap: 36px;
+    padding: 48px 32px;
   }
 
   @include respond($bp-md) {
-    padding: 56px 40px;
-    gap: 40px;
+    padding: 60px 44px;
   }
 
-  @include respond($bp-lg) {
+  @media (min-width: 992px) {
     padding: 70px 60px;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: 64px;
   }
-}
 
-.solutions-cta-left {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  width: 100%;
-}
-
-.cta-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  line-height: 2.2;
-  padding: 4px 14px;
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #8a8a8e;
-  font-weight: 600;
-}
-
-.cta-title {
-  font-family: $font-display;
-  font-weight: 800;
-  font-stretch: 112%;
-  font-size: clamp(26px, 4.2vw, 54px);
-  line-height: 0.96;
-  letter-spacing: -0.045em;
-  margin-top: 18px;
-  color: #ffffff;
-}
-
-.cta-desc {
-  font-size: 16.5px;
-  line-height: 1.6;
-  color: $color-on-dark-muted;
-  margin-top: 20px;
-  max-width: 520px;
-
-  @media (max-width: 768px) {
-    font-size: 14.5px;
-    line-height: 1.55;
+  .consultation-glow {
+    position: absolute;
+    right: -8%;
+    top: -40%;
+    width: 60%;
+    height: 180%;
+    background: radial-gradient(closest-side,
+        rgba(31, 49, 232, 0.42),
+        rgba(31, 49, 232, 0) 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 0;
   }
-}
 
-.cta-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 30px;
-  flex-wrap: wrap;
+  .consultation-content-wrap {
+    position: relative;
+    z-index: 1;
 
-  @media (max-width: 479px) {
-    width: 100%;
-
-    .btn-primary-blue,
-    .btn-outline-light {
-      width: 100%;
-      justify-content: center;
-      text-align: center;
+    @media (min-width: 992px) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 56px;
+      align-items: center;
     }
   }
 
-  .btn-primary-blue {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: #1f31e8;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 14px 24px;
-    border-radius: 2px;
-    white-space: nowrap;
-    text-decoration: none;
-    transition: background 0.25s ease, transform 0.2s ease;
+  .consultation-info {
+    position: relative;
+    z-index: 2;
+    max-width: 580px;
 
-    &:hover {
-      background: #1826b8;
-      transform: translateY(-1px);
+    @media (min-width: 992px) {
+      max-width: none;
     }
   }
 
-  .btn-outline-light {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: 1px solid rgba(241, 240, 236, 0.28);
+  .consultation-badge {
+    @include section-eyebrow("dark");
+  }
+
+  .consultation-title {
+    font-family: $font-display;
+    font-weight: 800;
+    font-stretch: 112%;
+    font-size: clamp(28px, 3.8vw, 50px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
     color: #f1f0ec;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 13px 23px;
-    border-radius: 2px;
-    white-space: nowrap;
-    background: transparent;
-    text-decoration: none;
-    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    margin: 22px 0 0;
 
-    &:hover {
-      background: rgba(241, 240, 236, 0.1);
-      border-color: rgba(241, 240, 236, 0.55);
-      transform: translateY(-1px);
-    }
-  }
-}
-
-.solutions-cta-right {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  width: 100%;
-}
-
-.step-card-row {
-  border-top: 1px solid rgba(241, 240, 236, 0.14);
-  padding: 18px 0;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
-
-  &:first-child {
-    border-top: none;
-    @include respond($bp-lg) {
-      border-top: 1px solid rgba(241, 240, 236, 0.14);
+    @media (max-width: 480px) {
+      font-size: clamp(26px, 7vw, 34px);
+      line-height: 1.05;
     }
   }
 
-  &:last-child {
-    border-bottom: 1px solid rgba(241, 240, 236, 0.14);
+  .consultation-desc {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: #a9a9ae;
+    margin: 18px 0 26px;
+    max-width: 460px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 12px 0 18px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 13px;
+      margin: 10px 0 16px;
+    }
   }
 
-  .step-badge {
-    width: 24px;
-    height: 24px;
-    border-radius: 7px;
-    margin-top: 2px;
-    flex: none;
+  .consultation-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    @media (max-width: 479px) {
+      flex-direction: column;
+      width: 100%;
+
+      .btn-primary-consult,
+      .btn-secondary-consult {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    .btn-primary-consult {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1f31e8;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 16px 28px;
+      border-radius: 2px;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+
+      .btn-arrow {
+        opacity: 0.65;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover {
+        background: #1826b8;
+
+        .btn-arrow {
+          transform: translateX(3px);
+        }
+      }
+    }
+
+    .btn-secondary-consult {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(241, 240, 236, 0.28);
+      color: #f1f0ec;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 15px 27px;
+      border-radius: 2px;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background 0.25s ease, border-color 0.25s ease;
+
+      &:hover {
+        background: rgba(241, 240, 236, 0.1);
+        border-color: rgba(241, 240, 236, 0.55);
+      }
+    }
   }
 
-  .step-info {
+  // Right side engagement items
+  .consultation-right {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    width: 100%;
+    border-top: 1px solid rgba(241, 240, 236, 0.14);
+    padding-top: 20px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 2;
+
+    @media (min-width: 992px) {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .engagement-item {
+      border-top: 1px solid rgba(241, 240, 236, 0.14);
+      padding: 16px 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      .engagement-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 7px;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+
+      .engagement-content {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+
+        .engagement-title {
+          font-family: $font-display;
+          font-weight: 700;
+          font-stretch: 106%;
+          font-size: 16.5px;
+          letter-spacing: -0.02em;
+          color: #f1f0ec;
+        }
+
+        .engagement-fit {
+          font-size: 13px;
+          line-height: 1.5;
+          color: #8a8a8e;
+          margin-top: 4px;
+        }
+      }
+    }
   }
 
-  .step-title {
-    display: block;
-    font-family: $font-display;
-    font-weight: 700;
-    font-size: 16.5px;
-    letter-spacing: -0.02em;
-    color: #ffffff;
+  // Animated Wave Sway Visual (Constrained to right side only)
+  .consultation-wave-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 35%;
+    width: 65%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.45;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 20%, #000000 55%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 20%, #000000 55%);
+
+    @media (max-width: 991px) {
+      left: 0;
+      top: 30%;
+      width: 100%;
+      height: 70%;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 25%, #000000 60%);
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 25%, #000000 60%);
+    }
+
+    .wave-inner {
+      position: absolute;
+      inset: -10% -8%;
+      animation: about-wave-sway 15s ease-in-out infinite;
+    }
+
+    .wave-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+// Keyframe Animation for CTA Wave Ribbon
+@keyframes about-wave-sway {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
   }
 
-  .step-desc {
-    display: block;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: $color-muted;
-    margin-top: 4px;
+  50% {
+    transform: translateY(-12px) rotate(1.5deg);
   }
 }

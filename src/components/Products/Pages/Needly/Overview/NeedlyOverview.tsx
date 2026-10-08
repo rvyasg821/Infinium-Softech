@@ -12,14 +12,14 @@ export function NeedlyOverview() {
 
         <div className="overview-left-col">
           <span className="section-eyebrow" data-reveal="">Overview</span>
-          <h2 className="overview-headline">
+          <h2 data-reveal="" className="overview-headline">
             Connecting customers with nearby grocery shops.
           </h2>
-          <p className="overview-desc">
+          <p data-reveal="" className="overview-desc">
             Needly creates a direct connection between customers and local grocery shops. Customers send their grocery requirements to nearby shops, while shop owners check availability, provide prices, and respond before the order is confirmed.
           </p>
 
-          <div className="overview-meta-list">
+          <div data-reveal="" className="overview-meta-list">
             <div className="meta-item">
               <div className="icon-wrapper">
                 <User size={18} strokeWidth={2.5} />
@@ -51,7 +51,7 @@ export function NeedlyOverview() {
         </div>
 
         <div className="overview-right-col">
-          <div className="needly-overview-image-wrapper">
+          <div data-reveal="" className="needly-overview-image-wrapper">
             <Image
               src="/shots/Needly.png"
               alt="Needly Overview"

@@ -52,8 +52,8 @@ export function NeedlyWorkflow() {
           <div className="workflow-left-col">
             <div className="workflow-header-sticky">
               <span className="section-eyebrow" data-reveal="">Workflow</span>
-              <h2 className="workflow-headline">A Structured, Direct Process</h2>
-              <p className="workflow-desc">
+              <h2 data-reveal="" className="workflow-headline">A Structured, Direct Process</h2>
+              <p data-reveal="" className="workflow-desc">
                 We've designed a clear, user-centered approach focused on empowering direct communication between customers and shop owners. By combining fast quote generation and an intuitive interface, we ensure every grocery order is handled efficiently and transparently.
               </p>
             </div>
@@ -69,7 +69,7 @@ export function NeedlyWorkflow() {
               <div className="vertical-timeline-line"></div>
               <div className="timeline-items">
                 {STEPS.map((step, idx) => (
-                  <div className="timeline-item" key={idx}>
+                  <div data-reveal="" className="timeline-item" key={idx}>
                     <div className="timeline-dot"></div>
                     <div className="timeline-content">
                       <h3 className="step-title">{step.title}</h3>

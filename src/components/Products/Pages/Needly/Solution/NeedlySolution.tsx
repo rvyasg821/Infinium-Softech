@@ -146,10 +146,10 @@ export function NeedlySolution() {
 
         <div className="Needly-solution-header">
           <span className="section-eyebrow" data-reveal="">Our solution</span>
-          <h2 className="solution-headline">
+          <h2 data-reveal="" className="solution-headline">
             Smart, fast, and transparent tools for local request matching.
           </h2>
-          <p className="solution-desc">
+          <p data-reveal="" className="solution-desc">
             Needly's custom solutions ensure smooth list creation, rapid shop replies, secure confirmations, and effortless local coordination.
           </p>
         </div>
@@ -163,7 +163,7 @@ export function NeedlySolution() {
             onTouchStart={stopAutoSlide}
           >
             {CARDS.map((card) => (
-              <div key={card.title} className={`bento-card ${card.className}`.trim()}>
+              <div data-reveal="" key={card.title} className={`bento-card ${card.className}`.trim()}>
                 <h3>{card.title}</h3>
                 <p>{card.desc}</p>
               </div>

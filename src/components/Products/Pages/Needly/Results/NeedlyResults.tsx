@@ -25,7 +25,7 @@ export function NeedlyResults() {
 
         <div className="results-header">
           <span className="section-eyebrow" data-reveal="">Key results</span>
-          <h2 className="results-headline">
+          <h2 data-reveal="" className="results-headline">
             Real value from connecting customers with local shop owners.
           </h2>
         </div>
@@ -36,11 +36,11 @@ export function NeedlyResults() {
             return (
               <React.Fragment key={idx}>
                 {isCenterSpot && (
-                  <div className="center-results-image">
+                  <div data-reveal="" className="center-results-image">
                     <img src="/shots/Needly/Needly_KR.png" alt="Needly Mobile Interfaces" />
                   </div>
                 )}
-                <div className={`result-item color-${item.color}`}>
+                <div data-reveal="" className={`result-item color-${item.color}`}>
                   <div className="result-item-header">
                     <div className="icon-wrapper">
                       <item.icon size={22} strokeWidth={2.5} />

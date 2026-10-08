@@ -128,15 +128,16 @@ export function NeedlyInterface() {
 
         <div className="needly-interface-header">
           <span className="section-eyebrow" data-reveal="">Interface</span>
-          <h2 className="interface-headline">
+          <h2 data-reveal="" className="interface-headline">
             Purpose-built interfaces for every user.
           </h2>
-          <p className="interface-desc">
+          <p data-reveal="" className="interface-desc">
             From sending grocery requests to managing shop responses, Needly provides simple interfaces designed for both customers and shop owners.
           </p>
         </div>
 
         <div
+          data-reveal=""
           className="interface-carousel-wrapper"
           onMouseEnter={() => (hoverRef.current = true)}
           onMouseLeave={() => (hoverRef.current = false)}

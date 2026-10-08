@@ -12,43 +12,46 @@ const defaultContent: SolutionsSectionIntro & { items: SolutionsProject[] } = {
   titleEnd: "for themselves.",
   description: "A selection of products and platforms shaped around real user and business needs.",
   items: [
-  {
-    name: "NurseWorth",
-    mark: "NW",
-    category: "Healthcare · AI logic",
-    tint: "#8B3FE8",
-    description:
-      "Salary, cost-of-living, and shift intelligence help nurses compare opportunities and plan their next career move.",
-    image: "/shots/mapmypay.jpg",
-    imageAlt: "NurseWorth AI insights platform",
-    href: "/products/NurseWorth",
-    result: "Web & mobile platform",
-  },
-  {
-    name: "Slota",
-    mark: "SL",
-    category: "AI · Workforce scheduling",
-    tint: "#1F31E8",
-    description:
-      "An intelligent workforce platform that brings task management, smart scheduling, and behavioral insights into one workspace.",
-    image: "/shots/slota.png",
-    imageAlt: "Slota AI scheduling interface",
-    href: "/products/slota",
-    result: "AI-powered SaaS platform",
-    logo: "/logos/slota-logo.png",
-  },
-  {
-    name: "Dishly",
-    mark: "DI",
-    category: "Kitchen AI · Food operations",
-    tint: "#0F8F87",
-    description:
-      "AI-powered cooking and menu guidance helps multi-outlet kitchens standardize prep, control portions, and reduce waste.",
-    image: "/shots/welzokart.jpg",
-    imageAlt: "Dishly AI kitchen operations screen",
-    href: "/products/dishly",
-    result: "Kitchen AI platform",
-  },
+    {
+      name: "WelzoKart",
+      mark: "WK",
+      category: "Quick commerce · Cloud platform",
+      tint: "#1E9E5A",
+      description:
+        "A commerce platform connecting catalogs, orders, dispatch, and customer experiences through connected digital services.",
+      image: "/shots/Welzokart 2.jpg",
+      imageAlt: "WelzoKart commerce platform",
+      href: "/products/welzokart",
+      result: "Commerce operations",
+      logo: "/logos/welzokart-logo.png",
+    },
+    {
+      name: "Slota",
+      mark: "SL",
+      category: "AI · Workforce scheduling",
+      tint: "#1F31E8",
+      description:
+        "An intelligent workforce platform that brings task management, smart scheduling, and behavioral insights into one workspace.",
+      image: "/shots/slota.png",
+      imageAlt: "Slota AI scheduling interface",
+      href: "/products/slota",
+      result: "AI-powered SaaS platform",
+      logo: "/logos/slota-logo.png",
+    },
+    {
+      name: "Needly",
+      mark: "ND",
+      category: "Saas Platform",
+      tint: "#0F8F87",
+      description:
+        "Daily needs buy and sell marketplace with verified neighbourhood listings.",
+      image: "/shots/Needly.png",
+      imageAlt: "Dishly AI kitchen operations screen",
+      href: "/products/dishly",
+      result: "Kitchen AI platform",
+      logo: "/logos/Needly-logo.png",
+    },
+
   ],
 };
 
