@@ -34,18 +34,17 @@
   }
 
   .workflow-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.045em;
     color: var(--needly-deep-green);
-
-    margin-bottom: 24px;
     line-height: 1.1;
+    margin: 12px 0 0;
     max-width: 480px;
 
     @media (min-width: 1400px) {
       max-width: 800px;
-    }
-
-    @media (max-width: 768px) {
-      margin: 10px 0;
     }
   }
 
@@ -54,6 +53,7 @@
     font-size: 16.5px;
     line-height: 1.6;
     max-width: 500px;
+    margin: 16px 0 32px;
   }
 }
 

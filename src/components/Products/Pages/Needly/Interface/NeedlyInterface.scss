@@ -30,19 +30,20 @@
   }
 
   .interface-headline {
-    margin-bottom: 16px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.045em;
     color: var(--needly-deep-green);
     line-height: 1.1;
-
-    @media (max-width: 768px) {
-      margin: 10px 0;
-    }
+    margin: 12px 0 0;
   }
 
   .interface-desc {
     font-size: 16.5px;
     color: var(--needly-muted);
-    line-height: 1.5;
+    line-height: 1.6;
+    margin: 16px 0 32px;
   }
 }
 

@@ -29,11 +29,18 @@
   }
 
   .results-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.045em;
+    line-height: 1.1;
     max-width: 700px;
     text-align: center;
+    color: var(--needly-ink);
+    margin: 12px 0 0;
 
     @media (max-width: 768px) {
-      margin: 10px 0;
+      margin: 10px 0 0;
       text-align: left;
     }
   }

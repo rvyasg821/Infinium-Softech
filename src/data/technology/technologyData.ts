@@ -194,7 +194,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "jQuery",
     description:
       "jQuery is a lightweight, fast JavaScript library that simplifies HTML DOM manipulation, event handling, animations, and Ajax requests. While newer frameworks now dominate, jQuery remains widely used in existing websites and legacy platforms. Our developers maintain, upgrade, and extend jQuery-based projects, and help migrate them to modern frameworks when the time is right.",
-    image: "/technology/jquery.png",
+    image: "/technology/jquery.svg",
     color: "#2AA8C4",
   },
 
@@ -226,7 +226,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "Java",
     description:
       "Java is a secure, object-oriented programming language known for its platform independence, stability, and strong performance. With Spring Boot and a mature ecosystem, it is a trusted choice for large-scale enterprise applications, banking systems, and microservice architectures. Our Java team builds robust, multithreaded back ends designed for reliability and long-term maintainability.",
-    image: "/technology/java.png",
+    image: "/technology/java.svg",
     color: "#1F31E8",
   },
   {
@@ -330,7 +330,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "MySQL",
     description:
       "MySQL is an open-source relational database management system trusted worldwide for its speed, reliability, and ease of use. It supports ACID transactions, indexing, replication, and powerful SQL querying, making it a dependable choice for web applications, e-commerce platforms, and business systems of every size.",
-    image: "/technology/mysql.png",
+    image: "/technology/mysql.svg",
     color: "#0F8F87",
   },
   {

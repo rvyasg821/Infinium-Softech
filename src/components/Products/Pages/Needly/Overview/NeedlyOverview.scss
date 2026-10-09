@@ -33,25 +33,20 @@
   }
 
   .overview-headline {
-
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.045em;
     line-height: 1.1;
-    margin-bottom: 24px;
-    max-width: 500px;
-
-    @media (min-width: 1400px) {
-      font-size: 46px;
-    }
-
-    @media (max-width: 768px) {
-      margin: 10px 0;
-    }
+    margin: 12px 0 0;
+    max-width: 600px;
   }
 
   .overview-desc {
     font-size: 16.5px;
     line-height: 1.6;
     max-width: 520px;
-    margin-bottom: 32px;
+    margin: 16px 0 32px;
   }
 
   .overview-meta-list {

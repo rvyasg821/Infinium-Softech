@@ -35,19 +35,20 @@
   }
 
   .challenges-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.045em;
     color: white;
-    margin-bottom: 24px;
     line-height: 1.1;
-
-    @media (max-width: 768px) {
-      margin: 10px 0;
-    }
+    margin: 12px 0 0;
   }
 
   .challenges-desc {
     color: rgba(255, 255, 255, 0.9);
     font-size: 16.5px;
     line-height: 1.6;
+    margin: 16px 0 32px;
   }
 
   // Image takes the leftover height. It is absolutely positioned inside the
