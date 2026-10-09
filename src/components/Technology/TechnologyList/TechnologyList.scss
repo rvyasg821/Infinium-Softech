@@ -266,7 +266,7 @@
   font-family: $font-display;
   font-weight: 800;
   font-stretch: 110%;
-  font-size: clamp(26px, 3.2vw, 48px);
+  font-size: var(--fs-h2);
   line-height: 1.1;
   letter-spacing: -0.04em;
   margin-top: 16px;
@@ -274,7 +274,7 @@
   text-wrap: pretty;
 
   @media (max-width: 768px) {
-    font-size: 22px;
+    // font-size: var(--fs-h2);
     margin-top: 20px;
   }
 }

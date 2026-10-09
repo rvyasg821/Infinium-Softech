@@ -35,12 +35,11 @@ export function SolutionPlaceholder({ solution }: { solution: SolutionItem }) {
             <h1 className="placeholder-title">{titleFallback(solution.title)}</h1>
             <p className="placeholder-desc">{solution.description}</p>
 
-            <div className="placeholder-status">
-              <div className="status-pill">
-                <span className="status-dot" style={{ backgroundColor: solution.color }} />
-                {solution.statusLabel || "Coming Soon"}
-              </div>
-              <Link href="/solutions" className="status-link">
+            <div className="placeholder-actions">
+              <Link href="#contact" className="btn-primary">
+                Talk to Sales
+              </Link>
+              <Link href="/solutions" className="btn-secondary">
                 Explore all solutions <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>

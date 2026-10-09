@@ -232,10 +232,29 @@
 
   .ai-solutions-hero-actions {
     width: 100%;
+    flex-wrap: nowrap;
+    gap: 8px;
 
     .btn-primary,
-    .btn-outline {
-      width: 100%;
+    .btn-secondary {
+      flex: 1;
+      justify-content: center;
+      text-align: center;
+      padding: 10px 6px;
+      font-size: 12.5px;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .ai-solutions-hero-actions {
+      flex-wrap: wrap;
+
+      .btn-primary,
+      .btn-secondary {
+        flex: none;
+        width: 100%;
+      }
     }
   }
 

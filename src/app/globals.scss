@@ -35,7 +35,7 @@
   --fs-h2: clamp(1.25rem, 2vw + 0.85rem, 3.875rem);
 
   /* H3: 16px → 44px (Stays cleanly beneath H2 size universally) */
-  --fs-h3: clamp(1rem, 1.5vw + 0.7rem, 2.75rem);
+  --fs-h3: clamp(1rem, 1vw, 1.04rem);
 
   /* H4: 15px → 32px */
   --fs-h4: clamp(0.9375rem, 1vw + 0.6rem, 2rem);

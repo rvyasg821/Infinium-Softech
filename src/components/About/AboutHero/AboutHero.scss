@@ -67,12 +67,27 @@
 
   @media (max-width: 479px) {
     width: 100%;
+    flex-wrap: nowrap;
+    gap: 8px;
 
     .btn-primary,
-    .btn-outline {
-      width: 100%;
+    .btn-secondary {
+      flex: 1;
       justify-content: center;
       text-align: center;
+      padding: 10px 6px;
+      font-size: 12.5px;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    flex-wrap: wrap;
+
+    .btn-primary,
+    .btn-secondary {
+      flex: none;
+      width: 100%;
     }
   }
 
@@ -99,7 +114,8 @@
       padding: 15px 26px;
     }
 
-    span, svg {
+    span,
+    svg {
       opacity: 0.65;
       transition: transform 0.2s ease;
     }
@@ -109,7 +125,8 @@
       transform: translateY(-1px);
       box-shadow: 0 6px 20px rgba($color-accent, 0.35);
 
-      span, svg {
+      span,
+      svg {
         transform: translateX(3px);
       }
     }
