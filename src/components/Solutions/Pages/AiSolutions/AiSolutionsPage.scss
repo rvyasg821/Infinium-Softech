@@ -84,7 +84,7 @@
     h2 {
       margin-top: 12px;
       font-size: clamp(2.3rem, 3vw, 4rem);
-      line-height: 1.05;
+      line-height: 1.1;
       letter-spacing: -0.03em;
       max-width: 12ch;
     }
@@ -165,7 +165,7 @@
       h2 {
         margin-top: 12px;
         font-size: clamp(2.1rem, 2.5vw, 3.4rem);
-        line-height: 1.08;
+        line-height: 1.1;
         max-width: 12ch;
       }
     }
@@ -173,7 +173,7 @@
     p {
       margin: 0;
       max-width: 560px;
-      font-size: 1.02rem;
+      font-size: 14px;
       line-height: 1.7;
       color: $color-body;
     }
@@ -230,4 +230,3 @@
   }
 
 }
- 

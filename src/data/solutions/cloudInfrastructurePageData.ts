@@ -271,31 +271,6 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
       "A selection of Infinium products and platforms supported by modern application and cloud technologies.",
     items: [
       {
-        name: "Truck Guru",
-        mark: "TG",
-        category: "Logistics · Cloud infrastructure",
-        tint: "#E8A21F",
-        description:
-          "A logistics platform supported by cloud infrastructure for application services, integrations, and scalable operations.",
-        image: "/shots/truckguru.jpg",
-        imageAlt: "Truck Guru logistics platform",
-        href: "/products/loadgo",
-        result: "Logistics operations",
-      },
-      {
-        name: "Slota",
-        mark: "SL",
-        category: "Bookings · Cloud platform",
-        tint: "#1F31E8",
-        description:
-          "A booking and management platform connecting application workflows, teams, services, and customer operations.",
-        image: "/shots/slota.png",
-        imageAlt: "Slota booking and management platform",
-        href: "/products/slota",
-        result: "Booking operations",
-        logo: "/logos/slota-logo.png",
-      },
-      {
         name: "WelzoKart",
         mark: "WK",
         category: "Quick commerce · Cloud platform",
@@ -307,6 +282,32 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
         href: "/products/welzokart",
         result: "Commerce operations",
         logo: "/logos/welzokart-logo.png",
+      },
+      {
+        name: "Slota",
+        mark: "SL",
+        category: "AI · Workforce scheduling",
+        tint: "#1F31E8",
+        description:
+          "An intelligent workforce platform that brings task management, smart scheduling, and behavioral insights into one workspace.",
+        image: "/shots/slota.png",
+        imageAlt: "Slota AI scheduling interface",
+        href: "/products/slota",
+        result: "AI-powered SaaS platform",
+        logo: "/logos/slota-logo.png",
+      },
+      {
+        name: "Needly",
+        mark: "ND",
+        category: "Saas Platform",
+        tint: "#0F8F87",
+        description:
+          "Daily needs buy and sell marketplace with verified neighbourhood listings.",
+        image: "/shots/Needly.png",
+        imageAlt: "Dishly AI kitchen operations screen",
+        href: "/products/dishly",
+        result: "Kitchen AI platform",
+        logo: "/logos/Needly-logo.png",
       },
     ],
   },
@@ -331,15 +332,15 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
       },
       {
         name: "Linux",
-        logo: "/technology/linux.png",
+        logo: "/technology/linux.svg",
       },
       {
         name: "Nginx",
-        logo: "/technology/nginx.png",
+        logo: "/technology/nginx.svg",
       },
       {
         name: "MongoDB",
-        logo: "/technology/mongodb.png",
+        logo: "/technology/MongoDB.png",
       },
       {
         name: "MySQL",
@@ -351,15 +352,15 @@ export const CLOUD_INFRASTRUCTURE_PAGE_CONTENT: WebApplicationsPageContent = {
       },
       {
         name: "GitHub Actions",
-        logo: "/technology/github-actions.png",
+        logo: "/technology/github-actions.svg",
       },
       {
         name: "CloudFront",
-        logo: "/technology/cloudfront.png",
+        logo: "/technology/cloudfront.svg",
       },
       {
         name: "Amazon S3",
-        logo: "/technology/s3.png",
+        logo: "/technology/s3.svg",
       },
     ],
   },

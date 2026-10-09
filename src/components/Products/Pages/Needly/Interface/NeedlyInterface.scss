@@ -1,243 +1,229 @@
-@use "../../../../../styles/variables" as *;
 @use "../../../../../styles/mixins" as *;
 
-.welzokart-interface-lc {
+.needly-interface-section {
   @include section-padding;
-  background-color: #fafcff;
-  position: relative;
-  overflow: hidden;
+  background-color: var(--needly-page-bg);
 }
 
-.interface-lc-container {
+.needly-interface-container {
   @include container;
 }
 
-.interface-lc-header {
-  margin-bottom: 40px;
+.needly-interface-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 32px;
 
-  .lc-eyebrow {
-    @include section-eyebrow("white");
-    margin-bottom: 16px;
+  @media (min-width: 1400px) {
+    max-width: 900px;
   }
 
-  .header-title-row {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+    text-align: left;
+  }
 
-    @media (min-width: $bp-lg) {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 40px;
-    }
+  .section-eyebrow {
+    @include section-eyebrow("dark");
+    // margin-bottom: 24px;
+    display: inline-block;
+  }
 
-    .lc-headline {
-      font-family: $font-display;
-      font-weight: 800;
-      font-stretch: 110%;
-      font-size: var(--fs-h2);
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-      color: $color-ink;
-      margin: 12px 0 0 0;
-      flex: 1;
-    }
+  .interface-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.045em;
+    color: var(--needly-deep-green);
+    line-height: 1.1;
+    margin: 12px 0 0;
+  }
 
-    .lc-desc {
-      font-size: clamp(14px, 1.25vw, 16.5px);
-      line-height: 1.6;
-      color: $color-body;
-      margin-top: 16px;
-      flex: 1;
-      max-width: 540px;
-    }
+  .interface-desc {
+    font-size: 16.5px;
+    color: var(--needly-muted);
+    line-height: 1.6;
+    margin: 16px 0 32px;
   }
 }
 
-/* Tab Navigation Buttons */
-.interface-tab-buttons {
+.interface-carousel-wrapper {
+  position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: #ffffff;
-  padding: 8px;
-  border-radius: 100px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  margin-bottom: 40px;
+
+  @media (max-width: 1023px) {
+    padding: 0 12px;
+  }
+}
+
+.interface-marquee-viewport {
+  width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
+  padding: 32px 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 
   &::-webkit-scrollbar {
     display: none;
   }
 
-  .tab-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 100px;
-    border: none;
-    background: transparent;
-    color: #475569;
-    font-family: $font-display;
-    font-size: 14.5px;
-    font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.25s ease;
-
-    &:hover {
-      color: #1d4ed8;
-      background: #f1f5f9;
-    }
-
-    &.is-active {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      color: #ffffff;
-      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
-
-      .tab-icon {
-        color: #ffffff;
-      }
-    }
+  // MOBILE / TABLET: one image per view, snap scrolling
+  @media (max-width: 1023px) {
+    padding: 16px 0;
+    mask-image: none;
+    flex: 1;
+    min-width: 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
 }
 
-/* Active Tab Content Card */
-.interface-tab-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 28px;
-  padding: 44px;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
-
-  @media (max-width: $bp-lg) {
-    grid-template-columns: 1fr;
-    padding: 28px;
-    gap: 32px;
-  }
-}
-
-.tab-info-col {
+.interface-marquee-track {
   display: flex;
-  flex-direction: column;
+  gap: 40px;
+  width: max-content;
 
-  .tab-badge {
-    display: inline-block;
-    width: fit-content;
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    color: #1d4ed8;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 16px;
+  @media (max-width: 1023px) {
+    gap: 0; // no gap so each slide is exactly 100% of the viewport
+    width: 100%;
   }
+}
 
-  .tab-title {
-    font-family: $font-display;
-    font-size: clamp(24px, 2.5vw, 32px);
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.25;
-    margin: 0 0 14px 0;
-  }
+.interface-image-card {
+  flex: 0 0 clamp(220px, 22vw, 290px);
+  position: relative;
+  border-radius: var(--needly-radius-lg);
+  overflow: visible;
+  perspective: 1200px;
 
-  .tab-desc {
-    font-size: 16px;
-    line-height: 1.65;
-    color: #334155;
-    margin: 0 0 24px 0;
-  }
-
-  .tab-features-list {
+  @media (max-width: 1023px) {
+    flex: 0 0 100%; // exactly one image per view
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 32px;
-
-    .tab-feature-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #0f172a;
-
-      .check-icon {
-        color: #16a34a;
-        flex-shrink: 0;
-      }
-    }
+    justify-content: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    perspective: none;
   }
 
-  .btn-tab-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    width: fit-content;
-    background: #0f172a;
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 100px;
-    font-size: 14.5px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.25s ease;
+  .grid-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--needly-radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(0, 0, 0, 0.04);
 
     @media (max-width: 1023px) {
-      display: none;
+      width: 100%;
+      max-width: 240px; // keep the phone screenshot at a nice size
+      margin: 0 auto;
     }
+  }
+
+  // 3D hover effect only on desktop with a real mouse
+  @media (min-width: 1024px) and (hover: hover) {
+    &:hover .grid-image {
+      transform: rotateY(-8deg) rotateX(8deg) scale(1.08) translateZ(20px);
+      box-shadow: -12px 24px 48px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      z-index: 10;
+    }
+  }
+}
+
+// ---------- Left / Right arrow buttons (mobile + tablet) ----------
+.interface-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: var(--needly-deep-green);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: var(--needly-deep-green);
+    color: #fff;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.92);
+  }
+
+  &.interface-arrow-left {
+    left: 4px;
+  }
+
+  &.interface-arrow-right {
+    right: 4px;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+// ---------- Dots (mobile + tablet) ----------
+.interface-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  .interface-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+
+    &.is-active {
+      width: 24px;
+      background: var(--needly-deep-green);
+    }
+  }
+}
+
+.interface-action {
+  text-align: center;
+  margin-top: 10px;
+
+  .btn-primary {
+    @include btn-hero-primary;
+    background: var(--needly-deep-green); // Overwrite mixin blue with Needly brand color
 
     &:hover {
-      background: #2563eb;
-      transform: translateX(4px);
+      background: var(--needly-app-green);
+      box-shadow: 0 6px 20px rgba(147, 192, 31, 0.3);
     }
-  }
-}
-
-.tab-media-col {
-  width: 100%;
-  perspective: 1000px;
-
-  .tab-image-frame {
-    position: relative;
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 6px solid #ffffff;
-    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
-    transform-style: preserve-3d;
-    cursor: pointer;
-    will-change: transform;
-
-    .tab-active-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      animation: tabFade 0.35s ease;
-    }
-  }
-}
-
-@keyframes tabFade {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }

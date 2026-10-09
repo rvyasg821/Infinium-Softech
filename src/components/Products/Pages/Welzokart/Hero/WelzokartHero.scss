@@ -12,7 +12,12 @@
     padding-top: 72px;
   }
 
-  padding-bottom: 70px;
+  padding-bottom: 0px; // Very small for mobile to decrease huge gap
+
+  @include respond($bp-lg) {
+    padding-bottom: 70px;
+  }
+
   position: relative;
   overflow: hidden;
   background: linear-gradient(180deg, #f4f8fc 0%, #ffffff 55%, #f8fafc 100%);
@@ -184,7 +189,7 @@
   line-height: 1.2;
   letter-spacing: -0.03em;
   color: #0f172a;
-  margin: 0 0 16px 0;
+  margin: 10px 0 10px 0;
 }
 
 /* Chips / Badges under Title (Not styled as action buttons) */
@@ -328,6 +333,10 @@
   align-items: center;
   position: relative;
   width: 100%;
+
+  @media (max-width: 1023px) {
+    margin-top: 32px;
+  }
 }
 
 .phone-mockup-wrapper {
@@ -643,7 +652,10 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: 20px;
-    margin-right: -20px; /* bleeds off screen */
+    padding-top: 12px;
+    margin-top: -12px;
+    margin-right: -20px;
+    /* bleeds off screen */
     margin-left: -20px;
     padding-left: 20px;
     padding-right: 20px;
@@ -658,6 +670,10 @@
       flex-shrink: 0;
       scroll-snap-align: center;
     }
+  }
+
+  @media (min-width : 480px) {
+    margin-bottom: 15px;
   }
 }
 
@@ -696,11 +712,11 @@
 
     .stat-num {
       font-family: $font-display;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 800;
       color: #1d4ed8;
       line-height: 1.1;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       letter-spacing: 0.03em;
     }
 
@@ -898,6 +914,72 @@
   }
 
   to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Hero Entry Animations ---------- */
+@keyframes welzokartHeroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lc-content {
+  >* {
+    opacity: 0;
+    animation: welzokartHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-crumbs {
+    animation-delay: 0.1s;
+  }
+
+  .identity-top {
+    animation-delay: 0.2s;
+  }
+
+  .hero-lc-title {
+    animation-delay: 0.3s;
+  }
+
+  .hero-chips-bar {
+    animation-delay: 0.4s;
+  }
+
+  .hero-lc-desc {
+    animation-delay: 0.5s;
+  }
+
+  .hero-cta-actions {
+    animation-delay: 0.6s;
+  }
+}
+
+.hero-lc-visual {
+  opacity: 0;
+  animation: welzokartHeroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
+}
+
+.hero-social-proof-bar {
+  opacity: 0;
+  animation: welzokartHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-lc-content>*,
+  .hero-lc-visual,
+  .hero-social-proof-bar {
+    animation: none;
     opacity: 1;
   }
 }

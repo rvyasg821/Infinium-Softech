@@ -30,8 +30,8 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(28px, 3.6vw, 64px);
-    line-height: 0.98;
+    font-size: var(--fs-h2);
+    line-height: 1.1;
     letter-spacing: -0.04em;
     margin-top: 18px;
     max-width: 20ch;

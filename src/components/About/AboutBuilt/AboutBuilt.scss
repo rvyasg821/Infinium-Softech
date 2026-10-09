@@ -6,7 +6,7 @@
   background: $color-bg;
   @include section-padding;
   padding-top: 0;
-} 
+}
 
 .about-built-container {
   @include container;
@@ -33,11 +33,11 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 112%;
-    font-size: clamp(30px, 3.8vw, 66px);
-    line-height: 0.96;
+    font-size: var(--fs-h2);
+    line-height: 1.1;
     letter-spacing: -0.045em;
-    margin-top: 18px;
-    margin-bottom: 24px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     color: $color-ink;
 
     @media (min-width: 768px) and (max-width: 1023px) {
@@ -52,7 +52,7 @@
     color: $color-body;
     margin: 0;
 
-    + .about-built-paragraph {
+    +.about-built-paragraph {
       margin-top: 14px;
     }
 
@@ -72,6 +72,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  perspective: 1200px;
 
   @include respond($bp-md) {
     padding-left: 12px;
@@ -83,5 +84,13 @@
     height: auto;
     border-radius: 8px;
     box-shadow: 0 18px 42px rgba(12, 12, 13, 0.14);
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center center;
+
+    &:hover {
+      transform: rotateY(-8deg) rotateX(6deg) scale(1.03);
+      box-shadow: 18px 32px 54px rgba(12, 12, 13, 0.22);
+    }
   }
 }

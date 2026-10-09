@@ -12,21 +12,32 @@ export function ProductPlaceholder({ product }: { product: ProductItem }) {
       <div className="placeholder-hero" style={{ backgroundColor: product.wash }}>
         <div className="placeholder-container">
           <div className="hero-glow-layer" aria-hidden="true">
-            <div 
-              className="hero-glow-center" 
-              style={{ background: `radial-gradient(circle, ${product.tint}33 0%, transparent 70%)` }} 
+            <div
+              className="hero-glow-center"
+              style={{ background: `radial-gradient(circle, ${product.tint}33 0%, transparent 70%)` }}
             />
           </div>
 
           <div className="placeholder-content">
             <div className="placeholder-identity">
-              <span 
-                className="placeholder-mark" 
-                style={{ backgroundColor: product.tint }}
-                title={`${product.name} mark`}
-              >
-                {product.mark}
-              </span>
+              {product.logo ? (
+                <Image
+                  src={product.logo}
+                  alt={`${product.name} Logo`}
+                  width={48}
+                  height={48}
+                  className="placeholder-logo-img"
+                  style={{ borderRadius: "12px", boxShadow: "0 8px 16px rgba(0, 0, 0, 0.06)" }}
+                />
+              ) : (
+                <span
+                  className="placeholder-mark"
+                  style={{ backgroundColor: product.tint }}
+                  title={`${product.name} mark`}
+                >
+                  {product.mark}
+                </span>
+              )}
               <span className="placeholder-tag" style={{ color: product.tint }}>
                 {product.tag} Platform
               </span>
@@ -41,7 +52,7 @@ export function ProductPlaceholder({ product }: { product: ProductItem }) {
                 Coming Soon
               </div>
               <Link href="/products" className="status-link">
-                Explore full ecosystem <span aria-hidden="true">&rarr;</span>
+                Explore full ecosystem<span aria-hidden="true">&rarr;</span>
               </Link>
             </div>
           </div>

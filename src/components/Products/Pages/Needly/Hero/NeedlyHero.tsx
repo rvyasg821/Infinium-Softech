@@ -1,93 +1,180 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProductItem } from "@/data/productsData";
 import {
-  Play,
   ArrowRight,
-  ShieldCheck,
-  Zap,
-  MapPin,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle2,
-  Users,
-  ShoppingBag,
-  Building2,
-  X,
   MessageSquare,
+  Store,
   Smartphone,
-  Globe
+  Globe,
+  Briefcase,
+  // Groceries
+  Apple,
+  Carrot,
+  Cherry,
+  Banana,
+  Grape,
+  Citrus,
+  Milk,
+  Egg,
+  Wheat,
+  Salad,
+  Leaf,
+  ShoppingBasket,
+  ShoppingCart,
+  Croissant,
+  Beef,
+  Fish,
+  Drumstick,
+  Cookie,
+  Candy,
+  IceCream,
+  Pizza,
+  Sandwich,
+  Soup,
+  Coffee,
+  Nut,
+  Bean,
+  Sprout,
+  Popcorn,
+  CupSoda,
+  Package,
+  Cake,
+  Wine,
+  // New: more groceries / household
+  Ham,
+  Hamburger,
+  Donut,
+  Dessert,
+  Lollipop,
+  Beer,
+  GlassWater,
+  Bone,
+  Baby,
+  SprayCan,
+  Droplets,
+  // New: medicine
+  Pill,
+  Stethoscope,
+  Syringe,
+  Thermometer,
+  HeartPulse,
+  Cross,
+  // New: electronics
+  Laptop,
+  Headphones,
+  Tv,
+  Camera,
+  Watch,
+  Lightbulb,
+  Plug,
+  Battery,
+  Speaker,
+  Gamepad2,
+  Keyboard,
+  Printer,
 } from "lucide-react";
 import "./NeedlyHero.scss";
 
-const SLIDES = [
-  {
-    id: "request",
-    title: "Request Groceries",
-    desc: "Send your product list directly to nearby local shops.",
-    img: "/shots/Welzokart_ui-1.png",
-    callout: "📝 Seamless Order Requests"
-  },
-  {
-    id: "response",
-    title: "Shop Response",
-    desc: "Shops confirm what is available and reply with clear prices.",
-    img: "/shots/Welzokart_ui-2.png",
-    callout: "✅ Real-Time Availability"
-  },
-  {
-    id: "confirm",
-    title: "Review & Confirm",
-    desc: "Review the shop's offer and securely confirm your purchase.",
-    img: "/shots/Welzokart_ui-3.png",
-    callout: "💳 Easy Secure Confirmation"
-  },
-  {
-    id: "delivery",
-    title: "Local Delivery",
-    desc: "Groceries are packed and delivered straight to your door.",
-    img: "/shots/Welzokart_ui-4.png",
-    callout: "📍 Transparent Delivery"
-  }
+// Background decorative icons: position (%), size (px), rotation (deg), float delay (s)
+const BG_ICONS = [
+  // Row 1 (top)
+  { Icon: Apple, top: "3%", left: "3%", size: 56, rotate: -15, delay: 0 },
+  { Icon: Wheat, top: "4%", left: "14%", size: 42, rotate: -25, delay: 1.0 },
+  { Icon: Carrot, top: "6%", left: "26%", size: 48, rotate: 25, delay: 1.2 },
+  { Icon: Cookie, top: "3%", left: "38%", size: 40, rotate: 10, delay: 2.2 },
+  { Icon: Croissant, top: "7%", left: "52%", size: 44, rotate: 15, delay: 2.0 },
+  { Icon: Sprout, top: "4%", left: "64%", size: 42, rotate: -10, delay: 0.8 },
+  { Icon: Candy, top: "8%", left: "76%", size: 40, rotate: 20, delay: 1.7 },
+  { Icon: Cherry, top: "4%", left: "90%", size: 52, rotate: 12, delay: 0.6 },
+
+  // Row 1.5 (new: medicine + electronics + food)
+  { Icon: Pill, top: "15%", left: "9%", size: 42, rotate: -18, delay: 0.5 },
+  { Icon: Laptop, top: "14%", left: "20%", size: 46, rotate: 8, delay: 1.9 },
+  { Icon: Ham, top: "16%", left: "33%", size: 44, rotate: -22, delay: 0.3 },
+  { Icon: Headphones, top: "14%", left: "45%", size: 44, rotate: 14, delay: 2.4 },
+  { Icon: Stethoscope, top: "16%", left: "58%", size: 46, rotate: -10, delay: 1.1 },
+  { Icon: Donut, top: "14%", left: "71%", size: 42, rotate: 20, delay: 0.7 },
+  { Icon: Tv, top: "16%", left: "84%", size: 46, rotate: -8, delay: 1.6 },
+  { Icon: Syringe, top: "13%", left: "93%", size: 40, rotate: 30, delay: 2.2 },
+
+  // Row 2
+  { Icon: Milk, top: "24%", left: "2%", size: 50, rotate: -8, delay: 1.8 },
+  { Icon: Fish, top: "26%", left: "16%", size: 46, rotate: 18, delay: 0.4 },
+  { Icon: Banana, top: "22%", left: "47%", size: 54, rotate: 30, delay: 0.3 },
+  { Icon: Pizza, top: "27%", left: "60%", size: 44, rotate: -18, delay: 2.5 },
+  { Icon: Nut, top: "24%", left: "78%", size: 38, rotate: 22, delay: 1.1 },
+  { Icon: Grape, top: "28%", left: "94%", size: 48, rotate: -12, delay: 2.1 },
+
+  // Row 2.5 (new)
+  { Icon: Thermometer, top: "36%", left: "9%", size: 42, rotate: 16, delay: 1.4 },
+  { Icon: Hamburger, top: "35%", left: "26%", size: 44, rotate: -14, delay: 0.8 },
+  { Icon: Camera, top: "37%", left: "40%", size: 44, rotate: 10, delay: 2.0 },
+  { Icon: Beer, top: "35%", left: "56%", size: 42, rotate: -20, delay: 0.2 },
+  { Icon: HeartPulse, top: "37%", left: "72%", size: 44, rotate: 12, delay: 1.7 },
+  { Icon: Watch, top: "35%", left: "88%", size: 42, rotate: -16, delay: 2.6 },
+
+  // Row 3 (middle)
+  { Icon: Salad, top: "46%", left: "4%", size: 58, rotate: 10, delay: 0.9 },
+  { Icon: Egg, top: "44%", left: "20%", size: 40, rotate: 18, delay: 2.4 },
+  { Icon: Soup, top: "48%", left: "34%", size: 46, rotate: -14, delay: 1.4 },
+  { Icon: Drumstick, top: "45%", left: "50%", size: 46, rotate: 28, delay: 0.2 },
+  { Icon: ShoppingCart, top: "47%", left: "66%", size: 46, rotate: -10, delay: 1.6 },
+  { Icon: IceCream, top: "44%", left: "82%", size: 44, rotate: 14, delay: 2.3 },
+  { Icon: Bean, top: "50%", left: "95%", size: 38, rotate: -20, delay: 0.5 },
+
+  // Row 3.5 (new)
+  { Icon: Dessert, top: "57%", left: "10%", size: 42, rotate: -12, delay: 1.0 },
+  { Icon: Lightbulb, top: "56%", left: "23%", size: 42, rotate: 15, delay: 2.1 },
+  { Icon: Lollipop, top: "58%", left: "37%", size: 40, rotate: -24, delay: 0.6 },
+  { Icon: Plug, top: "56%", left: "52%", size: 40, rotate: 18, delay: 1.3 },
+  { Icon: Baby, top: "58%", left: "66%", size: 44, rotate: -8, delay: 2.5 },
+  { Icon: GlassWater, top: "56%", left: "80%", size: 42, rotate: 12, delay: 0.4 },
+
+  // Row 4
+  { Icon: Beef, top: "66%", left: "2%", size: 50, rotate: -12, delay: 1.3 },
+  { Icon: Citrus, top: "68%", left: "14%", size: 50, rotate: -20, delay: 1.5 },
+  { Icon: Sandwich, top: "64%", left: "28%", size: 44, rotate: 16, delay: 0.7 },
+  { Icon: Coffee, top: "67%", left: "44%", size: 42, rotate: -8, delay: 2.6 },
+  { Icon: Package, top: "65%", left: "58%", size: 44, rotate: 12, delay: 1.9 },
+  { Icon: CupSoda, top: "68%", left: "72%", size: 42, rotate: -16, delay: 0.1 },
+  { Icon: ShoppingBasket, top: "64%", left: "90%", size: 60, rotate: 8, delay: 0.2 },
+
+  // Row 4.5 (new)
+  { Icon: Cross, top: "78%", left: "4%", size: 40, rotate: 10, delay: 1.8 },
+  { Icon: Battery, top: "77%", left: "18%", size: 42, rotate: -18, delay: 0.9 },
+  { Icon: Bone, top: "79%", left: "32%", size: 40, rotate: 24, delay: 2.2 },
+  { Icon: Speaker, top: "77%", left: "48%", size: 42, rotate: -10, delay: 0.5 },
+  { Icon: SprayCan, top: "79%", left: "62%", size: 42, rotate: 16, delay: 1.5 },
+  { Icon: Droplets, top: "77%", left: "77%", size: 40, rotate: -14, delay: 2.4 },
+  { Icon: Gamepad2, top: "79%", left: "93%", size: 44, rotate: 12, delay: 0.3 },
+
+  // Row 5 (bottom)
+  { Icon: Popcorn, top: "88%", left: "6%", size: 42, rotate: 14, delay: 2.0 },
+  { Icon: Cake, top: "90%", left: "22%", size: 44, rotate: -10, delay: 0.9 },
+  { Icon: Wine, top: "88%", left: "40%", size: 40, rotate: 20, delay: 1.2 },
+  { Icon: Keyboard, top: "90%", left: "55%", size: 44, rotate: -12, delay: 1.7 },
+  { Icon: Leaf, top: "91%", left: "70%", size: 38, rotate: 35, delay: 0.7 },
+  { Icon: Printer, top: "89%", left: "85%", size: 42, rotate: 10, delay: 2.3 },
 ];
 
 export function NeedlyHero({ product }: { product: ProductItem }) {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const blockRef = useRef<HTMLDivElement>(null);
 
-  const phoneRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.history.scrollRestoration = "manual";
-      window.scrollTo(0, 0);
-    }
-  }, []);
-
-  // Auto-slide effect
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % SLIDES.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  // Parallax tilt handler
+  // Parallax float handler
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!phoneRef.current) return;
-    const rect = phoneRef.current.getBoundingClientRect();
+    if (!blockRef.current) return;
+    const rect = blockRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
     setTilt({
-      x: (y / rect.height) * -10,
-      y: (x / rect.width) * 10
+      x: (y / rect.height) * -3,
+      y: (x / rect.width) * 3,
     });
   };
 
@@ -96,269 +183,162 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
   };
 
   return (
-    <section className="welzokart-hero-lc">
-      <div className="hero-glow-layer" aria-hidden="true">
-        <div className="hero-glow-tr" />
-        <div className="hero-glow-bl" />
-        <div className="hero-glow-center" />
+    <section className="needly-hero-section">
+      {/* Decorative background icons */}
+      <div className="hero-bg-icons" aria-hidden="true">
+        {BG_ICONS.map(({ Icon, top, left, size, rotate, delay }, i) => (
+          <span
+            key={i}
+            className="bg-icon"
+            style={
+              {
+                top,
+                left,
+                "--rotate": `${rotate}deg`,
+                animationDelay: `${delay}s`,
+              } as CSSProperties
+            }
+          >
+            <Icon size={size} strokeWidth={1.5} />
+          </span>
+        ))}
       </div>
 
-      <div className="welzokart-hero-lc-container">
+      <div className="needly-hero-container">
         {/* Top Split Section */}
         <div className="hero-split-top">
-          {/* Left Text Column */}
-          <div className="hero-lc-content">
-            {/* Breadcrumb */}
+          <div className="hero-left-col">
             <nav aria-label="Breadcrumb" className="hero-crumbs">
               <Link href="/products">Products</Link>
               <span className="crumb-sep">/</span>
               <span className="current">Needly</span>
             </nav>
 
-            {/* Identity Badge */}
             <div className="identity-top">
               <Image
                 src="/logos/Needly-logo.png"
-                alt="WelzoKart Logo"
-                width={180}
-                height={50}
+                alt="Needly Logo"
+                width={80}
+                height={80}
                 className="identity-logo"
                 priority
               />
               <div className="identity-meta">
                 <strong className="identity-name">Needly</strong>
                 <span className="identity-sub">
-                  <i className="pulse-dot" /> GROCERY REQUEST PLATFORM · LIVE IN PRODUCTION
+                  Order groceries from nearby shops with live pricing.
                 </span>
               </div>
             </div>
 
-            {/* Title */}
-            <h1 className="hero-lc-title">
-              Order groceries from nearby shops, with real-time availability and pricing.
+            <div className="hero-handwritten">Har Dukaan. Har Zaroorat.</div>
+
+            <h1 className="hero-headline">
+              Nearby Groceries, <br />
+              Real-Time Prices
             </h1>
 
-            {/* Chips / Badges under Title */}
-            <div className="hero-chips-bar" aria-label="Platform tags">
-              <span className="chip-badge">Request-Based</span>
-              <span className="chip-sep">·</span>
-              <span className="chip-badge">Web &amp; Mobile</span>
-              <span className="chip-sep">·</span>
-              <span className="chip-badge">Local Shopping</span>
-              <span className="chip-sep">·</span>
-              <span className="chip-badge">Global</span>
+            <div className="hero-tags" aria-label="Platform tags">
+              <span className="tag-pill">Request-Based</span>
+              <span className="tag-pill">Web &amp; Mobile</span>
+              <span className="tag-pill">Local Shopping</span>
+              <span className="tag-pill">Global</span>
             </div>
 
-            {/* High-Legibility Description */}
-            <p className="hero-lc-desc">
-              Needly connects customers with nearby grocery shops, making local shopping easier through direct product requests, shop responses, and simple order confirmation.
+            <p className="hero-description">
+              Needly connects customers with nearby local grocery shops, making
+              local shopping easier through direct product requests, shop
+              responses, and simple order confirmation.
             </p>
 
-            {/* Hero CTA Action Buttons */}
-            <div className="hero-cta-actions">
-              <Link href="/contact" className="btn-hero-primary">
+            <div className="hero-cta-group">
+              <Link href="/contact" className="needly-btn-primary">
                 <span>Book a Demo</span>
-                <ArrowRight size={18} className="arrow-icon" />
+                <ArrowRight size={18} style={{ marginLeft: "8px" }} />
               </Link>
 
-              <Link href="/contact" className="btn-hero-secondary">
-                <div className="play-icon-circle">
-                  <MessageSquare size={14} />
-                </div>
+              <Link href="/contact" className="needly-btn-secondary">
+                <MessageSquare size={16} style={{ marginRight: "8px" }} />
                 <span>Talk to Our Team</span>
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Interactive Phone Mockup */}
-          <div className="hero-lc-visual">
+          <div className="hero-right-col">
             <div
-              ref={phoneRef}
-              className="phone-mockup-wrapper"
+              ref={blockRef}
+              className="blob-container"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              onMouseEnter={() => setIsPaused(true)}
               style={{
-                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
               }}
             >
-              {/* Floating Callout Badges */}
-              <div className="floating-badge badge-top-left">
-                <Zap size={15} className="icon-zap" />
-                <span>Quick Shop Replies</span>
-              </div>
+              <div className="blob-shape"></div>
+              <div className="blob-orange-circle"></div>
 
-              <div className="floating-badge badge-bottom-left">
-                <MapPin size={15} className="icon-map" />
-                <span>Nearby Local Shops</span>
-              </div>
-
-              <div className="floating-badge badge-top-right">
-                <ShieldCheck size={15} className="icon-shield" />
-                <span>Secure Payments</span>
-              </div>
-
-              <div className="floating-badge badge-bottom-right">
-                <Star size={15} className="icon-star" />
-                <span>4.9 App Rating</span>
-              </div>
-
-              {/* Smartphone Outer Frame */}
-              <div className="phone-device-frame">
-                <div className="phone-notch">
-                  <div className="camera-lens" />
-                  <div className="speaker-grille" />
-                </div>
-
-                {/* Sliding Phone Screen Display */}
-                <div className="phone-screen-viewport">
-                  {SLIDES.map((slide, index) => (
-                    <div
-                      key={slide.id}
-                      className={`phone-screen-slide ${index === activeSlide ? "is-active" : ""}`}
-                    >
-                      <Image
-                        src={slide.img}
-                        alt={slide.title}
-                        width={600}
-                        height={1000}
-                        className="phone-screen-img"
-                        priority={index === 0}
-                      />
-                      <div className="slide-overlay-info">
-                        <span className="slide-tag">{slide.callout}</span>
-                        <h4 className="slide-title">{slide.title}</h4>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Arrow Controls */}
-                <button
-                  type="button"
-                  aria-label="Previous slide"
-                  className="mockup-nav-arrow arrow-left"
-                  onClick={() =>
-                    setActiveSlide((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1))
-                  }
-                >
-                  <ChevronLeft size={20} />
-                </button>
-
-                <button
-                  type="button"
-                  aria-label="Next slide"
-                  className="mockup-nav-arrow arrow-right"
-                  onClick={() =>
-                    setActiveSlide((prev) => (prev + 1) % SLIDES.length)
-                  }
-                >
-                  <ChevronRight size={20} />
-                </button>
-
-                {/* Pagination Dots */}
-                <div className="phone-screen-dots">
-                  {SLIDES.map((slide, idx) => (
-                    <button
-                      key={slide.id}
-                      type="button"
-                      aria-label={`Go to ${slide.title}`}
-                      className={`screen-dot ${idx === activeSlide ? "is-active" : ""}`}
-                      onClick={() => setActiveSlide(idx)}
-                    >
-                      <span className="dot-tooltip">{slide.title}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <Image
+                src="/shots/Welzokart_ui-1.png"
+                alt="Shop catalog screen"
+                width={250}
+                height={520}
+                className="phone-screen phone-back"
+                priority
+              />
+              <Image
+                src="/shots/Welzokart_ui-4.png"
+                alt="Request screen"
+                width={250}
+                height={520}
+                className="phone-screen phone-front"
+                priority
+              />
             </div>
           </div>
         </div>
 
         {/* Live Production Stats & Social Proof Bar */}
-        <div className="hero-social-proof-bar">
-          <div className="stats-live-grid">
-            <div className="stat-live-card">
-              <div className="stat-icon-wrap">
-                <Building2 size={22} />
+        <div className="hero-pinned-info">
+          <div className="info-grid">
+            <div className="info-card">
+              <div className="info-icon">
+                <Briefcase size={22} />
               </div>
-              <div className="stat-data">
-                <span className="stat-num">Industry</span>
-                <span className="stat-text">Local Groceries</span>
+              <div className="info-text">
+                <strong>Industry</strong>
+                <span>Local Groceries</span>
               </div>
             </div>
-
-            <div className="stat-live-card">
-              <div className="stat-icon-wrap">
+            <div className="info-card">
+              <div className="info-icon">
                 <Smartphone size={22} />
               </div>
-              <div className="stat-data">
-                <span className="stat-num">Platform</span>
-                <span className="stat-text">Mobile application</span>
+              <div className="info-text">
+                <strong>Platform</strong>
+                <span>Mobile application</span>
               </div>
             </div>
-
-            <div className="stat-live-card">
-              <div className="stat-icon-wrap">
-                <Zap size={22} />
+            <div className="info-card">
+              <div className="info-icon">
+                <Store size={22} />
               </div>
-              <div className="stat-data">
-                <span className="stat-num">Solutions</span>
-                <span className="stat-text">Request-to-Delivery</span>
+              <div className="info-text">
+                <strong>Solutions</strong>
+                <span>Request-to-Delivery</span>
               </div>
             </div>
-
-            <div className="stat-live-card">
-              <div className="stat-icon-wrap">
+            <div className="info-card">
+              <div className="info-icon">
                 <Globe size={22} />
               </div>
-              <div className="stat-data">
-                <span className="stat-num">Country</span>
-                <span className="stat-text">India</span>
+              <div className="info-text">
+                <strong>Country</strong>
+                <span>India</span>
               </div>
             </div>
           </div>
-
-          {/* <div className="trust-proof-strip">
-            <span className="trust-label">
-              Trusted by 50+ regional retail chains &amp; quick-commerce operators
-            </span>
-            <div className="trust-badges">
-              <span className="proof-pill">✓ Multi-Vendor Support</span>
-              <span className="proof-pill">✓ Live GPS Tracking</span>
-              <span className="proof-pill">✓ PCI-DSS Secure Payments</span>
-            </div>
-          </div> */}
         </div>
       </div>
-
-      {/* Video Modal Popup */}
-      {isVideoOpen && (
-        <div className="hero-video-modal-backdrop" onClick={() => setIsVideoOpen(false)}>
-          <div className="hero-video-modal-dialog" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="video-modal-close"
-              onClick={() => setIsVideoOpen(false)}
-              aria-label="Close video modal"
-            >
-              <X size={24} />
-            </button>
-            <div className="video-container">
-              <div className="video-placeholder-card">
-                <div className="play-pulse-ring">
-                  <Play size={48} className="icon-play-big" />
-                </div>
-                <h3>Needly 60-Second Walkthrough</h3>
-                <p>See how smoothly requests flow from the customer to the local shop owner.</p>
-                <Link href="/contact" className="btn-modal-action" onClick={() => setIsVideoOpen(false)}>
-                  Request Full Product Demo →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

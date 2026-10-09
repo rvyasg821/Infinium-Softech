@@ -33,12 +33,10 @@
       transform: translateX(-50%);
       width: 70%;
       height: 160%;
-      background: radial-gradient(
-        ellipse at center,
-        rgba(31, 49, 232, 0.22) 0%,
-        rgba(139, 63, 232, 0.1) 45%,
-        transparent 70%
-      );
+      background: radial-gradient(ellipse at center,
+          rgba(31, 49, 232, 0.22) 0%,
+          rgba(139, 63, 232, 0.1) 45%,
+          transparent 70%);
       pointer-events: none;
       filter: blur(40px);
     }
@@ -73,15 +71,15 @@
       font-family: $font-display;
       font-weight: 800;
       font-stretch: 112%;
-      font-size: clamp(28px, 3.8vw, 50px);
+      font-size: var(--fs-h2);
       line-height: 0.96;
       letter-spacing: -0.045em;
       color: #f1f0ec;
       margin: 22px 0 0;
 
       @media (max-width: 480px) {
-        font-size: clamp(26px, 7vw, 34px);
-        line-height: 1.05;
+        // font-size: clamp(26px, 7vw, 34px);
+        line-height: 1.1;
       }
     }
 
@@ -275,6 +273,7 @@
 
 // Keyframe Animation for CTA Wave Ribbon
 @keyframes appointgem-cta-wave-sway {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg);

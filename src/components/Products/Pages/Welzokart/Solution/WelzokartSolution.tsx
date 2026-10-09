@@ -75,11 +75,11 @@ export function WelzokartSolution() {
       <div className="solution-lc-container">
 
         <div className="solution-lc-header">
-          <span className="lc-eyebrow">OUR SOLUTION</span>
-          <h2 className="lc-headline">
+          <span data-reveal="" className="lc-eyebrow">OUR SOLUTION</span>
+          <h2 data-reveal="" className="lc-headline">
             Smart, scalable, and secure solutions for seamless grocery services.
           </h2>
-          <p className="lc-desc">
+          <p data-reveal="" className="lc-desc">
             WelzoKart's tailored solutions ensure smooth ordering, secure payments, verified riders, and effortless scalability for a flawless customer experience.
           </p>
         </div>
@@ -101,7 +101,7 @@ export function WelzokartSolution() {
             onScroll={handleScroll}
           >
             {SOLUTIONS.map((item, idx) => (
-              <div key={idx} className="lc-solution-card">
+              <div data-reveal="" key={idx} className="lc-solution-card">
                 <div className="lc-card-header">
                   <div className="lc-card-icon">
                     {item.icon}

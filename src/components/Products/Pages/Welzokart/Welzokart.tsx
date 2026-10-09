@@ -17,14 +17,16 @@ export function Welzokart({ product }: { product: ProductItem }) {
     <div className="Welzokart-page">
       <main>
         <WelzokartHero product={product} />
-        <WelzokartNav />
-        <WelzokartOverview />
-        <WelzokartInterface />
-        <WelzokartChallenges />
-        <WelzokartSolution />
-        <WelzokartWorkflow />
-        <WelzokartResults />
-        <WelzokartStack />
+        <div className="product-nav-container">
+          <WelzokartNav />
+          <WelzokartOverview />
+          <WelzokartInterface />
+          <WelzokartChallenges />
+          <WelzokartSolution />
+          <WelzokartWorkflow />
+          <WelzokartResults />
+          <WelzokartStack />
+        </div>
         <WelzokartEcosystem />
         <WelzokartCta />
       </main>

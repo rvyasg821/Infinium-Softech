@@ -48,10 +48,10 @@
     font-weight: 800;
     font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.94;
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 18px 0 0;
+    margin: 12px 0 0;
 
     @include respond($bp-lg) {
       grid-column: 1;
@@ -67,7 +67,7 @@
     font-size: 16.5px;
     line-height: 1.6;
     color: $color-body;
-    margin: 20px 0 0;
+    margin: 12px 0 0;
     max-width: 560px;
 
     @include respond($bp-lg) {
@@ -331,7 +331,7 @@
       font-family: $font-display;
       font-weight: 800;
       font-stretch: 108%;
-      font-size: clamp(20px, 3.2vw, 32px);
+      font-size: var(--fs-h3);
       letter-spacing: -0.035em;
       color: $color-ink;
       margin: 18px 0 0;

@@ -36,7 +36,7 @@ export function AboutHero() {
               <Link href="/products" className="btn-primary">
                 see our product  <ArrowRight size={16} aria-hidden="true" />
               </Link>
-              <Link href="/contact" className="btn-outline">
+              <Link href="/contact" className="btn-secondary">
                 How we deliver <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>

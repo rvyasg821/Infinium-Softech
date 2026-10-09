@@ -25,13 +25,13 @@ export function AiSolutionsConsultation({ content = defaultContent }: { content?
               <span className="ai-consultation-badge">Book consultation</span>
 
               <h2 className="ai-consultation-title">
-                {content.titleStart}
+                Tell us the operation.
                 <br />
-                {content.titleEnd}
+                We&apos;ll bring the products.
               </h2>
 
               <p className="ai-consultation-desc">
-                {content.description}
+                A 30-minute session with an implementation lead, mapped to your industry and current stack.
               </p>
 
               <div className="ai-consultation-actions">

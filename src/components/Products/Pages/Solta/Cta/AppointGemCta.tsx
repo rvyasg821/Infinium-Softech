@@ -15,7 +15,7 @@ export function AppointGemCta() {
               <span className="consultation-badge">Book consultation</span>
 
               <h2 id="cta-title" className="consultation-title">
-                See Slota <br className="mobile-title-break" />
+                See Slota
                 against your own calendar
               </h2>
 

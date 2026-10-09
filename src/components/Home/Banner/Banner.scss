@@ -276,11 +276,11 @@
     font-family: $font-display;
     font-weight: 800;
     font-size: var(--fs-display);
-    line-height: 0.94;
+    line-height: 1.1;
     letter-spacing: -0.04em;
     max-width: 26ch;
     margin: min(20px, 2vh) auto 0;
-    
+
     @media (max-width: 420px) {
       font-size: clamp(24px, 7.8vw, 36px);
     }
@@ -607,6 +607,16 @@
     font-weight: 800;
     font-size: 8px;
     flex-shrink: 0;
+    overflow: hidden; // logo never spills outside the box
+    box-sizing: border-box;
+
+    // Logo images scale with the box at every screen size
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; // keeps the logo's proportions
+    }
 
     &.mark-blue {
       background: $tint-blue;

@@ -97,19 +97,19 @@ export function WelzokartInterface() {
 
         {/* Section Header */}
         <div className="interface-lc-header">
-          <span className="lc-eyebrow">INTERFACE &amp; ECOSYSTEM</span>
+          <span data-reveal="" className="lc-eyebrow">INTERFACE &amp; ECOSYSTEM</span>
           <div className="header-title-row">
-            <h2 className="lc-headline">
+            <h2 data-reveal="" className="lc-headline">
               Purpose-Built Interfaces for Every Stakeholder
             </h2>
-            <p className="lc-desc">
+            <p data-reveal="" className="lc-desc">
               WelzoKart connects customers, riders, grocery store vendors, and platform administrators into one synchronized ecosystem. Explore how each interface simplifies operations.
             </p>
           </div>
         </div>
 
         {/* Tab Navigation Buttons */}
-        <div className="interface-tab-buttons" role="tablist">
+        <div data-reveal="" className="interface-tab-buttons" role="tablist">
           {TABS.map((tab, idx) => {
             const Icon = tab.icon;
             const isActive = idx === activeTab;
@@ -129,7 +129,7 @@ export function WelzokartInterface() {
         </div>
 
         {/* Active Tab Content Card */}
-        <div className="interface-tab-content">
+        <div data-reveal="" className="interface-tab-content">
           <div className="tab-info-col">
             <span className="tab-badge">{currentTab.badge}</span>
             <h3 className="tab-title">{currentTab.title}</h3>

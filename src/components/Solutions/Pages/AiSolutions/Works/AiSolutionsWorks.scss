@@ -20,7 +20,7 @@
     @media (max-width: 900px) {
       flex-direction: column;
       align-items: flex-start;
-      gap: 24px;
+      gap: 12px;
     }
   }
 
@@ -38,7 +38,7 @@
     font-family: $font-display;
     font-size: var(--fs-h2);
     font-weight: 800;
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.045em;
   }
 
@@ -48,16 +48,16 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
-    
+
     @media (min-width: 901px) {
-      max-width: 480px; 
+      max-width: 480px;
     }
   }
 
   .ai-solutions-works-intro {
     margin: 0;
     color: $color-body;
-    font-size: 1.08rem;
+    font-size: 14px;
     line-height: 1.6;
     max-width: none;
   }
@@ -138,9 +138,8 @@
     transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      border-color: rgba(12, 12, 13, 0.36);
-      box-shadow: 0 12px 32px rgba(12, 12, 13, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(12, 12, 13, 0.08), 0 4px 12px rgba(12, 12, 13, 0.04);
 
       .ai-work-image {
         transform: scale(1.04);
@@ -217,6 +216,16 @@
     font-family: $font-display;
     font-size: 14px;
     font-weight: 800;
+
+    .ai-work-badge-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: #ffffff;
+    }
   }
 
   .ai-work-name {
@@ -354,6 +363,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .ai-solutions-works .ai-work-card,
   .ai-solutions-works .ai-work-image,
   .ai-solutions-works .ai-solutions-works-arrow,

@@ -33,7 +33,7 @@ export function AppointGemOverview() {
           <div className="overview-left">
             <span data-reveal="" className="appointgem-eyebrow">Overview</span>
             <h2 data-reveal="" id="overview-title" className="overview-headline">
-              One calendar the <br className="mobile-title-break" />whole business trusts
+              One calendar the <br />whole business trusts
             </h2>
             <div data-reveal="" className="use-cases-row">
               {USE_CASES.map((item) => (

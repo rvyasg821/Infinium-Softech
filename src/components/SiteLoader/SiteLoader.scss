@@ -21,6 +21,7 @@
   @media (prefers-color-scheme: dark) {
     background-color: var(--bg-dark, #0f1115);
     color: var(--text-dark, #e5e7eb);
+
     .circle-wrap {
       background: var(--card-dark, #1a1d23);
     }
@@ -40,6 +41,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 164px;
+    height: 164px;
+  }
 }
 
 .ring-in {
@@ -51,8 +57,15 @@
 }
 
 @keyframes ringIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .ring {
@@ -71,7 +84,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .circle-wrap {
@@ -86,13 +101,29 @@
   overflow: hidden;
   transform: scale(0);
   opacity: 0;
-  animation: popIn 0.7s cubic-bezier(.34,1.56,.64,1) 0.1s forwards;
+  animation: popIn 0.7s cubic-bezier(.34, 1.56, .64, 1) 0.1s forwards;
+
+  @media (max-width: 768px) {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 @keyframes popIn {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .logo-clip {
@@ -114,7 +145,10 @@
 }
 
 @keyframes logoIn {
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .caption {
@@ -126,6 +160,13 @@
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 0.6; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
 }

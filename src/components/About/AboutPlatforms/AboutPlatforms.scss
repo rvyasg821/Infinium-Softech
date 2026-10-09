@@ -34,8 +34,8 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 112%;
-    font-size: clamp(30px, 3.8vw, 66px);
-    line-height: 0.96;
+    font-size: var(--fs-h2);
+    line-height: 1.1;
     letter-spacing: -0.045em;
     margin-top: 18px;
     color: $color-ink;
@@ -280,9 +280,8 @@
   }
 
   &:hover {
-    border-color: rgba(12, 12, 13, 0.36);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(12, 12, 13, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(12, 12, 13, 0.08), 0 4px 12px rgba(12, 12, 13, 0.04);
 
     .card-img {
       transform: scale(1.04);
@@ -338,6 +337,10 @@
       width: 40px;
       height: 40px;
       object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: #ffffff;
     }
   }
 

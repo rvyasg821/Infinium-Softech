@@ -23,12 +23,15 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
+  @media (max-width: 768px) {
+    gap: 0px;
+  }
 }
 
 .operators-title-wrap {
   .operators-eyebrow {
     @include section-eyebrow("light");
-    margin-bottom: 14px;
   }
 
   .operators-headline {
@@ -36,7 +39,7 @@
     font-weight: 800;
     font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: $color-ink;
     margin: 12px 0 0;

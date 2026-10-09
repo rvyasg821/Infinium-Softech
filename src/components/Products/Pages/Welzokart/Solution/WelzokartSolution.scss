@@ -28,11 +28,15 @@
 .solution-lc-header {
   text-align: left;
   max-width: 800px;
-  margin: 0 0 60px;
+  margin: 0 0 40px;
+
+  @media (max-width: 768px) {
+    margin: 0 0 24px;
+  }
 
   .lc-eyebrow {
     @include section-eyebrow("white");
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .lc-headline {
@@ -40,10 +44,10 @@
     font-weight: 800;
     font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: #0c0c0d;
-    margin: 12px 0 20px 0;
+    margin: 10px 0 10px 0;
   }
 
   .lc-desc {

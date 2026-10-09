@@ -1,273 +1,198 @@
 import "./PrivacyPolicy.scss";
 import { Metadata } from "next";
+import { getPageMetadata } from "@/lib/seo";
+import { ClientScrollSpy } from "@/components/ClientScrollSpy/ClientScrollSpy";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Infinium Softech",
-  description: "Privacy Policy and data practices for Infinium Softech.",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
-};
+export const metadata: Metadata = getPageMetadata("/privacy-policy");
 
 export default function PrivacyPolicyPage() {
   return (
     <main className="privacy-policy-page">
-      <div className="privacy-container">
-        <h1>Privacy Policy</h1>
-        <p className="last-updated">
-          <strong>Last Updated: October 2, 2026</strong>
-        </p>
-
-        <p>
-          At <strong>Infinium Softech</strong>, we respect your privacy and are committed to protecting the personal information you provide when you visit our website, explore our products, contact us, request a demonstration, or otherwise interact with our digital platforms.
-        </p>
-        <p>
-          This Privacy Policy explains what information we collect, how we use it, how we protect it, and the choices available to you.
-        </p>
-        <p>
-          By accessing or using the Infinium Softech website and related product platforms, you acknowledge the practices described in this Privacy Policy.
-        </p>
-
-        <h2>1. About Infinium Softech</h2>
-        <p>
-          Infinium Softech is a product-focused technology company that develops and provides software products, digital solutions, and technology platforms for businesses and users.
-        </p>
-        <p>
-          For the purposes of this Privacy Policy, <strong>"Infinium Softech," "we," "us," and "our"</strong> refer to Infinium Softech and its applicable websites, products, and digital platforms.
-        </p>
-
-        <h2>2. Information We Collect</h2>
-        <p>
-          We may collect information that you voluntarily provide to us and certain information that is automatically collected when you use our website or products.
-        </p>
-
-        <h3>Information You Provide</h3>
-        <p>Depending on how you interact with us, we may collect:</p>
-        <ul>
-          <li>Full name</li>
-          <li>Email address</li>
-          <li>Phone or mobile number</li>
-          <li>Company or organization name</li>
-          <li>Job title or professional information</li>
-          <li>Information submitted through contact forms</li>
-          <li>Information submitted through demo or consultation requests</li>
-          <li>Product or service interests</li>
-          <li>Messages, questions, feedback, or other communications</li>
-          <li>Any other information you voluntarily provide</li>
-        </ul>
-        <p>We only request information that is reasonably necessary for the relevant purpose.</p>
-
-        <h3>Information Collected Automatically</h3>
-        <p>
-          When you visit our website, certain technical and usage information may be collected automatically, including:
-        </p>
-        <ul>
-          <li>IP address</li>
-          <li>Browser type and version</li>
-          <li>Device type</li>
-          <li>Operating system</li>
-          <li>Pages visited</li>
-          <li>Date and time of visits</li>
-          <li>Referring website or page</li>
-          <li>Website interaction and usage information</li>
-          <li>Approximate location information derived from technical data</li>
-        </ul>
-        <p>
-          This information helps us understand website usage, maintain security, and improve our website and products.
-        </p>
-
-        <h2>3. Product Information</h2>
-        <p>
-          If you use one of our products or product platforms, we may collect information required to provide, maintain, secure, and improve the relevant product.
-        </p>
-        <p>
-          The information collected may vary depending on the particular product and its functionality.
-        </p>
-        <p>
-          Where a product processes information on behalf of a business or organization, the applicable customer agreement, product terms, or separate privacy documentation may also apply.
-        </p>
-        <p>
-          We do not use customer-provided product data for unrelated purposes unless permitted by applicable law, contractual terms, or with appropriate authorization.
-        </p>
-
-        <h2>4. How We Use Your Information</h2>
-        <p>We may use the information we collect to:</p>
-        <ul>
-          <li>Respond to your enquiries and requests</li>
-          <li>Provide product information and demonstrations</li>
-          <li>Communicate with you regarding our products and services</li>
-          <li>Provide customer and technical support</li>
-          <li>Operate, maintain, and improve our website</li>
-          <li>Operate and improve our products and platforms</li>
-          <li>Understand how users interact with our website and products</li>
-          <li>Monitor and improve website performance</li>
-          <li>Detect, prevent, and address security issues, fraud, or misuse</li>
-          <li>Maintain the reliability and security of our systems</li>
-          <li>Send important product, service, or administrative communications</li>
-          <li>Comply with applicable legal and regulatory requirements</li>
-          <li>Establish, exercise, or defend our legal rights</li>
-          <li>Carry out other purposes that are communicated to you at the time information is collected</li>
-        </ul>
-
-        <h2>5. Communication</h2>
-        <p>
-          If you submit your contact details through our website, we may use them to respond to your enquiry, provide requested product information, arrange a product demonstration, or communicate regarding your request.
-        </p>
-        <p>
-          Where permitted by applicable law, we may also send information about our products, updates, or company announcements.
-        </p>
-        <p>
-          You may request to stop receiving promotional communications at any time by contacting us or using an available unsubscribe option.
-        </p>
-
-        <h2>6. Cookies and Similar Technologies</h2>
-        <p>
-          Our website may use cookies and similar technologies to provide a better user experience and understand website usage.
-        </p>
-        <p>Cookies may be used to:</p>
-        <ul>
-          <li>Maintain website functionality</li>
-          <li>Remember preferences</li>
-          <li>Understand website traffic and usage</li>
-          <li>Measure website performance</li>
-          <li>Improve our website and products</li>
-          <li>Support analytics and marketing activities where applicable</li>
-        </ul>
-        <p>
-          You can control or disable cookies through your browser settings. Disabling certain cookies may affect some website functionality.
-        </p>
-
-        <h2>7. Analytics and Website Technologies</h2>
-        <p>
-          We may use third-party analytics and website technologies to understand how visitors interact with our website and to improve its performance.
-        </p>
-        <p>
-          These technologies may collect information such as browser type, device information, pages visited, interaction data, and approximate location.
-        </p>
-        <p>
-          Where applicable, third-party providers process information according to their own privacy policies and terms.
-        </p>
-
-        <h2>8. How We Share Information</h2>
-        <p>We do not sell or rent your personal information.</p>
-        <p>
-          We may share information with trusted third parties when reasonably necessary to operate our website, products, and business, including:
-        </p>
-        <ul>
-          <li>Hosting and infrastructure providers</li>
-          <li>Email and communication providers</li>
-          <li>Analytics providers</li>
-          <li>Security and technology providers</li>
-          <li>Customer support and business service providers</li>
-          <li>Professional advisors</li>
-          <li>Government authorities or law enforcement when legally required</li>
-        </ul>
-        <p>
-          Third-party service providers may process information on our behalf and are expected to handle such information appropriately and for authorized purposes.
-        </p>
-
-        <h2>9. Third-Party Links</h2>
-        <p>
-          Our website or products may contain links to third-party websites, applications, or services.
-        </p>
-        <p>
-          We are not responsible for the privacy practices, security, or content of third-party websites. We recommend reviewing the privacy policies of those third parties before providing them with personal information.
-        </p>
-
-        <h2>10. Data Security</h2>
-        <p>
-          We take reasonable technical and organizational measures to protect personal information against unauthorized access, disclosure, alteration, loss, or misuse.
-        </p>
-        <p>
-          However, no method of transmitting or storing information over the internet can be guaranteed to be completely secure.
-        </p>
-        <p>
-          We continuously work to improve the security of our website, products, systems, and data-processing practices.
-        </p>
-
-        <h2>11. Data Retention</h2>
-        <p>
-          We retain personal information only for as long as reasonably necessary for the purposes described in this Privacy Policy, including providing products and services, responding to enquiries, maintaining business records, resolving disputes, and complying with legal obligations.
-        </p>
-        <p>
-          The specific retention period may vary depending on the type of information and the purpose for which it was collected.
-        </p>
-
-        <h2>12. Your Privacy Rights</h2>
-        <p>
-          Depending on applicable law, you may have rights regarding your personal information, which may include:
-        </p>
-        <ul>
-          <li>Requesting access to your personal information</li>
-          <li>Requesting correction of inaccurate information</li>
-          <li>Requesting deletion of personal information</li>
-          <li>Requesting restrictions on certain processing</li>
-          <li>Withdrawing consent where processing is based on consent</li>
-          <li>Objecting to certain uses of your information</li>
-          <li>Requesting information about how your data is processed</li>
-        </ul>
-        <p>
-          To exercise an applicable privacy right, please contact us using the details provided below.
-        </p>
-        <p>
-          We may need to verify your identity before processing certain requests.
-        </p>
-
-        <h2>13. Children's Privacy</h2>
-        <p>
-          Our website and products are primarily intended for businesses, professionals, and general users.
-        </p>
-        <p>
-          We do not knowingly collect personal information from children where such collection is prohibited by applicable law.
-        </p>
-        <p>
-          If you believe that a child has provided personal information to us without appropriate consent, please contact us so that we can take appropriate action.
-        </p>
-
-        <h2>14. International Data Processing</h2>
-        <p>
-          Depending on the technologies and service providers we use, your information may be processed or stored in countries other than the country in which you are located.
-        </p>
-        <p>
-          Where required by applicable law, we take appropriate measures to protect personal information when it is transferred or processed across jurisdictions.
-        </p>
-
-        <h2>15. Product-Specific Privacy</h2>
-        <p>
-          Some Infinium Softech products may have additional privacy requirements depending on their features, users, integrations, and the type of information they process.
-        </p>
-        <p>
-          Where a product requires additional privacy terms or a separate privacy notice, those terms will apply together with this Privacy Policy.
-        </p>
-
-        <h2>16. Changes to This Privacy Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time to reflect changes in our products, website, business practices, technology, or applicable legal requirements.
-        </p>
-        <p>
-          When we make changes, we will update the <strong>"Last Updated"</strong> date at the top of this page.
-        </p>
-        <p>
-          We encourage you to review this page periodically to stay informed about how we protect your information.
-        </p>
-
-        <h2>17. Contact Us</h2>
-        <p>
-          If you have questions about this Privacy Policy, your personal information, or our privacy practices, please contact us:
-        </p>
-        
-        <div className="contact-details">
-          <p><strong>Infinium Softech</strong></p>
-          <p><strong>Email:</strong> <a href="mailto:privacy@yourdomain.com">privacy@yourdomain.com</a></p>
-          <p><strong>Website:</strong> Your Website URL</p>
-          <p><strong>Address:</strong> Company Address</p>
+      <ClientScrollSpy />
+      {/* Hero Section */}
+      <section className="privacy-hero-section">
+        <div className="hero-glow-layer" aria-hidden="true">
+          <div className="hero-glow-tr" />
+          <div className="hero-glow-bl" />
+          <div className="hero-glow-center" />
+          <div className="hero-orbs">
+            <div className="orb-bl" />
+            <div className="orb-tr" />
+          </div>
         </div>
 
-        <p className="copyright-info">
-          <br/>
-          <strong>© 2026 Infinium Softech. All Rights Reserved.</strong>
-        </p>
-      </div>
+        <div className="privacy-hero-container">
+          <div className="privacy-hero-content">
+            <span className="privacy-eyebrow">Trust & Transparency</span>
+            <h1 className="privacy-headline">Privacy Policy</h1>
+            <p className="privacy-lead">
+              At <strong>Infinium Softech</strong>, we respect your privacy and are committed to protecting the personal information you provide when you interact with our digital platforms.
+            </p>
+            <p className="last-updated">
+              Last Updated: <strong>October 9, 2026</strong>
+            </p>
+          </div>
+
+          <div className="privacy-hero-visual">
+            <img src="/shots/privacy-hero-light.png" alt="Privacy and Data Security illustration" />
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="privacy-content-section">
+        <div className="privacy-container">
+
+          {/* Sidebar Menu */}
+          <aside className="privacy-sidebar">
+            <nav className="privacy-nav">
+              <a href="#about" className="sidebar-link">1. About Us</a>
+              <a href="#collect" className="sidebar-link">2. Info We Collect</a>
+              <a href="#products" className="sidebar-link">3. Product Info & Use</a>
+              <a href="#analytics" className="sidebar-link">4. Cookies & Analytics</a>
+              <a href="#sharing" className="sidebar-link">5. Data Sharing & Third-Party</a>
+              <a href="#security" className="sidebar-link">6. Security & Retention</a>
+              <a href="#rights" className="sidebar-link">7. Privacy Rights</a>
+              <a href="#international" className="sidebar-link">8. Updates & International</a>
+              <a href="#contact" className="sidebar-link">9. Contact Us</a>
+            </nav>
+          </aside>
+
+          {/* Privacy Content Data */}
+          <div className="privacy-data">
+            <p>
+              By accessing or using the Infinium Softech website and related product platforms, you acknowledge the practices described in this Privacy Policy.
+            </p>
+
+            <h2 id="about">1. About Infinium Softech</h2>
+            <p>
+              Infinium Softech is a product-focused technology company that provides software products, digital solutions, and technology platforms for businesses and users.
+            </p>
+            <p>
+              In this Privacy Policy, <strong>"Infinium Softech," "we," "us," and "our"</strong> refer to Infinium Softech and its applicable websites, products, and digital platforms.
+            </p>
+
+            <h2 id="collect">2. Information We Collect</h2>
+            <p>
+              We may collect information that you provide voluntarily and technical information collected when you use our website or products.
+            </p>
+            <p><strong>Information you provide may include:</strong></p>
+            <ul>
+              <li>Full name, email address, and phone number</li>
+              <li>Company name, job title, or professional information</li>
+              <li>Contact form submissions and consultation requests</li>
+              <li>Product interests, messages, questions, and feedback</li>
+            </ul>
+            <p><strong>Automatically collected information may include:</strong></p>
+            <ul>
+              <li>IP address, browser type, and operating system</li>
+              <li>Device information and approximate location</li>
+              <li>Pages visited, visit times, and referring websites</li>
+              <li>Website interaction and usage information</li>
+            </ul>
+            <p>
+              The information collected depends on how you interact with our website and services.
+            </p>
+
+            <h2 id="products">3. Product Information and How We Use It</h2>
+            <p>
+              When you use our products or platforms, we may process information necessary to provide, maintain, secure, and improve the relevant services. The information collected may vary depending on the product and its functionality.
+            </p>
+            <p>We may use collected information to:</p>
+            <ul>
+              <li>Respond to enquiries and provide requested information</li>
+              <li>Arrange product demonstrations and consultations</li>
+              <li>Deliver customer and technical support</li>
+              <li>Operate and improve our website, products, and platforms</li>
+              <li>Monitor performance and understand user interactions</li>
+              <li>Detect fraud, security issues, and unauthorized activities</li>
+              <li>Send important product and service communications</li>
+              <li>Meet legal obligations and protect our legal rights</li>
+            </ul>
+            <p>
+              Where we process information on behalf of a business or organization, applicable customer agreements and product-specific privacy terms may also apply.
+            </p>
+
+            <h2 id="analytics">4. Communication, Cookies, and Analytics</h2>
+            <p>
+              We may use your contact details to respond to enquiries, share requested product information, arrange demonstrations, and provide relevant service updates.
+            </p>
+            <p>
+              Where permitted by applicable law, we may also send promotional communications. You can request to stop receiving these communications by contacting us or using an available unsubscribe option.
+            </p>
+            <p>
+              Our website may use cookies and similar technologies to maintain functionality, remember preferences, measure traffic, analyze website performance, and support marketing activities where applicable.
+            </p>
+            <p>
+              We may also use analytics providers and other website technologies to understand visitor behavior. You can manage cookies through your browser settings, although disabling certain cookies may affect website functionality.
+            </p>
+
+            <h2 id="sharing">5. Information Sharing and Third-Party Services</h2>
+            <p>We do not sell or rent your personal information.</p>
+            <p>
+              We may share information with trusted service providers when necessary to operate our business, including hosting providers, email services, analytics providers, security services, customer support providers, and professional advisors.
+            </p>
+            <p>
+              We may also disclose information when required by law or to protect our legal rights.
+            </p>
+            <p>
+              Our website or products may link to third-party websites, applications, APIs, or services. These third parties may have their own privacy policies and practices. We are not responsible for their independent handling of your information.
+            </p>
+
+            <h2 id="security">6. Data Security and Retention</h2>
+            <p>
+              We take reasonable technical and organizational measures to protect personal information against unauthorized access, disclosure, alteration, loss, or misuse.
+            </p>
+            <p>
+              However, no internet transmission or electronic storage method can be guaranteed to be completely secure.
+            </p>
+            <p>
+              We retain personal information only for as long as reasonably necessary to provide services, respond to enquiries, maintain business records, resolve disputes, and comply with legal obligations. Retention periods may vary depending on the information and its purpose.
+            </p>
+
+            <h2 id="rights">7. Your Privacy Rights and Children's Privacy</h2>
+            <p>Depending on applicable law, you may have the right to:</p>
+            <ul>
+              <li>Request access to your personal information</li>
+              <li>Request correction of inaccurate information</li>
+              <li>Request deletion of personal information</li>
+              <li>Request restrictions on certain processing activities</li>
+              <li>Withdraw consent where processing is based on consent</li>
+              <li>Object to certain uses of your information</li>
+              <li>Request information about how your data is processed</li>
+            </ul>
+            <p>
+              You can contact us to exercise applicable privacy rights. We may need to verify your identity before processing your request.
+            </p>
+            <p>
+              Our website and products are primarily intended for businesses, professionals, and general users. We do not knowingly collect children's personal information where prohibited by applicable law. If you believe a child has provided personal information to us inappropriately, please contact us.
+            </p>
+
+            <h2 id="international">8. International Processing, Product Privacy, and Policy Updates</h2>
+            <p>
+              Your information may be processed or stored in countries other than your own, depending on the technologies and service providers we use. Where required by law, we take appropriate measures to protect information transferred across jurisdictions.
+            </p>
+            <p>
+              Some Infinium Softech products may have additional privacy requirements depending on their features, integrations, and the information they process. Separate product-specific privacy notices or agreements may apply alongside this policy.
+            </p>
+            <p>
+              We may update this Privacy Policy to reflect changes in our products, website, business practices, technology, or legal requirements. Updates will be published on this page with a revised <strong>"Last Updated"</strong> date. We encourage you to review this page periodically.
+            </p>
+
+            <h2 id="contact">9. Contact Us</h2>
+            <p>
+              If you have questions about this Privacy Policy, your personal information, or our privacy practices, please contact us:
+            </p>
+
+            <div className="contact-details">
+              <p><strong>Company:</strong> Infinium Softech</p>
+              <p><strong>Email:</strong> <a href="mailto:privacy@yourdomain.com">privacy@yourdomain.com</a></p>
+              <p><strong>Website:</strong> https://infiniumsoftech.com</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

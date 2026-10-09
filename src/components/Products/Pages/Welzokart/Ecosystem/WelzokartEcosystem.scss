@@ -27,8 +27,8 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(30px, 4vw, 68px);
-    line-height: 0.98;
+    font-size: var(--fs-h2);
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: $color-ink;
     margin: 12px 0 0;
@@ -238,12 +238,20 @@
     font-family: $font-display;
     font-weight: 800;
     font-size: 12px;
+
+    .badge-logo {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: #fff;
+      object-fit: contain;
+    }
   }
 
   .card-name {
     font-family: $font-display;
     font-weight: 700;
-    font-size: 16.5px;
+    font-size: var(--fs-h3);
     letter-spacing: -0.02em;
     color: $color-ink;
     margin: 0;
@@ -263,6 +271,6 @@
     font-size: 14px;
     line-height: 1.55;
     color: #3a3a3e;
-    margin-top: 16px;
+    // margin-top: 16px;
   }
 }

@@ -15,7 +15,7 @@
   .why-header {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    // gap: 16px;
 
     @include respond($bp-lg) {
       flex-direction: row;
@@ -34,7 +34,7 @@
     font-weight: 800;
     font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: #f1f0ec;
     margin: 12px 0 0;

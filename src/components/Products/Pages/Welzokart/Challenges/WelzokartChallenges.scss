@@ -16,11 +16,15 @@
 .challenges-lc-header {
   text-align: left;
   max-width: 800px;
-  margin: 0 0 60px;
+  margin: 0 0 40px;
+
+  @media (max-width: 768px) {
+    margin: 0 0 24px;
+  }
 
   .lc-eyebrow {
     @include section-eyebrow("white");
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .lc-headline {
@@ -28,10 +32,10 @@
     font-weight: 800;
     font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 12px 0 20px 0;
+    margin: 10px 0 10px 0;
   }
 
   .lc-desc {
@@ -44,23 +48,26 @@
 .challenges-lc-layout-parts {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 60px;
 
   @media (max-width: $bp-lg) {
-    gap: 60px;
+    gap: 20px;
   }
 }
 
 .challenge-part {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 
   @media (max-width: $bp-lg) {
-    flex-direction: column;
+    gap: 24px;
+    flex-direction: column-reverse;
+    /* Part 1: Image first, cards below */
 
     &:nth-child(2) {
-      flex-direction: column-reverse;
+      flex-direction: column;
+      /* Part 2: Image already first in DOM, cards below */
     }
   }
 }
@@ -77,7 +84,7 @@
   border-radius: 16px;
   background: linear-gradient(135deg, #eef7fe 0%, #ffffff 70%, #f4fafe 100%);
   border: 1px solid #d4ebfc;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
   position: relative;
   overflow: hidden;
@@ -114,6 +121,7 @@
     color: #0b1a2a;
     margin-bottom: 8px;
   }
+
   p {
     font-size: 14px;
     line-height: 1.6;

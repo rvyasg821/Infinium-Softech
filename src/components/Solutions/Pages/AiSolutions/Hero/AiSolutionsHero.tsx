@@ -68,7 +68,7 @@ export function AiSolutionsHero({
               <Link href="/book-a-demo" className="btn-primary">
                 {content.primaryAction} <ArrowRight size={16} aria-hidden="true" />
               </Link>
-              <Link href="/contact" className="btn-outline">
+              <Link href="/contact" className="btn-secondary">
                 {content.secondaryAction} <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>

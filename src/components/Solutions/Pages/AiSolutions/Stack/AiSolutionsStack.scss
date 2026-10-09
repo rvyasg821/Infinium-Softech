@@ -34,12 +34,12 @@
   }
 
   .ai-solutions-stack-title {
-    margin: 18px 0 0;
+    margin: 12px 0 0;
     color: $color-ink;
     font-family: $font-display;
     font-size: var(--fs-h2);
     font-weight: 800;
-    line-height: 0.98;
+    line-height: 1.1;
     letter-spacing: -0.04em;
 
     @include respond($bp-md) {
@@ -49,14 +49,13 @@
 
   .ai-solutions-stack-description {
     max-width: 600px;
-    margin: 18px 0 0;
+    margin: 12px 0 0;
     color: $color-body;
     font-size: 16.5px;
     line-height: 1.6;
 
     @include respond($bp-md) {
       grid-column: 2;
-      margin: 18px 0 0;
     }
 
     @media (min-width: 768px) and (max-width: 1023px) {

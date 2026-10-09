@@ -17,14 +17,16 @@ export function AppointGem({ product }: { product: ProductItem }) {
     <div className="appointgem-page">
       <main>
         <AppointGemHero product={product} />
-        <AppointGemNav />
-        <AppointGemOverview />
-        <AppointGemInterface />
-        <AppointGemChallenges />
-        <AppointGemSolution />
-        <AppointGemWorkflow />
-        <AppointGemResults />
-        <AppointGemStack />
+        <div className="product-nav-container">
+          <AppointGemNav />
+          <AppointGemOverview />
+          <AppointGemInterface />
+          <AppointGemChallenges />
+          <AppointGemSolution />
+          <AppointGemWorkflow />
+          <AppointGemResults />
+          <AppointGemStack />
+        </div>
         <AppointGemEcosystem />
         <AppointGemCta />
       </main>

@@ -58,7 +58,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     items: [
       { label: "Slota", href: "/products/slota" },
       { label: "WelzoKart", href: "/products/welzokart" },
-      { label: "NurseWorth", href: "/products/NurseWorth" },
+      { label: "Needly", href: "/products/needly" },
       { label: "LoadGo", href: "/products/loadgo" },
       { label: "Trekvano", href: "/products/trekvano" },
       { label: "Textora", href: "/products/Textora" },
@@ -99,14 +99,20 @@ const FOOTER_COLUMNS: FooterColumn[] = [
 const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Service", href: "/terms-of-service" },
-  { label: "Security", href: "/book-a-demo" },
 ];
 
+// const SOCIAL_LINKS = [
+//   { name: "Instagram", icon: InstagramIcon, href: "#" },
+//   { name: "Facebook", icon: FacebookIcon, href: "#" },
+//   { name: "YouTube", icon: YoutubeIcon, href: "#" },
+//   { name: "LinkedIn", icon: LinkedinIcon, href: "#" },
+// ];
+
 const SOCIAL_LINKS = [
-  { name: "Instagram", icon: InstagramIcon, href: "https://instagram.com" },
-  { name: "Facebook", icon: FacebookIcon, href: "https://facebook.com" },
-  { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com" },
-  { name: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com" },
+  { name: "Instagram", icon: InstagramIcon },
+  { name: "Facebook", icon: FacebookIcon },
+  { name: "YouTube", icon: YoutubeIcon },
+  { name: "LinkedIn", icon: LinkedinIcon },
 ];
 
 export function Footer() {
@@ -134,9 +140,7 @@ export function Footer() {
           />
 
           <p>
-            Nine proprietary products. One unified platform. Built for
-            operators across logistics, healthcare, commerce, education
-            and services.
+            Powerful products. One unified platform. Built to support operators across logistics, healthcare, commerce, education and services.
           </p>
 
           <div className="social-links">
@@ -145,7 +149,7 @@ export function Footer() {
               return (
                 <a
                   key={social.name}
-                  href={social.href}
+                  // href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}

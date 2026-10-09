@@ -1,227 +1,227 @@
-@use "../../../../../styles/variables" as *;
 @use "../../../../../styles/mixins" as *;
 
-.welzokart-solution-lc {
+.needly-solution-section {
   @include section-padding;
-  background-color: #fafbf5;
-  position: relative;
-  overflow: hidden;
-
-  // Dotted lines background graphic mock
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: radial-gradient(rgba(149, 219, 90, 0.4) 2px, transparent 2px);
-    background-size: 30px 30px;
-    opacity: 0.5;
-  }
+  background-color: var(--needly-page-bg);
 }
 
-.solution-lc-container {
+.needly-solution-container {
   @include container;
-  position: relative;
-  z-index: 2;
 }
 
-.solution-lc-header {
-  text-align: left;
-  max-width: 800px;
-  margin: 0 0 60px;
+.Needly-solution-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 60px;
 
-  .lc-eyebrow {
-    @include section-eyebrow("white");
-    margin-bottom: 20px;
+  @media (min-width: 1400px) {
+    max-width: 800px;
   }
 
-  .lc-headline {
-    font-family: $font-display;
+  @media (max-width: 1023px) {
+    margin-bottom: 36px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-eyebrow {
+    @include section-eyebrow("dark");
+    // margin-bottom: 24px;
+    display: inline-block;
+  }
+
+  .solution-headline {
+    font-family: var(--font-display);
     font-weight: 800;
-    font-stretch: 110%;
     font-size: var(--fs-h2);
-    line-height: 0.98;
     letter-spacing: -0.045em;
-    color: #0c0c0d;
-    margin: 12px 0 20px 0;
+    line-height: 1.1;
+    margin: 12px 0 0;
   }
 
-  .lc-desc {
-    font-size: clamp(14px, 1.25vw, 16.5px);
+  .solution-desc {
+    font-size: 16.5px;
     line-height: 1.6;
-    color: $color-body;
+    max-width: 700px;
+    margin: 16px auto 0;
   }
 }
 
-.solution-carousel-wrapper {
-  position: relative;
+.solution-carousel {
   width: 100%;
 }
 
-.solution-nav-btn {
-  display: none;
-
-  @media (max-width: $bp-md) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 1.5px solid #3c82ca;
-    color: #0c0c0d;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-    transition: all 0.2s ease;
-
-    &.prev-btn {
-      left: -10px;
-    }
-
-    &.next-btn {
-      right: -10px;
-    }
-
-    &:hover:not(:disabled) {
-      background: #3c82ca;
-      color: #ffffff;
-    }
-
-    &:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-      border-color: #cbd5e1;
-      color: #94a3b8;
-    }
-  }
-}
-
-.solution-carousel-dots {
-  display: none;
-
-  @media (max-width: $bp-md) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-
-    .solution-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #cbd5e1;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &.is-active {
-        width: 24px;
-        border-radius: 100px;
-        background: #3c82ca;
-      }
-    }
-  }
-}
-
-.solution-lc-grid {
+// DESKTOP (1024px and above): bento grid
+.solution-bento-grid {
+  position: relative; // needed so offsetLeft is measured from the track
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  gap: 20px;
 
-  @media (max-width: $bp-md) {
+  // MOBILE / TABLET (1023px and below): carousel, one card per view
+  @media (max-width: 1023px) {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
     gap: 16px;
-    padding-bottom: 20px;
-    margin-right: -10px;
-    margin-left: -10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    overflow-x: auto;
+    padding: 4px 2px 12px; // room for card borders / shadows
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+}
 
-    .lc-solution-card {
-      min-width: 85%;
-      // flex-shrink: 0;
-      scroll-snap-align: center;
+.bento-card {
+  background: var(--needly-card-white);
+  border: 1px solid var(--needly-border);
+  border-radius: var(--needly-radius-md);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-column: span 2; // Default for normal cards in a 6-col grid
 
-      /* Override any hover transform displacement on mobile carousel since it can clip */
-      &:hover {
-        transform: none;
-        box-shadow: -6px 6px 0px #3c82ca;
+  // Carousel card: exactly one per view
+  @media (max-width: 1023px) {
+    flex: 0 0 100%;
+    min-width: 0;
+    min-height: 220px;
+    padding: 28px 24px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  @media (max-width: 600px) {
+    min-height: 200px;
+    padding: 24px 20px;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  &.span-2 {
+    grid-column: span 4;
+  }
+
+  &.span-1-5 {
+    grid-column: span 3;
+  }
+
+  &.bg-orange-gradient {
+    background: linear-gradient(135deg, var(--needly-peach), var(--needly-amber));
+    border: none;
+
+    &.dark-text {
+
+      h3,
+      p {
+        color: var(--needly-ink);
       }
+    }
+  }
+
+  &.bg-solid-green {
+    background: var(--needly-app-green);
+    border: none;
+
+    &.white-text {
+
+      h3,
+      p {
+        color: white;
+      }
+    }
+  }
+
+  &.bg-soft-green {
+    background: linear-gradient(135deg, rgba(147, 192, 31, 0.16), rgba(147, 192, 31, 0.06));
+    border: 1px solid rgba(147, 192, 31, 0.28);
+
+    h3 {
+      color: var(--needly-deep-green);
     }
   }
 }
 
-.lc-solution-card {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 16px;
-  border: 1.5px solid #3c82ca;
-  box-shadow: -6px 6px 0px #3c82ca;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+// Arrows + dots (only on 1023px and below)
+.solution-controls {
+  display: none;
 
-  &:hover {
-    transform: translate(2px, -2px);
-    box-shadow: -8px 8px 0px #3c82ca;
-  }
-
-  .lc-card-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .lc-card-icon {
-    width: 60px;
-    height: 60px;
-    background: #f7f9fc;
-    border-radius: 12px;
+  @media (max-width: 1023px) {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    gap: 14px;
+    margin-top: 12px;
+  }
+}
 
-    svg {
-      width: 28px;
-      height: 28px;
-      color: #0c0c0d; // black icons per mockup
+.solution-arrow {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: var(--needly-deep-green);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: var(--needly-deep-green);
+    color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+.solution-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .solution-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+
+    &.is-active {
+      width: 24px;
+      background: var(--needly-deep-green);
     }
-  }
-
-  h3 {
-    font-family: $font-display;
-    font-size: 18px;
-    font-weight: 800;
-    color: #0c0c0d;
-    margin: 0;
-  }
-
-  p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555;
-    margin: 0;
-    white-space: normal;
-    word-break: break-word;
   }
 }

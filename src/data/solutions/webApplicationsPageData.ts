@@ -222,9 +222,45 @@ export const WEB_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
     titleEnd: "for real operations.",
     description: "A selection of Infinium products with web experiences built around everyday workflows.",
     items: [
-      { name: "Slota", mark: "SL", category: "Bookings · Web platform", tint: "#1F31E8", description: "A booking and management platform that brings calendars, teams, services, and payments together.", image: "/shots/slota.png", imageAlt: "Slota booking and management platform", href: "/products/slota", result: "Booking operations", logo: "/logos/slota-logo.png" },
-      { name: "WelzoKart", mark: "WK", category: "Quick commerce · Web platform", tint: "#1E9E5A", description: "A commerce platform connecting product catalogs, orders, dispatch, and customer experiences.", image: "/shots/Welzokart 2.jpg", imageAlt: "WelzoKart commerce platform", href: "/products/welzokart", result: "Commerce operations", logo: "/logos/welzokart-logo.png" },
-      { name: "NurseWorth", mark: "NW", category: "Healthcare · Web platform", tint: "#8B3FE8", description: "A healthcare staffing platform for credentialing, shift matching, and workforce coordination.", image: "/shots/mapmypay.jpg", imageAlt: "NurseWorth staffing platform", href: "/products/NurseWorth", result: "Workforce management" },
+      {
+        name: "WelzoKart",
+        mark: "WK",
+        category: "Quick commerce · Cloud platform",
+        tint: "#1E9E5A",
+        description:
+          "A commerce platform connecting catalogs, orders, dispatch, and customer experiences through connected digital services.",
+        image: "/shots/Welzokart 2.jpg",
+        imageAlt: "WelzoKart commerce platform",
+        href: "/products/welzokart",
+        result: "Commerce operations",
+        logo: "/logos/welzokart-logo.png",
+      },
+      {
+        name: "Slota",
+        mark: "SL",
+        category: "AI · Workforce scheduling",
+        tint: "#1F31E8",
+        description:
+          "An intelligent workforce platform that brings task management, smart scheduling, and behavioral insights into one workspace.",
+        image: "/shots/slota.png",
+        imageAlt: "Slota AI scheduling interface",
+        href: "/products/slota",
+        result: "AI-powered SaaS platform",
+        logo: "/logos/slota-logo.png",
+      },
+      {
+        name: "Needly",
+        mark: "ND",
+        category: "Saas Platform",
+        tint: "#0F8F87",
+        description:
+          "Daily needs buy and sell marketplace with verified neighbourhood listings.",
+        image: "/shots/Needly.png",
+        imageAlt: "Dishly AI kitchen operations screen",
+        href: "/products/dishly",
+        result: "Kitchen AI platform",
+        logo: "/logos/Needly-logo.png",
+      },
     ],
   },
   stack: {
@@ -243,7 +279,7 @@ export const WEB_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
       { name: "Java", logo: "/technology/java.png" },
       { name: "PostgreSQL", logo: "/technology/Postgre-SQL.png" },
       { name: "MySQL", logo: "/technology/mysql.png" },
-      { name: "AWS", logo: "/technology/AWS.png" },
+      { name: "AWS", logo: "/technology/cloudfront.svg" },
     ],
   },
 };

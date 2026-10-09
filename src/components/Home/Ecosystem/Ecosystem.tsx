@@ -10,6 +10,57 @@ import "./Ecosystem.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function EcosystemVisualCol({ prod }: { prod: EcosystemProduct & { wash: string, shot: string } | any }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setTilt({
+      x: (y / rect.height) * -8,
+      y: (x / rect.width) * 8
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  return (
+    <div
+      className="card-visual"
+      style={{
+        backgroundColor: prod.wash,
+      }}
+    >
+      <div className="visual-glow" aria-hidden="true" />
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="preview-img-wrapper"
+        style={{
+          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transition: tilt.x === 0 && tilt.y === 0 ? "transform 0.5s ease" : "transform 0.1s ease"
+        }}
+      >
+        <Image
+          src={prod.shot}
+          alt={`${prod.name} product screen preview`}
+          width={960}
+          height={600}
+          sizes="(min-width: 1280px) 720px, (min-width: 1024px) 55vw, 100vw"
+          className="preview-shot"
+          loading="eager"
+        />
+      </div>
+    </div>
+  );
+}
+
 export function Ecosystem() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
@@ -652,26 +703,7 @@ export function Ecosystem() {
                     </div>
 
                     {/* Right Column: Screenshot Visual */}
-                    <div
-                      className="card-visual"
-                      style={{
-                        backgroundColor: prod.wash,
-                      }}
-                    >
-                      <div className="visual-glow" aria-hidden="true" />
-
-                      <div className="preview-img-wrapper">
-                        <Image
-                          src={prod.shot}
-                          alt={`${prod.name} product screen preview`}
-                          width={960}
-                          height={600}
-                          sizes="(min-width: 1280px) 720px, (min-width: 1024px) 55vw, 100vw"
-                          className="preview-shot"
-                          loading="eager"
-                        />
-                      </div>
-                    </div>
+                    <EcosystemVisualCol prod={prod} />
                   </div>
                 </div>
               ))}
