@@ -1,8 +1,13 @@
 "use server";
 
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: process.env.SMTP_SECURE === "true",
+  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+});
 
 export async function sendContactEmail(formData: {
   name: string;
@@ -16,9 +21,9 @@ export async function sendContactEmail(formData: {
   try {
     const { name, email, mobile, service, stage, startTime, message } = formData;
 
-    const data = await resend.emails.send({
-      from: "Infinium Softech <onboarding@resend.dev>",
-      to: [process.env.CONTACT_EMAIL || "hello@infiniumsoftech.com"], // Uses the email you specified in .env.local
+    const data = await transporter.sendMail({
+      from: `Infinium Softech <${process.env.SMTP_USER}>`,
+      to: process.env.CONTACT_EMAIL || "hello@infiniumsoftech.com",
       subject: `New Contact Request from ${name}`,
       text: `
         New Contact Request
@@ -32,11 +37,6 @@ export async function sendContactEmail(formData: {
         Message: ${message}
       `,
     });
-
-    if (data.error) {
-      console.error("Resend API returned an error:", data.error);
-      return { success: false, error: data.error.message };
-    }
 
     return { success: true, data };
   } catch (error) {
@@ -58,9 +58,9 @@ export async function sendDemoEmail(formData: {
   try {
     const { name, email, company, size, product, day, time, message } = formData;
 
-    const data = await resend.emails.send({
-      from: "Infinium Softech <onboarding@resend.dev>",
-      to: [process.env.CONTACT_EMAIL || "hello@infiniumsoftech.com"], // Uses the email you specified in .env.local
+    const data = await transporter.sendMail({
+      from: `Infinium Softech <${process.env.SMTP_USER}>`,
+      to: process.env.CONTACT_EMAIL || "hello@infiniumsoftech.com",
       subject: `New Demo Request: ${company || name}`,
       text: `
         New Demo Request
@@ -74,11 +74,6 @@ export async function sendDemoEmail(formData: {
         Additional Info: ${message}
       `,
     });
-
-    if (data.error) {
-      console.error("Resend API returned an error:", data.error);
-      return { success: false, error: data.error.message };
-    }
 
     return { success: true, data };
   } catch (error) {
