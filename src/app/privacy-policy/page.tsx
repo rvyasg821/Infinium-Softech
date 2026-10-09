@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
               Last Updated: <strong>October 9, 2026</strong>
             </p>
           </div>
-          
+
           <div className="privacy-hero-visual">
             <img src="/shots/privacy-hero-light.png" alt="Privacy and Data Security illustration" />
           </div>
@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
       {/* Content Section */}
       <section className="privacy-content-section">
         <div className="privacy-container">
-            
+
           {/* Sidebar Menu */}
           <aside className="privacy-sidebar">
             <nav className="privacy-nav">
@@ -189,7 +189,7 @@ export default function PrivacyPolicyPage() {
               <p><strong>Email:</strong> <a href="mailto:privacy@yourdomain.com">privacy@yourdomain.com</a></p>
               <p><strong>Website:</strong> https://infiniumsoftech.com</p>
             </div>
-            
+
           </div>
         </div>
       </section>

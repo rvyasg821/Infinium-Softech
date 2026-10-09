@@ -28,11 +28,11 @@ export function ClientScrollSpy() {
           }
         });
       },
-      { 
+      {
         // Trigger when the element is just past the sticky header (120px) 
         // down to about 60% of the screen height
-        rootMargin: "-130px 0px -70% 0px", 
-        threshold: 0 
+        rootMargin: "-130px 0px -70% 0px",
+        threshold: 0
       }
     );
 

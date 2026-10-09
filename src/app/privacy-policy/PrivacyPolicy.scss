@@ -6,7 +6,7 @@
   color: $color-ink;
   min-height: 100vh;
   position: relative;
-  overflow-x: clip; 
+  overflow-x: clip;
 
   // Hero Section (Matches About Section exactly)
   .privacy-hero-section {
@@ -70,16 +70,25 @@
       .last-updated {
         font-size: 14px;
         color: $color-muted;
+
         strong {
           color: $color-ink;
         }
       }
     }
-    
+
     @keyframes float-hero {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
     }
 
     .privacy-hero-visual {
@@ -131,16 +140,15 @@
       overscroll-behavior: contain;
       scrollbar-width: thin;
       scrollbar-color: rgba(12, 12, 13, 0.2) transparent;
-      
+
       @media (max-width: 991px) {
-        position: relative;
-        top: 0;
-        max-height: none;
+        display: none;
       }
 
       &::-webkit-scrollbar {
         width: 6px;
       }
+
       &::-webkit-scrollbar-thumb {
         background: rgba(12, 12, 13, 0.2);
         border-radius: 6px;
@@ -149,7 +157,7 @@
       &:hover::-webkit-scrollbar-thumb {
         background: rgba(12, 12, 13, 0.4);
       }
-      
+
       .privacy-nav {
         display: flex;
         flex-direction: column;
@@ -168,7 +176,7 @@
         text-decoration: none;
         transition: background 0.2s ease, color 0.2s ease;
         flex-shrink: 0;
-        
+
         svg {
           width: 18px;
           height: 18px;
@@ -176,11 +184,12 @@
           flex-shrink: 0;
           transition: color 0.2s ease;
         }
-        
-        &:hover, &.active {
+
+        &:hover,
+        &.active {
           background: #eff6ff;
           color: #1d4ed8;
-          
+
           svg {
             color: #3b82f6;
           }
