@@ -81,10 +81,10 @@ export function AppointGemResults() {
   return (
     <section id="results" className="appointgem-results-section" aria-labelledby="results-title">
       <div className="appointgem-results-container">
-        <div className="results-header">
+        <div className="slota-results-header">
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Key results</span>
-            <h2 data-reveal="" id="results-title" className="results-headline">
+            <h2 data-reveal="" id="results-title" className="slota-results-headline">
               Measured across <br className="mobile-title-break" />live accounts
             </h2>
           </div>

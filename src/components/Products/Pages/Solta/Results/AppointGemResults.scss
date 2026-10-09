@@ -14,10 +14,11 @@
     @include section-eyebrow("light");
   }
 
-  .results-header {
+  .slota-results-header {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    text-align: start;
 
     @include respond($bp-lg) {
       flex-direction: row;
@@ -27,7 +28,7 @@
     }
   }
 
-  .results-headline {
+  .slota-results-headline {
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;

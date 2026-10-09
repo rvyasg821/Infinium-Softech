@@ -16,17 +16,13 @@
   .solution-header {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
 
     @include respond($bp-lg) {
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
       gap: 50px;
-    }
-
-    @media (max-width: 480px) {
-      gap: 12px;
     }
   }
 
@@ -42,15 +38,23 @@
     line-height: 1.1;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 12px 0 0;
+    margin: 12px 0;
+
+    @include respond($bp-lg) {
+      margin: 12px 0 0;
+    }
   }
 
   .solution-subtitle {
     font-size: clamp(14px, 1.25vw, 16.5px);
     line-height: 1.6;
     color: $color-body;
-    margin: 12px 0 0;
     max-width: 560px;
+    margin: 0;
+
+    @include respond($bp-lg) {
+      margin: 12px 0 0;
+    }
   }
 
   .solution-grid {

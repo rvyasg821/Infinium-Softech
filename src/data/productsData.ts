@@ -130,7 +130,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metric: "58,020",
     metricDelta: "▲ 26.1%",
     shot: "/shots/Needly.png",
-    logo: "/logos/needly-logo.png",
+    logo: "/logos/Needly-logo.png",
     apps: "Web, buyer, seller",
     api: "Payments + KYC",
     golive: "6–8 weeks",

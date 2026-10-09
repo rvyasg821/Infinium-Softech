@@ -14,7 +14,7 @@
   .workflow-header-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0px;
 
     @include respond($bp-lg) {
       flex-direction: row;
