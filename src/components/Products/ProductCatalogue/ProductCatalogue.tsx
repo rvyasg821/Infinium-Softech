@@ -245,7 +245,7 @@ export function ProductCatalogue({
               className="btn-reset"
               onClick={() => onSelectFilter("All")}
             >
-              Show all nine
+              Show all
             </button>
           </div>
         )}

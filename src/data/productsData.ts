@@ -262,7 +262,6 @@ export const PRODUCT_CATEGORIES = [
   "All",
   "Bookings",
   "Quick commerce",
-  "Healthcare",
   "Logistics",
   "Kitchen AI",
   "Education",
