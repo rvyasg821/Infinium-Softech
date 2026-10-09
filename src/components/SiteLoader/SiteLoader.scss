@@ -41,6 +41,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 164px;
+    height: 164px;
+  }
 }
 
 .ring-in {
@@ -97,6 +102,11 @@
   transform: scale(0);
   opacity: 0;
   animation: popIn 0.7s cubic-bezier(.34, 1.56, .64, 1) 0.1s forwards;
+
+  @media (max-width: 768px) {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 @keyframes popIn {
@@ -117,8 +127,8 @@
 }
 
 .logo-clip {
-  width: 50%;
-  height: 50%;
+  width: 72%;
+  height: 72%;
   overflow: hidden;
   display: flex;
   align-items: center;

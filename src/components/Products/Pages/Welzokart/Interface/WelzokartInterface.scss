@@ -155,10 +155,10 @@
 
   .tab-title {
     font-family: $font-display;
-    font-size: clamp(24px, 2.5vw, 32px);
+    // font-size: clamp(24px, 2.5vw, 32px);
     font-weight: 800;
     color: #0f172a;
-    line-height: 1.25;
+    line-height: 1.1;
     margin: 0 0 14px 0;
   }
 
