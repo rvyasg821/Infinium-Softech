@@ -28,12 +28,13 @@
 
   .section-eyebrow {
     @include section-eyebrow("dark");
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
     display: inline-block;
   }
 
   .solution-headline {
     margin-bottom: 20px;
+
     @media (max-width: 768px) {
       margin: 10px 0;
     }

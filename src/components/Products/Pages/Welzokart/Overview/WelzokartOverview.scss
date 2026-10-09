@@ -92,7 +92,7 @@
 
   .lc-eyebrow {
     @include section-eyebrow("white");
-    margin-bottom: 16px;
+    // margin-bottom: 16px;
 
     @media (max-width: $bp-lg) {
       order: 1;

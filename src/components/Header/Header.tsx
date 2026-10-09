@@ -118,7 +118,8 @@ export function Header() {
 
       if (menuDef.isProducts && menuDef.productItems && menuDef.productItems.length > 0) {
         const match = menuDef.productItems.find(p => pathname === `/products/${p.id}`);
-        nextPreviewName = match ? match.name : menuDef.productItems[0].name;
+        // Only highlight if matching the current page
+        nextPreviewName = match ? match.name : "";
       } else if (menuDef.items && menuDef.items.length > 0) {
         const match = menuDef.items.find(item => item.href && item.href.split("#")[0] !== "/" && pathname.startsWith(item.href.split("#")[0]));
         if (match) {
@@ -131,13 +132,11 @@ export function Header() {
           }
         }
         if (!nextPreviewName) {
-          nextPreviewName = menuDef.items[0].product;
+          nextPreviewName = ""; // Only highlight if matching the current page
         }
       }
 
-      if (nextPreviewName) {
-        setPreviewProductName(nextPreviewName);
-      }
+      setPreviewProductName(nextPreviewName);
     }
   };
 
@@ -408,11 +407,9 @@ export function Header() {
               {/* Mobile / Tablet Horizontal Category Chip Tabs */}
               <div className="mobile-category-chips-wrapper">
                 <div className="mobile-category-chips">
-                  {/* FIX: About/Contact chips are never "selected" (filled).
-                      Only the open menu chip is filled, so two chips can't be highlighted together. */}
                   <Link
                     href="/about"
-                    className={`category-chip ${activeMenu === "about" || (!activeMenu && pathname === "/about") ? "is-selected" : ""}`}
+                    className={`category-chip ${pathname.startsWith("/about") ? "is-selected" : ""}`}
                     aria-current={pathname === "/about" ? "page" : undefined}
                     onClick={(event) => handleHeaderLinkClick(event, "/about")}
                   >
@@ -421,7 +418,8 @@ export function Header() {
 
                   {MENU_KEYS.map((key) => {
                     const def = MENU_DEFS[key];
-                    const isSelected = currentMenuKey === key;
+                    const isSelected = pathname.startsWith("/" + key);
+                    const isOpenTab = currentMenuKey === key;
                     return (
                       <button
                         key={key}
@@ -429,7 +427,7 @@ export function Header() {
                           chipRefs.current[key] = el;
                         }}
                         type="button"
-                        className={`category-chip ${isSelected ? "is-selected" : ""}`}
+                        className={`category-chip ${isSelected ? "is-selected" : ""} ${isOpenTab ? "is-open-tab" : ""}`}
                         aria-pressed={isSelected}
                         onClick={() => handleCategoryClick(key)}
                       >
@@ -440,7 +438,7 @@ export function Header() {
 
                   <Link
                     href="/contact"
-                    className={`category-chip ${activeMenu === "contact" || (!activeMenu && pathname === "/contact") ? "is-selected" : ""}`}
+                    className={`category-chip ${pathname.startsWith("/contact") ? "is-selected" : ""}`}
                     aria-current={pathname === "/contact" ? "page" : undefined}
                     onClick={(event) => handleHeaderLinkClick(event, "/contact")}
                   >

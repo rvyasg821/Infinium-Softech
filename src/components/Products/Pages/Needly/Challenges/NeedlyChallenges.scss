@@ -30,14 +30,15 @@
 
   .section-eyebrow {
     @include section-eyebrow("white");
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
     display: inline-block;
   }
 
   .challenges-headline {
     color: white;
     margin-bottom: 24px;
-    line-height: 1.2;
+    line-height: 1.1;
+
     @media (max-width: 768px) {
       margin: 10px 0;
     }

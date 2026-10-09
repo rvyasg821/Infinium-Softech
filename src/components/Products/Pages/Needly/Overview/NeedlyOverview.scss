@@ -21,23 +21,23 @@
 .overview-left-col {
   padding-right: 40px;
   position: relative;
-  
+
   @media (max-width: 992px) {
     padding-right: 0;
   }
-  
+
   .section-eyebrow {
     @include section-eyebrow("dark");
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
     display: inline-block;
   }
 
   .overview-headline {
-    
-    line-height: 1.2;
+
+    line-height: 1.1;
     margin-bottom: 24px;
     max-width: 500px;
-    
+
     @media (min-width: 1400px) {
       font-size: 46px;
     }
@@ -46,6 +46,7 @@
       margin: 10px 0;
     }
   }
+
   .overview-desc {
     font-size: 16.5px;
     line-height: 1.6;
@@ -65,12 +66,12 @@
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--needly-radius-lg);
     padding: 24px 32px;
-    
+
     .meta-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      
+
       .icon-wrapper {
         width: 38px;
         height: 38px;
@@ -95,6 +96,7 @@
           letter-spacing: 0.05em;
           opacity: 0.7;
         }
+
         .meta-value {
           color: var(--needly-ink);
           font-size: 1rem;
@@ -143,7 +145,7 @@
     width: 100%;
     height: auto;
     border-radius: var(--needly-radius-lg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
     transform: rotateY(-8deg) rotateX(4deg) translateZ(0);
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -152,7 +154,7 @@
 
     &:hover {
       transform: rotateY(0deg) rotateX(0deg) scale(1.03) translateZ(20px);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.8) inset;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     }
   }
 }

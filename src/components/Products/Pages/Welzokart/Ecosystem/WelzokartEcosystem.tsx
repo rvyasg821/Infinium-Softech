@@ -35,8 +35,8 @@ function EcosystemCardView({
 
       <div className="card-body">
         <div className="card-identity">
-          <span 
-            className="card-badge" 
+          <span
+            className="card-badge"
             style={{ backgroundColor: prod.logo ? "transparent" : prod.tint }}
           >
             {prod.logo ? (
@@ -79,7 +79,7 @@ export function WelzokartEcosystem() {
             Other products in <br className="mobile-title-break" />the ecosystem
           </h2>
           <Link href="/products" className="ecosystem-link">
-            View all nine <span aria-hidden="true">→</span>
+            View all<span aria-hidden="true">→</span>
           </Link>
         </div>
 

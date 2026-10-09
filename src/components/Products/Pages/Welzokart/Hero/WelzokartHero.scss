@@ -333,7 +333,7 @@
   align-items: center;
   position: relative;
   width: 100%;
-  
+
   @media (max-width: 768px) {
     margin-top: 32px;
   }
@@ -706,11 +706,11 @@
 
     .stat-num {
       font-family: $font-display;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 800;
       color: #1d4ed8;
       line-height: 1.1;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       letter-spacing: 0.03em;
     }
 
@@ -918,6 +918,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -925,16 +926,34 @@
 }
 
 .hero-lc-content {
-  > * {
+  >* {
     opacity: 0;
     animation: welzokartHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  .hero-crumbs { animation-delay: 0.1s; }
-  .identity-top { animation-delay: 0.2s; }
-  .hero-lc-title { animation-delay: 0.3s; }
-  .hero-chips-bar { animation-delay: 0.4s; }
-  .hero-lc-desc { animation-delay: 0.5s; }
-  .hero-cta-actions { animation-delay: 0.6s; }
+
+  .hero-crumbs {
+    animation-delay: 0.1s;
+  }
+
+  .identity-top {
+    animation-delay: 0.2s;
+  }
+
+  .hero-lc-title {
+    animation-delay: 0.3s;
+  }
+
+  .hero-chips-bar {
+    animation-delay: 0.4s;
+  }
+
+  .hero-lc-desc {
+    animation-delay: 0.5s;
+  }
+
+  .hero-cta-actions {
+    animation-delay: 0.6s;
+  }
 }
 
 .hero-lc-visual {
@@ -950,7 +969,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-lc-content > *,
+
+  .hero-lc-content>*,
   .hero-lc-visual,
   .hero-social-proof-bar {
     animation: none;

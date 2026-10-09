@@ -434,7 +434,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "AWS (Amazon Web Services)",
     description:
       "AWS provides a broad set of cloud services including EC2, S3, RDS, Lambda, and CloudFront. We design, deploy, and manage secure, highly available cloud architectures on AWS that scale automatically with demand, while keeping infrastructure costs under control.",
-    image: "/technology/AWS.png",
+    image: "/technology/AWS_black.png",
     color: "#E8A21F",
   },
   {

@@ -58,7 +58,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     items: [
       { label: "Slota", href: "/products/slota" },
       { label: "WelzoKart", href: "/products/welzokart" },
-      { label: "NurseWorth", href: "/products/NurseWorth" },
+      { label: "Needly", href: "/products/needly" },
       { label: "LoadGo", href: "/products/loadgo" },
       { label: "Trekvano", href: "/products/trekvano" },
       { label: "Textora", href: "/products/Textora" },
@@ -101,11 +101,18 @@ const LEGAL_LINKS = [
   { label: "Terms of Service", href: "/terms-of-service" },
 ];
 
+// const SOCIAL_LINKS = [
+//   { name: "Instagram", icon: InstagramIcon, href: "#" },
+//   { name: "Facebook", icon: FacebookIcon, href: "#" },
+//   { name: "YouTube", icon: YoutubeIcon, href: "#" },
+//   { name: "LinkedIn", icon: LinkedinIcon, href: "#" },
+// ];
+
 const SOCIAL_LINKS = [
-  { name: "Instagram", icon: InstagramIcon, href: "https://instagram.com" },
-  { name: "Facebook", icon: FacebookIcon, href: "https://facebook.com" },
-  { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com" },
-  { name: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com" },
+  { name: "Instagram", icon: InstagramIcon },
+  { name: "Facebook", icon: FacebookIcon },
+  { name: "YouTube", icon: YoutubeIcon },
+  { name: "LinkedIn", icon: LinkedinIcon },
 ];
 
 export function Footer() {
@@ -142,7 +149,7 @@ export function Footer() {
               return (
                 <a
                   key={social.name}
-                  href={social.href}
+                  // href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}

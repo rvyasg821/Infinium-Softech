@@ -79,7 +79,7 @@ export function NeedlyEcosystem() {
             Other products in <br className="mobile-title-break" />the ecosystem
           </h2>
           <Link href="/products" className="ecosystem-link">
-            View all nine <span aria-hidden="true">→</span>
+            View all<span aria-hidden="true">→</span>
           </Link>
         </div>
 

@@ -225,6 +225,10 @@
   @include respond($bp-md) {
     margin-bottom: 56px;
   }
+
+  @media (max-width:768px) {
+    margin-bottom: 25px;
+  }
 }
 
 .category-header-eyebrow {
@@ -263,7 +267,7 @@
   font-weight: 800;
   font-stretch: 110%;
   font-size: clamp(26px, 3.2vw, 48px);
-  line-height: 0.94;
+  line-height: 1.1;
   letter-spacing: -0.04em;
   margin-top: 16px;
   color: $color-ink;

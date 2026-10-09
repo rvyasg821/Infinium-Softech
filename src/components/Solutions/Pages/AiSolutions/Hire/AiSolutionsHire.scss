@@ -29,7 +29,7 @@
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: 24px;
     align-items: center;
- 
+
     @media (max-width: 992px) {
       grid-template-columns: 1fr;
       gap: 12px;
@@ -57,7 +57,7 @@
   p {
     margin: 0;
     max-width: 560px;
-    font-size: 1.02rem;
+    font-size: 14px;
     line-height: 1.7;
     color: $color-body;
   }
@@ -92,7 +92,9 @@
         padding: 15px 26px;
       }
 
-      span, svg, .arrow {
+      span,
+      svg,
+      .arrow {
         opacity: 0.65;
         transition: transform 0.2s ease;
       }
@@ -102,7 +104,9 @@
         transform: translateY(-1px);
         box-shadow: 0 6px 20px rgba($color-accent, 0.35);
 
-        span, svg, .arrow {
+        span,
+        svg,
+        .arrow {
           transform: translateX(3px);
         }
       }

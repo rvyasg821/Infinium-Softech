@@ -49,7 +49,7 @@
     font-family: $font-display;
     font-size: var(--fs-h2);
     font-weight: 800;
-    line-height: 0.94;
+    line-height: 1.1;
     letter-spacing: -0.045em;
 
     @include respond($bp-lg) {
@@ -61,7 +61,7 @@
     max-width: 560px;
     margin: 12px 0 0;
     color: $color-body;
-    font-size: 16.5px;
+    font-size: 14px;
     line-height: 1.6;
 
     @include respond($bp-lg) {

@@ -25,14 +25,15 @@
 
   .section-eyebrow {
     @include section-eyebrow("dark");
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
     display: inline-block;
   }
 
   .interface-headline {
     margin-bottom: 16px;
     color: var(--needly-deep-green);
-    line-height: 1.2;
+    line-height: 1.1;
+
     @media (max-width: 768px) {
       margin: 10px 0;
     }
