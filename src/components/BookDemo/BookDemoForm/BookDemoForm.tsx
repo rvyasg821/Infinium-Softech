@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { sendDemoEmail } from "@/actions/sendEmail";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "./BookDemoForm.scss";
 
 const DEMO_SIZES = ["1–10", "11–50", "51–200", "201–1,000", "1,000+"];
@@ -76,6 +78,28 @@ export function BookDemoForm() {
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const showSweetAlert = (
+    title: string,
+    text: string,
+    icon: "warning" | "error" | "info" | "success" = "warning"
+  ) => {
+    if (typeof window !== "undefined" && !Swal.isVisible()) {
+      Swal.fire({
+        icon,
+        title,
+        text,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#0c0c0d",
+        background: "#ffffff",
+        color: "#0c0c0d",
+        customClass: {
+          popup: "infinium-swal-popup",
+          confirmButton: "infinium-swal-btn",
+        },
+      });
+    }
+  };
+
   useEffect(() => {
     if (isSent && sectionRef.current) {
       const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
@@ -85,25 +109,54 @@ export function BookDemoForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
-    
-    setIsSubmitting(true);
-    const result = await sendDemoEmail({
-      name,
-      email,
-      company,
-      size,
-      product,
-      day,
-      time,
-      message,
-    });
-    setIsSubmitting(false);
 
-    if (result.success) {
-      setIsSent(true);
-    } else {
-      alert("Something went wrong. Please try again.");
+    if (!name.trim()) {
+      showSweetAlert("Name Required", "Please enter your full name.");
+      return;
+    }
+    if (!/^[a-zA-Z\s]+$/.test(name.trim())) {
+      showSweetAlert("Invalid Name", "The Name field can only contain letters and spaces.");
+      return;
+    }
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      showSweetAlert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await sendDemoEmail({
+        name,
+        email,
+        company,
+        size,
+        product,
+        day,
+        time,
+        message,
+      });
+
+      if (result.success) {
+        setIsSent(true);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Submission Error",
+          text: result.error || "Something went wrong while booking your demo. Please try again.",
+          confirmButtonText: "Try Again",
+          confirmButtonColor: "#0c0c0d",
+        });
+      }
+    } catch {
+      Swal.fire({
+        icon: "error",
+        title: "Network Error",
+        text: "A network error occurred. Please check your connection and try again.",
+        confirmButtonText: "Try Again",
+        confirmButtonColor: "#0c0c0d",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -213,7 +266,64 @@ export function BookDemoForm() {
                     required
                     placeholder="Your name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onBeforeInput={(e: any) => {
+                      if (e.data && !/^[a-zA-Z\s]+$/.test(e.data)) {
+                        e.preventDefault();
+                        showSweetAlert(
+                          "Invalid Name",
+                          "The Name field only accepts letters and spaces. Numbers and special characters are not allowed."
+                        );
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (
+                        e.key.length > 1 ||
+                        e.ctrlKey ||
+                        e.metaKey ||
+                        e.altKey
+                      ) {
+                        return;
+                      }
+                      if (!/^[a-zA-Z\s]$/.test(e.key)) {
+                        e.preventDefault();
+                        showSweetAlert(
+                          "Invalid Name",
+                          "The Name field only accepts letters and spaces. Numbers and special characters are not allowed."
+                        );
+                      }
+                    }}
+                    onPaste={(e) => {
+                      const text = e.clipboardData.getData("text");
+                      if (!/^[a-zA-Z\s]*$/.test(text)) {
+                        e.preventDefault();
+                        const clean = text.replace(/[^a-zA-Z\s]/g, "");
+                        const updated = (name + clean).trimStart();
+                        setName(updated);
+                        showSweetAlert(
+                          "Invalid Name",
+                          "The Name field only accepts letters and spaces. Numbers and symbols were removed."
+                        );
+                      }
+                    }}
+                    onInput={(e) => {
+                      const input = e.currentTarget;
+                      const clean = input.value.replace(/[^a-zA-Z\s]/g, "");
+                      if (input.value !== clean) {
+                        input.value = clean;
+                        showSweetAlert(
+                          "Invalid Name",
+                          "The Name field only accepts letters and spaces. Numbers and special characters are not allowed."
+                        );
+                      }
+                      setName(clean);
+                    }}
+                    onChange={(e) => {
+                      const clean = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+                      e.target.value = clean;
+                      setName(clean);
+                    }}
+                    pattern="[a-zA-Z\s]+"
+                    title="Please enter letters and spaces only"
                     className="field-input"
                   />
                 </label>

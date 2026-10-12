@@ -9,6 +9,8 @@ import {
   CONTACT_DESKS,
   CONTACT_STEPS,
 } from "@/data/contactData";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "./ContactForm.scss";
 
 export function ContactForm() {
@@ -22,6 +24,28 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const showSweetAlert = (
+    title: string,
+    text: string,
+    icon: "warning" | "error" | "info" | "success" = "warning"
+  ) => {
+    if (typeof window !== "undefined" && !Swal.isVisible()) {
+      Swal.fire({
+        icon,
+        title,
+        text,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#0c0c0d",
+        background: "#ffffff",
+        color: "#0c0c0d",
+        customClass: {
+          popup: "infinium-swal-popup",
+          confirmButton: "infinium-swal-btn",
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     if (isSent && sectionRef.current) {
@@ -179,24 +203,60 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !mobile.trim()) return;
-    
-    setIsSubmitting(true);
-    const result = await sendContactEmail({
-      name,
-      email,
-      mobile,
-      service,
-      stage,
-      startTime,
-      message,
-    });
-    setIsSubmitting(false);
 
-    if (result.success) {
-      setIsSent(true);
-    } else {
-      alert("Something went wrong. Please try again.");
+    if (!name.trim()) {
+      showSweetAlert("Name Required", "Please enter your name.");
+      return;
+    }
+    if (!/^[a-zA-Z\s]+$/.test(name.trim())) {
+      showSweetAlert("Invalid Name", "The Name field can only contain letters and spaces.");
+      return;
+    }
+
+    const cleanDigits = mobile.replace(/\D/g, "");
+    if (!cleanDigits) {
+      showSweetAlert("Contact Number Required", "Please enter your contact number.");
+      return;
+    }
+    if (cleanDigits.length !== 10) {
+      showSweetAlert("Invalid Contact Number", "Please enter a valid 10-digit contact number.");
+      return;
+    }
+
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      showSweetAlert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await sendContactEmail({
+        name,
+        email,
+        mobile,
+        service,
+        stage,
+        startTime,
+        message,
+      });
+
+      if (result.success) {
+        setIsSent(true);
+      } else {
+        showSweetAlert(
+          "Submission Error",
+          result.error || "Something went wrong while sending your request. Please try again.",
+          "error"
+        );
+      }
+    } catch {
+      showSweetAlert(
+        "Network Error",
+        "A network error occurred. Please check your connection and try again.",
+        "error"
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -235,7 +295,52 @@ export function ContactForm() {
                     required
                     placeholder="Your name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onBeforeInput={(e: any) => {
+                      if (e.data && !/^[a-zA-Z\s]+$/.test(e.data)) {
+                        e.preventDefault();
+                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and special characters are not allowed.");
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (
+                        e.key.length > 1 ||
+                        e.ctrlKey ||
+                        e.metaKey ||
+                        e.altKey
+                      ) {
+                        return;
+                      }
+                      if (!/^[a-zA-Z\s]$/.test(e.key)) {
+                        e.preventDefault();
+                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and special characters are not allowed.");
+                      }
+                    }}
+                    onPaste={(e) => {
+                      const text = e.clipboardData.getData("text");
+                      if (!/^[a-zA-Z\s]*$/.test(text)) {
+                        e.preventDefault();
+                        const clean = text.replace(/[^a-zA-Z\s]/g, "");
+                        const updated = (name + clean).trimStart();
+                        setName(updated);
+                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and symbols were removed.");
+                      }
+                    }}
+                    onInput={(e) => {
+                      const input = e.currentTarget;
+                      const clean = input.value.replace(/[^a-zA-Z\s]/g, "");
+                      if (input.value !== clean) {
+                        input.value = clean;
+                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and special characters are not allowed.");
+                      }
+                      setName(clean);
+                    }}
+                    onChange={(e) => {
+                      const clean = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+                      e.target.value = clean;
+                      setName(clean);
+                    }}
+                    pattern="[a-zA-Z\s]+"
+                    title="Please enter letters and spaces only"
                     className="field-input"
                   />
                 </label>
@@ -259,7 +364,62 @@ export function ContactForm() {
                     required
                     placeholder="Your mobile number"
                     value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
+                    onBeforeInput={(e: any) => {
+                      if (e.data && !/^[0-9]+$/.test(e.data)) {
+                        e.preventDefault();
+                        showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters cannot be entered.");
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (
+                        e.key.length > 1 ||
+                        e.ctrlKey ||
+                        e.metaKey ||
+                        e.altKey
+                      ) {
+                        return;
+                      }
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault();
+                        showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters cannot be entered.");
+                      }
+                    }}
+                    onPaste={(e) => {
+                      const text = e.clipboardData.getData("text");
+                      if (!/^[0-9]*$/.test(text)) {
+                        e.preventDefault();
+                        const clean = text.replace(/\D/g, "").slice(0, 10);
+                        const updated = (mobile + clean).slice(0, 10);
+                        setMobile(updated);
+                        showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters were removed.");
+                      } else {
+                        e.preventDefault();
+                        const clean = text.replace(/\D/g, "");
+                        const updated = (mobile + clean).slice(0, 10);
+                        setMobile(updated);
+                      }
+                    }}
+                    onInput={(e) => {
+                      const input = e.currentTarget;
+                      const hasNonDigits = /\D/.test(input.value);
+                      const clean = input.value.replace(/\D/g, "").slice(0, 10);
+                      if (input.value !== clean) {
+                        input.value = clean;
+                        if (hasNonDigits) {
+                          showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters cannot be entered.");
+                        }
+                      }
+                      setMobile(clean);
+                    }}
+                    onChange={(e) => {
+                      const clean = e.target.value.replace(/\D/g, "").slice(0, 10);
+                      e.target.value = clean;
+                      setMobile(clean);
+                    }}
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    title="Please enter a 10-digit mobile number"
                     className="field-input"
                   />
                 </label>

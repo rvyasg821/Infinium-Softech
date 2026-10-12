@@ -59,6 +59,15 @@
   margin: 0;
 }
 
+// Prevent mobile browsers (iOS Safari, Chrome, etc.) from auto-zooming when focusing inputs
+@media screen and (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
 html {
   height: 100%;
 }
@@ -452,5 +461,72 @@ svg {
   50% {
     border-radius: 56% 44% 46% 54% / 45% 55% 48% 52%;
     opacity: 1;
+  }
+}
+
+// ── SweetAlert Global Icon Size ──
+div:where(.swal2-icon),
+.swal2-icon {
+  width: 4em !important;
+  height: 4em !important;
+  line-height: 4em !important;
+  margin: 1.5em auto 0.6em !important;
+
+  .swal2-icon-content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 2.75em !important;
+  }
+
+  &.swal2-error {
+    .swal2-x-mark {
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    [class^="swal2-x-mark-line"] {
+      position: absolute !important;
+      top: 1.85em !important;
+      width: 2.35em !important;
+      height: 0.28em !important;
+      border-radius: 0.125em !important;
+    }
+
+    [class^="swal2-x-mark-line"][class$="left"] {
+      left: 0.825em !important;
+      transform: rotate(45deg) !important;
+    }
+
+    [class^="swal2-x-mark-line"][class$="right"] {
+      right: 0.825em !important;
+      transform: rotate(-45deg) !important;
+    }
+  }
+
+  &.swal2-warning {
+    border-color: #f8bb86 !important;
+    color: #f8bb86 !important;
+  }
+
+  &.swal2-success {
+    [class^="swal2-success-line"][class$="tip"] {
+      top: 2.3em !important;
+      left: 0.65em !important;
+      width: 1.25em !important;
+    }
+
+    [class^="swal2-success-line"][class$="long"] {
+      top: 1.9em !important;
+      right: 0.4em !important;
+      width: 2.35em !important;
+    }
+
+    .swal2-success-ring {
+      width: 4em !important;
+      height: 4em !important;
+    }
   }
 }
