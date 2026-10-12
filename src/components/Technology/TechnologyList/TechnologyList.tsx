@@ -78,8 +78,10 @@ function setBrowserUrl(url: string, mode: "push" | "replace" = "push") {
 function resolvePath(
   pathname: string
 ): { elementId: string; category: string } | null {
-  const parts = pathname.split("/").filter(Boolean);
-  if (`/${parts[0]}` !== ROUTE_PREFIX) return null;
+  const cleanPath = pathname.split("?")[0].split("#")[0];
+  const parts = cleanPath.split("/").filter(Boolean);
+  if (parts.length === 0) return null;
+  if (`/${parts[0]}` !== ROUTE_PREFIX && `/${parts[0]}` !== "/technology") return null;
 
   const slug = parts[1];
   if (!slug) return null;
@@ -229,8 +231,13 @@ export function TechnologyList({ initialSlug }: { initialSlug?: string }) {
 
   // Opened directly on /technology/[slug]: scroll to it
   useEffect(() => {
-    if (!initialSlug) return;
-    const resolved = resolvePath(`${ROUTE_PREFIX}/${initialSlug}`);
+    const slugToResolve =
+      initialSlug ||
+      (typeof window !== "undefined"
+        ? window.location.pathname.split("/").filter(Boolean)[1]
+        : undefined);
+    if (!slugToResolve) return;
+    const resolved = resolvePath(`${ROUTE_PREFIX}/${slugToResolve}`);
     if (!resolved) return;
 
     const { elementId, category } = resolved;
@@ -238,7 +245,7 @@ export function TechnologyList({ initialSlug }: { initialSlug?: string }) {
     setActiveSection(category);
     scrollActiveTabIntoView(category);
     lastSpyIdRef.current = elementId;
-    lockObserver(1500);
+    lockObserver(1800);
 
     const t = setTimeout(() => {
       const el = document.getElementById(elementId);
@@ -253,15 +260,73 @@ export function TechnologyList({ initialSlug }: { initialSlug?: string }) {
     lockObserver,
   ]);
 
+  // Listen for scroll-to-technology custom event from Header or Footer
+  useEffect(() => {
+    const handleScrollToTech = (e: Event) => {
+      const customEvent = e as CustomEvent<{ href?: string; slug?: string }>;
+      const targetUrl =
+        customEvent.detail?.href ||
+        (customEvent.detail?.slug
+          ? `${ROUTE_PREFIX}/${customEvent.detail.slug}`
+          : ROUTE_PREFIX);
+
+      setBrowserUrl(targetUrl, "push");
+
+      const resolved = resolvePath(targetUrl);
+      if (resolved) {
+        const { elementId, category } = resolved;
+        setActiveSection(category);
+        scrollActiveTabIntoView(category);
+        lastSpyIdRef.current = elementId;
+        lockObserver(1800);
+
+        const t = setTimeout(() => {
+          const el = document.getElementById(elementId);
+          if (el) scrollToElement(el);
+        }, 60);
+
+        return () => clearTimeout(t);
+      } else if (targetUrl === ROUTE_PREFIX || targetUrl === "/technologies") {
+        setActiveSection(SECTION_IDS[0]);
+        scrollActiveTabIntoView(SECTION_IDS[0]);
+        lastSpyIdRef.current = "__top__";
+        lockObserver(1800);
+
+        const t = setTimeout(() => {
+          const el = document.getElementById("tech-list");
+          if (el) scrollToElement(el);
+          else window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 60);
+
+        return () => clearTimeout(t);
+      }
+    };
+
+    window.addEventListener("scroll-to-technology", handleScrollToTech);
+    return () =>
+      window.removeEventListener("scroll-to-technology", handleScrollToTech);
+  }, [lockObserver, scrollActiveTabIntoView, scrollToElement]);
+
   // Browser back / forward: follow the URL
   useEffect(() => {
     const onPopState = () => {
       const target = resolvePath(window.location.pathname);
-      if (!target) return;
+      if (!target) {
+        if (
+          window.location.pathname === ROUTE_PREFIX ||
+          window.location.pathname === "/technology"
+        ) {
+          setActiveSection(SECTION_IDS[0]);
+          scrollActiveTabIntoView(SECTION_IDS[0]);
+          lastSpyIdRef.current = "__top__";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        return;
+      }
       const el = document.getElementById(target.elementId);
       if (!el) return;
 
-      lockObserver(1500);
+      lockObserver(1800);
       lastSpyIdRef.current = target.elementId;
       setActiveSection(target.category);
       scrollActiveTabIntoView(target.category);

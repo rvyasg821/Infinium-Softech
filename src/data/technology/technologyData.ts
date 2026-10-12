@@ -605,8 +605,15 @@ export function getTechSlug(id: string): string {
 }
 
 export function findTechBySlug(slug: string): IndividualTechItem | undefined {
+  const normalized = slug.toLowerCase();
   return INDIVIDUAL_TECH_ITEMS.find(
-    (t) => t.id === slug || getTechSlug(t.id) === slug
+    (t) =>
+      t.id.toLowerCase() === normalized ||
+      getTechSlug(t.id).toLowerCase() === normalized ||
+      (normalized === "react" && t.id === "reactjs") ||
+      (normalized === "node" && t.id === "nodejs") ||
+      (normalized === "next" && t.id === "nextjs") ||
+      (normalized === "laravel" && t.id === "php")
   );
 }
 

@@ -25,6 +25,9 @@ export type GenericMenuItem = {
   LucideIcon?: ElementType;
   previewImage?: string;
   link?: string;
+  tag?: string;
+  previewTitle?: string;
+  previewDesc?: string;
 };
 
 export type MenuDef = {
@@ -156,12 +159,90 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Solutions",
     eyebrow: "How we build and ship",
     items: [
-      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Slot", href: "/solutions/ai-solutions", LucideIcon: BrainCircuit, previewImage: "/solutions/AI%20%26%20Automation.png", link: "/solutions/ai-solutions" },
-      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software", LucideIcon: Code, previewImage: "/solutions/Custom%20Software.png", link: "/solutions/custom-software" },
-      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications", LucideIcon: Monitor, previewImage: "/solutions/Web%20Development.png", link: "/solutions/web-applications" },
-      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications", LucideIcon: Smartphone, previewImage: "/solutions/Mobile%20Applications.png", link: "/solutions/mobile-applications" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems", LucideIcon: Building2, previewImage: "/solutions/Enterprise%20Solutions.png", link: "/solutions/enterprise-systems" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure", LucideIcon: Cloud, previewImage: "/solutions/Cloud%20Infrastructure.png", link: "/solutions/cloud-infrastructure" },
+      {
+        name: "AI Solutions",
+        desc: "Forecasting, routing and instructions",
+        tint: "#0F8F87",
+        product: "AI Solutions",
+        href: "/solutions/ai-solutions",
+        link: "/solutions/ai-solutions",
+        LucideIcon: BrainCircuit,
+        previewImage: "/solutions/AI%20%26%20Automation.png",
+        tag: "AI & AUTOMATION",
+        previewTitle: "AI Solutions",
+        previewDesc:
+          "Forecasting, routing and instruction models sit inside the workflow rather than beside it. Every prediction is written back to the record it affects, with a human able to override.",
+      },
+      {
+        name: "Custom Software",
+        desc: "Workflows shaped to your operation",
+        tint: "#1E9E5A",
+        product: "Custom Software",
+        href: "/solutions/custom-software",
+        link: "/solutions/custom-software",
+        LucideIcon: Code,
+        previewImage: "/solutions/Custom%20Software.png",
+        tag: "CUSTOM SOFTWARE",
+        previewTitle: "Custom Software",
+        previewDesc:
+          "When the process is the differentiator, we model it directly: your states, approvals and exceptions, with the platform layer handling identity, billing and reporting underneath.",
+      },
+      {
+        name: "Web Applications",
+        desc: "Dashboards on one component system",
+        tint: "#1F31E8",
+        product: "Web Applications",
+        href: "/solutions/web-applications",
+        link: "/solutions/web-applications",
+        LucideIcon: Monitor,
+        previewImage: "/solutions/Web%20Development.png",
+        tag: "WEB DEVELOPMENT",
+        previewTitle: "Web Applications",
+        previewDesc:
+          "Operations consoles, admin panels and customer portals drawn from a single design system. A pattern proven in one product arrives in the next without a redesign.",
+      },
+      {
+        name: "Mobile Apps",
+        desc: "Customer, rider, crew and field apps",
+        tint: "#2AA8C4",
+        product: "Mobile Apps",
+        href: "/solutions/mobile-applications",
+        link: "/solutions/mobile-applications",
+        LucideIcon: Smartphone,
+        previewImage: "/solutions/Mobile%20Applications.png",
+        tag: "MOBILE APPLICATIONS",
+        previewTitle: "Mobile Apps",
+        previewDesc:
+          "Native-feel iOS and Android apps for customer, rider, crew and field roles. They share the component system and APIs of the web products, so one release ships to both.",
+      },
+      {
+        name: "Enterprise Systems",
+        desc: "SSO, roles, audit trails, compliance",
+        tint: "#8B3FE8",
+        product: "Enterprise Systems",
+        href: "/solutions/enterprise-systems",
+        link: "/solutions/enterprise-systems",
+        LucideIcon: Building2,
+        previewImage: "/solutions/Enterprise%20Solutions.png",
+        tag: "ENTERPRISE SOLUTIONS",
+        previewTitle: "Enterprise Systems",
+        previewDesc:
+          "The platform layer every product inherits: single sign-on, granular roles, full audit history and encryption in transit and at rest, configured per entity and per branch.",
+      },
+      {
+        name: "Cloud Infrastructure",
+        desc: "Multi-region AWS with autoscaling",
+        tint: "#E8A21F",
+        product: "Cloud Infrastructure",
+        href: "/solutions/cloud-infrastructure",
+        link: "/solutions/cloud-infrastructure",
+        LucideIcon: Cloud,
+        previewImage: "/solutions/Cloud%20Infrastructure.png",
+        tag: "CLOUD INFRASTRUCTURE",
+        previewTitle: "Cloud Infrastructure",
+        previewDesc:
+          "Every product runs on the same infrastructure: managed backups, blue-green deploys and observability wired in from the first commit. Scale becomes a configuration change.",
+      },
     ],
   },
   technology: {

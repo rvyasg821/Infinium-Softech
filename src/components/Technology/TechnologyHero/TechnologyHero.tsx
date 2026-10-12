@@ -37,7 +37,24 @@ export function TechnologyHero() {
             </p>
 
             <div data-reveal="" className="technology-hero-actions">
-              <Link href="/technologies/frontendtech" className="btn-primary">
+              <Link
+                href="/technologies/frontendtech"
+                className="btn-primary"
+                onClick={(e) => {
+                  if (
+                    typeof window !== "undefined" &&
+                    window.location.pathname.startsWith("/technologies")
+                  ) {
+                    e.preventDefault();
+                    window.history.pushState(null, "", "/technologies/frontendtech");
+                    window.dispatchEvent(
+                      new CustomEvent("scroll-to-technology", {
+                        detail: { href: "/technologies/frontendtech" },
+                      })
+                    );
+                  }
+                }}
+              >
                 Explore All Stack
               </Link>
 
