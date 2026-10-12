@@ -25,6 +25,52 @@ export function ContactForm() {
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    mobile?: string;
+    service?: string;
+    stage?: string;
+    startTime?: string;
+  }>({});
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
+
+  const validateName = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[a-zA-Z\s]+$/.test(val.trim())) return "Please enter letters and spaces only.";
+    return undefined;
+  };
+
+  const validateEmail = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) return "Please enter a valid email address.";
+    return undefined;
+  };
+
+  const validateMobile = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    const cleanDigits = val.replace(/\D/g, "");
+    if (!/^\+?[0-9\s\-()]+$/.test(val) || cleanDigits.length < 7 || cleanDigits.length > 15) {
+      return "Please enter a telephone number.";
+    }
+    return undefined;
+  };
+
+  const validateService = (val: string) => {
+    if (!val) return "Please fill out this field.";
+    return undefined;
+  };
+
+  const validateStage = (val: string) => {
+    if (!val) return "Please fill out this field.";
+    return undefined;
+  };
+
+  const validateStartTime = (val: string) => {
+    if (!val) return "Please fill out this field.";
+    return undefined;
+  };
+
   const showSweetAlert = (
     title: string,
     text: string,
@@ -204,27 +250,33 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim()) {
-      showSweetAlert("Name Required", "Please enter your name.");
-      return;
-    }
-    if (!/^[a-zA-Z\s]+$/.test(name.trim())) {
-      showSweetAlert("Invalid Name", "The Name field can only contain letters and spaces.");
-      return;
-    }
+    const nameErr = validateName(name);
+    const emailErr = validateEmail(email);
+    const mobileErr = validateMobile(mobile);
+    const serviceErr = validateService(service);
+    const stageErr = validateStage(stage);
+    const startTimeErr = validateStartTime(startTime);
 
-    const cleanDigits = mobile.replace(/\D/g, "");
-    if (!cleanDigits) {
-      showSweetAlert("Contact Number Required", "Please enter your contact number.");
-      return;
-    }
-    if (cleanDigits.length !== 10) {
-      showSweetAlert("Invalid Contact Number", "Please enter a valid 10-digit contact number.");
-      return;
-    }
+    const newErrors = {
+      name: nameErr,
+      email: emailErr,
+      mobile: mobileErr,
+      service: serviceErr,
+      stage: stageErr,
+      startTime: startTimeErr,
+    };
 
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      showSweetAlert("Invalid Email", "Please enter a valid email address.");
+    setTouched({
+      name: true,
+      email: true,
+      mobile: true,
+      service: true,
+      stage: true,
+      startTime: true,
+    });
+    setErrors(newErrors);
+
+    if (nameErr || emailErr || mobileErr || serviceErr || stageErr || startTimeErr) {
       return;
     }
 
@@ -269,6 +321,8 @@ export function ContactForm() {
     setStage("");
     setStartTime("");
     setMessage("");
+    setErrors({});
+    setTouched({});
   };
 
   const sentMessageNote = service
@@ -281,7 +335,7 @@ export function ContactForm() {
         {/* Left Column: Interactive Form Box */}
         <div data-reveal="" className="contact-form-card">
           {!isSent ? (
-            <form onSubmit={handleSubmit} className="form-inner">
+            <form onSubmit={handleSubmit} noValidate className="form-inner">
               <h2 className="form-title">Send us a brief</h2>
               <p className="form-subtitle">
                 Tell us about your project and we will get back to you with the right next steps.
@@ -289,149 +343,95 @@ export function ContactForm() {
 
               <div className="form-grid">
                 <label className="form-field">
-                  <span className="field-label">Name</span>
+                  <span className="field-label">Name*</span>
                   <input
                     type="text"
-                    required
                     placeholder="Your name"
                     value={name}
-                    onBeforeInput={(e: any) => {
-                      if (e.data && !/^[a-zA-Z\s]+$/.test(e.data)) {
-                        e.preventDefault();
-                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and special characters are not allowed.");
-                      }
-                    }}
-                    onKeyDown={(e) => {
-                      if (
-                        e.key.length > 1 ||
-                        e.ctrlKey ||
-                        e.metaKey ||
-                        e.altKey
-                      ) {
-                        return;
-                      }
-                      if (!/^[a-zA-Z\s]$/.test(e.key)) {
-                        e.preventDefault();
-                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and special characters are not allowed.");
-                      }
-                    }}
-                    onPaste={(e) => {
-                      const text = e.clipboardData.getData("text");
-                      if (!/^[a-zA-Z\s]*$/.test(text)) {
-                        e.preventDefault();
-                        const clean = text.replace(/[^a-zA-Z\s]/g, "");
-                        const updated = (name + clean).trimStart();
-                        setName(updated);
-                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and symbols were removed.");
-                      }
-                    }}
-                    onInput={(e) => {
-                      const input = e.currentTarget;
-                      const clean = input.value.replace(/[^a-zA-Z\s]/g, "");
-                      if (input.value !== clean) {
-                        input.value = clean;
-                        showSweetAlert("Invalid Name", "The Name field only accepts letters and spaces. Numbers and special characters are not allowed.");
-                      }
-                      setName(clean);
-                    }}
                     onChange={(e) => {
-                      const clean = e.target.value.replace(/[^a-zA-Z\s]/g, "");
-                      e.target.value = clean;
-                      setName(clean);
+                      const val = e.target.value;
+                      setName(val);
+                      if (touched.name) {
+                        setErrors((prev) => ({ ...prev, name: validateName(val) }));
+                      }
                     }}
-                    pattern="[a-zA-Z\s]+"
-                    title="Please enter letters and spaces only"
-                    className="field-input"
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, name: true }));
+                      setErrors((prev) => ({ ...prev, name: validateName(name) }));
+                    }}
+                    className={`field-input ${touched.name && errors.name ? "field-input--error" : ""}`}
                   />
+                  {touched.name && errors.name && (
+                    <span className="field-error-msg">{errors.name}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Email Address</span>
+                  <span className="field-label">Email Address*</span>
                   <input
                     type="email"
-                    required
                     placeholder="name@company.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="field-input"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setEmail(val);
+                      if (touched.email) {
+                        setErrors((prev) => ({ ...prev, email: validateEmail(val) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, email: true }));
+                      setErrors((prev) => ({ ...prev, email: validateEmail(email) }));
+                    }}
+                    className={`field-input ${touched.email && errors.email ? "field-input--error" : ""}`}
                   />
+                  {touched.email && errors.email && (
+                    <span className="field-error-msg">{errors.email}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">Mobile No</span>
                   <input
                     type="tel"
-                    required
                     placeholder="Your mobile number"
                     value={mobile}
-                    onBeforeInput={(e: any) => {
-                      if (e.data && !/^[0-9]+$/.test(e.data)) {
-                        e.preventDefault();
-                        showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters cannot be entered.");
-                      }
-                    }}
-                    onKeyDown={(e) => {
-                      if (
-                        e.key.length > 1 ||
-                        e.ctrlKey ||
-                        e.metaKey ||
-                        e.altKey
-                      ) {
-                        return;
-                      }
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault();
-                        showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters cannot be entered.");
-                      }
-                    }}
-                    onPaste={(e) => {
-                      const text = e.clipboardData.getData("text");
-                      if (!/^[0-9]*$/.test(text)) {
-                        e.preventDefault();
-                        const clean = text.replace(/\D/g, "").slice(0, 10);
-                        const updated = (mobile + clean).slice(0, 10);
-                        setMobile(updated);
-                        showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters were removed.");
-                      } else {
-                        e.preventDefault();
-                        const clean = text.replace(/\D/g, "");
-                        const updated = (mobile + clean).slice(0, 10);
-                        setMobile(updated);
-                      }
-                    }}
-                    onInput={(e) => {
-                      const input = e.currentTarget;
-                      const hasNonDigits = /\D/.test(input.value);
-                      const clean = input.value.replace(/\D/g, "").slice(0, 10);
-                      if (input.value !== clean) {
-                        input.value = clean;
-                        if (hasNonDigits) {
-                          showSweetAlert("Invalid Contact Number", "Only numeric digits (0–9) are allowed in the contact number. Letters cannot be entered.");
-                        }
-                      }
-                      setMobile(clean);
-                    }}
+                    maxLength={15}
                     onChange={(e) => {
-                      const clean = e.target.value.replace(/\D/g, "").slice(0, 10);
-                      e.target.value = clean;
-                      setMobile(clean);
+                      const val = e.target.value.slice(0, 15);
+                      setMobile(val);
+                      if (touched.mobile) {
+                        setErrors((prev) => ({ ...prev, mobile: validateMobile(val) }));
+                      }
                     }}
-                    inputMode="numeric"
-                    pattern="[0-9]{10}"
-                    maxLength={10}
-                    title="Please enter a 10-digit mobile number"
-                    className="field-input"
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, mobile: true }));
+                      setErrors((prev) => ({ ...prev, mobile: validateMobile(mobile) }));
+                    }}
+                    className={`field-input ${touched.mobile && errors.mobile ? "field-input--error" : ""}`}
                   />
+                  {touched.mobile && errors.mobile && (
+                    <span className="field-error-msg">{errors.mobile}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">Select a service</span>
                   <div className="select-wrap">
                     <select
-                      required
                       value={service}
-                      onChange={(e) => setService(e.target.value)}
-                      className="field-select"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setService(val);
+                        if (touched.service) {
+                          setErrors((prev) => ({ ...prev, service: validateService(val) }));
+                        }
+                      }}
+                      onBlur={() => {
+                        setTouched((prev) => ({ ...prev, service: true }));
+                        setErrors((prev) => ({ ...prev, service: validateService(service) }));
+                      }}
+                      className={`field-select ${touched.service && errors.service ? "field-select--error" : ""}`}
                     >
                       <option value="" disabled>
                         Select a service
@@ -444,16 +444,28 @@ export function ContactForm() {
                     </select>
                     <span className="select-caret" aria-hidden="true">▾</span>
                   </div>
+                  {touched.service && errors.service && (
+                    <span className="field-error-msg">{errors.service}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">At what stage is your app?</span>
                   <div className="select-wrap">
                     <select
-                      required
                       value={stage}
-                      onChange={(e) => setStage(e.target.value)}
-                      className="field-select"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setStage(val);
+                        if (touched.stage) {
+                          setErrors((prev) => ({ ...prev, stage: validateStage(val) }));
+                        }
+                      }}
+                      onBlur={() => {
+                        setTouched((prev) => ({ ...prev, stage: true }));
+                        setErrors((prev) => ({ ...prev, stage: validateStage(stage) }));
+                      }}
+                      className={`field-select ${touched.stage && errors.stage ? "field-select--error" : ""}`}
                     >
                       <option value="" disabled>
                         Select stage
@@ -466,16 +478,28 @@ export function ContactForm() {
                     </select>
                     <span className="select-caret" aria-hidden="true">▾</span>
                   </div>
+                  {touched.stage && errors.stage && (
+                    <span className="field-error-msg">{errors.stage}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">When do you want to start</span>
                   <div className="select-wrap">
                     <select
-                      required
                       value={startTime}
-                      onChange={(e) => setStartTime(e.target.value)}
-                      className="field-select"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setStartTime(val);
+                        if (touched.startTime) {
+                          setErrors((prev) => ({ ...prev, startTime: validateStartTime(val) }));
+                        }
+                      }}
+                      onBlur={() => {
+                        setTouched((prev) => ({ ...prev, startTime: true }));
+                        setErrors((prev) => ({ ...prev, startTime: validateStartTime(startTime) }));
+                      }}
+                      className={`field-select ${touched.startTime && errors.startTime ? "field-select--error" : ""}`}
                     >
                       <option value="" disabled>
                         Select timeline
@@ -488,6 +512,9 @@ export function ContactForm() {
                     </select>
                     <span className="select-caret" aria-hidden="true">▾</span>
                   </div>
+                  {touched.startTime && errors.startTime && (
+                    <span className="field-error-msg">{errors.startTime}</span>
+                  )}
                 </label>
               </div>
 
