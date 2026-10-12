@@ -19,7 +19,7 @@ import {
 const SECTION_IDS = TECHNOLOGY_HERO_INDEX_ITEMS.map((item) => item.category);
 
 // URL shown when the user is above the list
-const BASE_PATH = "/technologyes";
+const BASE_PATH = "/technologies";
 
 // Ordered list (same order as the page) of everything the scroll-spy tracks:
 // each category section, followed by its tech cards.

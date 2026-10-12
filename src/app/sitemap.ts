@@ -53,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allTechSlugs = [...new Set([...categorySlugs, ...techSlugs])];
 
   const dynamicTechItems: MetadataRoute.Sitemap = allTechSlugs.map((slug) => ({
-    url: `${SITE_URL}/technologyes/${slug}`,
+    url: `${SITE_URL}/technologies/${slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as ChangeFrequency,
     priority: 0.8,

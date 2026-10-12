@@ -166,7 +166,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
-      technology: "/technologyes",
+      technology: "/technologies",
     };
     const route = routeByMenuKey[key];
 
@@ -177,7 +177,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
-      technology: "/technologyes",
+      technology: "/technologies",
     };
     const route = routeByMenuKey[key];
 
@@ -198,7 +198,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
-      technology: "/technologyes",
+      technology: "/technologies",
     };
     const route = routeByMenuKey[key];
 
@@ -301,7 +301,7 @@ export function Header() {
                 !activeMenu &&
                 ((key === "products" && pathname.startsWith("/products")) ||
                   (key === "solutions" && pathname === "/solutions") ||
-                  (key === "technology" && pathname.startsWith("/technologyes")));
+                  (key === "technology" && pathname.startsWith("/technologies")));
               return (
                 <button
                   key={key}
@@ -358,7 +358,7 @@ export function Header() {
                     if (pathname.startsWith("/about")) defaultMenu = "about";
                     if (pathname.startsWith("/contact")) defaultMenu = "contact";
                     if (pathname.startsWith("/solutions")) defaultMenu = "solutions";
-                    if (pathname.startsWith("/technologyes") || pathname.startsWith("/technology")) defaultMenu = "technology";
+                    if (pathname.startsWith("/technologies") || pathname.startsWith("/technology")) defaultMenu = "technology";
                     toggleMenuKey(defaultMenu);
                   }
                 }}

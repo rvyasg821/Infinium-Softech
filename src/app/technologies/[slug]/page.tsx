@@ -33,7 +33,7 @@ export async function generateMetadata({
     const cat = CATEGORY_HEADERS[categoryKey];
     const title = `${cat.title} Frameworks & Solutions | Infinium Softech`;
     const description = `${cat.subtitle}. Explore Infinium Softech's comprehensive ${cat.title} stack and enterprise architectures.`;
-    const canonical = `${SITE_URL}/technologyes/${slug}`;
+    const canonical = `${SITE_URL}/technologies/${slug}`;
 
     return {
       title,
@@ -62,7 +62,7 @@ export async function generateMetadata({
       tech.description.length > 155
         ? `${tech.description.slice(0, 152)}...`
         : tech.description;
-    const canonical = `${SITE_URL}/technologyes/${slug}`;
+    const canonical = `${SITE_URL}/technologies/${slug}`;
 
     return {
       title,
@@ -89,10 +89,10 @@ export async function generateMetadata({
     };
   }
 
-  return getPageMetadata("/technologyes");
+  return getPageMetadata("/technologies");
 }
 
-export default async function TechnologyesSlugPage({
+export default async function TechnologiesSlugPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -118,8 +118,8 @@ export default async function TechnologyesSlugPage({
       ? tech.description
       : categoryKey
       ? CATEGORY_HEADERS[categoryKey]?.subtitle
-      : "Technology Stack",
-    url: `${SITE_URL}/technologyes/${slug}`,
+      : "Technologies Stack",
+    url: `${SITE_URL}/technologies/${slug}`,
     publisher: {
       "@type": "Organization",
       name: "Infinium Softech",
@@ -137,14 +137,14 @@ export default async function TechnologyesSlugPage({
         {
           "@type": "ListItem",
           position: 2,
-          name: "Technologyes",
-          item: `${SITE_URL}/technologyes`,
+          name: "Technologies",
+          item: `${SITE_URL}/technologies`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: itemTitle,
-          item: `${SITE_URL}/technologyes/${slug}`,
+          item: `${SITE_URL}/technologies/${slug}`,
         },
       ],
     },

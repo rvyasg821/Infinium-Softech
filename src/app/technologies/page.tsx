@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import { getPageMetadata, SITE_URL } from "@/lib/seo";
 import { Technology } from "@/components/Technology/Technology";
 
-export const metadata: Metadata = getPageMetadata("/technologyes");
+export const metadata: Metadata = getPageMetadata("/technologies");
 
-export default function TechnologyesPage() {
+export default function TechnologiesPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "Technologyes — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
+    name: "Technologies — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
     description:
       "Explore Infinium Softech's comprehensive technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",
-    url: `${SITE_URL}/technologyes`,
+    url: `${SITE_URL}/technologies`,
     publisher: {
       "@type": "Organization",
       name: "Infinium Softech",
@@ -29,8 +29,8 @@ export default function TechnologyesPage() {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Technologyes",
-          item: `${SITE_URL}/technologyes`,
+          name: "Technologies",
+          item: `${SITE_URL}/technologies`,
         },
       ],
     },
