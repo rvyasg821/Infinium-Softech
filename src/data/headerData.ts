@@ -87,7 +87,8 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "Transport and truck booking ecosystem across long-haul and regional lanes.",
     shot: "/shots/LoadGo.png",
     wash: "rgba(232, 162, 31, 0.16)",
-    link: "/products/loadgo"
+    link: "/products/loadgo",
+    logo: "/logos/LoadGo-logo.png",
   },
   {
     id: "dishly",

@@ -148,6 +148,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metricLabel: "Loads moved",
     metric: "11,842",
     metricDelta: "▲ 13.9%",
+    logo: "/logos/LoadGo-logo.png",
     shot: "/shots/LoadGo.png",
     apps: "Web, driver, shipper",
     api: "GPS + ERP",

@@ -89,6 +89,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     appLabel: "On road",
     appValue: "482",
     shot: "/shots/LoadGo.png",
+    logo: "/logos/LoadGo-logo.png",
 
   },
   {

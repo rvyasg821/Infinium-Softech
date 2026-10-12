@@ -260,7 +260,14 @@ export function Banner() {
               >
                 <div className="card-glass">
                   <div className="card-head">
-                    <div className="card-mark mark-amber">TG</div>
+                    <div className="card-mark mark-blue">
+                      <Image
+                        src="/logos/LoadGo-logo.png"
+                        alt="Loadgo Logo"
+                        width={28}
+                        height={28}
+                      />
+                    </div>
                     <div className="card-title">LoadGo</div>
                   </div>
                   <div className="card-metric">482</div>
