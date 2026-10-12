@@ -130,6 +130,12 @@
       "changeFrequency": "weekly",
       "priority": 0.9
     },
+    "/technology/[slug]": {
+      "title": "Technology Stack",
+      "description": "Explore Infinium Softech's technology stack including frontend, backend, mobile, databases, CMS, and cloud tools.",
+      "changeFrequency": "weekly",
+      "priority": 0.8
+    },
     "/privacy-policy": {
       "title": "Privacy Policy",
       "description": "Read Infinium Softech's privacy policy to learn how we collect, use, and protect your personal information.",

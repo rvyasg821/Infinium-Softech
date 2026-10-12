@@ -248,6 +248,11 @@ export function Header() {
   const currentHoveredGenericItem = currentMenuDef?.items?.find((item) => item.product === previewProductName);
   const previewShot = currentHoveredGenericItem?.previewImage || currentPreviewProduct.shot;
 
+  const isTechnologyMenu =
+    activeMenu === "technology" ||
+    currentMenuDef?.key === "technology" ||
+    currentMenuDef?.key === "technologys";
+
   return (
     <div
       className="site-header-wrapper"
@@ -393,7 +398,7 @@ export function Header() {
             }
           }}
         >
-          <div className={`mega-menu-inner ${currentMenuDef?.key === "technology" ? "is-tech-menu" : ""}`}>
+          <div className={`mega-menu-inner ${isTechnologyMenu ? "is-tech-menu" : ""}`}>
             {/* Left Content Column */}
             <div className="mega-left-col">
               {/* Category Eyebrow Header */}
@@ -494,7 +499,7 @@ export function Header() {
 
               {/* Generic Menu Links Layout (Industries, Solutions, Technology, Company, Demo) */}
               {!currentMenuDef?.isProducts && currentMenuDef?.items && (
-                <div className={`links-grid ${currentMenuDef.key === "technology" ? "tech-links-grid" : ""}`}>
+                <div className={`links-grid ${isTechnologyMenu ? "tech-links-grid" : ""}`}>
                   {currentMenuDef.items.map((item) => {
                     const isSelected = previewProductName === item.product;
                     const matchedProd = ECOSYSTEM_PRODUCTS.find((p) => p.name === item.product);
@@ -584,7 +589,7 @@ export function Header() {
             </div>
 
             {/* Right Preview Card (Hidden for Technology Menu) */}
-            {currentMenuDef && currentMenuDef.key !== "technology" && (
+            {currentMenuDef && !isTechnologyMenu && (
               <div className="preview-card">
                 <div
                   className="preview-image-wrapper"

@@ -37,7 +37,7 @@ export function TechnologyHero() {
             </p>
 
             <div data-reveal="" className="technology-hero-actions">
-              <Link href="#frontend" className="btn-primary">
+              <Link href="/technology/frontendtech" className="btn-primary">
                 Explore All Stack
               </Link>
 

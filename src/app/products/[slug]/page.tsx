@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 
   const routeKey = `/products/${slug}` as RouteKey;
-  
+
   try {
     const baseMetadata = getPageMetadata(routeKey);
     return {
