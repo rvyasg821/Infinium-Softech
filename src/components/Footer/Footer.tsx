@@ -76,14 +76,14 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    title: "Technology",
+    title: "Technologyes",
     items: [
-      { label: "React", href: "/technology#tech-reactjs" },
-      { label: "Next.js", href: "/technology#tech-nextjs" },
-      { label: "Flutter", href: "/technology#tech-flutter" },
-      { label: "Node.js", href: "/technology#tech-nodejs" },
-      { label: "Laravel", href: "/technology#tech-php" },
-      { label: "AWS", href: "/technology#tech-aws" },
+      { label: "React", href: "/technologyes#tech-reactjs" },
+      { label: "Next.js", href: "/technologyes#tech-nextjs" },
+      { label: "Flutter", href: "/technologyes#tech-flutter" },
+      { label: "Node.js", href: "/technologyes#tech-nodejs" },
+      { label: "Laravel", href: "/technologyes#tech-php" },
+      { label: "AWS", href: "/technologyes#tech-aws" },
     ],
   },
   {

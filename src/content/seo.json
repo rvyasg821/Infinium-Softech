@@ -136,6 +136,18 @@
       "changeFrequency": "weekly",
       "priority": 0.8
     },
+    "/technologyes": {
+      "title": "Technologyes — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
+      "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",
+      "changeFrequency": "weekly",
+      "priority": 0.9
+    },
+    "/technologyes/[slug]": {
+      "title": "Technologyes Stack",
+      "description": "Explore Infinium Softech's technology stack including frontend, backend, mobile, databases, CMS, and cloud tools.",
+      "changeFrequency": "weekly",
+      "priority": 0.8
+    },
     "/privacy-policy": {
       "title": "Privacy Policy",
       "description": "Read Infinium Softech's privacy policy to learn how we collect, use, and protect your personal information.",

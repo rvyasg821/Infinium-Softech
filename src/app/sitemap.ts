@@ -2,6 +2,12 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import seo from "@/content/seo.json";
 import { PRODUCT_ITEMS } from "@/data/productsData";
+import { SOLUTIONS_LIST_DATA } from "@/data/solutions/solutionsData";
+import {
+  INDIVIDUAL_TECH_ITEMS,
+  SLUG_TO_CATEGORY_MAP,
+  getTechSlug,
+} from "@/data/technology/technologyData";
 
 type ChangeFrequency =
   | "always"
@@ -35,5 +41,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticSitemapItems, ...dynamicProductItems];
+  const dynamicSolutionItems: MetadataRoute.Sitemap = SOLUTIONS_LIST_DATA.map((sol) => ({
+    url: `${SITE_URL}/solutions/${sol.id}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as ChangeFrequency,
+    priority: 0.8,
+  }));
+
+  const categorySlugs = Object.keys(SLUG_TO_CATEGORY_MAP);
+  const techSlugs = INDIVIDUAL_TECH_ITEMS.map((t) => getTechSlug(t.id));
+  const allTechSlugs = [...new Set([...categorySlugs, ...techSlugs])];
+
+  const dynamicTechItems: MetadataRoute.Sitemap = allTechSlugs.map((slug) => ({
+    url: `${SITE_URL}/technologyes/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as ChangeFrequency,
+    priority: 0.8,
+  }));
+
+  return [
+    ...staticSitemapItems,
+    ...dynamicProductItems,
+    ...dynamicSolutionItems,
+    ...dynamicTechItems,
+  ];
 }
+
+

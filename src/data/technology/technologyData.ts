@@ -63,13 +63,13 @@ export const SLUG_TO_CATEGORY_MAP: Record<string, string> = {
 };
 
 export const TECHNOLOGY_HERO_INDEX_ITEMS: HeroIndexItem[] = [
-  { num: "01", title: "Frontend Tech", color: "#2AA8C4", href: "/technology/frontendtech", category: "frontend", slug: "frontendtech" },
-  { num: "02", title: "Backend Tech", color: "#1F31E8", href: "/technology/backendtech", category: "backend", slug: "backendtech" },
-  { num: "03", title: "Mobile Tech", color: "#1E9E5A", href: "/technology/mobiletech", category: "mobile", slug: "mobiletech" },
-  { num: "04", title: "Database Systems", color: "#0F8F87", href: "/technology/databasesystems", category: "database", slug: "databasesystems" },
-  { num: "05", title: "CMS Solutions", color: "#8B3FE8", href: "/technology/cmssolutions", category: "cms", slug: "cmssolutions" },
-  { num: "06", title: "Cloud & DevOps", color: "#E8A21F", href: "/technology/cloud-devops", category: "cloud-devops", slug: "cloud-devops" },
-  { num: "07", title: "Design Tools", color: "#E0452F", href: "/technology/designtools", category: "design-tools", slug: "designtools" },
+  { num: "01", title: "Frontend Tech", color: "#2AA8C4", href: "/technologyes/frontendtech", category: "frontend", slug: "frontendtech" },
+  { num: "02", title: "Backend Tech", color: "#1F31E8", href: "/technologyes/backendtech", category: "backend", slug: "backendtech" },
+  { num: "03", title: "Mobile Tech", color: "#1E9E5A", href: "/technologyes/mobiletech", category: "mobile", slug: "mobiletech" },
+  { num: "04", title: "Database Systems", color: "#0F8F87", href: "/technologyes/databasesystems", category: "database", slug: "databasesystems" },
+  { num: "05", title: "CMS Solutions", color: "#8B3FE8", href: "/technologyes/cmssolutions", category: "cms", slug: "cmssolutions" },
+  { num: "06", title: "Cloud & DevOps", color: "#E8A21F", href: "/technologyes/cloud-devops", category: "cloud-devops", slug: "cloud-devops" },
+  { num: "07", title: "Design Tools", color: "#E0452F", href: "/technologyes/designtools", category: "design-tools", slug: "designtools" },
 ];
 
 export const CATEGORY_HEADERS: Record<string, CategoryHeader> = {
@@ -126,16 +126,7 @@ export const CATEGORY_HEADERS: Record<string, CategoryHeader> = {
 
 export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
   // FRONTEND TECH
-  {
-    id: "angularjs",
-    category: "frontend",
-    categoryName: "Frontend Tech",
-    title: "Angular.js",
-    description:
-      "Angular.js is a powerful JavaScript framework developed by Google for building dynamic, single-page web applications. It extends HTML with additional attributes and binds data using a two-way data binding approach. With features like dependency injection, reusable components, and built-in routing, Angular.js simplifies complex front-end development. Our developers use it to deliver structured, maintainable, and enterprise-ready web interfaces.",
-    image: "/technology/angularjs-service.png",
-    color: "#2AA8C4",
-  },
+
   {
     id: "reactjs",
     category: "frontend",
@@ -184,6 +175,16 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     description:
       "CSS3 is the latest evolution of Cascading Style Sheets, used to style and format HTML elements with modern layouts, transitions, animations, and media queries. With Flexbox, CSS Grid, and custom properties, we craft pixel-perfect, fully responsive designs that look and perform consistently across desktops, tablets, and mobile devices.",
     image: "/technology/css3.png",
+    color: "#2AA8C4",
+  },
+  {
+    id: "angularjs",
+    category: "frontend",
+    categoryName: "Frontend Tech",
+    title: "Angular.js",
+    description:
+      "Angular.js is a powerful JavaScript framework developed by Google for building dynamic, single-page web applications. It extends HTML with additional attributes and binds data using a two-way data binding approach. With features like dependency injection, reusable components, and built-in routing, Angular.js simplifies complex front-end development. Our developers use it to deliver structured, maintainable, and enterprise-ready web interfaces.",
+    image: "/technology/angularjs-service.png",
     color: "#2AA8C4",
   },
   {
@@ -581,7 +582,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
 ];
 
 // Base route prefix for technology pages
-export const ROUTE_PREFIX = "/technology";
+export const ROUTE_PREFIX = "/technologyes";
 
 // Pretty URL names. Anything not listed here uses its `id` as the slug.
 export const TECH_SLUG_OVERRIDES: Record<string, string> = {
