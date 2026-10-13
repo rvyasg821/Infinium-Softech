@@ -536,7 +536,7 @@ export async function sendDemoEmail(formData: {
     ].join("");
 
     const tagline = company?.trim()
-      ? `A project demo has been requested on the Infinium Softech website.`
+      ? `A project demo has been requested for ${company.trim()} by ${name}.`
       : "A new project demo has been requested on the Infinium Softech website.";
 
     const html = buildEmail(
