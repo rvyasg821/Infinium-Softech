@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPageMetadata, type RouteKey } from "@/lib/seo";
+import { getPageMetadata, SITE_URL, type RouteKey } from "@/lib/seo";
 import { SOLUTIONS_LIST_DATA } from "@/data/solutions/solutionsData";
 import { SolutionPlaceholder } from "@/components/Solutions/Pages/Placeholder/SolutionPlaceholder";
 import { AiSolutionsPage } from "@/components/Solutions/Pages/AiSolutions/AiSolutionsPage";
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: SolutionPageProps): Promise<M
     return {
       ...baseMetadata,
       alternates: {
-        canonical: `/solutions/${slug}`,
+        canonical: `${SITE_URL}/solutions/${slug}`,
       },
     };
   } catch (error) {
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: SolutionPageProps): Promise<M
       title: solution.title,
       description: solution.description,
       alternates: {
-        canonical: `/solutions/${solution.id}`,
+        canonical: `${SITE_URL}/solutions/${solution.id}`,
       },
     };
   }

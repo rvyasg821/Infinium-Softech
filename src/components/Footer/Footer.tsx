@@ -76,14 +76,14 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    title: "Technology",
+    title: "Technologies",
     items: [
-      { label: "React", href: "/technology#tech-reactjs" },
-      { label: "Next.js", href: "/technology#tech-nextjs" },
-      { label: "Flutter", href: "/technology#tech-flutter" },
-      { label: "Node.js", href: "/technology#tech-nodejs" },
-      { label: "Laravel", href: "/technology#tech-php" },
-      { label: "AWS", href: "/technology#tech-aws" },
+      { label: "React", href: "/technologies/react-js" },
+      { label: "Next.js", href: "/technologies/next-js" },
+      { label: "Flutter", href: "/technologies/flutter" },
+      { label: "Node.js", href: "/technologies/node-js" },
+      { label: "Laravel", href: "/technologies/php-laravel" },
+      { label: "AWS", href: "/technologies/aws" },
     ],
   },
   {
@@ -210,7 +210,25 @@ export function Footer() {
                 <ul className="column-list">
                   {col.items.map((item) => (
                     <li key={item.label}>
-                      <Link href={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={(e) => {
+                          if (item.href.startsWith("/technologies")) {
+                            if (
+                              typeof window !== "undefined" &&
+                              window.location.pathname.startsWith("/technologies")
+                            ) {
+                              e.preventDefault();
+                              window.history.pushState(null, "", item.href);
+                              window.dispatchEvent(
+                                new CustomEvent("scroll-to-technology", {
+                                  detail: { href: item.href },
+                                })
+                              );
+                            }
+                          }
+                        }}
+                      >
                         {item.label}
                       </Link>
                     </li>

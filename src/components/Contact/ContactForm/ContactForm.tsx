@@ -9,6 +9,8 @@ import {
   CONTACT_DESKS,
   CONTACT_STEPS,
 } from "@/data/contactData";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "./ContactForm.scss";
 
 export function ContactForm() {
@@ -22,6 +24,74 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    mobile?: string;
+    service?: string;
+    stage?: string;
+    startTime?: string;
+  }>({});
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
+
+  const validateName = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[a-zA-Z\s]+$/.test(val.trim())) return "Please enter letters and spaces only.";
+    return undefined;
+  };
+
+  const validateEmail = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) return "Please enter a valid email address.";
+    return undefined;
+  };
+
+  const validateMobile = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    const cleanDigits = val.replace(/\D/g, "");
+    if (!/^\+?[0-9\s\-()]+$/.test(val) || cleanDigits.length < 7 || cleanDigits.length > 15) {
+      return "Please enter a telephone number.";
+    }
+    return undefined;
+  };
+
+  const validateService = (val: string) => {
+    if (!val) return "Please fill out this field.";
+    return undefined;
+  };
+
+  const validateStage = (val: string) => {
+    if (!val) return "Please fill out this field.";
+    return undefined;
+  };
+
+  const validateStartTime = (val: string) => {
+    if (!val) return "Please fill out this field.";
+    return undefined;
+  };
+
+  const showSweetAlert = (
+    title: string,
+    text: string,
+    icon: "warning" | "error" | "info" | "success" = "warning"
+  ) => {
+    if (typeof window !== "undefined" && !Swal.isVisible()) {
+      Swal.fire({
+        icon,
+        title,
+        text,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#0c0c0d",
+        background: "#ffffff",
+        color: "#0c0c0d",
+        customClass: {
+          popup: "infinium-swal-popup",
+          confirmButton: "infinium-swal-btn",
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     if (isSent && sectionRef.current) {
@@ -179,24 +249,66 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !mobile.trim()) return;
-    
-    setIsSubmitting(true);
-    const result = await sendContactEmail({
-      name,
-      email,
-      mobile,
-      service,
-      stage,
-      startTime,
-      message,
-    });
-    setIsSubmitting(false);
 
-    if (result.success) {
-      setIsSent(true);
-    } else {
-      alert("Something went wrong. Please try again.");
+    const nameErr = validateName(name);
+    const emailErr = validateEmail(email);
+    const mobileErr = validateMobile(mobile);
+    const serviceErr = validateService(service);
+    const stageErr = validateStage(stage);
+    const startTimeErr = validateStartTime(startTime);
+
+    const newErrors = {
+      name: nameErr,
+      email: emailErr,
+      mobile: mobileErr,
+      service: serviceErr,
+      stage: stageErr,
+      startTime: startTimeErr,
+    };
+
+    setTouched({
+      name: true,
+      email: true,
+      mobile: true,
+      service: true,
+      stage: true,
+      startTime: true,
+    });
+    setErrors(newErrors);
+
+    if (nameErr || emailErr || mobileErr || serviceErr || stageErr || startTimeErr) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await sendContactEmail({
+        name,
+        email,
+        mobile,
+        service,
+        stage,
+        startTime,
+        message,
+      });
+
+      if (result.success) {
+        setIsSent(true);
+      } else {
+        showSweetAlert(
+          "Submission Error",
+          result.error || "Something went wrong while sending your request. Please try again.",
+          "error"
+        );
+      }
+    } catch {
+      showSweetAlert(
+        "Network Error",
+        "A network error occurred. Please check your connection and try again.",
+        "error"
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -209,6 +321,8 @@ export function ContactForm() {
     setStage("");
     setStartTime("");
     setMessage("");
+    setErrors({});
+    setTouched({});
   };
 
   const sentMessageNote = service
@@ -221,7 +335,7 @@ export function ContactForm() {
         {/* Left Column: Interactive Form Box */}
         <div data-reveal="" className="contact-form-card">
           {!isSent ? (
-            <form onSubmit={handleSubmit} className="form-inner">
+            <form onSubmit={handleSubmit} noValidate className="form-inner">
               <h2 className="form-title">Send us a brief</h2>
               <p className="form-subtitle">
                 Tell us about your project and we will get back to you with the right next steps.
@@ -229,49 +343,95 @@ export function ContactForm() {
 
               <div className="form-grid">
                 <label className="form-field">
-                  <span className="field-label">Name</span>
+                  <span className="field-label">Name*</span>
                   <input
                     type="text"
-                    required
                     placeholder="Your name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="field-input"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setName(val);
+                      if (touched.name) {
+                        setErrors((prev) => ({ ...prev, name: validateName(val) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, name: true }));
+                      setErrors((prev) => ({ ...prev, name: validateName(name) }));
+                    }}
+                    className={`field-input ${touched.name && errors.name ? "field-input--error" : ""}`}
                   />
+                  {touched.name && errors.name && (
+                    <span className="field-error-msg">{errors.name}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Email Address</span>
+                  <span className="field-label">Email Address*</span>
                   <input
                     type="email"
-                    required
                     placeholder="name@company.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="field-input"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setEmail(val);
+                      if (touched.email) {
+                        setErrors((prev) => ({ ...prev, email: validateEmail(val) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, email: true }));
+                      setErrors((prev) => ({ ...prev, email: validateEmail(email) }));
+                    }}
+                    className={`field-input ${touched.email && errors.email ? "field-input--error" : ""}`}
                   />
+                  {touched.email && errors.email && (
+                    <span className="field-error-msg">{errors.email}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">Mobile No</span>
                   <input
                     type="tel"
-                    required
                     placeholder="Your mobile number"
                     value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    className="field-input"
+                    maxLength={15}
+                    onChange={(e) => {
+                      const val = e.target.value.slice(0, 15);
+                      setMobile(val);
+                      if (touched.mobile) {
+                        setErrors((prev) => ({ ...prev, mobile: validateMobile(val) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, mobile: true }));
+                      setErrors((prev) => ({ ...prev, mobile: validateMobile(mobile) }));
+                    }}
+                    className={`field-input ${touched.mobile && errors.mobile ? "field-input--error" : ""}`}
                   />
+                  {touched.mobile && errors.mobile && (
+                    <span className="field-error-msg">{errors.mobile}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">Select a service</span>
                   <div className="select-wrap">
                     <select
-                      required
                       value={service}
-                      onChange={(e) => setService(e.target.value)}
-                      className="field-select"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setService(val);
+                        if (touched.service) {
+                          setErrors((prev) => ({ ...prev, service: validateService(val) }));
+                        }
+                      }}
+                      onBlur={() => {
+                        setTouched((prev) => ({ ...prev, service: true }));
+                        setErrors((prev) => ({ ...prev, service: validateService(service) }));
+                      }}
+                      className={`field-select ${touched.service && errors.service ? "field-select--error" : ""}`}
                     >
                       <option value="" disabled>
                         Select a service
@@ -284,16 +444,28 @@ export function ContactForm() {
                     </select>
                     <span className="select-caret" aria-hidden="true">▾</span>
                   </div>
+                  {touched.service && errors.service && (
+                    <span className="field-error-msg">{errors.service}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">At what stage is your app?</span>
                   <div className="select-wrap">
                     <select
-                      required
                       value={stage}
-                      onChange={(e) => setStage(e.target.value)}
-                      className="field-select"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setStage(val);
+                        if (touched.stage) {
+                          setErrors((prev) => ({ ...prev, stage: validateStage(val) }));
+                        }
+                      }}
+                      onBlur={() => {
+                        setTouched((prev) => ({ ...prev, stage: true }));
+                        setErrors((prev) => ({ ...prev, stage: validateStage(stage) }));
+                      }}
+                      className={`field-select ${touched.stage && errors.stage ? "field-select--error" : ""}`}
                     >
                       <option value="" disabled>
                         Select stage
@@ -306,16 +478,28 @@ export function ContactForm() {
                     </select>
                     <span className="select-caret" aria-hidden="true">▾</span>
                   </div>
+                  {touched.stage && errors.stage && (
+                    <span className="field-error-msg">{errors.stage}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
                   <span className="field-label">When do you want to start</span>
                   <div className="select-wrap">
                     <select
-                      required
                       value={startTime}
-                      onChange={(e) => setStartTime(e.target.value)}
-                      className="field-select"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setStartTime(val);
+                        if (touched.startTime) {
+                          setErrors((prev) => ({ ...prev, startTime: validateStartTime(val) }));
+                        }
+                      }}
+                      onBlur={() => {
+                        setTouched((prev) => ({ ...prev, startTime: true }));
+                        setErrors((prev) => ({ ...prev, startTime: validateStartTime(startTime) }));
+                      }}
+                      className={`field-select ${touched.startTime && errors.startTime ? "field-select--error" : ""}`}
                     >
                       <option value="" disabled>
                         Select timeline
@@ -328,6 +512,9 @@ export function ContactForm() {
                     </select>
                     <span className="select-caret" aria-hidden="true">▾</span>
                   </div>
+                  {touched.startTime && errors.startTime && (
+                    <span className="field-error-msg">{errors.startTime}</span>
+                  )}
                 </label>
               </div>
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Instrument_Sans } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.scss";
@@ -20,6 +20,12 @@ const instrumentSans = Instrument_Sans({
 });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

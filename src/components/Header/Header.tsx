@@ -22,6 +22,7 @@ export function Header() {
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [previewProductName, setPreviewProductName] = useState<string>("Slota");
+  const [selectedSolutionName, setSelectedSolutionName] = useState<string>("AI Solutions");
   const [isMobile, setIsMobile] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -114,25 +115,24 @@ export function Header() {
     setActiveMenu(key);
     const menuDef = MENU_DEFS[key];
     if (menuDef) {
+      if (key === "solutions") {
+        const matchSol = menuDef.items?.find(
+          (item) => item.href && (pathname === item.href || (item.href !== "/solutions" && pathname.startsWith(item.href)))
+        );
+        setSelectedSolutionName(matchSol ? matchSol.name : "");
+      }
+
       let nextPreviewName = "";
 
       if (menuDef.isProducts && menuDef.productItems && menuDef.productItems.length > 0) {
         const match = menuDef.productItems.find(p => pathname === `/products/${p.id}`);
-        // Only highlight if matching the current page
         nextPreviewName = match ? match.name : "";
       } else if (menuDef.items && menuDef.items.length > 0) {
-        const match = menuDef.items.find(item => item.href && item.href.split("#")[0] !== "/" && pathname.startsWith(item.href.split("#")[0]));
-        if (match) {
+        const match = menuDef.items.find(
+          item => item.href && item.href !== "/technologies" && item.href !== "/solutions" && pathname.startsWith(item.href)
+        );
+        if (match && match.product) {
           nextPreviewName = match.product;
-        } else {
-          const currentProd = ECOSYSTEM_PRODUCTS.find(p => pathname === `/products/${p.id}`);
-          if (currentProd) {
-            const relatedItem = menuDef.items.find(item => item.product === currentProd.name);
-            if (relatedItem) nextPreviewName = relatedItem.product;
-          }
-        }
-        if (!nextPreviewName) {
-          nextPreviewName = ""; // Only highlight if matching the current page
         }
       }
 
@@ -166,7 +166,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
-      technology: "/technology",
+      technology: "/technologies",
     };
     const route = routeByMenuKey[key];
 
@@ -177,7 +177,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
-      technology: "/technology",
+      technology: "/technologies",
     };
     const route = routeByMenuKey[key];
 
@@ -198,7 +198,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
-      technology: "/technology",
+      technology: "/technologies",
     };
     const route = routeByMenuKey[key];
 
@@ -245,8 +245,46 @@ export function Header() {
   const currentPreviewProduct =
     ECOSYSTEM_PRODUCTS.find((p) => p.name === previewProductName) || ECOSYSTEM_PRODUCTS[0];
 
+  const isSolutionsMenu =
+    activeMenu === "solutions" || currentMenuDef?.key === "solutions";
+
+  const currentSolutionItem =
+    (selectedSolutionName && MENU_DEFS.solutions?.items?.find((item) => item.name === selectedSolutionName)) ||
+    MENU_DEFS.solutions?.items?.find(
+      (item) => item.href && (pathname === item.href || (item.href !== "/solutions" && pathname.startsWith(item.href)))
+    ) ||
+    MENU_DEFS.solutions?.items?.[0];
+
   const currentHoveredGenericItem = currentMenuDef?.items?.find((item) => item.product === previewProductName);
-  const previewShot = currentHoveredGenericItem?.previewImage || currentPreviewProduct.shot;
+
+  const cardTag = isSolutionsMenu
+    ? (currentSolutionItem?.tag || "AI & AUTOMATION")
+    : currentPreviewProduct.tag;
+
+  const cardTitle = isSolutionsMenu
+    ? (currentSolutionItem?.previewTitle || currentSolutionItem?.name || "AI Solutions")
+    : currentPreviewProduct.name;
+
+  const cardDesc = isSolutionsMenu
+    ? (currentSolutionItem?.previewDesc || currentSolutionItem?.desc || "")
+    : currentPreviewProduct.desc;
+
+  const cardImage = isSolutionsMenu
+    ? (currentSolutionItem?.previewImage || "/solutions/AI%20%26%20Automation.png")
+    : (currentHoveredGenericItem?.previewImage || currentPreviewProduct.shot);
+
+  const cardLink = isSolutionsMenu
+    ? (currentSolutionItem?.link || currentSolutionItem?.href || "/solutions/ai-solutions")
+    : (currentPreviewProduct.link || "#");
+
+  const cardBgWash = isSolutionsMenu
+    ? "rgba(15, 143, 135, 0.08)"
+    : currentPreviewProduct.wash;
+
+  const isTechnologyMenu =
+    activeMenu === "technology" ||
+    currentMenuDef?.key === "technology" ||
+    currentMenuDef?.key === "technologys";
 
   return (
     <div
@@ -296,7 +334,7 @@ export function Header() {
                 !activeMenu &&
                 ((key === "products" && pathname.startsWith("/products")) ||
                   (key === "solutions" && pathname === "/solutions") ||
-                  (key === "technology" && pathname === "/technology"));
+                  (key === "technology" && pathname.startsWith("/technologies")));
               return (
                 <button
                   key={key}
@@ -353,7 +391,7 @@ export function Header() {
                     if (pathname.startsWith("/about")) defaultMenu = "about";
                     if (pathname.startsWith("/contact")) defaultMenu = "contact";
                     if (pathname.startsWith("/solutions")) defaultMenu = "solutions";
-                    if (pathname.startsWith("/technology")) defaultMenu = "technology";
+                    if (pathname.startsWith("/technologies") || pathname.startsWith("/technology")) defaultMenu = "technology";
                     toggleMenuKey(defaultMenu);
                   }
                 }}
@@ -393,7 +431,7 @@ export function Header() {
             }
           }}
         >
-          <div className={`mega-menu-inner ${currentMenuDef?.key === "technology" ? "is-tech-menu" : ""}`}>
+          <div className={`mega-menu-inner ${isTechnologyMenu ? "is-tech-menu" : ""}`}>
             {/* Left Content Column */}
             <div className="mega-left-col">
               {/* Category Eyebrow Header */}
@@ -451,7 +489,9 @@ export function Header() {
               {currentMenuDef?.isProducts && currentMenuDef.productItems && (
                 <div className="products-grid">
                   {currentMenuDef.productItems.map((prod) => {
-                    const isSelected = previewProductName === prod.name;
+                    const isSelected =
+                      pathname === `/products/${prod.id}` ||
+                      pathname.startsWith(`/products/${prod.id}/`);
                     return (
                       <Link
                         key={prod.name}
@@ -494,9 +534,13 @@ export function Header() {
 
               {/* Generic Menu Links Layout (Industries, Solutions, Technology, Company, Demo) */}
               {!currentMenuDef?.isProducts && currentMenuDef?.items && (
-                <div className={`links-grid ${currentMenuDef.key === "technology" ? "tech-links-grid" : ""}`}>
+                <div className={`links-grid ${isTechnologyMenu ? "tech-links-grid" : ""}`}>
                   {currentMenuDef.items.map((item) => {
-                    const isSelected = previewProductName === item.product;
+                    const isSelected = item.href
+                      ? (item.href !== "/technologies" &&
+                          item.href !== "/solutions" &&
+                          (pathname === item.href || pathname.startsWith(item.href + "/")))
+                      : false;
                     const matchedProd = ECOSYSTEM_PRODUCTS.find((p) => p.name === item.product);
                     const targetHref = item.href || (matchedProd ? `#${matchedProd.id}` : "#ecosystem");
                     return (
@@ -504,12 +548,32 @@ export function Header() {
                         key={item.name}
                         href={targetHref}
                         className={`link-card ${isSelected ? "is-selected" : ""}`}
-                        onMouseEnter={() => setPreviewProductName(item.product)}
-                        onClick={() => {
-                          setPreviewProductName(item.product);
+                        onMouseEnter={() => {
+                          if (isSolutionsMenu) {
+                            setSelectedSolutionName(item.name);
+                          } else {
+                            setPreviewProductName(item.product);
+                          }
+                        }}
+                        onClick={(e) => {
+                          if (isSolutionsMenu) {
+                            setSelectedSolutionName(item.name);
+                          } else {
+                            setPreviewProductName(item.product);
+                          }
                           setActiveMenu(null);
                           if (item.href) {
-                            if (item.href.includes("#")) {
+                            if (item.href.startsWith("/technologies")) {
+                              if (pathname.startsWith("/technologies")) {
+                                e.preventDefault();
+                                window.history.pushState(null, "", item.href);
+                                window.dispatchEvent(
+                                  new CustomEvent("scroll-to-technology", {
+                                    detail: { href: item.href },
+                                  })
+                                );
+                              }
+                            } else if (item.href.includes("#")) {
                               const [hrefPath, hashId] = item.href.split("#");
                               if (pathname === hrefPath || (hrefPath === "" && hashId)) {
                                 const el = document.getElementById(hashId);
@@ -584,15 +648,15 @@ export function Header() {
             </div>
 
             {/* Right Preview Card (Hidden for Technology Menu) */}
-            {currentMenuDef && currentMenuDef.key !== "technology" && (
+            {currentMenuDef && !isTechnologyMenu && (
               <div className="preview-card">
                 <div
                   className="preview-image-wrapper"
-                  style={{ backgroundColor: currentPreviewProduct.wash }}
+                  style={{ backgroundColor: cardBgWash }}
                 >
                   <Image
-                    src={previewShot}
-                    alt={currentPreviewProduct.name}
+                    src={cardImage}
+                    alt={cardTitle}
                     width={480}
                     height={300}
                     className="preview-img"
@@ -600,31 +664,29 @@ export function Header() {
                   />
                 </div>
                 <div className="preview-content">
-                  <div className="preview-tag">{currentPreviewProduct.tag}</div>
-                  <div className="preview-title">{currentPreviewProduct.name}</div>
-                  <div className="preview-desc">{currentPreviewProduct.desc}</div>
+                  <div className="preview-tag">{cardTag}</div>
+                  <div className="preview-title">{cardTitle}</div>
+                  <div className="preview-desc">{cardDesc}</div>
                   <div className="preview-actions">
                     <Link
                       href="/book-a-demo"
                       className="btn-launch"
                       onClick={() => setActiveMenu(null)}
                     >
-                      Launch demo <span aria-hidden="true">→</span>
+                      Book a demo <span aria-hidden="true">→</span>
                     </Link>
                     <Link
-                      href={
-                        currentMenuDef && currentMenuDef.items
-                          ? currentMenuDef.items.find(item => item.product === currentPreviewProduct.name)?.link || currentMenuDef.items.find(item => item.product === currentPreviewProduct.name)?.href || currentPreviewProduct.link || "#"
-                          : currentPreviewProduct.link || "#"
-                      }
+                      href={cardLink}
                       className="btn-details"
                       onClick={() => {
                         setActiveMenu(null);
-                        window.dispatchEvent(
-                          new CustomEvent("scroll-to-ecosystem-product", {
-                            detail: { id: currentPreviewProduct.id },
-                          })
-                        );
+                        if (!isSolutionsMenu) {
+                          window.dispatchEvent(
+                            new CustomEvent("scroll-to-ecosystem-product", {
+                              detail: { id: currentPreviewProduct.id },
+                            })
+                          );
+                        }
                       }}
                     >
                       View details

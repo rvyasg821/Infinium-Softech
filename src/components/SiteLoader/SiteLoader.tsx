@@ -1,24 +1,80 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 import "./SiteLoader.scss";
 
+// Set to false if you want to completely disable the loader on page change
+export const SHOW_LOADER_ON_PAGE_CHANGE = true;
+
 export function SiteLoader() {
-  const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [isFading, setIsFading] = useState(false);
+  const [isPageChange, setIsPageChange] = useState(false);
+
+  const isInitialMount = useRef(true);
+  const prevPathname = useRef(pathname);
+
+  // 1. Initial Website Enter & Page Refresh: Full original size
   useEffect(() => {
-    // Hide the loader after a short delay or when window is fully loaded
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500); // 1.5 second loading feel
+    const fadeTimer = setTimeout(() => {
+      setIsFading(true);
+    }, 1250);
 
-    return () => clearTimeout(timer);
+    const hideTimer = setTimeout(() => {
+      setIsVisible(false);
+    }, 1600);
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
-  if (!loading) return null;
+  // 2. Page Navigation / Change: Decreased size
+  useEffect(() => {
+    // Skip initial mount (handled by effect above)
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      prevPathname.current = pathname;
+      return;
+    }
+
+    // Trigger on actual pathname change
+    if (prevPathname.current !== pathname) {
+      prevPathname.current = pathname;
+
+      if (!SHOW_LOADER_ON_PAGE_CHANGE) return;
+
+      setIsPageChange(true);
+      setIsFading(false);
+      setIsVisible(true);
+
+      const fadeTimer = setTimeout(() => {
+        setIsFading(true);
+      }, 550);
+
+      const hideTimer = setTimeout(() => {
+        setIsVisible(false);
+      }, 850);
+
+      return () => {
+        clearTimeout(fadeTimer);
+        clearTimeout(hideTimer);
+      };
+    }
+  }, [pathname]);
+
+  if (!isVisible) return null;
 
   return (
-    <div className={`site-loader ${!loading ? "is-hidden" : ""}`}>
+    <div
+      className={`site-loader ${isPageChange ? "is-page-change" : ""} ${
+        isFading ? "is-hidden" : ""
+      }`}
+    >
       <div className="stage" id="stage">
         <div className="ring-in">
           <svg className="ring" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">

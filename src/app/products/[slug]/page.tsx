@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPageMetadata, type RouteKey } from "@/lib/seo";
+import { getPageMetadata, SITE_URL, type RouteKey } from "@/lib/seo";
 import { AppointGem } from "@/components/Products/Pages/Solta/AppointGem";
 import { Welzokart } from "@/components/Products/Pages/Welzokart/Welzokart";
 import { Needly } from "@/components/Products/Pages/Needly/Needly"
@@ -25,14 +25,14 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 
   const routeKey = `/products/${slug}` as RouteKey;
-  
+
   try {
     const baseMetadata = getPageMetadata(routeKey);
     return {
       ...baseMetadata,
       alternates: {
         ...baseMetadata.alternates,
-        canonical: `/products/${product.id}`,
+        canonical: `${SITE_URL}/products/${product.id}`,
       },
     };
   } catch (error) {
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       title: product.name,
       description: product.desc,
       alternates: {
-        canonical: `/products/${product.id}`,
+        canonical: `${SITE_URL}/products/${product.id}`,
       },
     };
   }

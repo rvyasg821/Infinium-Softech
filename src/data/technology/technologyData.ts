@@ -21,16 +21,55 @@ export interface HeroIndexItem {
   title: string;
   color: string;
   href: string;
+  category: string;
+  slug: string;
 }
 
+export const CATEGORY_SLUG_MAP: Record<string, string> = {
+  frontend: "frontendtech",
+  backend: "backendtech",
+  mobile: "mobiletech",
+  database: "databasesystems",
+  cms: "cmssolutions",
+  "cloud-devops": "cloud-devops",
+  "design-tools": "designtools",
+};
+
+export const SLUG_TO_CATEGORY_MAP: Record<string, string> = {
+  frontendtech: "frontend",
+  backendtech: "backend",
+  mobiletech: "mobile",
+  databasesystems: "database",
+  cmssolutions: "cms",
+  "cloud-devops": "cloud-devops",
+  designtools: "design-tools",
+
+  // Aliases
+  frontend: "frontend",
+  "frontend-tech": "frontend",
+  backend: "backend",
+  "backend-tech": "backend",
+  mobile: "mobile",
+  "mobile-tech": "mobile",
+  database: "database",
+  "database-systems": "database",
+  cms: "cms",
+  "cms-solutions": "cms",
+  cloud: "cloud-devops",
+  clouddevops: "cloud-devops",
+  "cloud-and-devops": "cloud-devops",
+  design: "design-tools",
+  "design-tools": "design-tools",
+};
+
 export const TECHNOLOGY_HERO_INDEX_ITEMS: HeroIndexItem[] = [
-  { num: "01", title: "Frontend Tech", color: "#2AA8C4", href: "#frontend" },
-  { num: "02", title: "Backend Tech", color: "#1F31E8", href: "#backend" },
-  { num: "03", title: "Mobile Tech", color: "#1E9E5A", href: "#mobile" },
-  { num: "04", title: "Database Systems", color: "#0F8F87", href: "#database" },
-  { num: "05", title: "CMS Solutions", color: "#8B3FE8", href: "#cms" },
-  { num: "06", title: "Cloud & DevOps", color: "#E8A21F", href: "#cloud-devops" },
-  { num: "07", title: "Design Tools", color: "#E0452F", href: "#design-tools" },
+  { num: "01", title: "Frontend Tech", color: "#2AA8C4", href: "/technologies/frontendtech", category: "frontend", slug: "frontendtech" },
+  { num: "02", title: "Backend Tech", color: "#1F31E8", href: "/technologies/backendtech", category: "backend", slug: "backendtech" },
+  { num: "03", title: "Mobile Tech", color: "#1E9E5A", href: "/technologies/mobiletech", category: "mobile", slug: "mobiletech" },
+  { num: "04", title: "Database Systems", color: "#0F8F87", href: "/technologies/databasesystems", category: "database", slug: "databasesystems" },
+  { num: "05", title: "CMS Solutions", color: "#8B3FE8", href: "/technologies/cmssolutions", category: "cms", slug: "cmssolutions" },
+  { num: "06", title: "Cloud & DevOps", color: "#E8A21F", href: "/technologies/cloud-devops", category: "cloud-devops", slug: "cloud-devops" },
+  { num: "07", title: "Design Tools", color: "#E0452F", href: "/technologies/designtools", category: "design-tools", slug: "designtools" },
 ];
 
 export const CATEGORY_HEADERS: Record<string, CategoryHeader> = {
@@ -87,16 +126,7 @@ export const CATEGORY_HEADERS: Record<string, CategoryHeader> = {
 
 export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
   // FRONTEND TECH
-  {
-    id: "angularjs",
-    category: "frontend",
-    categoryName: "Frontend Tech",
-    title: "Angular.js",
-    description:
-      "Angular.js is a powerful JavaScript framework developed by Google for building dynamic, single-page web applications. It extends HTML with additional attributes and binds data using a two-way data binding approach. With features like dependency injection, reusable components, and built-in routing, Angular.js simplifies complex front-end development. Our developers use it to deliver structured, maintainable, and enterprise-ready web interfaces.",
-    image: "/technology/angularjs-service.png",
-    color: "#2AA8C4",
-  },
+
   {
     id: "reactjs",
     category: "frontend",
@@ -145,6 +175,16 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     description:
       "CSS3 is the latest evolution of Cascading Style Sheets, used to style and format HTML elements with modern layouts, transitions, animations, and media queries. With Flexbox, CSS Grid, and custom properties, we craft pixel-perfect, fully responsive designs that look and perform consistently across desktops, tablets, and mobile devices.",
     image: "/technology/css3.png",
+    color: "#2AA8C4",
+  },
+  {
+    id: "angularjs",
+    category: "frontend",
+    categoryName: "Frontend Tech",
+    title: "Angular.js",
+    description:
+      "Angular.js is a powerful JavaScript framework developed by Google for building dynamic, single-page web applications. It extends HTML with additional attributes and binds data using a two-way data binding approach. With features like dependency injection, reusable components, and built-in routing, Angular.js simplifies complex front-end development. Our developers use it to deliver structured, maintainable, and enterprise-ready web interfaces.",
+    image: "/technology/angularjs-service.png",
     color: "#2AA8C4",
   },
   {
@@ -540,3 +580,53 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     color: "#E0452F",
   },
 ];
+
+// Base route prefix for technology pages
+export const ROUTE_PREFIX = "/technologies";
+
+// Pretty URL names. Anything not listed here uses its `id` as the slug.
+export const TECH_SLUG_OVERRIDES: Record<string, string> = {
+  angularjs: "angular-js",
+  reactjs: "react-js",
+  vuejs: "vue-js",
+  nextjs: "next-js",
+  nodejs: "node-js",
+  nestjs: "nest-js",
+  tailwindcss: "tailwind-css",
+  php: "php-laravel",
+  ios: "ios-swift",
+  mssql: "ms-sql-server",
+  woocommerce: "woo-commerce",
+  illustrator: "illustrator-photoshop",
+};
+
+export function getTechSlug(id: string): string {
+  return TECH_SLUG_OVERRIDES[id] ?? id;
+}
+
+export function findTechBySlug(slug: string): IndividualTechItem | undefined {
+  const normalized = slug.toLowerCase();
+  return INDIVIDUAL_TECH_ITEMS.find(
+    (t) =>
+      t.id.toLowerCase() === normalized ||
+      getTechSlug(t.id).toLowerCase() === normalized ||
+      (normalized === "react" && t.id === "reactjs") ||
+      (normalized === "node" && t.id === "nodejs") ||
+      (normalized === "next" && t.id === "nextjs") ||
+      (normalized === "laravel" && t.id === "php")
+  );
+}
+
+// "frontend" -> "frontendtech"
+export function getCategoryRouteSlug(category: string): string {
+  return (
+    TECHNOLOGY_HERO_INDEX_ITEMS.find((i) => i.category === category)?.slug ??
+    CATEGORY_SLUG_MAP[category] ??
+    category
+  );
+}
+
+// "frontendtech" -> "frontend" (or undefined if invalid)
+export function getCategoryFromRouteSlug(slug: string): string | undefined {
+  return SLUG_TO_CATEGORY_MAP[slug];
+}

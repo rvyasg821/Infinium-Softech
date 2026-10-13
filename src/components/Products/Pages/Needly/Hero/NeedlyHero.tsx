@@ -19,7 +19,7 @@ import {
   Banana,
   Grape,
   Citrus,
-  Milk,
+  Milk, 
   Egg,
   Wheat,
   Salad,
@@ -275,10 +275,10 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
               }}
             >
               <div className="blob-shape"></div>
-              <div className="blob-orange-circle"></div>
+              <div className="blob-orange-circle"></div> 
 
               <Image
-                src="/shots/Welzokart_ui-1.png"
+                src="/shots/Needly/Needly_interface-1.jpg"
                 alt="Shop catalog screen"
                 width={250}
                 height={520}
@@ -286,7 +286,7 @@ export function NeedlyHero({ product }: { product: ProductItem }) {
                 priority
               />
               <Image
-                src="/shots/Welzokart_ui-4.png"
+                src="/shots/Needly/Needly_interface-5.jpg"
                 alt="Request screen"
                 width={250}
                 height={520}

@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { sendDemoEmail } from "@/actions/sendEmail";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "./BookDemoForm.scss";
 
 const DEMO_SIZES = ["1–10", "11–50", "51–200", "201–1,000", "1,000+"];
@@ -76,34 +78,108 @@ export function BookDemoForm() {
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+  }>({});
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
+
+  const validateName = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[a-zA-Z\s]+$/.test(val.trim()))
+      return "Please enter letters and spaces only.";
+    return undefined;
+  };
+
+  const validateEmail = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()))
+      return "Please enter a valid email address.";
+    return undefined;
+  };
+
+  const showSweetAlert = (
+    title: string,
+    text: string,
+    icon: "warning" | "error" | "info" | "success" = "warning"
+  ) => {
+    if (typeof window !== "undefined" && !Swal.isVisible()) {
+      Swal.fire({
+        icon,
+        title,
+        text,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#0c0c0d",
+        background: "#ffffff",
+        color: "#0c0c0d",
+        customClass: {
+          popup: "infinium-swal-popup",
+          confirmButton: "infinium-swal-btn",
+        },
+      });
+    }
+  };
+
   useEffect(() => {
     if (isSent && sectionRef.current) {
-      const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      const y =
+        sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   }, [isSent]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
-    
-    setIsSubmitting(true);
-    const result = await sendDemoEmail({
-      name,
-      email,
-      company,
-      size,
-      product,
-      day,
-      time,
-      message,
-    });
-    setIsSubmitting(false);
 
-    if (result.success) {
-      setIsSent(true);
-    } else {
-      alert("Something went wrong. Please try again.");
+    const nameErr = validateName(name);
+    const emailErr = validateEmail(email);
+
+    const newErrors = {
+      name: nameErr,
+      email: emailErr,
+    };
+
+    setTouched({
+      name: true,
+      email: true,
+    });
+    setErrors(newErrors);
+
+    if (nameErr || emailErr) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await sendDemoEmail({
+        name,
+        email,
+        company,
+        size,
+        product,
+        day,
+        time,
+        message,
+      });
+
+      if (result.success) {
+        setIsSent(true);
+      } else {
+        showSweetAlert(
+          "Submission Error",
+          result.error ||
+            "Something went wrong while booking your demo. Please try again.",
+          "error"
+        );
+      }
+    } catch {
+      showSweetAlert(
+        "Network Error",
+        "A network error occurred. Please check your connection and try again.",
+        "error"
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -117,6 +193,8 @@ export function BookDemoForm() {
     setDay("Tue");
     setTime("Afternoon");
     setMessage("");
+    setErrors({});
+    setTouched({});
   };
 
   const productChipsRef = useRef<HTMLDivElement>(null);
@@ -194,40 +272,86 @@ export function BookDemoForm() {
   };
 
   return (
-    <section ref={sectionRef} id="form" className="contact-form-section content-padding" aria-label="Book a Demo Request Form">
+    <section
+      ref={sectionRef}
+      id="form"
+      className="contact-form-section content-padding"
+      aria-label="Book a Demo Request Form"
+    >
       <div className="contact-form-container">
         {/* Left Column: Interactive Form Card */}
         <div data-reveal="" className="contact-form-card">
           {!isSent ? (
-            <form onSubmit={handleSubmit} className="form-inner">
+            <form onSubmit={handleSubmit} noValidate className="form-inner">
               <h2 className="form-title">Pick a time</h2>
               <p className="form-subtitle">
-                Tell us who&apos;s joining and roughly when works. We&apos;ll confirm the exact slot by email.
+                Tell us who&apos;s joining and roughly when works. We&apos;ll
+                confirm the exact slot by email.
               </p>
 
               <div className="form-grid">
                 <label className="form-field">
-                  <span className="field-label">Full name</span>
+                  <span className="field-label">Full name*</span>
                   <input
                     type="text"
-                    required
                     placeholder="Your name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="field-input"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setName(val);
+                      if (touched.name) {
+                        setErrors((prev) => ({
+                          ...prev,
+                          name: validateName(val),
+                        }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, name: true }));
+                      setErrors((prev) => ({
+                        ...prev,
+                        name: validateName(name),
+                      }));
+                    }}
+                    className={`field-input ${
+                      touched.name && errors.name ? "field-input--error" : ""
+                    }`}
                   />
+                  {touched.name && errors.name && (
+                    <span className="field-error-msg">{errors.name}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Work email</span>
+                  <span className="field-label">Work email*</span>
                   <input
                     type="email"
-                    required
                     placeholder="name@company.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="field-input"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setEmail(val);
+                      if (touched.email) {
+                        setErrors((prev) => ({
+                          ...prev,
+                          email: validateEmail(val),
+                        }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, email: true }));
+                      setErrors((prev) => ({
+                        ...prev,
+                        email: validateEmail(email),
+                      }));
+                    }}
+                    className={`field-input ${
+                      touched.email && errors.email ? "field-input--error" : ""
+                    }`}
                   />
+                  {touched.email && errors.email && (
+                    <span className="field-error-msg">{errors.email}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
@@ -255,7 +379,9 @@ export function BookDemoForm() {
                         </option>
                       ))}
                     </select>
-                    <span className="select-caret" aria-hidden="true">▾</span>
+                    <span className="select-caret" aria-hidden="true">
+                      ▾
+                    </span>
                   </div>
                 </label>
               </div>
@@ -263,7 +389,9 @@ export function BookDemoForm() {
               {/* Product Chips Selection */}
               <div className="form-products-group">
                 <div className="form-products-header">
-                  <span className="field-label">Which product do you want to see</span>
+                  <span className="field-label">
+                    Which product do you want to see
+                  </span>
                   <div className="chips-nav-controls">
                     <button
                       type="button"
@@ -271,7 +399,14 @@ export function BookDemoForm() {
                       onClick={scrollChipsLeft}
                       aria-label="Scroll products left"
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                      >
                         <path d="M15 18l-6-6 6-6" />
                       </svg>
                     </button>
@@ -281,7 +416,14 @@ export function BookDemoForm() {
                       onClick={scrollChipsRight}
                       aria-label="Scroll products right"
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                      >
                         <path d="M9 18l6-6-6-6" />
                       </svg>
                     </button>
@@ -289,7 +431,9 @@ export function BookDemoForm() {
                 </div>
                 <div
                   ref={productChipsRef}
-                  className={`product-chips-wrap ${isChipsDragging ? "is-dragging" : ""}`}
+                  className={`product-chips-wrap ${
+                    isChipsDragging ? "is-dragging" : ""
+                  }`}
                   onWheel={handleChipsWheel}
                   onMouseDown={handleChipsMouseDown}
                   onMouseMove={handleChipsMouseMove}
@@ -323,7 +467,9 @@ export function BookDemoForm() {
                     <button
                       key={idx}
                       type="button"
-                      className={`option-chip-btn ${day === dName ? "is-active" : ""}`}
+                      className={`option-chip-btn ${
+                        day === dName ? "is-active" : ""
+                      }`}
                       onClick={() => setDay(dName)}
                     >
                       {dName}
@@ -340,19 +486,26 @@ export function BookDemoForm() {
                     <button
                       key={idx}
                       type="button"
-                      className={`option-chip-btn ${time === tName ? "is-active" : ""}`}
+                      className={`option-chip-btn ${
+                        time === tName ? "is-active" : ""
+                      }`}
                       onClick={() => setTime(tName)}
                     >
                       {tName}
                     </button>
                   ))}
                 </div>
-                <div className="time-subnote">Times shown in your local timezone. We&apos;ll confirm by email.</div>
+                <div className="time-subnote">
+                  Times shown in your local timezone. We&apos;ll confirm by
+                  email.
+                </div>
               </div>
 
               {/* Message Textarea */}
               <label className="form-field form-field--full">
-                <span className="field-label">Anything we should know before the call</span>
+                <span className="field-label">
+                  Anything we should know before the call
+                </span>
                 <textarea
                   rows={4}
                   placeholder="Current process, rough volumes, the tools you run today."
@@ -364,7 +517,11 @@ export function BookDemoForm() {
 
               {/* Form Actions */}
               <div className="form-footer">
-                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? "Requesting..." : "Request this slot"}
                   {!isSubmitting && <span aria-hidden="true">→</span>}
                 </button>
@@ -378,13 +535,10 @@ export function BookDemoForm() {
               </div>
               <h3 className="success-title">Request sent.</h3>
               <p className="success-note">
-                We&apos;ll confirm {day} · {time} by email within one working day, with a calendar invite and a link to join.
+                We&apos;ll confirm {day} · {time} by email within one working
+                day, with a calendar invite and a link to join.
               </p>
-              <button
-                type="button"
-                onClick={handleReset}
-                className="btn-reset"
-              >
+              <button type="button" onClick={handleReset} className="btn-reset">
                 Book another
               </button>
             </div>
