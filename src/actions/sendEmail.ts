@@ -48,6 +48,13 @@ function escapeHtml(value: string): string {
   });
 }
 
+// Capitalizes the first letter of every word (the rest of each word is kept as typed)
+function capitalizeName(value: string): string {
+  return String(value ?? "")
+    .trim()
+    .replace(/(^|\s)(\S)/g, (_match, space: string, letter: string) => `${space}${letter.toUpperCase()}`);
+}
+
 function fieldRow(label: string, value?: string): string {
   const cleanValue = value?.trim() ?? "";
   const isEmpty = !cleanValue || cleanValue === "Not provided";
@@ -452,8 +459,10 @@ export async function sendContactEmail(formData: {
       return { success: false, error: "Name and email are required." };
     }
 
+    const displayName = capitalizeName(name);
+
     const fieldsHtml = [
-      fieldRow("Name", name),
+      fieldRow("Name", displayName),
       fieldRow("Email Address", email),
       fieldRow("Mobile Number", mobile),
       fieldRow("Service", service),
@@ -471,7 +480,7 @@ export async function sendContactEmail(formData: {
     const text = [
       "CONTACT DETAILS",
       "",
-      `Name: ${name}`,
+      `Name: ${displayName}`,
       `Email: ${email}`,
       `Mobile: ${mobile || "Not provided"}`,
       `Service: ${service || "Not provided"}`,
@@ -487,7 +496,7 @@ export async function sendContactEmail(formData: {
     ].join("\n");
 
     return await deliverEmail({
-      subject: `New - ${name.trim()} - Contact Details`,
+      subject: `${displayName} - Contact Details`,
       text,
       html,
     });
@@ -514,8 +523,10 @@ export async function sendDemoEmail(formData: {
       return { success: false, error: "Name and work email are required." };
     }
 
+    const displayName = capitalizeName(name);
+
     const fieldsHtml = [
-      fieldRow("Name", name),
+      fieldRow("Name", displayName),
       fieldRow("Work Email", email),
       fieldRow("Company", company),
       fieldRow("Team Size", size),
@@ -538,7 +549,7 @@ export async function sendDemoEmail(formData: {
     const text = [
       "PROJECT DEMO REQUEST",
       "",
-      `Name: ${name}`,
+      `Name: ${displayName}`,
       `Work Email: ${email}`,
       `Company: ${company || "Not provided"}`,
       `Team Size: ${size || "Not provided"}`,
@@ -555,7 +566,7 @@ export async function sendDemoEmail(formData: {
     ].join("\n");
 
     return await deliverEmail({
-      subject: `New - ${name.trim()} - Project Demo Request`,
+      subject: `${displayName} - Project Demo Request`,
       text,
       html,
     });
