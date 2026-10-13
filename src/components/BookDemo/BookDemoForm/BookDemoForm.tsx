@@ -78,6 +78,26 @@ export function BookDemoForm() {
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+  }>({});
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
+
+  const validateName = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[a-zA-Z\s]+$/.test(val.trim()))
+      return "Please enter letters and spaces only.";
+    return undefined;
+  };
+
+  const validateEmail = (val: string) => {
+    if (!val.trim()) return "Please fill out this field.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()))
+      return "Please enter a valid email address.";
+    return undefined;
+  };
+
   const showSweetAlert = (
     title: string,
     text: string,
@@ -102,7 +122,8 @@ export function BookDemoForm() {
 
   useEffect(() => {
     if (isSent && sectionRef.current) {
-      const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      const y =
+        sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   }, [isSent]);
@@ -110,16 +131,21 @@ export function BookDemoForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim()) {
-      showSweetAlert("Name Required", "Please enter your full name.");
-      return;
-    }
-    if (!/^[a-zA-Z\s]+$/.test(name.trim())) {
-      showSweetAlert("Invalid Name", "The Name field can only contain letters and spaces.");
-      return;
-    }
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      showSweetAlert("Invalid Email", "Please enter a valid email address.");
+    const nameErr = validateName(name);
+    const emailErr = validateEmail(email);
+
+    const newErrors = {
+      name: nameErr,
+      email: emailErr,
+    };
+
+    setTouched({
+      name: true,
+      email: true,
+    });
+    setErrors(newErrors);
+
+    if (nameErr || emailErr) {
       return;
     }
 
@@ -139,22 +165,19 @@ export function BookDemoForm() {
       if (result.success) {
         setIsSent(true);
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Submission Error",
-          text: result.error || "Something went wrong while booking your demo. Please try again.",
-          confirmButtonText: "Try Again",
-          confirmButtonColor: "#0c0c0d",
-        });
+        showSweetAlert(
+          "Submission Error",
+          result.error ||
+            "Something went wrong while booking your demo. Please try again.",
+          "error"
+        );
       }
     } catch {
-      Swal.fire({
-        icon: "error",
-        title: "Network Error",
-        text: "A network error occurred. Please check your connection and try again.",
-        confirmButtonText: "Try Again",
-        confirmButtonColor: "#0c0c0d",
-      });
+      showSweetAlert(
+        "Network Error",
+        "A network error occurred. Please check your connection and try again.",
+        "error"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -170,6 +193,8 @@ export function BookDemoForm() {
     setDay("Tue");
     setTime("Afternoon");
     setMessage("");
+    setErrors({});
+    setTouched({});
   };
 
   const productChipsRef = useRef<HTMLDivElement>(null);
@@ -247,97 +272,86 @@ export function BookDemoForm() {
   };
 
   return (
-    <section ref={sectionRef} id="form" className="contact-form-section content-padding" aria-label="Book a Demo Request Form">
+    <section
+      ref={sectionRef}
+      id="form"
+      className="contact-form-section content-padding"
+      aria-label="Book a Demo Request Form"
+    >
       <div className="contact-form-container">
         {/* Left Column: Interactive Form Card */}
         <div data-reveal="" className="contact-form-card">
           {!isSent ? (
-            <form onSubmit={handleSubmit} className="form-inner">
+            <form onSubmit={handleSubmit} noValidate className="form-inner">
               <h2 className="form-title">Pick a time</h2>
               <p className="form-subtitle">
-                Tell us who&apos;s joining and roughly when works. We&apos;ll confirm the exact slot by email.
+                Tell us who&apos;s joining and roughly when works. We&apos;ll
+                confirm the exact slot by email.
               </p>
 
               <div className="form-grid">
                 <label className="form-field">
-                  <span className="field-label">Full name</span>
+                  <span className="field-label">Full name*</span>
                   <input
                     type="text"
-                    required
                     placeholder="Your name"
                     value={name}
-                    onBeforeInput={(e: any) => {
-                      if (e.data && !/^[a-zA-Z\s]+$/.test(e.data)) {
-                        e.preventDefault();
-                        showSweetAlert(
-                          "Invalid Name",
-                          "The Name field only accepts letters and spaces. Numbers and special characters are not allowed."
-                        );
-                      }
-                    }}
-                    onKeyDown={(e) => {
-                      if (
-                        e.key.length > 1 ||
-                        e.ctrlKey ||
-                        e.metaKey ||
-                        e.altKey
-                      ) {
-                        return;
-                      }
-                      if (!/^[a-zA-Z\s]$/.test(e.key)) {
-                        e.preventDefault();
-                        showSweetAlert(
-                          "Invalid Name",
-                          "The Name field only accepts letters and spaces. Numbers and special characters are not allowed."
-                        );
-                      }
-                    }}
-                    onPaste={(e) => {
-                      const text = e.clipboardData.getData("text");
-                      if (!/^[a-zA-Z\s]*$/.test(text)) {
-                        e.preventDefault();
-                        const clean = text.replace(/[^a-zA-Z\s]/g, "");
-                        const updated = (name + clean).trimStart();
-                        setName(updated);
-                        showSweetAlert(
-                          "Invalid Name",
-                          "The Name field only accepts letters and spaces. Numbers and symbols were removed."
-                        );
-                      }
-                    }}
-                    onInput={(e) => {
-                      const input = e.currentTarget;
-                      const clean = input.value.replace(/[^a-zA-Z\s]/g, "");
-                      if (input.value !== clean) {
-                        input.value = clean;
-                        showSweetAlert(
-                          "Invalid Name",
-                          "The Name field only accepts letters and spaces. Numbers and special characters are not allowed."
-                        );
-                      }
-                      setName(clean);
-                    }}
                     onChange={(e) => {
-                      const clean = e.target.value.replace(/[^a-zA-Z\s]/g, "");
-                      e.target.value = clean;
-                      setName(clean);
+                      const val = e.target.value;
+                      setName(val);
+                      if (touched.name) {
+                        setErrors((prev) => ({
+                          ...prev,
+                          name: validateName(val),
+                        }));
+                      }
                     }}
-                    pattern="[a-zA-Z\s]+"
-                    title="Please enter letters and spaces only"
-                    className="field-input"
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, name: true }));
+                      setErrors((prev) => ({
+                        ...prev,
+                        name: validateName(name),
+                      }));
+                    }}
+                    className={`field-input ${
+                      touched.name && errors.name ? "field-input--error" : ""
+                    }`}
                   />
+                  {touched.name && errors.name && (
+                    <span className="field-error-msg">{errors.name}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
-                  <span className="field-label">Work email</span>
+                  <span className="field-label">Work email*</span>
                   <input
                     type="email"
-                    required
                     placeholder="name@company.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="field-input"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setEmail(val);
+                      if (touched.email) {
+                        setErrors((prev) => ({
+                          ...prev,
+                          email: validateEmail(val),
+                        }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, email: true }));
+                      setErrors((prev) => ({
+                        ...prev,
+                        email: validateEmail(email),
+                      }));
+                    }}
+                    className={`field-input ${
+                      touched.email && errors.email ? "field-input--error" : ""
+                    }`}
                   />
+                  {touched.email && errors.email && (
+                    <span className="field-error-msg">{errors.email}</span>
+                  )}
                 </label>
 
                 <label className="form-field">
@@ -365,7 +379,9 @@ export function BookDemoForm() {
                         </option>
                       ))}
                     </select>
-                    <span className="select-caret" aria-hidden="true">▾</span>
+                    <span className="select-caret" aria-hidden="true">
+                      ▾
+                    </span>
                   </div>
                 </label>
               </div>
@@ -373,7 +389,9 @@ export function BookDemoForm() {
               {/* Product Chips Selection */}
               <div className="form-products-group">
                 <div className="form-products-header">
-                  <span className="field-label">Which product do you want to see</span>
+                  <span className="field-label">
+                    Which product do you want to see
+                  </span>
                   <div className="chips-nav-controls">
                     <button
                       type="button"
@@ -381,7 +399,14 @@ export function BookDemoForm() {
                       onClick={scrollChipsLeft}
                       aria-label="Scroll products left"
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                      >
                         <path d="M15 18l-6-6 6-6" />
                       </svg>
                     </button>
@@ -391,7 +416,14 @@ export function BookDemoForm() {
                       onClick={scrollChipsRight}
                       aria-label="Scroll products right"
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                      >
                         <path d="M9 18l6-6-6-6" />
                       </svg>
                     </button>
@@ -399,7 +431,9 @@ export function BookDemoForm() {
                 </div>
                 <div
                   ref={productChipsRef}
-                  className={`product-chips-wrap ${isChipsDragging ? "is-dragging" : ""}`}
+                  className={`product-chips-wrap ${
+                    isChipsDragging ? "is-dragging" : ""
+                  }`}
                   onWheel={handleChipsWheel}
                   onMouseDown={handleChipsMouseDown}
                   onMouseMove={handleChipsMouseMove}
@@ -433,7 +467,9 @@ export function BookDemoForm() {
                     <button
                       key={idx}
                       type="button"
-                      className={`option-chip-btn ${day === dName ? "is-active" : ""}`}
+                      className={`option-chip-btn ${
+                        day === dName ? "is-active" : ""
+                      }`}
                       onClick={() => setDay(dName)}
                     >
                       {dName}
@@ -450,19 +486,26 @@ export function BookDemoForm() {
                     <button
                       key={idx}
                       type="button"
-                      className={`option-chip-btn ${time === tName ? "is-active" : ""}`}
+                      className={`option-chip-btn ${
+                        time === tName ? "is-active" : ""
+                      }`}
                       onClick={() => setTime(tName)}
                     >
                       {tName}
                     </button>
                   ))}
                 </div>
-                <div className="time-subnote">Times shown in your local timezone. We&apos;ll confirm by email.</div>
+                <div className="time-subnote">
+                  Times shown in your local timezone. We&apos;ll confirm by
+                  email.
+                </div>
               </div>
 
               {/* Message Textarea */}
               <label className="form-field form-field--full">
-                <span className="field-label">Anything we should know before the call</span>
+                <span className="field-label">
+                  Anything we should know before the call
+                </span>
                 <textarea
                   rows={4}
                   placeholder="Current process, rough volumes, the tools you run today."
@@ -474,7 +517,11 @@ export function BookDemoForm() {
 
               {/* Form Actions */}
               <div className="form-footer">
-                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? "Requesting..." : "Request this slot"}
                   {!isSubmitting && <span aria-hidden="true">→</span>}
                 </button>
@@ -488,13 +535,10 @@ export function BookDemoForm() {
               </div>
               <h3 className="success-title">Request sent.</h3>
               <p className="success-note">
-                We&apos;ll confirm {day} · {time} by email within one working day, with a calendar invite and a link to join.
+                We&apos;ll confirm {day} · {time} by email within one working
+                day, with a calendar invite and a link to join.
               </p>
-              <button
-                type="button"
-                onClick={handleReset}
-                className="btn-reset"
-              >
+              <button type="button" onClick={handleReset} className="btn-reset">
                 Book another
               </button>
             </div>
