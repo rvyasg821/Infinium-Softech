@@ -15,7 +15,7 @@ function SolutionVisualCol({ item }: { item: typeof SOLUTIONS_LIST_DATA[0] }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => { 
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
@@ -24,7 +24,7 @@ function SolutionVisualCol({ item }: { item: typeof SOLUTIONS_LIST_DATA[0] }) {
       x: (y / rect.height) * -10,
       y: (x / rect.width) * 10
     });
-  };
+  }; 
 
   const handleMouseLeave = () => {
     setTilt({ x: 0, y: 0 });
