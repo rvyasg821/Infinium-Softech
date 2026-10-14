@@ -16,7 +16,7 @@ export interface SolutionItem {
   reverse?: boolean;
 }
 
-export interface HeroIndexItem {
+export interface HeroIndexItem { 
   num: string;
   title: string;
   color: string;
@@ -56,7 +56,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
     ],
     ctaText: "Explore Solution",
     ctaLink: "/solutions/ai-solutions",
-    image: "/solutions/AI & Automation.png",
+    image: "/solutions/AI_&_Automation.png",
     imageAlt: "Strivedge AI Solutions & Intelligence Dashboard",
     statusLabel: "In production",
     productsTag: "Dishly · LoadGo",
