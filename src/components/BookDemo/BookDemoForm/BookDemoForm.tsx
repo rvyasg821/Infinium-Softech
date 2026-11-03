@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Script from "next/script";
 import { sendDemoEmail } from "@/actions/sendEmail";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -78,6 +79,11 @@ export function BookDemoForm() {
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Turnstile state
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileWidgetId = useRef<string | undefined>(undefined);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+
   const [errors, setErrors] = useState<{
     name?: string;
     email?: string;
@@ -151,7 +157,7 @@ export function BookDemoForm() {
 
     setIsSubmitting(true);
     try {
-      const result = await sendDemoEmail({
+            const result = await sendDemoEmail({
         name,
         email,
         company,
@@ -160,30 +166,53 @@ export function BookDemoForm() {
         day,
         time,
         message,
+        turnstileToken,
       });
 
       if (result.success) {
         setIsSent(true);
-      } else {
+            } else {
         showSweetAlert(
           "Submission Error",
           result.error ||
             "Something went wrong while booking your demo. Please try again.",
           "error"
         );
+        // Reset widget so the user can get a fresh token
+        if (
+          typeof window !== "undefined" &&
+          typeof (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile?.reset === "function" &&
+          turnstileWidgetId.current !== undefined
+        ) {
+          (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile!.reset(
+            turnstileWidgetId.current
+          );
+        }
+        setTurnstileToken("");
       }
-    } catch {
+        } catch {
       showSweetAlert(
         "Network Error",
         "A network error occurred. Please check your connection and try again.",
         "error"
       );
+      // Reset widget on network error too
+      if (
+        typeof window !== "undefined" &&
+        typeof (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile?.reset === "function" &&
+        turnstileWidgetId.current !== undefined
+      ) {
+        (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile!.reset(
+          turnstileWidgetId.current
+        );
+      }
+      setTurnstileToken("");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleReset = () => {
+    const handleReset = () => {
     setIsSent(false);
     setName("");
     setEmail("");
@@ -195,6 +224,7 @@ export function BookDemoForm() {
     setMessage("");
     setErrors({});
     setTouched({});
+    setTurnstileToken("");
   };
 
   const productChipsRef = useRef<HTMLDivElement>(null);
@@ -515,8 +545,46 @@ export function BookDemoForm() {
                 />
               </label>
 
-              {/* Form Actions */}
+                            {/* Form Actions */}
               <div className="form-footer">
+                {/* Turnstile widget */}
+                <div
+                  ref={turnstileContainerRef}
+                  id="cf-turnstile-demo"
+                  style={{ marginBottom: "12px" }}
+                />
+                <Script
+                  id="cf-turnstile-script-demo"
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+                  strategy="afterInteractive"
+                  onReady={() => {
+                    const w = window as Window & {
+                      turnstile?: {
+                        render: (
+                          container: HTMLElement | string,
+                          opts: Record<string, unknown>
+                        ) => string;
+                        reset: (id: string) => void;
+                      };
+                    };
+                    if (
+                      w.turnstile &&
+                      turnstileContainerRef.current &&
+                      turnstileWidgetId.current === undefined
+                    ) {
+                      turnstileWidgetId.current = w.turnstile.render(
+                        turnstileContainerRef.current,
+                        {
+                          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+                          action: "book_demo",
+                          callback: (token: string) => setTurnstileToken(token),
+                          "expired-callback": () => setTurnstileToken(""),
+                          "error-callback": () => setTurnstileToken(""),
+                        }
+                      );
+                    }
+                  }}
+                />
                 <button
                   type="submit"
                   className="btn-primary"

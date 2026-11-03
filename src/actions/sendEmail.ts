@@ -1,5 +1,107 @@
 "use server";
 
+// ---------------------------------------------------------------------------
+// Cloudflare Turnstile – server-side siteverify
+// ---------------------------------------------------------------------------
+
+const TURNSTILE_VERIFY_URL =
+  "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+/**
+ * Parses the TURNSTILE_HOSTNAMES env var into a Set.
+ * Production deployments must not include localhost / 127.0.0.1 in that var.
+ */
+function allowedHostnames(): Set<string> {
+  return new Set(
+    (process.env.TURNSTILE_HOSTNAMES ?? "")
+      .split(",")
+      .map((h) => h.trim())
+      .filter(Boolean)
+  );
+}
+
+/**
+ * Calls the Cloudflare siteverify endpoint and asserts:
+ *   - result.success === true
+ *   - result.action === expectedAction
+ *   - result.hostname is in the TURNSTILE_HOSTNAMES allowlist
+ *
+ * Returns { ok: true } on success or { ok: false, reason: string } on failure.
+ */
+async function verifyTurnstile(
+  token: unknown,
+  expectedAction: string,
+  remoteIp?: string
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (
+    typeof token !== "string" ||
+    token.length === 0 ||
+    token.length > 2048
+  ) {
+    return { ok: false, reason: "Missing or malformed Turnstile token." };
+  }
+
+  const hostnames = allowedHostnames();
+  if (hostnames.size === 0) {
+    return { ok: false, reason: "TURNSTILE_HOSTNAMES is not configured." };
+  }
+
+  const secret = process.env.TURNSTILE_SECRET_KEY ?? "";
+  if (!secret) {
+    return { ok: false, reason: "TURNSTILE_SECRET_KEY is not configured." };
+  }
+
+  let result: {
+    success: boolean;
+    action?: string;
+    hostname?: string;
+    "error-codes"?: string[];
+  };
+
+  try {
+    const params = new URLSearchParams({
+      secret,
+      response: token,
+    });
+    if (remoteIp) params.set("remoteip", remoteIp);
+
+    const r = await fetch(TURNSTILE_VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      signal: AbortSignal.timeout(10_000),
+      body: params,
+    });
+
+    if (!r.ok) throw new Error(`siteverify HTTP ${r.status}`);
+    result = await r.json();
+  } catch (err) {
+    console.error("Turnstile siteverify fetch failed:", err);
+    return { ok: false, reason: "Bot-protection check failed. Please try again." };
+  }
+
+  if (!result.success) {
+    const codes = (result["error-codes"] ?? []).join(", ");
+    console.warn("Turnstile token invalid:", codes);
+    return { ok: false, reason: "Bot-protection check failed. Please refresh and try again." };
+  }
+
+  if (result.action !== expectedAction) {
+    console.warn(
+      `Turnstile action mismatch: expected "${expectedAction}", got "${result.action}"`
+    );
+    return { ok: false, reason: "Bot-protection check failed." };
+  }
+
+  if (!result.hostname || !hostnames.has(result.hostname)) {
+    console.warn(
+      `Turnstile hostname not allowed: "${result.hostname}"`
+    );
+    return { ok: false, reason: "Bot-protection check failed." };
+  }
+
+  return { ok: true };
+}
+
 import nodemailer from "nodemailer";
 
 const SITE_URL = "https://www.infiniumsoftech.com";
@@ -451,12 +553,19 @@ export async function sendContactEmail(formData: {
   stage: string;
   startTime: string;
   message: string;
+  turnstileToken?: string;
 }) {
   try {
-    const { name, email, mobile, service, stage, startTime, message } = formData;
+    const { name, email, mobile, service, stage, startTime, message, turnstileToken } = formData;
 
     if (!name?.trim() || !email?.trim()) {
       return { success: false, error: "Name and email are required." };
+    }
+
+    // --- Turnstile verification ---
+    const turnstileResult = await verifyTurnstile(turnstileToken, "contact");
+    if (!turnstileResult.ok) {
+      return { success: false, error: (turnstileResult as { ok: false; reason: string }).reason };
     }
 
     const displayName = capitalizeName(name);
@@ -515,12 +624,19 @@ export async function sendDemoEmail(formData: {
   day: string;
   time: string;
   message: string;
+  turnstileToken?: string;
 }) {
   try {
-    const { name, email, company, size, product, day, time, message } = formData;
+    const { name, email, company, size, product, day, time, message, turnstileToken } = formData;
 
     if (!name?.trim() || !email?.trim()) {
       return { success: false, error: "Name and work email are required." };
+    }
+
+    // --- Turnstile verification ---
+    const turnstileResult = await verifyTurnstile(turnstileToken, "book_demo");
+    if (!turnstileResult.ok) {
+      return { success: false, error: (turnstileResult as { ok: false; reason: string }).reason };
     }
 
     const displayName = capitalizeName(name);

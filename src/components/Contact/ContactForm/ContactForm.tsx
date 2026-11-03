@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Script from "next/script";
 import { sendContactEmail } from "@/actions/sendEmail";
 import {
   CONTACT_SERVICES,
@@ -24,6 +25,11 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Turnstile state
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileWidgetId = useRef<string | undefined>(undefined);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
 
   const [errors, setErrors] = useState<{
     name?: string;
@@ -282,7 +288,7 @@ export function ContactForm() {
 
     setIsSubmitting(true);
     try {
-      const result = await sendContactEmail({
+        const result = await sendContactEmail({
         name,
         email,
         mobile,
@@ -290,29 +296,52 @@ export function ContactForm() {
         stage,
         startTime,
         message,
+        turnstileToken,
       });
 
       if (result.success) {
         setIsSent(true);
       } else {
-        showSweetAlert(
+              showSweetAlert(
           "Submission Error",
           result.error || "Something went wrong while sending your request. Please try again.",
           "error"
         );
+        // Reset widget so the user can get a fresh token for the next attempt
+        if (
+          typeof window !== "undefined" &&
+          typeof (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile?.reset === "function" &&
+          turnstileWidgetId.current !== undefined
+        ) {
+          (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile!.reset(
+            turnstileWidgetId.current
+          );
+        }
+        setTurnstileToken("");
       }
-    } catch {
+        } catch {
       showSweetAlert(
         "Network Error",
         "A network error occurred. Please check your connection and try again.",
         "error"
       );
+      // Reset widget on network error too
+      if (
+        typeof window !== "undefined" &&
+        typeof (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile?.reset === "function" &&
+        turnstileWidgetId.current !== undefined
+      ) {
+        (window as Window & { turnstile?: { reset: (id: string) => void } }).turnstile!.reset(
+          turnstileWidgetId.current
+        );
+      }
+      setTurnstileToken("");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleReset = () => {
+    const handleReset = () => {
     setIsSent(false);
     setName("");
     setEmail("");
@@ -323,6 +352,7 @@ export function ContactForm() {
     setMessage("");
     setErrors({});
     setTouched({});
+    setTurnstileToken("");
   };
 
   const sentMessageNote = service
@@ -530,8 +560,46 @@ export function ContactForm() {
                 />
               </label>
 
-              {/* Form Actions */}
+                            {/* Form Actions */}
               <div className="form-footer">
+                {/* Turnstile widget */}
+                <div
+                  ref={turnstileContainerRef}
+                  id="cf-turnstile-contact"
+                  style={{ marginBottom: "12px" }}
+                />
+                <Script
+                  id="cf-turnstile-script-contact"
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+                  strategy="afterInteractive"
+                  onReady={() => {
+                    const w = window as Window & {
+                      turnstile?: {
+                        render: (
+                          container: HTMLElement | string,
+                          opts: Record<string, unknown>
+                        ) => string;
+                        reset: (id: string) => void;
+                      };
+                    };
+                    if (
+                      w.turnstile &&
+                      turnstileContainerRef.current &&
+                      turnstileWidgetId.current === undefined
+                    ) {
+                      turnstileWidgetId.current = w.turnstile.render(
+                        turnstileContainerRef.current,
+                        {
+                          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+                          action: "contact",
+                          callback: (token: string) => setTurnstileToken(token),
+                          "expired-callback": () => setTurnstileToken(""),
+                          "error-callback": () => setTurnstileToken(""),
+                        }
+                      );
+                    }
+                  }}
+                />
                 <button type="submit" className="btn-primary" disabled={isSubmitting}>
                   {isSubmitting ? "Sending..." : "Send enquiry"}
                   {!isSubmitting && <span aria-hidden="true">→</span>}
